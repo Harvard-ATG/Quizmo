@@ -1,3 +1,4 @@
 .svn
+/quizmo/protected/config/database.php
 /quizmo/protected/config/ldap.php
 /quizmo/protected/config/isites.php
