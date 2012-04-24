@@ -1,0 +1,35 @@
+<phpunit bootstrap="bootstrap.php"
+		colors="false"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnFailure="false">
+
+
+<!-- ************************************************************* -->
+<!-- this would be nice, though it's not available until phpunit 3.6+ (using 3.4)
+	it would be nice to do this instead of altering the system php.ini
+	(and no, ini_set doesn't work in bootstrap.php doesn't work) -->
+<!--
+	<php>
+		<includePath>/web/quizmo/app/quizmo/protected/tests/phpunit</includePath>
+		<ini name="extension" value="dom.so" />
+	</php>
+-->
+<!-- ************************************************************* -->
+
+
+	<selenium>
+		<browser name="Firefox on MacOSX"
+		           browser="*firefox"
+		           host="140.247.29.192"
+		           port="4444"
+		           timeout="30000"/>
+		<browser name="Safari on MacOSX"
+		           browser="*safari"
+		           host="140.247.29.192"
+		           port="4444"
+		           timeout="30000"/>
+	</selenium>
+
+</phpunit>

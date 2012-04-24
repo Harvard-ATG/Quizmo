@@ -1,0 +1,101 @@
+a:22:{s:7:"attribs";a:6:{s:15:"packagerversion";s:5:"1.4.2";s:7:"version";s:3:"2.0";s:5:"xmlns";s:35:"http://pear.php.net/dtd/package-2.0";s:11:"xmlns:tasks";s:33:"http://pear.php.net/dtd/tasks-1.0";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:18:"xsi:schemaLocation";s:147:"http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd";}s:4:"name";s:3:"PDO";s:7:"channel";s:12:"pecl.php.net";s:7:"summary";s:26:"PHP Data Objects Interface";s:11:"description";s:320:"PDO provides a uniform data access interface, sporting advanced features such
+as prepared statements and bound parameters.  PDO drivers are dynamically
+loadable and may be developed independently from the core, but still accessed
+using the same API.
+Read the documentation at http://www.php.net/pdo for more information.";s:4:"lead";a:4:{i:0;a:4:{s:4:"name";s:11:"Wez Furlong";s:4:"user";s:3:"wez";s:5:"email";s:11:"wez@php.net";s:6:"active";s:3:"yes";}i:1;a:4:{s:4:"name";s:14:"Marcus Boerger";s:4:"user";s:5:"helly";s:5:"email";s:13:"helly@php.net";s:6:"active";s:3:"yes";}i:2;a:4:{s:4:"name";s:16:"Ilia Alshanetsky";s:4:"user";s:5:"iliaa";s:5:"email";s:13:"iliaa@php.net";s:6:"active";s:3:"yes";}i:3;a:4:{s:4:"name";s:19:"George Schlossnagle";s:4:"user";s:13:"gschlossnagle";s:5:"email";s:17:"george@omniti.com";s:6:"active";s:3:"yes";}}s:4:"date";s:10:"2006-05-01";s:4:"time";s:8:"22:47:43";s:7:"version";a:2:{s:7:"release";s:5:"1.0.3";s:3:"api";s:5:"1.0.3";}s:9:"stability";a:2:{s:7:"release";s:6:"stable";s:3:"api";s:6:"stable";}s:7:"license";a:2:{s:7:"attribs";a:1:{s:3:"uri";s:26:"http://www.php.net/license";}s:8:"_content";s:3:"PHP";}s:5:"notes";s:2475:"It is highly recommended that you update to PHP 5.1 or higher before using PDO.
+This PECL release corresponds to the PHP 5.1.3 release.
+
+You need to install a PDO database driver to make use of PDO,
+check http://pecl.php.net/package-search.php?pkg_name=PDO
+for a list of available PDO drivers.
+
+If you are running on Windows, you can find a precompiled binary at:
+http://pecl4win.php.net/ext.php/php_pdo.dll
+
+You can find additional PDO drivers at:
+http://pecl4win.php.net
+
+** Changes **
+- Fixed bug #37167 (PDO segfaults when throwing exception from the
+  fetch handler). (Tony)
+- Fixed memory corruption when PDO::FETCH_LAZY mode is being used. (Ilia)
+- Fixed bug #36222 (errorInfo in PDOException is always NULL). (Ilia)
+- Fixed bug #35797 (segfault on PDOStatement::execute() with
+  zend.ze1_compatibility_mode = On). (Tony, Ilia)
+- Fixed bug #35543 (crash when calling non-existing method in extended class). (Tony)
+- Fixed bug #35508 (improved validation of fetch modes). (Tony)
+- Fixed bug #35431 (PDO crashes when using LAZY fetch with fetchAll). (Wez)
+- Fixed bug #35430 (PDO crashes on incorrect FETCH_FUNC use). (Tony)
+
+- Changed PDO_XXX constants to PDO::XXX
+- It is now possible to extend PDO and PDOStatement and override their constructors
+
+- Fixed Bug #35303; PDO::prepare() can cause crashes with invalid parameters
+- Fixed Bug #35135; "new PDOStatement" can cause crashes.
+- Fixed Bug #35293 and PECL Bug #5589; segfault when creating persistent connections
+- Fixed PECL Bug #5010, problem installing headers
+- renamed pdo_drivers() to PDO::getAvailableDrivers()
+- Various fixes when building with SPL
+- PDO::setAttribute(PDO::ATTR_STATEMENT_CLASS) allows you to set your own
+  PDOStatement replacement when extending PDO and PDOStatement
+- Fixed Bug #34687; error information from PDO::query() was not always returned
+- Fixed PECL Bug #5750; uri: DSN was not handled correctly
+- Fixed PECL Bug #5589; segfault when persistent connection attempt fails
+- Fixed Bug #34590; User defined PDOStatement class methods are not callable
+- Fixed Bug #34908; FETCH_INTO segfaults without destination object
+- Fixed PECL Bug #5809; PDOStatement::execute(array(...)) modifies args
+- Fixed PECL Bug #5772; FETCH_FUNC cannot call functions with mixed case names
+
+** Note **
+
+You should uninstall and re-install your individual database drivers whenever
+you upgrade the base PDO package, otherwise you will see an error about PDO API
+numbers when you run your PHP scripts.";s:8:"contents";a:1:{s:3:"dir";a:2:{s:7:"attribs";a:1:{s:4:"name";s:1:"/";}s:4:"file";a:16:{i:0;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"b8ef66de5c92ee64a2999ab753175f94";s:4:"name";s:9:"config.m4";s:4:"role";s:3:"src";}}i:1;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"8a31bf7e60c5ec26fe16a68264d016f9";s:4:"name";s:10:"config.w32";s:4:"role";s:3:"src";}}i:2;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"ac553b370742d3c61861bdf073522997";s:4:"name";s:7:"CREDITS";s:4:"role";s:3:"doc";}}i:3;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"52ffc0fb973a24d4247d299cf6f5f118";s:4:"name";s:13:"Makefile.frag";s:4:"role";s:3:"src";}}i:4;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"9268fc29fd06cc9c03a3dde22b613869";s:4:"name";s:5:"pdo.c";s:4:"role";s:3:"src";}}i:5;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"ea7dc3a8ed41d86f2f2be143027743b3";s:4:"name";s:7:"pdo.php";s:4:"role";s:3:"doc";}}i:6;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"bace4780214d57be58a807b51d673a2c";s:4:"name";s:9:"pdo_dbh.c";s:4:"role";s:3:"src";}}i:7;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"70d4be3ea86590982c34889d7aec1455";s:4:"name";s:14:"pdo_sqlstate.c";s:4:"role";s:3:"src";}}i:8;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"8490c74a2e86bbec90a26577082c92d9";s:4:"name";s:16:"pdo_sql_parser.c";s:4:"role";s:3:"src";}}i:9;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"06f16f52cb0e5c5fd6c8ce746a6a3b8c";s:4:"name";s:17:"pdo_sql_parser.re";s:4:"role";s:3:"src";}}i:10;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"30eb2896138497efbbb8807f2d449029";s:4:"name";s:10:"pdo_stmt.c";s:4:"role";s:3:"src";}}i:11;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"215c859cd562d6c051c9bcfbd5471ac0";s:4:"name";s:9:"php_pdo.h";s:4:"role";s:3:"src";}}i:12;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"d821b23131c4be73c46411bdc8f1073b";s:4:"name";s:16:"php_pdo_driver.h";s:4:"role";s:3:"src";}}i:13;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"3416216229c47b4da838fb1afb0e54a5";s:4:"name";s:13:"php_pdo_int.h";s:4:"role";s:3:"src";}}i:14;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"8886cfa812af28670956ed5b9f0ca69e";s:4:"name";s:6:"README";s:4:"role";s:3:"doc";}}i:15;a:1:{s:7:"attribs";a:3:{s:6:"md5sum";s:32:"725db82f99d8c52a183d73d8468c720b";s:4:"name";s:4:"TODO";s:4:"role";s:3:"doc";}}}}}s:12:"dependencies";a:1:{s:8:"required";a:2:{s:3:"php";a:1:{s:3:"min";s:5:"5.0.3";}s:13:"pearinstaller";a:1:{s:3:"min";s:5:"1.4.0";}}}s:17:"providesextension";s:3:"PDO";s:13:"extsrcrelease";s:0:"";s:8:"filelist";a:7:{s:7:"CREDITS";a:4:{s:6:"md5sum";s:32:"ac553b370742d3c61861bdf073522997";s:4:"name";s:7:"CREDITS";s:4:"role";s:3:"doc";s:12:"installed_as";s:36:"/web/quizmo/app/pear/doc/PDO/CREDITS";}s:7:"pdo.php";a:4:{s:6:"md5sum";s:32:"ea7dc3a8ed41d86f2f2be143027743b3";s:4:"name";s:7:"pdo.php";s:4:"role";s:3:"doc";s:12:"installed_as";s:36:"/web/quizmo/app/pear/doc/PDO/pdo.php";}s:6:"README";a:4:{s:6:"md5sum";s:32:"8886cfa812af28670956ed5b9f0ca69e";s:4:"name";s:6:"README";s:4:"role";s:3:"doc";s:12:"installed_as";s:35:"/web/quizmo/app/pear/doc/PDO/README";}s:4:"TODO";a:4:{s:6:"md5sum";s:32:"725db82f99d8c52a183d73d8468c720b";s:4:"name";s:4:"TODO";s:4:"role";s:3:"doc";s:12:"installed_as";s:33:"/web/quizmo/app/pear/doc/PDO/TODO";}s:16:"php_pdo_driver.h";a:6:{s:4:"role";s:3:"src";s:4:"name";s:16:"php_pdo_driver.h";s:12:"installed_as";s:41:"/usr/include/php/ext/pdo/php_pdo_driver.h";s:7:"php_api";i:0;s:12:"zend_mod_api";i:0;s:12:"zend_ext_api";i:0;}s:9:"php_pdo.h";a:6:{s:4:"role";s:3:"src";s:4:"name";s:9:"php_pdo.h";s:12:"installed_as";s:34:"/usr/include/php/ext/pdo/php_pdo.h";s:7:"php_api";i:0;s:12:"zend_mod_api";i:0;s:12:"zend_ext_api";i:0;}s:6:"pdo.so";a:6:{s:4:"role";s:3:"src";s:4:"name";s:6:"pdo.so";s:12:"installed_as";s:27:"/usr/lib/php/modules/pdo.so";s:7:"php_api";i:0;s:12:"zend_mod_api";i:0;s:12:"zend_ext_api";i:0;}}s:12:"_lastversion";N;s:7:"dirtree";a:1:{s:28:"/web/quizmo/app/pear/doc/PDO";b:1;}s:3:"old";a:7:{s:7:"version";s:5:"1.0.3";s:12:"release_date";s:10:"2006-05-01";s:13:"release_state";s:6:"stable";s:15:"release_license";s:3:"PHP";s:13:"release_notes";s:2475:"It is highly recommended that you update to PHP 5.1 or higher before using PDO.
+This PECL release corresponds to the PHP 5.1.3 release.
+
+You need to install a PDO database driver to make use of PDO,
+check http://pecl.php.net/package-search.php?pkg_name=PDO
+for a list of available PDO drivers.
+
+If you are running on Windows, you can find a precompiled binary at:
+http://pecl4win.php.net/ext.php/php_pdo.dll
+
+You can find additional PDO drivers at:
+http://pecl4win.php.net
+
+** Changes **
+- Fixed bug #37167 (PDO segfaults when throwing exception from the
+  fetch handler). (Tony)
+- Fixed memory corruption when PDO::FETCH_LAZY mode is being used. (Ilia)
+- Fixed bug #36222 (errorInfo in PDOException is always NULL). (Ilia)
+- Fixed bug #35797 (segfault on PDOStatement::execute() with
+  zend.ze1_compatibility_mode = On). (Tony, Ilia)
+- Fixed bug #35543 (crash when calling non-existing method in extended class). (Tony)
+- Fixed bug #35508 (improved validation of fetch modes). (Tony)
+- Fixed bug #35431 (PDO crashes when using LAZY fetch with fetchAll). (Wez)
+- Fixed bug #35430 (PDO crashes on incorrect FETCH_FUNC use). (Tony)
+
+- Changed PDO_XXX constants to PDO::XXX
+- It is now possible to extend PDO and PDOStatement and override their constructors
+
+- Fixed Bug #35303; PDO::prepare() can cause crashes with invalid parameters
+- Fixed Bug #35135; "new PDOStatement" can cause crashes.
+- Fixed Bug #35293 and PECL Bug #5589; segfault when creating persistent connections
+- Fixed PECL Bug #5010, problem installing headers
+- renamed pdo_drivers() to PDO::getAvailableDrivers()
+- Various fixes when building with SPL
+- PDO::setAttribute(PDO::ATTR_STATEMENT_CLASS) allows you to set your own
+  PDOStatement replacement when extending PDO and PDOStatement
+- Fixed Bug #34687; error information from PDO::query() was not always returned
+- Fixed PECL Bug #5750; uri: DSN was not handled correctly
+- Fixed PECL Bug #5589; segfault when persistent connection attempt fails
+- Fixed Bug #34590; User defined PDOStatement class methods are not callable
+- Fixed Bug #34908; FETCH_INTO segfaults without destination object
+- Fixed PECL Bug #5809; PDOStatement::execute(array(...)) modifies args
+- Fixed PECL Bug #5772; FETCH_FUNC cannot call functions with mixed case names
+
+** Note **
+
+You should uninstall and re-install your individual database drivers whenever
+you upgrade the base PDO package, otherwise you will see an error about PDO API
+numbers when you run your PHP scripts.";s:12:"release_deps";a:2:{i:0;a:4:{s:4:"type";s:3:"php";s:3:"rel";s:2:"ge";s:7:"version";s:5:"5.0.3";s:8:"optional";s:2:"no";}i:1;a:6:{s:4:"type";s:3:"pkg";s:7:"channel";s:12:"pear.php.net";s:4:"name";s:4:"PEAR";s:3:"rel";s:2:"ge";s:7:"version";s:5:"1.4.0";s:8:"optional";s:2:"no";}}s:11:"maintainers";a:4:{i:0;a:5:{s:4:"name";s:11:"Wez Furlong";s:5:"email";s:11:"wez@php.net";s:6:"active";s:3:"yes";s:6:"handle";s:3:"wez";s:4:"role";s:4:"lead";}i:1;a:5:{s:4:"name";s:14:"Marcus Boerger";s:5:"email";s:13:"helly@php.net";s:6:"active";s:3:"yes";s:6:"handle";s:5:"helly";s:4:"role";s:4:"lead";}i:2;a:5:{s:4:"name";s:16:"Ilia Alshanetsky";s:5:"email";s:13:"iliaa@php.net";s:6:"active";s:3:"yes";s:6:"handle";s:5:"iliaa";s:4:"role";s:4:"lead";}i:3;a:5:{s:4:"name";s:19:"George Schlossnagle";s:5:"email";s:17:"george@omniti.com";s:6:"active";s:3:"yes";s:6:"handle";s:13:"gschlossnagle";s:4:"role";s:4:"lead";}}}s:10:"xsdversion";s:3:"2.0";s:13:"_lastmodified";i:1327963536;}
