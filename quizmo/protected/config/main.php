@@ -7,9 +7,9 @@
 // CWebApplication properties can be configured here.
 return CMap::mergeArray(
 	require(dirname(__FILE__).'/database.php'),
-	require(dirname(__FILE__).'/ldap.php'),
-	require(dirname(__FILE__).'/isites.php'),
 	require(dirname(__FILE__).'/facebook.php'),
+	//require(dirname(__FILE__).'/ldap.php'),
+	//require(dirname(__FILE__).'/isites.php'),
 	array(
 		'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 		'name'=>'Quizmo',

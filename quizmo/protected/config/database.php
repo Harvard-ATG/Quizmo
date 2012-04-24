@@ -16,10 +16,10 @@ return array(
 		
 		'db'=>array(
 			'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=my_host;dbname=my_dbname',
+			'connectionString' => 'mysql:host=localhost;dbname=quizmo_dev',
 			'emulatePrepare' => true,
-			'username' => 'my_username',
-			'password' => 'my_password',
+			'username' => 'quizmo_dev',
+			'password' => 'quizmo_dev',
 			'charset' => 'utf8',
 		),
 				
