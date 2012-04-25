@@ -54,6 +54,11 @@ cd /Applications/MAMP/htdocs/Quizmo/quizmo/protected
 [yes]
 ```
 
+* PHPUnit needs some extras
+```sh
+pear install phpunit/PHPUnit_Selenium
+```
+
 * Now try to run the tests
 
 ```sh

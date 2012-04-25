@@ -13,6 +13,7 @@
 class Collection extends QActiveRecord
 {
 
+	public $ID;
 	public $sequenceName = 'COLLECTIONS_SEQ';	
 	
 	/**
