@@ -1,4 +1,6 @@
 .svn
+README-technotes.php
+README-webrootsInstall.php
 /quizmo/protected/config/database.php
 /quizmo/protected/config/ldap.php
 /quizmo/protected/config/isites.php
