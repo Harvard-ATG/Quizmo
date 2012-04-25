@@ -68,7 +68,7 @@ class PHPUnit_Runner_Version
      */
     public static function id()
     {
-        return '@package_version@';
+        return '3.4';
     }
 
     /**
@@ -76,7 +76,7 @@ class PHPUnit_Runner_Version
      */
     public static function getVersionString()
     {
-        return 'PHPUnit @package_version@ by Sebastian Bergmann.';
+        return 'PHPUnit 3.4 by Sebastian Bergmann.';
     }
 }
 ?>
