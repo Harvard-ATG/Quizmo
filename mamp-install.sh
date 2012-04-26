@@ -13,7 +13,7 @@ print_step() {
 cd $APP_DIR
 
 print_step "Creating the users"
-/Applications/MAMP/Library/bin/mysql -uroot -p$MYSQL_ROOT_PASSWORD -v -e "CREATE DATABASE 'quizmo_dev';"
+/Applications/MAMP/Library/bin/mysql -uroot -p$MYSQL_ROOT_PASSWORD -v -e 'CREATE DATABASE `quizmo_dev`;'
 /Applications/MAMP/Library/bin/mysql -uroot -p$MYSQL_ROOT_PASSWORD -v -e "CREATE USER 'quizmo_dev'@'localhost' IDENTIFIED BY 'quizmo_dev';"
 /Applications/MAMP/Library/bin/mysql -uroot -p$MYSQL_ROOT_PASSWORD -v -e "GRANT ALL PRIVILEGES ON *.* TO 'quizmo_dev'@'localhost' WITH GRANT OPTION;"
 
