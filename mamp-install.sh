@@ -50,13 +50,10 @@ print_step "Installing PHPUnit's Selenium Extension"
 
 print_step "Configuring your environment for CakePHP's console utility"
 export PATH=/Applications/MAMP/bin/php/php5.3.6/bin:$PATH 
-export PATH=$APP_DIR/app/Console:$PATH
+#export PATH=$APP_DIR/app/Console:$PATH
 
-print_step "Installing the application. You will be prompted to enter the DB username and password: catool/catool"
-$APP_DIR/app/Console/cake install app
-
-print_step "Running the application unit tests"
-$APP_DIR/app/Console/cake install test
+#print_step "Running the application unit tests"
+#$APP_DIR/app/Console/cake install test
 
 echo ""
 echo "-------------------------------"
