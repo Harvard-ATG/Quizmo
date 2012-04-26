@@ -17,7 +17,7 @@ print_step "Creating the users"
 /Applications/MAMP/Library/bin/mysql -uroot -p$MYSQL_ROOT_PASSWORD -v -e "GRANT ALL PRIVILEGES ON *.* TO 'quizmo_dev'@'localhost' WITH GRANT OPTION;"
 
 print_step "Running migrations"
-/Applications/MAMP/htdocs/Quizmo/app/quizmo/
+/Applications/MAMP/htdocs/Quizmo/quizmo/protected/yiic migrate --interactive=0
 
 #----
 # There's an issue with the default pear.conf in MAMP that results in this error
