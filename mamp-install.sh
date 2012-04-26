@@ -54,14 +54,9 @@ export PATH=/Applications/MAMP/bin/php/php5.3.6/bin:$PATH
 #export PATH=$APP_DIR/app/Console:$PATH
 
 #print_step "Running the application unit tests"
-#$APP_DIR/app/Console/cake install test
 
 echo ""
 echo "-------------------------------"
 echo "Installation process completed."
 echo "-------------------------------"
 echo ""
-echo "NOTE: to use the 'cake' console, you must update" 
-echo "your PATH environment variable to use MAMP's PHP:"
-echo ""
-echo "export PATH=$APP_DIR/app/Console:/Applications/MAMP/bin/php/php5.3.6/bin:\$PATH"
