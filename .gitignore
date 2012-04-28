@@ -1,6 +1,9 @@
 .svn
+.DS_Store
 README-technotes.php
 README-webrootsInstall.php
 /quizmo/protected/config/database.php
 /quizmo/protected/config/ldap.php
 /quizmo/protected/config/isites.php
+/quizmo/assets/*
+/quizmo/protected/runtime/*
