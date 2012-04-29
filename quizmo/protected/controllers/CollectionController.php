@@ -6,7 +6,7 @@ class CollectionController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	//public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -66,12 +66,10 @@ class CollectionController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Collection']))
-		{
-			$model->attributes=$_POST['Collection'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
-		}
+		// we basically want a form that allows us to enter:
+			// Collection name
+			// Collection description
+		// nothing needs to come from the db for this
 
 		$this->render('create',array(
 			'model'=>$model,

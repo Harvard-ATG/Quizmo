@@ -28,6 +28,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+    <script src="/js/jquery-1.7.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
   </head>
 
   <body>
@@ -83,8 +85,6 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.7.2.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
 
   </body>
 </html>

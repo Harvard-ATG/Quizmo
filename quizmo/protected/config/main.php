@@ -24,6 +24,9 @@ return CMap::mergeArray(
 			'application.models.*',
 			'application.components.*',
 		),
+		
+		// need to change this for isites
+		'layout'=>"main",
 
 		'modules'=>array(
 			// uncomment the following to enable the Gii tool
@@ -108,7 +111,7 @@ return CMap::mergeArray(
 			'adminEmail'=>'jcleveng@fas.harvard.edu',
 			'authMethod'=>'facebook',
 			//'authMethod'=>'isites',
-			'default_redirect'=>'http://dev2.webroots.fas.harvard.edu:8240/',
+			'default_redirect'=>'http://quizmo.harvard.edu',
 		),
 
 		// comment this if you don't want the login to be forced (if you want to allow viewer level guests)
