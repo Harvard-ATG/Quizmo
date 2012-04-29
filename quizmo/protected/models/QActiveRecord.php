@@ -20,7 +20,6 @@ class QActiveRecord extends CActiveRecord {
 			
 		} else {
 			// not implemented yet, doubt this will work
-			$this->ID = Yii::app()->db->getLastInsertID();
 			
 		}
 		
