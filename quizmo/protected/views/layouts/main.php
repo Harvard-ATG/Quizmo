@@ -1,72 +1,90 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
 
-	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-</head>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-<body>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+  </head>
 
-<div class="container" id="page">
+  <body>
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.php"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+          <div class="btn-group pull-right">
+	
+			<?php if(Yii::app()->user->isGuest) {?>
+            <a class="btn dropdown-toggle" href="/site/login">
+              <i class="icon-user"></i> Login
+              <span class="caret"></span>
+            </a>
+			<?php } else {?>
+            <a class="btn" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> <?php echo Yii::app()->user->name; ?>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+<!--              <li><a href="#">Profile</a></li> 
+              <li class="divider"></li>
+-->
+              <li><a href="/site/logout">Sign Out</a></li>
+            </ul>
+			<?php } ?>
 
-	<div id="facebook">
-		<?php
-		/*
-		$this->widget('application.extensions.facebook.FbLogin',
-			array(
-				'devappid' => '105687629555089',
-				'devsecret' => 'a345a7c98ca4aafbf1a73d2a277d65df',
-				'cookie' => TRUE
-			)
-		);
-		*/
-		?>
-	</div>
 
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				//array('label'=>'Home', 'url'=>array('/site/index')),
-				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				//array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-	<?php echo $content; ?>
+    <div class="container">
 
-	<div class="clear"></div>
+		<?php echo $content; ?>
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+    </div> <!-- /container -->
 
-</div><!-- page -->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.7.2.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
 
-</body>
+  </body>
 </html>
