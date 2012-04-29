@@ -5,7 +5,7 @@ class Autoincrement {
 	
 		if($driver == 'mysql') {
 			$createAutoincrement = <<< SQL
-ALTER TABLE $table_name MODIFY COLUMN id INT NOT NULL AUTO_INCREMENT
+ALTER TABLE $table_name MODIFY COLUMN ID INT NOT NULL AUTO_INCREMENT
 SQL;
 			
 			$this->execute($createAutoincrement);
