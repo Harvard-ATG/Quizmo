@@ -125,12 +125,18 @@ class QuizController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($collection_id = '')
 	{
-		$dataProvider=new CActiveDataProvider('Quiz');
+		//error_log("quiz/index");
+		$user_id = Yii::app()->user->id;
+		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
+		
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			//'dataProvider'=>$dataProvider,
+			'quizes'=>$quizes,
+			'user_id'=>$user_id,
 		));
+		
 	}
 
 	/**

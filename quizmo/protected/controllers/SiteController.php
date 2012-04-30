@@ -31,15 +31,16 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		//error_log("site/index");
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		//$this->render('index');
 
 
 		if(Yii::app()->params['authMethod'] == 'isites'){
-			$collection = new Collection;
-			$collection_id = $collection->getIdFromOtherId($other_id);
-			$this->forward('/quiz/index', array('collection_id'=>$collection_id));
+			$other_id = Yii::app()->getRequest()->getParam('topicId');
+			$collection = Collection::getByOtherId($other_id);
+			$this->forward('/quiz/index/'.$collection->ID);
 		} else {
 			$this->forward('/collection/index');
 		}

@@ -115,4 +115,25 @@ class Quiz extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	// this still needs a unit test...
+	public function getQuizArrayByCollectionId($collection_id){
+		
+		$quizes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
+		
+		$quizArray = array();
+		foreach($quizes as $quiz){
+			$qa = array();
+			$qa['link'] = "quiz/view/".$quiz->ID;
+			foreach($quiz as $key=>$value){
+				$qa[$key] = $value;
+			}
+			array_push($quizArray, $qa);
+		}
+		error_log(var_export($quizArray, 1));
+		return $quizArray;
+	
+	}
+	
+	
 }

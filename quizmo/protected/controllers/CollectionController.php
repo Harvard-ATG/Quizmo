@@ -105,7 +105,6 @@ class CollectionController extends Controller
 	public function actionUpdate($id='')
 	{
 		
-		error_log("actionUpdate");
 		$model=$this->loadModel($id);
 		
 		if($id == ''){

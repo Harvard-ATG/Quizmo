@@ -52,15 +52,11 @@ class CollectionTest extends CDbTestCase {
 		
 	}
 	
-	public function testGetIdFromOtherId(){
+	public function testGetByOtherId(){
 		foreach($this->collections as $collectionFixture){
-			$collection = new Collection;	
-			echo("\n");
-			echo($collectionFixture['ID']."\n");
-			echo($collectionFixture['OTHER_ID']."\n");
-			echo($collection->getIdFromOtherId($collectionFixture['OTHER_ID'])."\n");
+			$collection = Collection::getByOtherId($collectionFixture['OTHER_ID']);	
 			
-			$this->assertEquals($collectionFixture['ID'], $collection->getIdFromOtherId($collectionFixture['OTHER_ID']), "Failed asserting that getIdFromOtherId is getting the appropriate ID");
+			$this->assertEquals($collectionFixture['ID'], $collection->ID, "Failed asserting that getIdFromOtherId is getting the appropriate ID");
 			
 		}
 		
