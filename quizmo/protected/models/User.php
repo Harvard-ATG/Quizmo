@@ -13,7 +13,7 @@
 class User extends QActiveRecord
 {
 
-	public $ID;
+	//public $ID;
 	public $sequenceName = 'USERS_SEQ';	
 
 	/**
@@ -92,11 +92,11 @@ class User extends QActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->id);
-		$criteria->compare('EXTERNAL_ID',$this->external_id,true);
-		$criteria->compare('NAME',$this->name,true);
-		$criteria->compare('FNAME',$this->fname,true);
-		$criteria->compare('LNAME',$this->lname,true);
+		$criteria->compare('ID',$this->ID);
+		$criteria->compare('EXTERNAL_ID',$this->EXTERNAL_ID,true);
+		$criteria->compare('NAME',$this->NAME,true);
+		$criteria->compare('FNAME',$this->FNAME,true);
+		$criteria->compare('LNAME',$this->LNAME,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

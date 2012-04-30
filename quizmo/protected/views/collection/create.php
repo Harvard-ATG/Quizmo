@@ -1,5 +1,5 @@
 
-<form id="collection-form" class="form-horizontal row-fluid" action="/collection/update">
+<form id="collection-form" class="form-horizontal row-fluid" action="/collection/create" method="post">
 	<fieldset>
 		<legend>Create Collection</legend>
 

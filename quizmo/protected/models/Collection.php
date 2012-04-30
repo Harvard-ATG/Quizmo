@@ -103,4 +103,18 @@ class Collection extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function create($title, $description, $other_id='', $deleted=0){
+		$this->setAttributes(array(
+		        'OTHER_ID'=>$other_id,
+		        'TITLE'=>$title,
+		        'DESCRIPTION'=>$description,
+		        'DELETED'=>$deleted,
+				
+	    ),false);
+		
+		$this->save();
+		return $this->ID;
+	}
+	
 }

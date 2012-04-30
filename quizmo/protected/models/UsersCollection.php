@@ -103,4 +103,22 @@ class UsersCollection extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function addUserToCollection($user_id, $collection_id, $permission='enrollee'){
+		
+		$conditions = 'collection_id=:collection_id AND user_id=:user_id';
+		$params = array(':collection_id'=>$collection_id, ':user_id'=>$user_id);
+		$this->find($conditions, $params);
+		
+		$this->setAttributes(array(
+		        'USER_ID'=>$user_id,
+		        'COLLECTION_ID'=>$collection_id,
+		        'PERMISSION'=>$permission,
+	    ),false);
+		
+		$this->save(false);
+		
+		return $this->ID;
+		
+	}
 }

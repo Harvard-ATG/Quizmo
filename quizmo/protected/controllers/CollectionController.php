@@ -57,11 +57,34 @@ class CollectionController extends Controller
 
 	/**
 	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * If creation is successful, the browser will be redirected to the 'index' page.
 	 */
 	public function actionCreate()
 	{
-		$model=new Collection;
+		$collection = new Collection;
+		// then this is a create action
+		$title = Yii::app()->getRequest()->getParam('title');
+		$description = Yii::app()->getRequest()->getParam('description');
+		$user_id = Yii::app()->user->getId();
+		
+		
+		if($title != ''){
+			$collection_id = $collection->create($title, $description);
+			if($collection_id != ''){
+				// then add the user to the collection as an owner
+				$userscollection = new UsersCollection;
+				$ucid = $userscollection->addUserToCollection($user_id, $collection_id, 'owner');
+				// now go to list
+				$this->redirect('index');
+				return;
+			}
+		}
+
+		$this->render('create');
+		
+		
+
+
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -71,9 +94,7 @@ class CollectionController extends Controller
 			// Collection description
 		// nothing needs to come from the db for this
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		//$this->render('create',array());
 	}
 
 	/**
@@ -81,9 +102,27 @@ class CollectionController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id='')
 	{
+		
+		error_log("actionUpdate");
 		$model=$this->loadModel($id);
+		
+		if($id == ''){
+			// then this is a create action
+			$title = Yii::app()->getRequest()->getParam('title');
+			$description = Yii::app()->getRequest()->getParam('description');
+			if($title != ''){
+				
+			}
+			$model->create();
+			
+		} else {
+			
+			
+			
+		}
+		
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -137,9 +176,9 @@ class CollectionController extends Controller
 			$collectionLinks[$collection->ID] = "collection/view/".$collection->ID;
 			
 			array_push($collections, $collection);
-			foreach($collection as $key => $value){
-				error_log("$key => $value");
-			}
+			//foreach($collection as $key => $value){
+			//	error_log("$key => $value");
+			//}
 		}
 		
 		

@@ -24,7 +24,7 @@ foreach($this->getFixtures() as $tableName=>$fixturePath){
 }
 
 foreach($reset_order as $tableName){
-	echo("resetting $tableName\n");
+	//echo("resetting $tableName\n");
 	$this->resetTable($tableName);
 }
 foreach($load_order as $tableName){

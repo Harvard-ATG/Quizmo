@@ -7,7 +7,7 @@
 {foreach from=$collections item=collection}
 	<div class="row-fluid">
 
-		<!-- {$this->widget('LinkWidget', ['href' => $collection.ID, 'text' => $collection.TITLE], true)}<br/> -->
+		<!-- {*$this->widget('LinkWidget', ['href' => $collection.ID, 'text' => $collection.TITLE], true)*}<br/> -->
 		<a href="{$collectionLinks[$collection.ID]}">{$collection.TITLE}:{$collectionLinks[$collection.ID]}</a>
 	</div>
 {/foreach}
