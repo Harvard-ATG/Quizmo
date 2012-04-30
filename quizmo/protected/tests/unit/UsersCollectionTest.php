@@ -7,6 +7,10 @@
 class UsersCollectionTest extends CDbTestCase {
    
 
+	public $fixtures=array(
+		'collections'=>'Collection',
+		'users'=>'User'
+	);
 	
 	/**
 	* testAddUserToCollection

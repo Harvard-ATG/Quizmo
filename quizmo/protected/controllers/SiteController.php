@@ -35,7 +35,15 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		//$this->render('index');
 
-		$this->forward('/collection/index');
+
+		if(Yii::app()->params['authMethod'] == 'isites'){
+			$collection = new Collection;
+			$collection_id = $collection->getIdFromOtherId($other_id);
+			$this->forward('/quiz/index', array('collection_id'=>$collection_id));
+		} else {
+			$this->forward('/collection/index');
+		}
+		
 	}
 
 	/**
@@ -80,7 +88,6 @@ class SiteController extends Controller
 	public function actionLogin()
 	{
 		
-		error_log("actionLogin");
 		
 		$identity = IdentityFactory::getIdentity();
 		Yii::app()->user->login($identity);
@@ -95,7 +102,6 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 
-		
 		IdentityFactory::logout();
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);

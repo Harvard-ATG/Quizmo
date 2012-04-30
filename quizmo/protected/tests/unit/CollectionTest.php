@@ -18,7 +18,7 @@ class CollectionTest extends CDbTestCase {
 	* 
 	*/
 	public function testModel(){
-				
+		/*		
 		foreach($this->collections as $collectionFixture){
 			$collection = new Collection;
 			$collection->setAttributes(array(
@@ -36,6 +36,7 @@ class CollectionTest extends CDbTestCase {
 			//$this->assertNull($collection);
 				
 		}
+		*/
 		
     }   
 
@@ -46,10 +47,25 @@ class CollectionTest extends CDbTestCase {
 		
 		$this->assertGreaterThan(0, $collection->create($title, $description), "Failed asserting that create works with a title and description");
 		$this->assertGreaterThan(0, $collection->create($title, ''), "Failed asserting that create works with a title and no description");
-		$this->assertFalse($collection->create('', ''), "Failed asserting that empty title and description fail to create a new collection");
+		$this->assertFalse($collection->create('', ''), "Failed asserting that empty title and description fail to create a new collection");		
+		
 		
 	}
 	
+	public function testGetIdFromOtherId(){
+		foreach($this->collections as $collectionFixture){
+			$collection = new Collection;	
+			echo("\n");
+			echo($collectionFixture['ID']."\n");
+			echo($collectionFixture['OTHER_ID']."\n");
+			echo($collection->getIdFromOtherId($collectionFixture['OTHER_ID'])."\n");
+			
+			$this->assertEquals($collectionFixture['ID'], $collection->getIdFromOtherId($collectionFixture['OTHER_ID']), "Failed asserting that getIdFromOtherId is getting the appropriate ID");
+			
+		}
+		
+	
+	}
 	
 	
    

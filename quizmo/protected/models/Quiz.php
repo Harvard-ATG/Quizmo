@@ -4,20 +4,23 @@
  * This is the model class for table "Quizes".
  *
  * The followings are the available columns in table 'Quizes':
- * @property integer $id
- * @property integer $collection_id
- * @property string $title
- * @property string $description
- * @property integer $visibility
- * @property string $state
- * @property integer $show_feedback
- * @property string $start_date
- * @property string $end_date
- * @property string $date_modified
- * @property integer $deleted
+ * @property integer $ID
+ * @property integer $COLLECTION_ID
+ * @property string $TITLE
+ * @property string $DESCRIPTION
+ * @property integer $VISIBILITY
+ * @property string $STATE
+ * @property integer $SHOW_FEEDBACK
+ * @property string $START_DATE
+ * @property string $END_DATE
+ * @property string $DATE_MODIFIED
+ * @property integer $DELETED
  */
-class Quiz extends CActiveRecord
+class Quiz extends QActiveRecord
 {
+	
+	public $sequenceName = 'QUIZES_SEQ';	
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -96,17 +99,17 @@ class Quiz extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->id);
-		$criteria->compare('COLLECTION_ID',$this->collection_id);
-		$criteria->compare('TITLE',$this->title,true);
-		$criteria->compare('DESCRIPTION',$this->description,true);
-		$criteria->compare('VISIBILITY',$this->visibility);
-		$criteria->compare('STATE',$this->state,true);
-		$criteria->compare('SHOW_FEEDBACK',$this->show_feedback);
-		$criteria->compare('START_DATE',$this->start_date,true);
-		$criteria->compare('END_DATE',$this->end_date,true);
-		$criteria->compare('DATE_MODIFIED',$this->date_modified,true);
-		$criteria->compare('DELETED',$this->deleted);
+		$criteria->compare('ID',$this->ID);
+		$criteria->compare('COLLECTION_ID',$this->COLLECTION_ID);
+		$criteria->compare('TITLE',$this->TITLE,true);
+		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
+		$criteria->compare('VISIBILITY',$this->VISIBILITY);
+		$criteria->compare('STATE',$this->STATE,true);
+		$criteria->compare('SHOW_FEEDBACK',$this->SHOW_FEEDBACK);
+		$criteria->compare('START_DATE',$this->START_DATE,true);
+		$criteria->compare('END_DATE',$this->END_DATE,true);
+		$criteria->compare('DATE_MODIFIED',$this->DATE_MODIFIED,true);
+		$criteria->compare('DELETED',$this->DELETED);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -121,4 +121,13 @@ class Collection extends QActiveRecord
 		return $this->ID;
 	}
 	
+	public function getIdFromOtherId($other_id){
+		
+		$collection = Collection::model()->find('other_id=:other_id', array(':other_id' => $other_id));
+		
+		//$this->find('other_id=:other_id', array(':other_id' => $other_id));
+		return $collection->ID;		
+
+	}
+	
 }
