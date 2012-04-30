@@ -13,7 +13,7 @@
 class Collection extends QActiveRecord
 {
 
-	public $ID;
+	//public $ID;
 	public $sequenceName = 'COLLECTIONS_SEQ';	
 	
 	/**
@@ -105,6 +105,10 @@ class Collection extends QActiveRecord
 	}
 	
 	public function create($title, $description, $other_id='', $deleted=0){
+		
+		if($title == ''){
+			return false;
+		}
 		$this->setAttributes(array(
 		        'OTHER_ID'=>$other_id,
 		        'TITLE'=>$title,

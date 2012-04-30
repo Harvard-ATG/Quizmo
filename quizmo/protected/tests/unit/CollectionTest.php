@@ -44,8 +44,8 @@ class CollectionTest extends CDbTestCase {
 		$description = "Unit test description...";
 		$collection = new Collection;
 		
-		$this->assertTrue($collection->create($title, $description), "Failed asserting that create works with a title and description");
-		$this->assertTrue($collection->create($title, ''), "Failed asserting that create works with a title and no description");
+		$this->assertGreaterThan(0, $collection->create($title, $description), "Failed asserting that create works with a title and description");
+		$this->assertGreaterThan(0, $collection->create($title, ''), "Failed asserting that create works with a title and no description");
 		$this->assertFalse($collection->create('', ''), "Failed asserting that empty title and description fail to create a new collection");
 		
 	}
