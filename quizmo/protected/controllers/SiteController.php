@@ -40,6 +40,9 @@ class SiteController extends Controller
 		if(Yii::app()->params['authMethod'] == 'isites'){
 			$other_id = Yii::app()->getRequest()->getParam('topicId');
 			$collection = Collection::getByOtherId($other_id);
+			Yii::app()->session['collection_id'] = $collection->ID;
+
+			// forward doesn't seem to send along the parameter...
 			$this->forward('/quiz/index/'.$collection->ID);
 		} else {
 			$this->forward('/collection/index');

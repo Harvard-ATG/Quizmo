@@ -1,15 +1,28 @@
-<?php
-$this->breadcrumbs=array(
-	'Quizs'=>array('index'),
-	'Create',
-);
+<form id="collection-form" class="form-horizontal row-fluid" action="/collection/create" method="post">
+	<fieldset>
+		<legend>Create Quiz</legend>
 
-$this->menu=array(
-	array('label'=>'List Quiz', 'url'=>array('index')),
-	array('label'=>'Manage Quiz', 'url'=>array('admin')),
-);
-?>
+		<?php echo $this->renderPartial('_form', array('title'=>'', 'description'=>'')); ?>
+	</fieldset>
+</form>
 
-<h1>Create Quiz</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<script>
+$(document).ready(function(){
+	
+	$('#quiz-form').submit(function() {
+		// validate data
+		if ($("input:#title").val() == "") {
+			$("#title-control-group p.help-inline").text("Error: title required").show();
+			$("#title-control-group").addClass("error");
+			return false;
+		} else {
+			$("#title-control-group p.help-inline").text("").show();			
+			$("#title-control-group").removeClass("error");
+		}
+
+	  return true;
+	});
+
+});
+</script>

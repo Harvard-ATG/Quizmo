@@ -61,21 +61,26 @@ class QuizController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Quiz;
+		$quiz = new Quiz;
+		// then this is a create action
+		$title = Yii::app()->getRequest()->getParam('title');
+		$description = Yii::app()->getRequest()->getParam('description');
+		$user_id = Yii::app()->user->getId();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Quiz']))
-		{
-			$model->attributes=$_POST['Quiz'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		if($title != ''){
+			//$quiz_id = $quiz->create($title, $description);
+			if($quiz_id != ''){
+				// then add the user to the collection as an owner
+				//$userscollection = new UsersCollection;
+				//$ucid = $userscollection->addUserToCollection($user_id, $collection_id, 'owner');
+				// now go to list
+				$this->redirect('index');
+				return;
+			}
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		$this->render('create');
+
 	}
 
 	/**
@@ -126,9 +131,9 @@ class QuizController extends Controller
 	* Lists all models.
 	* @param $id => in this case, $id refers to collection_id
 	 */
-	public function actionIndex($id='')
+	public function actionIndex()
 	{
-		$collection_id = $id;
+		$collection_id = Yii::app()->session['collection_id'];
 		$user_id = Yii::app()->user->id;
 		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
 		$this->render('index',array(
