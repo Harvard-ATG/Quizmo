@@ -2,7 +2,7 @@
 
 $reset_order = array(
 	'USERS_COLLECTIONS',
-	//'QUIZES',
+	'QUIZES',
 	'USERS',
 	'COLLECTIONS',
 );
@@ -10,7 +10,7 @@ $reset_order = array(
 $load_order = array(
 	'USERS',
 	'COLLECTIONS',
-	//'QUIZES',
+	'QUIZES',
 	'USERS_COLLECTIONS',
 );
 

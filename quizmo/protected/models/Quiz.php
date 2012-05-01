@@ -116,7 +116,9 @@ class Quiz extends QActiveRecord
 		));
 	}
 	
-	// this still needs a unit test...
+	/**
+	* This is meant to make printing a list easy...  json probably better, but this works for now...
+	*/
 	public function getQuizArrayByCollectionId($collection_id){
 		
 		$quizes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
@@ -130,7 +132,6 @@ class Quiz extends QActiveRecord
 			}
 			array_push($quizArray, $qa);
 		}
-		error_log(var_export($quizArray, 1));
 		return $quizArray;
 	
 	}

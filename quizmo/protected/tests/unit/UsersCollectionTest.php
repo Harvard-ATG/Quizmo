@@ -9,7 +9,8 @@ class UsersCollectionTest extends CDbTestCase {
 
 	public $fixtures=array(
 		'collections'=>'Collection',
-		'users'=>'User'
+		'users'=>'User',
+		'userscollections'=>'UsersCollection',
 	);
 	
 	/**
@@ -29,6 +30,18 @@ class UsersCollectionTest extends CDbTestCase {
 			
 		
     }   
+	
+	
+	public function testGetCollectionArrayByUserId(){
+		$user_id = 1;
+		$collection_idArr = array(1, 2);
+		
+		$collectionArray = UsersCollection::getCollectionArrayByUserId($user_id);
+		$this->assertContains($collectionArray[0]['ID'], $collection_idArr);
+		$this->assertContains($collectionArray[1]['ID'], $collection_idArr);
+
+		
+	}
 
    
 }

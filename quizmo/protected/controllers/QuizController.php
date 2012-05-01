@@ -123,18 +123,19 @@ class QuizController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	* Lists all models.
+	* @param $id => in this case, $id refers to collection_id
 	 */
-	public function actionIndex($collection_id = '')
+	public function actionIndex($id='')
 	{
-		//error_log("quiz/index");
+		$collection_id = $id;
 		$user_id = Yii::app()->user->id;
 		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
-		
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,
 			'quizes'=>$quizes,
 			'user_id'=>$user_id,
+			'collection_id'=>$collection_id,
 		));
 		
 	}
