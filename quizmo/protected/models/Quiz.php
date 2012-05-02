@@ -153,7 +153,7 @@ class Quiz extends QActiveRecord
 				
 	    ),false);
 		
-		$this->save(false))
+		$this->save(false);
 		return $this->ID;
 		
 	}

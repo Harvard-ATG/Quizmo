@@ -59,10 +59,13 @@ class QuizController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id='')
 	{
 		$quiz = new Quiz;
-		// then this is a create action
+		error_log("quiz/create");
+		$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
+		Yii::app()->session['collection_id'] = $collection_id;
+		error_log($collection_id);
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
 		$state = Yii::app()->getRequest()->getParam('state');
@@ -72,12 +75,12 @@ class QuizController extends Controller
 		$show_feedback = Yii::app()->getRequest()->getParam('show_feedback');
 		$user_id = Yii::app()->user->getId();
 
+error_log(var_export($_POST, 1));
+
+
 		if($title != ''){
-			$quiz_id = $quiz->create($title, $description);
+			$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 			if($quiz_id != ''){
-				// then add the user to the collection as an owner
-				//$userscollection = new UsersCollection;
-				//$ucid = $userscollection->addUserToCollection($user_id, $collection_id, 'owner');
 				// now go to list
 				$this->redirect('index');
 				return;
@@ -85,6 +88,7 @@ class QuizController extends Controller
 		}
 
 		$this->render('create', array(
+			'collection_id'=>$collection_id,
 			'title'=>$title,
 			'description'=>$description,
 			'state'=>$state,
@@ -144,9 +148,9 @@ class QuizController extends Controller
 	* Lists all models.
 	* @param $id => in this case, $id refers to collection_id
 	 */
-	public function actionIndex()
+	public function actionIndex($id='')
 	{
-		$collection_id = Yii::app()->session['collection_id'];
+		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
 		$user_id = Yii::app()->user->id;
 		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
 		$this->render('index',array(

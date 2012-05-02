@@ -1,8 +1,8 @@
-<form id="collection-form" class="form-horizontal row-fluid" action="/collection/create" method="post">
+<form id="quiz-form" class="form-horizontal row-fluid" action="/quiz/create" method="post">
 	<fieldset>
 		<legend>Create Quiz</legend>
 
-		<?php echo $this->renderPartial('_form', array('title'=>'', 'description'=>'', 'state'=>$state, 'start_date'=>$start_date, 'end_date'=>$end_date,)); ?>
+		<?php echo $this->renderPartial('_form', array('collection_id'=>$collection_id, 'title'=>$title, 'description'=>$description, 'state'=>$state, 'start_date'=>$start_date, 'end_date'=>$end_date,)); ?>
 	</fieldset>
 </form>
 

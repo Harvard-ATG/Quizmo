@@ -39,18 +39,20 @@
 	
 	<div class="controls">
 		<label class="checkbox">
-			<input type="checkbox" id="visibility" name="visibility" value="1">
+			<input type="checkbox" id="visibility" name="visibility" value="1"/>
 			Show quiz availability on student's list of quizzes
 			<p class="help-inline"></p>
 		</label>
 		<label class="checkbox">
-			<input type="checkbox" id="show_feedback" name="show_feedback" value="1">
+			<input type="checkbox" id="show_feedback" name="show_feedback" value="1"/>
 			Show correct answers to student after student submits quiz
 			<p class="help-inline"></p>
 		</label>
 	</div>
 	
 </div>
+
+<input type="hidden" id="collection_id" name="collection_id" value="{$collection_id}"/>
 
 <div class="form-actions">
 	<input type="submit" class="btn btn-primary" value="Submit" />

@@ -80,7 +80,10 @@ class CollectionController extends Controller
 			}
 		}
 
-		$this->render('create');
+		$this->render('create', array(
+			'title' => $title,
+			'description' => $description,
+		));
 		
 
 	}
