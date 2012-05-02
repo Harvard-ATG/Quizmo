@@ -3,7 +3,7 @@
 	<fieldset>
 		<legend>Create Collection</legend>
 
-		<?php echo $this->renderPartial('_form', array('title'=>'', 'description'=>'')); ?>
+		<?php echo $this->renderPartial('_form', array('title'=>$title, 'description'=>$description)); ?>
 	</fieldset>
 </form>
 

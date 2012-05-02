@@ -2,7 +2,7 @@
 	<fieldset>
 		<legend>Create Quiz</legend>
 
-		<?php echo $this->renderPartial('_form', array('title'=>'', 'description'=>'')); ?>
+		<?php echo $this->renderPartial('_form', array('title'=>'', 'description'=>'', 'state'=>$state, 'start_date'=>$start_date, 'end_date'=>$end_date,)); ?>
 	</fieldset>
 </form>
 

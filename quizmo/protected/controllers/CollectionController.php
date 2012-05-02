@@ -154,6 +154,7 @@ class CollectionController extends Controller
 		$user_id = Yii::app()->user->id;
 		
 		$collections = UsersCollection::getCollectionArrayByUserId($user_id);
+		//$collections = UsersCollection::getCollectionArrayAll();
 		
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,

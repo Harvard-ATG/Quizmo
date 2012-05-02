@@ -65,10 +65,15 @@ class QuizController extends Controller
 		// then this is a create action
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
+		$state = Yii::app()->getRequest()->getParam('state');
+		$start_date = Yii::app()->getRequest()->getParam('start_date');
+		$end_date = Yii::app()->getRequest()->getParam('end_date');
+		$visibility = Yii::app()->getRequest()->getParam('visibility');
+		$show_feedback = Yii::app()->getRequest()->getParam('show_feedback');
 		$user_id = Yii::app()->user->getId();
 
 		if($title != ''){
-			//$quiz_id = $quiz->create($title, $description);
+			$quiz_id = $quiz->create($title, $description);
 			if($quiz_id != ''){
 				// then add the user to the collection as an owner
 				//$userscollection = new UsersCollection;
@@ -79,7 +84,15 @@ class QuizController extends Controller
 			}
 		}
 
-		$this->render('create');
+		$this->render('create', array(
+			'title'=>$title,
+			'description'=>$description,
+			'state'=>$state,
+			'start_date'=>$start_date,
+			'end_date'=>$end_date,
+			'visibility'=>$visibility,
+			'show_feedback'=>$show_feedback,
+		));
 
 	}
 

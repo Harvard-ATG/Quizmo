@@ -136,5 +136,28 @@ class Quiz extends QActiveRecord
 	
 	}
 	
+	public function create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback){
+		
+		if($title == ''){
+			return false;
+		}
+		$this->setAttributes(array(
+	        	'COLLECTION_ID'=>$collection_id,
+	        	'TITLE'=>$title,
+		        'DESCRIPTION'=>$description,
+		        'STATE'=>$state,
+				'START_DATE'=>$start_date,
+				'END_DATE'=>$end_date,
+				'VISIBILITY'=>$visibility,
+				'SHOW_FEEDBACK'=>$show_feedback,
+				
+	    ),false);
+		
+		$this->save(false))
+		return $this->ID;
+		
+	}
+	
+	
 	
 }
