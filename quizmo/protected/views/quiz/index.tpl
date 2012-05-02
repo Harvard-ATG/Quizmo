@@ -3,10 +3,11 @@
 </div>
 
 <div id="quizes-container" class="span12 row-fluid">
-	<a class="btn" href="/quiz/create/{$collection_id}">New Quiz</a>
+	<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
 	New Quiz:
-		{$collection_id}
+
 		{url url="/quiz/create/$collection_id"}
+		<pre>{url url="/quiz/create/$collection_id"}</pre><br/>
 {foreach from=$quizes item=quiz}
 	<div class="row-fluid">
 

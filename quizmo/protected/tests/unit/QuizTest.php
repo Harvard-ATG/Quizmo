@@ -29,8 +29,8 @@ class QuizTest extends CDbTestCase {
 		$description = "Unit test description...";
 		$state = "S";
 		// dates need to be implemented
-		$start_date = "0000-00-00 00:00:00";
-		$end_date = "0000-00-00 00:00:00";
+		$start_date = "";
+		$end_date = "";
 		$visibility = 1;
 		$show_feedback = 1;
 		$quiz = new Quiz;
@@ -40,9 +40,9 @@ class QuizTest extends CDbTestCase {
 		// this fails really hard because of the integrity constraint...
 		//$this->assertFalse($quiz->create('', $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback), "Failed asserting that create fails without a collection_id");
 		
-		//$this->markTestIncomplete(
-        //  'This test still needs a correct date format.'
-        //);
+		$this->markTestIncomplete(
+          "This test still needs a correct date format.  It's a timestamp now, should be a date."
+        );
 	}
    
 }
