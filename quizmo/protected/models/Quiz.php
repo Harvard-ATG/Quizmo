@@ -150,6 +150,7 @@ class Quiz extends QActiveRecord
 				'END_DATE'=>$end_date,
 				'VISIBILITY'=>$visibility,
 				'SHOW_FEEDBACK'=>$show_feedback,
+				'DELETED'=>0,
 				
 	    ),false);
 		
