@@ -15,7 +15,7 @@ class FacebookSeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad(30000); 
 			
 			$this->type("id=email", "facebook@jazahn.com");
-			$this->type("id=pass", "rutgerss");
+			$this->type("id=pass", "");
 			$this->waitForPageToLoad(30000); 
 			$this->click("css=#ubefxt_2");
 			$this->waitForPageToLoad(30000); 
