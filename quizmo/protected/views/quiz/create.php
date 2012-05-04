@@ -1,4 +1,4 @@
-<form id="quiz-form" class="form-horizontal row-fluid" action="/quiz/create" method="post">
+<form id="quiz-form" class="form-horizontal row-fluid isites-form" action="/quiz/create" method="post">
 	<fieldset>
 		<legend>Create Quiz</legend>
 
