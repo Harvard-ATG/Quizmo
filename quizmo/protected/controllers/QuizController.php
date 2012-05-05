@@ -156,6 +156,7 @@ error_log(var_export($_POST, 1));
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,
 			'quizes'=>$quizes,
+			'sizeofquizes'=>sizeof($quizes),
 			'user_id'=>$user_id,
 			'collection_id'=>$collection_id,
 		));

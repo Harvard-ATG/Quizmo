@@ -14,8 +14,11 @@
  * @property string $feedback
  * @property integer $deleted
  */
-class Question extends CActiveRecord
+class Question extends QActiveRecord
 {
+	
+	public $sequenceName = 'QUIZES_SEQ';	
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -59,6 +62,7 @@ class Question extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'quiz' => array(self::BELONGS_TO, 'Quiz', 'QUIZ_ID'),
 		);
 	}
 
@@ -91,15 +95,15 @@ class Question extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->id);
-		$criteria->compare('QUIZ_ID',$this->quiz_id);
-		$criteria->compare('QUESTION_TYPE',$this->question_type,true);
-		$criteria->compare('TITLE',$this->title,true);
-		$criteria->compare('BODY',$this->body,true);
-		$criteria->compare('QUESTION_ORDER',$this->question_order);
-		$criteria->compare('POINTS',$this->points);
-		$criteria->compare('FEEDBACK',$this->feedback,true);
-		$criteria->compare('DELETED',$this->deleted);
+		$criteria->compare('ID',$this->ID);
+		$criteria->compare('QUIZ_ID',$this->QUIZ_ID);
+		$criteria->compare('QUESTION_TYPE',$this->QUESTION_TYPE,true);
+		$criteria->compare('TITLE',$this->TITLE,true);
+		$criteria->compare('BODY',$this->BODY,true);
+		$criteria->compare('QUESTION_ORDER',$this->QUESTION_ORDER);
+		$criteria->compare('POINTS',$this->POINTS);
+		$criteria->compare('FEEDBACK',$this->FEEDBACK,true);
+		$criteria->compare('DELETED',$this->DELETED);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

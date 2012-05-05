@@ -59,8 +59,8 @@ class Collection extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Quizes' => array(self::HAS_MANY, 'QUIZES', 'COLLECTION_ID'),
-			'UsersCollections' => array(self::HAS_MANY, 'USERSCOLLECTIONS', 'COLLECTION_ID'),
+			'quizes' => array(self::HAS_MANY, 'QUIZES', 'COLLECTION_ID'),
+			'userscollections' => array(self::HAS_MANY, 'USERSCOLLECTIONS', 'COLLECTION_ID'),
 		);
 	}
 

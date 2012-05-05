@@ -6,7 +6,7 @@ class QuestionController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	//public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -125,12 +125,23 @@ class QuestionController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($id='')
 	{
-		$dataProvider=new CActiveDataProvider('Question');
+		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
+		$user_id = Yii::app()->user->id;
+		$questions = Question::getQuestionArrayByQuizId($quiz_id);
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			//'dataProvider'=>$dataProvider,
+			'questions'=>$questions,
+			'sizeofquestions'=>sizeof($questions),
+			'user_id'=>$user_id,
+			'quiz_id'=>$quiz_id,
 		));
+		
+		//$dataProvider=new CActiveDataProvider('Question');
+		//$this->render('index',array(
+		//	'dataProvider'=>$dataProvider,
+		//));
 	}
 
 	/**

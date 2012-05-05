@@ -65,6 +65,8 @@ class Quiz extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'questions' => array(self::HAS_MANY, 'QUESTIONS', 'QUIZ_ID'),
+			'collection' => array(self::BELONGS_TO, 'Collection', 'COLLECTION_ID'),
 		);
 	}
 
@@ -126,7 +128,7 @@ class Quiz extends QActiveRecord
 		$quizArray = array();
 		foreach($quizes as $quiz){
 			$qa = array();
-			$qa['link'] = "quiz/view/".$quiz->ID;
+			$qa['link'] = "question/index/".$quiz->ID;
 			foreach($quiz as $key=>$value){
 				$qa[$key] = $value;
 			}
