@@ -109,4 +109,10 @@ class Question extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function getQuestionArrayByQuizId($quiz_id){
+		
+		
+		
+	}
 }

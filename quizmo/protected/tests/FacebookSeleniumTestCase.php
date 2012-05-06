@@ -8,6 +8,14 @@ class FacebookSeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
    	protected function login()
     {
 
+			
+			//echo("\nenter something: ");
+			//$line = trim(fgets(STDIN)); // reads one line from STDIN
+			//fscanf(STDIN, "%d\n", $number);
+			//echo($number."\n");
+			
+			exit();
+			
 	        $this->open('http://quizmo.harvard.edu');
 	
 			$this->click("css=#login-btn");

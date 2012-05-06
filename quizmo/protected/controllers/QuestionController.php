@@ -59,23 +59,38 @@ class QuestionController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id='')
 	{
-		$model=new Question;
+		$quiz = new Quiz;
+		//error_log("quiz/create");
+		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
+		Yii::app()->session['quiz_id'] = $quiz_id;
+		error_log($quiz_id);
+		$title = Yii::app()->getRequest()->getParam('title');
+		$body = Yii::app()->getRequest()->getParam('body');
+		$question_type = Yii::app()->getRequest()->getParam('question_type');
+		
+		$user_id = Yii::app()->user->getId();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		//error_log(var_export($_POST, 1));
 
-		if(isset($_POST['Question']))
-		{
-			$model->attributes=$_POST['Question'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+
+		if($title != ''){
+			//$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
+			//if($quiz_id != ''){
+				// now go to list
+			//	$this->redirect('index');
+			//	return;
+			//}
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+			'quiz_id'=>$quiz_id,
+			'title'=>$title,
+			'body'=>$body,
+			'question_type'=>$question_type,
 		));
+
 	}
 
 	/**
@@ -128,6 +143,7 @@ class QuestionController extends Controller
 	public function actionIndex($id='')
 	{
 		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
+		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
 		$this->render('index',array(

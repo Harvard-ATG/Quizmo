@@ -1,15 +1,34 @@
-<?php
-$this->breadcrumbs=array(
-	'Questions'=>array('index'),
-	'Create',
-);
+<form id="question-form" class="form-horizontal row-fluid" action="/question/create" method="post">
+	<fieldset>
+		<legend>Create Question</legend>
 
-$this->menu=array(
-	array('label'=>'List Question', 'url'=>array('index')),
-	array('label'=>'Manage Question', 'url'=>array('admin')),
-);
-?>
+		<?php echo $this->renderPartial('_form', array(
+			'quiz_id'=>$quiz_id,
+			'title'=>$title, 
+			'body'=>$body,
+			'question_type'=>$question_type,
+		)); ?>
+	</fieldset>
+</form>
 
-<h1>Create Question</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<script>
+$(document).ready(function(){
+	
+	$('#question-form').submit(function() {
+		returnval = true;
+		// validate data
+		if ($("input:#title").val() == "") {
+			$("#title-control-group p.help-inline").text("Error: title required").show();
+			$("#title-control-group").addClass("error");
+			returnval = false;
+		} else {
+			$("#title-control-group p.help-inline").text("").show();			
+			$("#title-control-group").removeClass("error");
+		}
+
+	  return returnval;
+	});
+
+});
+</script>

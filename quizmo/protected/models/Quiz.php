@@ -128,7 +128,7 @@ class Quiz extends QActiveRecord
 		$quizArray = array();
 		foreach($quizes as $quiz){
 			$qa = array();
-			$qa['link'] = "question/index/".$quiz->ID;
+			$qa['link'] = "/question/index/".$quiz->ID;
 			foreach($quiz as $key=>$value){
 				$qa[$key] = $value;
 			}
