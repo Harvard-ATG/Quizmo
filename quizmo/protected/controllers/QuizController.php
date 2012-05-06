@@ -64,7 +64,8 @@ class QuizController extends Controller
 		$quiz = new Quiz;
 		error_log("quiz/create");
 		$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
-		Yii::app()->session['collection_id'] = $collection_id;
+		$collection_id = ($collection_id == '') ? Yii::app()->getRequest()->getParam('collection_id') : $collection_id;
+		if($collection_id != '') Yii::app()->session['collection_id'] = $collection_id;
 		error_log($collection_id);
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
@@ -72,21 +73,30 @@ class QuizController extends Controller
 		$start_date = Yii::app()->getRequest()->getParam('start_date');
 		$end_date = Yii::app()->getRequest()->getParam('end_date');
 		$visibility = Yii::app()->getRequest()->getParam('visibility');
+		if($visibility == '') $visibility = 0;
 		$show_feedback = Yii::app()->getRequest()->getParam('show_feedback');
+		if($show_feedback == '') $show_feedback = 0;
 		$user_id = Yii::app()->user->getId();
 
 error_log(var_export($_POST, 1));
 
 
 		if($title != ''){
+			
+			//$collection_id = Yii::app()->getRequest()->getParam('collection_id');
+			error_log("before create...");
+			error_log("$collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback");
 			$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
+			error_log("passing create with: ==".$quiz_id."==");
 			if($quiz_id != ''){
 				// now go to list
-				$this->redirect('index');
+				error_log("forwarding..");
+				$this->forward('/quiz/index/'.$collection_id, false);
+				//$this->redirect(Yii::app()->isitestool->url("/quiz/index/".$collection_id));
 				return;
 			}
 		}
-
+		error_log("first run collection_id: ".$collection_id);
 		$this->render('create', array(
 			'collection_id'=>$collection_id,
 			'title'=>$title,
@@ -150,6 +160,8 @@ error_log(var_export($_POST, 1));
 	 */
 	public function actionIndex($id='')
 	{
+		error_log("quiz/index");
+		header("Status: 200");
 		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
 		$user_id = Yii::app()->user->id;
 		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
