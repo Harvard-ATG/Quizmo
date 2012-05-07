@@ -16,7 +16,7 @@
 {foreach from=$quizes item=quiz}
 
 		<tr>
-			<td><a href="{$quiz['link']}">{$quiz['TITLE']}</a></td>
+			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>
 			<td>Take Quiz</td>
 		</tr>
 					

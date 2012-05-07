@@ -153,7 +153,6 @@ class QuizController extends Controller
 	public function actionIndex($id='')
 	{
 		error_log("quiz/index");
-		header("Status: 200");
 		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
 		$user_id = Yii::app()->user->id;
 		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);

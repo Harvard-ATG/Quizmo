@@ -25,6 +25,6 @@ function smarty_function_url($params, &$smarty){
 
 		
 	}
-	error_log($url);
+
     return $url;
 }
