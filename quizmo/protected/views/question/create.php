@@ -14,7 +14,7 @@
 
 <script>
 $(document).ready(function(){
-	
+
 	$('#question-form').submit(function() {
 		returnval = true;
 		// validate data
@@ -29,6 +29,59 @@ $(document).ready(function(){
 
 	  return returnval;
 	});
+
+
+	$('#question-type-multiple').click(function(){
+		$('#multiple-choice-control-group').removeClass('hidden');
+		$('#true-false-control-group').addClass('hidden');
+		$('#check-all-control-group').addClass('hidden');
+		$('#essay-control-group').addClass('hidden');
+		$('#numerical-control-group').addClass('hidden');
+		$('#fill-in-control-group').addClass('hidden');
+	});
+	$('#question-type-truefalse').click(function(){
+		$('#multiple-choice-control-group').addClass('hidden');
+		$('#true-false-control-group').removeClass('hidden');
+		$('#check-all-control-group').addClass('hidden');
+		$('#essay-control-group').addClass('hidden');
+		$('#numerical-control-group').addClass('hidden');
+		$('#fill-in-control-group').addClass('hidden');
+	});
+	$('#question-type-checkall').click(function(){
+		$('#multiple-choice-control-group').addClass('hidden');
+		$('#true-false-control-group').addClass('hidden');
+		$('#check-all-control-group').removeClass('hidden');
+		$('#essay-control-group').addClass('hidden');
+		$('#numerical-control-group').addClass('hidden');
+		$('#fill-in-control-group').addClass('hidden');
+	});
+	$('#question-type-essay').click(function(){
+		$('#multiple-choice-control-group').addClass('hidden');
+		$('#true-false-control-group').addClass('hidden');
+		$('#check-all-control-group').addClass('hidden');
+		$('#essay-control-group').removeClass('hidden');
+		$('#numerical-control-group').addClass('hidden');
+		$('#fill-in-control-group').addClass('hidden');
+	});
+	$('#question-type-numerical').click(function(){
+		$('#multiple-choice-control-group').addClass('hidden');
+		$('#true-false-control-group').addClass('hidden');
+		$('#check-all-control-group').addClass('hidden');
+		$('#essay-control-group').addClass('hidden');
+		$('#numerical-control-group').removeClass('hidden');
+		$('#fill-in-control-group').addClass('hidden');
+	});
+	$('#question-type-fillin').click(function(){
+		$('#multiple-choice-control-group').addClass('hidden');
+		$('#true-false-control-group').addClass('hidden');
+		$('#check-all-control-group').addClass('hidden');
+		$('#essay-control-group').addClass('hidden');
+		$('#numerical-control-group').addClass('hidden');
+		$('#fill-in-control-group').removeClass('hidden');
+	});
+
+
+
 
 });
 </script>

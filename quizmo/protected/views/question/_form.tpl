@@ -15,18 +15,15 @@
 
 <div id="question_type-control-group" class="control-group">
 	<div class="btn-group" data-toggle="buttons-radio">
-		<button id="question-type-multiple" class="btn">Multiple-Choice</button>
-		<button id="question-type-truefalse" class="btn">True False</button>
-		<button id="question-type-checkall" class="btn">Check all that apply</button>
-		<button id="question-type-essay" class="btn">Essay</button>
-		<button id="question-type-numerical" class="btn">Numerical</button>
-		<button id="question-type-fillin" class="btn">Fill in the blank</button>
+		<button type="button" id="question-type-multiple" class="btn">Multiple-Choice</button>
+		<button type="button" id="question-type-truefalse" class="btn">True False</button>
+		<button type="button" id="question-type-checkall" class="btn">Check all that apply</button>
+		<button type="button" id="question-type-essay" class="btn">Essay</button>
+		<button type="button" id="question-type-numerical" class="btn">Numerical</button>
+		<button type="button" id="question-type-fillin" class="btn">Fill in the blank</button>
 		<input type="hidden" id="question_type" name="question_type" value=""/>
 	</div>
 </div>
-
-
-
 
 <div id="multiple-choice-control-group" class="control-group hidden">
 	<label class="control-label" for="state">Multiple Choice Answers</label>
@@ -36,11 +33,15 @@
 			<input type="text" id="multiple_answer1" name="multiple_answer1"/>
 			<p class="help-inline"></p>
 		</label>
+	</div>
+	<div class="controls">
 		<label class="radio">
 			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="1"/>
 			<input type="text" id="multiple_answer2" name="multiple_answer2"/>
 			<p class="help-inline"></p>
 		</label>
+	</div>
+	<div class="controls">
 		<label class="radio">
 			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="2"/>
 			<input type="text" id="multiple_answer3" name="multiple_answer3"/>
@@ -57,6 +58,8 @@
 			<input type="radio" id="true_answer" name="truefalse" value="true"/> True
 			<p class="help-inline"></p>
 		</label>
+	</div>
+	<div class="controls">
 		<label class="radio">
 			<input type="radio" id="false_answer" name="truefalse" value="false"/> False
 			<p class="help-inline"></p>
@@ -67,7 +70,7 @@
 
 <div id="check-all-control-group" class="control-group hidden">
 	<label class="control-label" for="check-all">Check All Answers</label>
-	<div class="controls">		
+	<div class="controls">
 		<label class="checkbox inline">
 			<input type="checkbox" id="check_all_check_answer1" name="check_all_check_answer1" value="1"/>
 		</label>
@@ -121,7 +124,6 @@
 		<p class="help-inline">
 			{literal}
 			<p>To create blanks, place curly braces around words. For example:</p>
-
 			<p>Roses are {red} and violets are {blue}.</p>
 			<p>Separate multiple correct answers with a pipe (|) symbol:</p>
 			<p>Roses are {red|scarlet} and violets are {blue|azure}</p>
@@ -140,6 +142,8 @@
 </div>
 
 <script>
+
+
 
 $(document).ready(function(){
 	
