@@ -76,8 +76,8 @@ class FacebookIdentity extends UserIdentity {
 		
 		$app_id = Yii::app()->facebook->appId;
 		$app_secret = Yii::app()->facebook->secret; 
-		$my_url = "http://dev2.webroots.fas.harvard.edu:8240/index.php";
-		//$my_url = "http://quizmo.harvard.edu";
+		//$my_url = "http://dev2.webroots.fas.harvard.edu:8240/index.php";
+		$my_url = "http://quizmo.harvard.edu";
 
 		// known valid access token stored in a database 
 		$access_token = Yii::app()->facebook->getAccessToken();
