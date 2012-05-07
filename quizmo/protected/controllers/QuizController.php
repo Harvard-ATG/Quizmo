@@ -62,11 +62,10 @@ class QuizController extends Controller
 	public function actionCreate($id='')
 	{
 		$quiz = new Quiz;
-		error_log("quiz/create");
+		//error_log("quiz/create");
 		$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
 		$collection_id = ($collection_id == '') ? Yii::app()->getRequest()->getParam('collection_id') : $collection_id;
 		if($collection_id != '') Yii::app()->session['collection_id'] = $collection_id;
-		error_log($collection_id);
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
 		$state = Yii::app()->getRequest()->getParam('state');
@@ -78,25 +77,18 @@ class QuizController extends Controller
 		if($show_feedback == '') $show_feedback = 0;
 		$user_id = Yii::app()->user->getId();
 
-error_log(var_export($_POST, 1));
-
 
 		if($title != ''){
 			
 			//$collection_id = Yii::app()->getRequest()->getParam('collection_id');
-			error_log("before create...");
-			error_log("$collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback");
 			$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
-			error_log("passing create with: ==".$quiz_id."==");
 			if($quiz_id != ''){
 				// now go to list
-				error_log("forwarding..");
-				$this->forward('/quiz/index/'.$collection_id, false);
-				//$this->redirect(Yii::app()->isitestool->url("/quiz/index/".$collection_id));
-				return;
+				$this->forward('/quiz/index/'.$collection_id, true);
+
 			}
 		}
-		error_log("first run collection_id: ".$collection_id);
+
 		$this->render('create', array(
 			'collection_id'=>$collection_id,
 			'title'=>$title,

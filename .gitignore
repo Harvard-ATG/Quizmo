@@ -7,3 +7,4 @@ README-webrootsInstall.php
 /quizmo/protected/config/isites.php
 /quizmo/assets/*
 /quizmo/protected/runtime/*
+/quizmo/protected/runtime/application.log
