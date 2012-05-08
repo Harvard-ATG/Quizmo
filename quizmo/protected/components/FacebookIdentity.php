@@ -77,7 +77,7 @@ class FacebookIdentity extends UserIdentity {
 		$app_id = Yii::app()->facebook->appId;
 		$app_secret = Yii::app()->facebook->secret; 
 		//$my_url = "http://dev2.webroots.fas.harvard.edu:8240/index.php";
-		$my_url = "http://quizmo.harvard.edu";
+		$my_url = Yii::app()->facebook->redirect;
 
 		// known valid access token stored in a database 
 		$access_token = Yii::app()->facebook->getAccessToken();
@@ -176,7 +176,7 @@ class FacebookIdentity extends UserIdentity {
 		} catch (FacebookApiException $e){
 			
 			// facebook sdk team blowwwwwwws
-			error_log(var_export($e->__toString(), 1));
+			//error_log(var_export($e->__toString(), 1));
 			//error_log(var_export($_SERVER, 1));
 			
 			$redirect_uri = (@$_SERVER['SCRIPT_URI']) ? $_SERVER['SCRIPT_URI'] : $_SERVER['HTTP_REFERER'];
