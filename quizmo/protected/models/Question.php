@@ -115,4 +115,83 @@ class Question extends QActiveRecord
 		
 		
 	}
+	
+	/**
+	* getNextQuestionOrder
+	*
+	* originally thinking of this just to be used internally
+	* when adding new questions -- to get the appropriate question_order
+	*
+	* @param $quiz_id int
+	*
+	* @return $quetion_order int
+	*/
+	public function getNextQuestionOrder($quiz_id){
+
+		$criteria=new CDbCriteria;
+		//$criteria->select = 'max(QUESTION_ORDER) AS max_question_order';
+		$criteria->condition = 'quiz_id='.$quiz_id;
+		$criteria->order = "question_order DESC";
+		
+		$question = Question::model()->find($criteria);
+		
+		return $question->QUESTION_ORDER+1;
+		
+
+	}
+	
+	/**
+	* createMultipleChoice
+	*
+	* @param $quiz_id string
+	* @param $title string
+	* @param $body string
+	* @param $score int
+	* @param $feedback string
+	* @param $multiple_radio_answer int
+	* @param $multiple_answers array of strings
+	*
+	* @return $question_id int
+	*/
+	public function createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers){
+		
+		if($quiz_id == '' || $title == '' || $body == ''){
+			return false;
+		}
+		
+		$question_order = $this->getNextQuestionOrder($quiz_id);
+		
+		$this->setAttributes(array(
+	        	'QUIZ_ID'=>$quiz_id,
+				'QUESTION_TYPE'=>'M',
+	        	'TITLE'=>$title,
+		        'BODY'=>$body,
+				'QUESTION_ORDER'=>$question_order,
+		        'POINTS'=>$score,
+				'FEEDBACK'=>$feedback,
+				'DELETED'=>0,
+				
+	    ),false);
+		
+		$this->save(false);
+		
+		
+		foreach($multiple_answers as $multiple_answer){
+			//$answer = new Answer;
+			
+			//$answer->create();
+		}
+		
+		
+		
+		
+		return $this->ID;
+		
+	
+	}
+	
+	
+	
+	
+	
 }

@@ -1,4 +1,4 @@
-<form id="question-form" class="form-horizontal row-fluid" action="/question/create" method="post">
+<form id="question-form" class="form-horizontal row-fluid" action="/question/create">
 	<fieldset>
 		<legend>Create Question</legend>
 

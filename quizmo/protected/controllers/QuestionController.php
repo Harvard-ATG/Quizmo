@@ -75,19 +75,30 @@ class QuestionController extends Controller
 		
 
 		$multiple_answers = array();
-		$count = 1;
-		while(!isset(Yii::app()->getRequest()->getParam('multiple_answer'.$count++))){
-			array_push($multiple_answers, Yii::app()->getRequest()->getParam('multiple_answer'.$count));
+		// isset() won't work with the yii->getParam
+		for($i = 0; isset($_POST['multiple_answer'.$i]); $i++){
+			array_push($multiple_answers, Yii::app()->getRequest()->getParam('multiple_answer'.$i));
 		}
-		
 		
 		$user_id = Yii::app()->user->getId();
 
 		error_log(var_export($_POST, 1));
 
 
-		if($title != ''){
-			//$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
+		if($title != '' && $body != '' && $question_type != ''){
+			$question = new Question;
+			switch($question_type){
+				case 'multiple':
+					$question_id = $question->createMultipleChoice($collection_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers);
+					break;
+				
+				
+				default:
+					error_log("unknown question type: $question_type");
+					break;
+				
+			}
+			//$question_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 			//if($quiz_id != ''){
 				// now go to list
 			//	$this->redirect('index');

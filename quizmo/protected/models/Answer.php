@@ -14,8 +14,11 @@
  * @property integer $is_correct
  * @property double $tolerance
  */
-class Answer extends CActiveRecord
+class Answer extends QActiveRecord
 {
+
+	public $sequenceName = 'ANSWERS_SEQ';	
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -60,6 +63,7 @@ class Answer extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'question' => array(self::BELONGS_TO, 'Question', 'QUESTION_ID'),
 		);
 	}
 
@@ -106,4 +110,11 @@ class Answer extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function createMultipleChoiceAnswer($question_id, $answer, $is_correct){
+	
+	
+	}
+	
+	
 }

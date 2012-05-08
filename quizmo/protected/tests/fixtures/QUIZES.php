@@ -17,6 +17,18 @@
  */
 return array(
 	
+	'quiz0' => array(
+		'COLLECTION_ID' => '1',
+		'TITLE' => 'dev quiz prime',
+		'DESCRIPTION' => "",
+		'VISIBILITY' => 1,
+		'STATE' => 'O',
+		'SHOW_FEEDBACK' => 0,
+		'START_DATE' => '',
+		'END_DATE' => '',
+		'DATE_MODIFIED' => '',
+		'DELETED' => 0,
+	),
 	'quiz1' => array(
 		'COLLECTION_ID' => '1',
 		'TITLE' => 'First Quiz',
