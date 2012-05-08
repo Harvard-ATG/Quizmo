@@ -27,6 +27,11 @@ class SFacebook extends CApplicationComponent
      */
     public $secret;
 
+  	/**
+     * @var string Facebook Application redirect
+     */
+    public $redirect;
+
     /**
      * @var bool Indicates if the CURL based @ syntax for file uploads is enabled in the PHP SDK
      */

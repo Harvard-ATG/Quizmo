@@ -14,6 +14,7 @@
 </div>
 
 <div id="question_type-control-group" class="control-group">
+	<p class="help-block"></p>
 	<div class="btn-group" data-toggle="buttons-radio">
 		<button type="button" id="question-type-multiple" class="btn">Multiple-Choice</button>
 		<button type="button" id="question-type-truefalse" class="btn">True False</button>
@@ -25,28 +26,32 @@
 	</div>
 </div>
 
+
+
+
+
 <div id="multiple-choice-control-group" class="control-group hidden">
 	<label class="control-label" for="state">Multiple Choice Answers</label>
 	<div class="controls">
-		<label class="radio">
+		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="0"/>
+		</label>
 			<input type="text" id="multiple_answer1" name="multiple_answer1"/>
 			<p class="help-inline"></p>
-		</label>
 	</div>
 	<div class="controls">
-		<label class="radio">
+		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="1"/>
+		</label>
 			<input type="text" id="multiple_answer2" name="multiple_answer2"/>
 			<p class="help-inline"></p>
-		</label>
 	</div>
 	<div class="controls">
-		<label class="radio">
+		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="2"/>
+		</label>
 			<input type="text" id="multiple_answer3" name="multiple_answer3"/>
 			<p class="help-inline"></p>
-		</label>
 		<p class="help-block"></p>
 	</div>
 </div>
@@ -120,7 +125,6 @@
 <div id="fill-in-control-group" class="control-group hidden">
 	<label class="control-label" for="numerical">Fill in the blank answer</label>
 	<div class="controls">
-		<textarea id="fill_in_answer" name="fill_in_answer">{*$fill_in_answer*}</textarea>
 		<p class="help-inline">
 			{literal}
 			<p>To create blanks, place curly braces around words. For example:</p>
@@ -130,8 +134,29 @@
 			{/literal}
 		</p>
 	</div>
-
 </div>
+
+
+
+
+
+
+
+<div id="score-control-group" class="control-group">
+	<label class="control-label" for="score">Score</label>
+	<div class="controls">
+		<input type="text" class="span1 input-xlarge" id="score" name="score" value="{*$score*}"/>
+		<p class="help-inline"></p>
+	</div>
+</div>
+<div id="feedback-control-group" class="control-group">
+	<label class="control-label" for="feedback">Feedback</label>
+	<div class="controls">
+		<textarea class="input-xlarge" id="feedback" name="feedback">{*$feedback*}</textarea>
+		<p class="help-inline"></p>
+	</div>
+</div>
+
 
 
 <input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>

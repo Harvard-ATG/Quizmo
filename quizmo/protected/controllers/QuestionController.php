@@ -69,10 +69,21 @@ class QuestionController extends Controller
 		$title = Yii::app()->getRequest()->getParam('title');
 		$body = Yii::app()->getRequest()->getParam('body');
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
+		$score = Yii::app()->getRequest()->getParam('score');
+		$feedback = Yii::app()->getRequest()->getParam('feedback');
+		$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
+		
+
+		$multiple_answers = array();
+		$count = 1;
+		while(!isset(Yii::app()->getRequest()->getParam('multiple_answer'.$count++))){
+			array_push($multiple_answers, Yii::app()->getRequest()->getParam('multiple_answer'.$count));
+		}
+		
 		
 		$user_id = Yii::app()->user->getId();
 
-		//error_log(var_export($_POST, 1));
+		error_log(var_export($_POST, 1));
 
 
 		if($title != ''){
