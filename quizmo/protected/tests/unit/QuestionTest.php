@@ -8,6 +8,7 @@ class QuestionTest extends CDbTestCase {
    
 
 	public $fixtures=array(
+		'quizes'=>'Quiz',
 		'questions'=>'Question',
 	);
 	
@@ -32,16 +33,16 @@ class QuestionTest extends CDbTestCase {
 		$score = "10";
 		$feedback = "this is feedback";
 		$multiple_radio_answer = 0;
-		$multiple_answers = array();
+		$multiple_answers = array(
+			array("answer"=>"one", "is_correct"=>1),
+			array("answer"=>"two", "is_correct"=>0),
+			array("answer"=>"three", "is_correct"=>0),			
+		);
 
 		$question = new Question;
 		
 		$this->assertGreaterThan(0, $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers), "Failed asserting that create works with all items");
 
-		
-		$this->markTestIncomplete(
-          "This test still needs to take Answers into account"
-        );
 	}
 
    

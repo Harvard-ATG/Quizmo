@@ -17,7 +17,7 @@
 class Question extends QActiveRecord
 {
 	
-	public $sequenceName = 'QUIZES_SEQ';	
+	public $sequenceName = 'QUESTIONS_SEQ';	
 	
 	/**
 	 * Returns the static model of the specified AR class.
@@ -110,6 +110,10 @@ class Question extends QActiveRecord
 		));
 	}
 	
+	/**
+	* getQuestionArrayByQuizId
+	*
+	*/
 	public function getQuestionArrayByQuizId($quiz_id){
 		
 		
@@ -135,8 +139,10 @@ class Question extends QActiveRecord
 		
 		$question = Question::model()->find($criteria);
 		
-		return $question->QUESTION_ORDER+1;
-		
+		if(isset($question->QUESTION_ORDER))
+			return $question->QUESTION_ORDER+1;
+		else
+			return 1;
 
 	}
 	
@@ -170,19 +176,15 @@ class Question extends QActiveRecord
 		        'POINTS'=>$score,
 				'FEEDBACK'=>$feedback,
 				'DELETED'=>0,
-				
 	    ),false);
 		
 		$this->save(false);
-		
+		$question_id = $this->ID;
 		
 		foreach($multiple_answers as $multiple_answer){
-			//$answer = new Answer;
-			
-			//$answer->create();
+			$answer = new Answer;
+			$answer->createMultipleChoiceAnswer($question_id, $multiple_answer['answer'], $multiple_answer['is_correct']);
 		}
-		
-		
 		
 		
 		return $this->ID;

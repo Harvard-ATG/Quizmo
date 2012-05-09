@@ -110,9 +110,58 @@ class Answer extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+
+	/**
+	* getNextAnswerOrder
+	*
+	* originally thinking of this just to be used internally
+	* when adding new questions -- to get the appropriate question_order
+	*
+	* @param $question_id int
+	*
+	* @return $answer_order int
+	*/
+	public function getNextAnswerOrder($question_id){
+
+		$criteria=new CDbCriteria;
+		$criteria->condition = 'question_id='.$question_id;
+		$criteria->order = "answer_order DESC";
+		
+		$answer = Answer::model()->find($criteria);
+		if(isset($answer->ANSWER_ORDER))
+			return $answer->ANSWER_ORDER+1;
+		else
+			return 1;
+
+	}
 	
+	/**
+	* createMultipleChoiceAnswer
+	*
+	* This is probably called from Question::createMultipleChoice
+	*
+	* @param $question_id
+	* @param $answer string
+	* @param $is_correct (1, 0)
+	*
+	* @return boolean
+	*/
 	public function createMultipleChoiceAnswer($question_id, $answer, $is_correct){
+		
+		$answer_order = $this->getNextAnswerOrder($question_id);
+		
+		$this->setAttributes(array(
+	        	'QUESTION_ID'=>$question_id,
+				'QUESTION_TYPE'=>'M',
+	        	'ANSWER'=>$answer,
+				'ANSWER_ORDER'=>$answer_order,
+		        'IS_CORRECT'=>$is_correct,				
+	    ),false);
+		
+		$this->save(false);
 	
+		return $this->ID;
 	
 	}
 	

@@ -2,6 +2,7 @@
 
 $reset_order = array(
 	'USERS_COLLECTIONS',
+	'ANSWERS',
 	'QUESTIONS',
 	'QUIZES',
 	'USERS',
@@ -13,6 +14,7 @@ $load_order = array(
 	'COLLECTIONS',
 	'QUIZES',
 	'QUESTIONS',
+	'ANSWERS',
 	'USERS_COLLECTIONS',
 );
 
