@@ -9,14 +9,7 @@ $reset_order = array(
 	'COLLECTIONS',
 );
 
-$load_order = array(
-	'COLLECTIONS',
-	'USERS',
-	'QUIZES',
-	'QUESTIONS',
-	'ANSWERS',
-	'USERS_COLLECTIONS',
-);
+$load_order = array_reverse($reset_order);
 
 foreach($this->getFixtures() as $tableName=>$fixturePath){
 	if(!in_array($tableName, $reset_order)){
@@ -25,8 +18,6 @@ foreach($this->getFixtures() as $tableName=>$fixturePath){
 	if(!in_array($tableName, $load_order)){
 		throw new CException("Table '$tableName' is not in the load_order.");
 	}
-	
-
 }
 
 foreach($reset_order as $tableName){

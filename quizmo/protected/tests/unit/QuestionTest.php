@@ -13,6 +13,19 @@ class QuestionTest extends CDbTestCase {
 	);
 	
 
+
+	public function testGetQuestionArrayByQuizId(){
+		$quiz_id = 1;
+		
+		$questions = Question::getQuestionArrayByQuizId($quiz_id);
+		// this is based on the fixtures..
+		$this->assertEquals(5, sizeof($questions));
+		
+		
+	}
+
+
+
 	public function testGetNextQuestionOrder(){
 		$quiz_id = 1;
 		$number = 6;

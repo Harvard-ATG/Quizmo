@@ -113,10 +113,29 @@ class Question extends QActiveRecord
 	/**
 	* getQuestionArrayByQuizId
 	*
+	* this is just to simplify the array vars for the view
+	*
+	* @param $quiz_id
+	*
+	* @return array()
+	* array(
+	* 	array(ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, QUESTION_ORDER, POINTS, FEEDBACK, DELETED, link)
+	* )
 	*/
 	public function getQuestionArrayByQuizId($quiz_id){
 		
+		$questions = Question::model()->findAll('quiz_id=:quiz_id', array(':quiz_id' => $quiz_id));
 		
+		$questionArray = array();
+		foreach($questions as $question){
+			$qa = array();
+			$qa['link'] = "/question/view/".$question->ID;
+			foreach($question as $key=>$value){
+				$qa[$key] = $value;
+			}
+			array_push($questionArray, $qa);
+		}
+		return $questionArray;
 		
 	}
 	
