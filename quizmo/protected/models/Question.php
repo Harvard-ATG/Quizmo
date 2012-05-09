@@ -124,6 +124,7 @@ class Question extends QActiveRecord
 	*/
 	public function getQuestionArrayByQuizId($quiz_id){
 		
+		error_log($quiz_id);
 		$questions = Question::model()->findAll('quiz_id=:quiz_id', array(':quiz_id' => $quiz_id));
 		
 		$questionArray = array();
@@ -150,14 +151,15 @@ class Question extends QActiveRecord
 	* @return $quetion_order int
 	*/
 	public function getNextQuestionOrder($quiz_id){
-
+		error_log("getNextQuestionOrder");
 		$criteria=new CDbCriteria;
 		//$criteria->select = 'max(QUESTION_ORDER) AS max_question_order';
 		$criteria->condition = 'quiz_id='.$quiz_id;
 		$criteria->order = "question_order DESC";
 		
 		$question = Question::model()->find($criteria);
-		
+
+
 		if(isset($question->QUESTION_ORDER))
 			return $question->QUESTION_ORDER+1;
 		else
@@ -179,13 +181,13 @@ class Question extends QActiveRecord
 	* @return $question_id int
 	*/
 	public function createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers){
-		
-		if($quiz_id == '' || $title == '' || $body == ''){
+		error_log("createMultipleChoice");
+		if($title == '' || $body == ''){
 			return false;
 		}
 		
 		$question_order = $this->getNextQuestionOrder($quiz_id);
-		
+		error_log("question_order: ".$question_order);
 		$this->setAttributes(array(
 	        	'QUIZ_ID'=>$quiz_id,
 				'QUESTION_TYPE'=>'M',
@@ -199,6 +201,8 @@ class Question extends QActiveRecord
 		
 		$this->save(false);
 		$question_id = $this->ID;
+		
+		error_log("question-id: $question_id");
 		
 		foreach($multiple_answers as $multiple_answer){
 			$answer = new Answer;

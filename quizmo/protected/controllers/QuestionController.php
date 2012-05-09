@@ -63,9 +63,12 @@ class QuestionController extends Controller
 	{
 		$quiz = new Quiz;
 		//error_log("quiz/create");
+		
 		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
-		Yii::app()->session['quiz_id'] = $quiz_id;
-		error_log($quiz_id);
+		$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
+		if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
+
+
 		$title = Yii::app()->getRequest()->getParam('title');
 		$body = Yii::app()->getRequest()->getParam('body');
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
@@ -73,23 +76,22 @@ class QuestionController extends Controller
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
 		
-
 		$multiple_answers = array();
 		// isset() won't work with the yii->getParam
-		for($i = 0; isset($_POST['multiple_answer'.$i]); $i++){
+		for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
 			array_push($multiple_answers, Yii::app()->getRequest()->getParam('multiple_answer'.$i));
 		}
 		
 		$user_id = Yii::app()->user->getId();
 
-		error_log(var_export($_POST, 1));
+		//error_log(var_export($_REQUEST, 1));
 
 
 		if($title != '' && $body != '' && $question_type != ''){
 			$question = new Question;
 			switch($question_type){
 				case 'multiple':
-					$question_id = $question->createMultipleChoice($collection_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers);
 					break;
 				
 				
@@ -99,11 +101,11 @@ class QuestionController extends Controller
 				
 			}
 			//$question_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
-			//if($quiz_id != ''){
+			if($question_id != ''){
 				// now go to list
-			//	$this->redirect('index');
-			//	return;
-			//}
+				$this->forward('/question/index/'.$quiz_id);
+				return;
+			}
 		}
 
 		$this->render('create', array(
@@ -168,18 +170,14 @@ class QuestionController extends Controller
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
+
 		$this->render('index',array(
-			//'dataProvider'=>$dataProvider,
 			'questions'=>$questions,
 			'sizeofquestions'=>sizeof($questions),
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 		));
-		
-		//$dataProvider=new CActiveDataProvider('Question');
-		//$this->render('index',array(
-		//	'dataProvider'=>$dataProvider,
-		//));
+
 	}
 
 	/**

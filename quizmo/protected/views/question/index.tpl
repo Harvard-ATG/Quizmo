@@ -4,9 +4,6 @@
 
 <div id="questions-container" class="span12 row-fluid">
 	<a class="btn" href='{url url="/question/create/$quiz_id"}'>New Question</a>
-	New Quiz:
-
-		{url url="/question/create/$quiz_id"}
 		<pre>{url url="/question/create/$quiz_id"}</pre><br/>
 {if $sizeofquestions > 0}
 	<table class="table">
@@ -19,9 +16,6 @@
 			<td><a href="{$question['link']}">{$question['TITLE']}</a></td>
 			<td>--</td>
 		</tr>
-					
-<!--	<a href="{$quiz['link']}">{$quiz['TITLE']}:{$quiz['link']}</a> -->
-
 
 
 
