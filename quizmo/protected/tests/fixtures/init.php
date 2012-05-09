@@ -10,8 +10,8 @@ $reset_order = array(
 );
 
 $load_order = array(
-	'USERS',
 	'COLLECTIONS',
+	'USERS',
 	'QUIZES',
 	'QUESTIONS',
 	'ANSWERS',

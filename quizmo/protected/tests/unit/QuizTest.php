@@ -18,7 +18,7 @@ class QuizTest extends CDbTestCase {
 		
 		$collections = Quiz::getQuizArrayByCollectionId($collection_id);
 		// this is based on the fixtures..
-		$this->assertEquals(3, sizeof($collections));
+		$this->assertEquals(4, sizeof($collections));
 		
 		
 	}
