@@ -182,7 +182,7 @@ class Question extends QActiveRecord
 	*
 	* @return $question_id int
 	*/
-	public function createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_answers){
+	public function createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers){
 		if($title == '' || $body == ''){
 			return false;
 		}
@@ -190,7 +190,7 @@ class Question extends QActiveRecord
 		$question_order = $this->getNextQuestionOrder($quiz_id);
 		$this->setAttributes(array(
 	        	'QUIZ_ID'=>$quiz_id,
-				'QUESTION_TYPE'=>'M',
+				'QUESTION_TYPE'=>$question_type,
 	        	'TITLE'=>$title,
 		        'BODY'=>$body,
 				'QUESTION_ORDER'=>$question_order,
@@ -204,7 +204,7 @@ class Question extends QActiveRecord
 				
 		foreach($multiple_answers as $multiple_answer){
 			$answer = new Answer;
-			$answer->create($question_id, 'M', $multiple_answer['answer'], $multiple_answer['is_correct']);
+			$answer->create($question_id, $question_type, $multiple_answer['answer'], $multiple_answer['is_correct']);
 		}
 		
 		return $this->ID;

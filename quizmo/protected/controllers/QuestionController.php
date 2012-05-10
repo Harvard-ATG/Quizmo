@@ -76,50 +76,47 @@ class QuestionController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		
-		$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
-		$multiple_answers = array();
-		// isset() won't work with the yii->getParam
-		// This produces an array of the form:
-		// array(
-		//		array(
-		//			'answer' => 'some answer',
-		//			'is_correct' => 1
-		//		), ...
-		//	)
-		for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
-			($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
-			array_push($multiple_answers, array(
-				'answer' => Yii::app()->getRequest()->getParam('multiple_answer'.$i),
-				'is_correct' => $correct
-			);
-		}
-		$truefalse = Yii::app()->getRequest()->getParam('truefalse');
 		
 		
-		$check_all_answers = array();
-		for($i = 0; isset($_REQUEST['check_all_answer'.$i]); $i++){
-			array_push($check_all_answers, Yii::app()->getRequest()->getParam('check_all_answer'.$i));
-		}
-		$check_all_check_answers = array();
-		for($i = 0; isset($_REQUEST['check_all_check_answers'.$i]); $i++){
-			array_push($check_all_check_answers, Yii::app()->getRequest()->getParam('check_all_check_answers'.$i));
-		}
-
-		error_log(var_export($check_all_answers, 1));
-		error_log(var_export($check_all_check_answers, 1));
-
+		
 		error_log(var_export($_REQUEST, 1));
 
 
 		if($title != '' && $body != '' && $question_type != ''){
 			$question = new Question;
 			switch($question_type){
+				// **********************************************************************
 				case 'multiple':
-					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_answers);
+					$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
+					$multiple_answers = array();
+					// isset() won't work with the yii->getParam
+					// This produces an array of the form:
+					// array(
+					//		array(
+					//			'answer' => 'some answer',
+					//			'is_correct' => 1
+					//		), ...
+					//	)
+					for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
+						($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
+						array_push($multiple_answers, array(
+							'answer' => Yii::app()->getRequest()->getParam('multiple_answer'.$i),
+							'is_correct' => $correct
+						));
+					}
+					// Maybe this should be moved to the model?
+					// ANSWER: No.  It is just getting params, that cannot be moved to the model
+					//Answer::multipleChoiceAnswers($multiple_radio_answer, )
+					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers);
 					break;
+				// **********************************************************************
+				
 				case 'truefalse':
+					$truefalse = Yii::app()->getRequest()->getParam('truefalse');
 					$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
 					break;
+				// **********************************************************************
+				
 				case 'checkall':
 					// The problem with this is if the check isn't checked, it won't show in the POST
 					// so let's just go up to 20
@@ -137,12 +134,31 @@ class QuestionController extends Controller
 							array_push($check_all_answers, array(
 								'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
 								'is_correct' => $correct
-							);
+							));
 						}
 					}
 
-					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $check_all_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $check_all_answers);
 					break;
+				// **********************************************************************
+
+				case 'essay':
+					$question_id = $question->createEssay($quiz_id, $title, $body, $score, $feedback);
+					break;
+				// **********************************************************************
+
+				case 'numerical':
+					//$truefalse = Yii::app()->getRequest()->getParam('truefalse');
+					//$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+					break;
+				// **********************************************************************
+
+				case 'fillin':
+					//$truefalse = Yii::app()->getRequest()->getParam('truefalse');
+					//$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+					break;
+				// **********************************************************************
+					
 				
 				default:
 					error_log("unknown question type: $question_type");

@@ -41,6 +41,7 @@ class QuestionTest extends CDbTestCase {
 
 	public function testCreateMultipleChoice(){
 		$quiz_id = 1;
+		$question_type = 'M';
 		$title = "Unit Test Title";
 		$body = "Unit test body...";
 		$score = "10";
@@ -53,7 +54,7 @@ class QuestionTest extends CDbTestCase {
 
 		$question = new Question;
 		
-		$this->assertGreaterThan(0, $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_answers), "Failed asserting that create works with all items");
+		$this->assertGreaterThan(0, $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers), "Failed asserting that create works with all items");
 		
 		// now check to make sure the answers were put in		
 		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));

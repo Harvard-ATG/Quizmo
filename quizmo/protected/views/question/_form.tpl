@@ -77,7 +77,7 @@
 	<label class="control-label" for="check-all">Check All Answers</label>
 	<div class="controls">
 		<label class="checkbox inline">
-			<input type="checkbox" id="check_all_check_answer1" name="check_all_check_answer1" value="1"/>
+			<input type="checkbox" id="check_all_check_answer0" name="check_all_check_answer0" value="1"/>
 		</label>
 			<input type="text" id="check_all_answer0" name="check_all_answer0"/>
 			<p class="help-inline"></p>
@@ -85,7 +85,7 @@
 		
 	<div class="controls">
 		<label class="checkbox inline">
-			<input type="checkbox" id="check_all_check_answer2" name="check_all_check_answer2" value="1"/>
+			<input type="checkbox" id="check_all_check_answer1" name="check_all_check_answer1" value="1"/>
 		</label>
 			<input type="text" id="check_all_answer1" name="check_all_answer1"/>
 			<p class="help-inline"></p>
@@ -93,7 +93,7 @@
 		
 	<div class="controls">
 		<label class="checkbox inline">
-			<input type="checkbox" id="check_all_check_answer3" name="check_all_check_answer3" value="1"/>
+			<input type="checkbox" id="check_all_check_answer2" name="check_all_check_answer2" value="1"/>
 		</label>
 			<input type="text" id="check_all_answer2" name="check_all_answer2"/>
 			<p class="help-inline"></p>
