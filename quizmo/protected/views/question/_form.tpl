@@ -101,7 +101,11 @@
 </div>
 
 <div id="essay-control-group" class="control-group hidden">
-	<p>I don't think an essay needs anything else...</p>
+	<label class="control-label" for="essay">Text Field Size For Essay (Area where student will enter their essay text)</label>
+	<div class="controls">
+		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{*$textarea_rows*}"/> rows in student response field.
+		<p class="help-inline"></p>
+	</div>	
 </div>
 
 <div id="numerical-control-group" class="control-group hidden">

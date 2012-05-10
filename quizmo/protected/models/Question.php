@@ -168,21 +168,19 @@ class Question extends QActiveRecord
 	}
 	
 	/**
-	* createMultipleChoice
+	* create
 	*
-	* This can function for both Multiple-Choice and Check-All-that-Apply
+	* Base model method for all questions (doesn't handle any answers)
 	*
 	* @param $quiz_id string
 	* @param $title string
 	* @param $body string
 	* @param $score int
 	* @param $feedback string
-	* @param $multiple_radio_answer int
-	* @param $multiple_answers array of strings
 	*
 	* @return $question_id int
 	*/
-	public function createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers){
+	public function create($quiz_id, $question_type, $title, $body, $score, $feedback){
 		if($title == '' || $body == ''){
 			return false;
 		}
@@ -200,14 +198,38 @@ class Question extends QActiveRecord
 	    ),false);
 		
 		$this->save(false);
-		$question_id = $this->ID;
+		
+		return $this->ID;
+		
+	
+	}
+
+	
+	/**
+	* createMultipleChoice
+	*
+	* This can function for both Multiple-Choice and Check-All-that-Apply
+	*
+	* @param $quiz_id string
+	* @param $title string
+	* @param $body string
+	* @param $score int
+	* @param $feedback string
+	* @param $multiple_radio_answer int
+	* @param $multiple_answers array of strings
+	*
+	* @return $question_id int
+	*/
+	public function createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers){
+		
+		$question_id = $this->create($quiz_id, $question_type, $title, $body, $score, $feedback);
 				
 		foreach($multiple_answers as $multiple_answer){
 			$answer = new Answer;
 			$answer->create($question_id, $question_type, $multiple_answer['answer'], $multiple_answer['is_correct']);
 		}
 		
-		return $this->ID;
+		return $question_id;
 		
 	
 	}
@@ -226,26 +248,9 @@ class Question extends QActiveRecord
 	* @return $question_id int
 	*/
 	public function createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse){
-		if($title == '' || $body == ''){
-			return false;
-		}
-		
-		$question_order = $this->getNextQuestionOrder($quiz_id);
-		$this->setAttributes(array(
-	        	'QUIZ_ID'=>$quiz_id,
-				'QUESTION_TYPE'=>'T',
-	        	'TITLE'=>$title,
-		        'BODY'=>$body,
-				'QUESTION_ORDER'=>$question_order,
-		        'POINTS'=>$score,
-				'FEEDBACK'=>$feedback,
-				'DELETED'=>0,
-	    ),false);
-		
-		$this->save(false);
-		$question_id = $this->ID;
+
+		$question_id = $this->create($quiz_id, 'T', $title, $body, $score, $feedback);
 				
-		$answer = new Answer;
 		if($truefalse){
 			$true = 1;
 			$false = 0;
@@ -253,59 +258,37 @@ class Question extends QActiveRecord
 			$true = 0;
 			$false = 1;			
 		}
+		$answer = new Answer;
 		$answer->create($question_id, 'T', 'true', $true);
+		$answer = new Answer;
 		$answer->create($question_id, 'T', 'false', $false);
 		
-		return $this->ID;
+		return $question_id;
 		
 	}
 	
 	/**
-	* createCheckAll
+	* createEssay
 	*
 	* @param $quiz_id string
 	* @param $title string
 	* @param $body string
 	* @param $score int
 	* @param $feedback string
-	* @param $check_all_check_answers array of bools
-	* @param $check_all_answers array of strings
+	* @param $textarea_rows int
 	*
 	* @return $question_id int
 	*/
-	public function createCheckAll($quiz_id, $title, $body, $score, $feedback, $truefalse){
-		if($title == '' || $body == ''){
-			return false;
-		}
+	public function createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows){
 		
-		$question_order = $this->getNextQuestionOrder($quiz_id);
-		$this->setAttributes(array(
-	        	'QUIZ_ID'=>$quiz_id,
-				'QUESTION_TYPE'=>'T',
-	        	'TITLE'=>$title,
-		        'BODY'=>$body,
-				'QUESTION_ORDER'=>$question_order,
-		        'POINTS'=>$score,
-				'FEEDBACK'=>$feedback,
-				'DELETED'=>0,
-	    ),false);
-		
-		$this->save(false);
-		$question_id = $this->ID;
+		$question_id = $this->create($quiz_id, 'E', $title, $body, $score, $feedback);
 				
 		$answer = new Answer;
-		if($truefalse){
-			$true = 1;
-			$false = 0;
-		} else {
-			$true = 0;
-			$false = 1;			
-		}
-		$answer->create($question_id, 'T', 'true', $true);
-		$answer->create($question_id, 'T', 'false', $false);
+		$answer->create($question_id, 'E', '', 0, $textarea_rows);
 		
-		return $this->ID;
+		return $question_id;
 		
 	}
+
 	
 }

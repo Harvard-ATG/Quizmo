@@ -35,10 +35,22 @@ class QuestionTest extends CDbTestCase {
 		$this->assertEquals($question_order, $number);
 		
 	}
-	
+
+	public function testCreate(){
+		$quiz_id = 1;
+		$question_type = 'E';
+		$title = "Question::create unit test";
+		$body = "Question::create unit test body";
+		$score = "1";
+		$feedback = "this is feedback";
+		$question = new Question;
+		$this->assertGreaterThan(0, $question->create($quiz_id, $question_type, $title, $body, $score, $feedback), "Failed asserting that create works with all items");
+		
+		
+	}
+
 
 	//	public function createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers){
-
 	public function testCreateMultipleChoice(){
 		$quiz_id = 1;
 		$question_type = 'M';
@@ -58,7 +70,7 @@ class QuestionTest extends CDbTestCase {
 		
 		// now check to make sure the answers were put in		
 		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
-		$this->assertEquals(sizeof($multiple_answers), sizeof($answers), "Failed asserting that the appropriate number of answers were added for the question.");
+		$this->assertEquals(sizeof($multiple_answers), sizeof($answers), "Failed asserting that the appropriate number of answers were added for the multiple-choice question.");
 		
 		
 	}
@@ -71,12 +83,30 @@ class QuestionTest extends CDbTestCase {
 		$feedback = "this is feedback";
 		$truefalse = true;
 		
-		$question = new Question;
-		
+		$question = new Question;		
 		$this->assertGreaterThan(0, $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse), "Failed asserting that create works with all items");
+		
+		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
+		$this->assertEquals(2, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the true/false question.");
 		
 	}
 
+	public function testCreateEssay(){
+		$quiz_id = 1;
+		$title = "Unit Test Essay Title";
+		$body = "talk about something";
+		$score = "10";
+		$feedback = "this is feedback";
+		$textarea_rows = 20;
+		
+		$question = new Question;		
+		$this->assertGreaterThan(0, $question->createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows), "Failed asserting that createEssay works with all items");
+		
+		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
+		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the essay question.");
+		
+		
+	}
 
 
    

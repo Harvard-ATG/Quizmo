@@ -148,7 +148,7 @@ class Answer extends QActiveRecord
 	*
 	* @return boolean
 	*/
-	public function create($question_id, $question_type, $answer, $is_correct){
+	public function create($question_id, $question_type, $answer, $is_correct, $textarea_rows=10, $is_case_sensitive=0, $tolerance=0){
 		
 		$answer_order = $this->getNextAnswerOrder($question_id);
 		
@@ -157,7 +157,10 @@ class Answer extends QActiveRecord
 				'QUESTION_TYPE'=>$question_type,
 	        	'ANSWER'=>$answer,
 				'ANSWER_ORDER'=>$answer_order,
-		        'IS_CORRECT'=>$is_correct,				
+		        'IS_CORRECT'=>$is_correct,	
+				'TEXTAREA_ROWS'=>$textarea_rows,
+				'IS_CASE_SENSITIVE'=>$is_case_sensitive,
+				'TOLERANCE'=>$tolerance,
 	    ),false);
 		
 		$this->save(false);

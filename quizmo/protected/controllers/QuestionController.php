@@ -143,7 +143,8 @@ class QuestionController extends Controller
 				// **********************************************************************
 
 				case 'essay':
-					$question_id = $question->createEssay($quiz_id, $title, $body, $score, $feedback);
+					$textarea_rows = Yii::app()->getRequest()->getParam('textarea_rows');
+					$question_id = $question->createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows);
 					break;
 				// **********************************************************************
 
