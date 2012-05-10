@@ -290,5 +290,50 @@ class Question extends QActiveRecord
 		
 	}
 
+	/**
+	* createNumerical
+	*
+	* @param $quiz_id string
+	* @param $title string
+	* @param $body string
+	* @param $score int
+	* @param $feedback string
+	* @param $tolerance float
+	*
+	* @return $question_id int
+	*/
+	public function createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance){
+		
+		$question_id = $this->create($quiz_id, 'E', $title, $body, $score, $feedback);
+				
+		$answer = new Answer;
+		$answer->create($question_id, 'E', '', 0, 10, 0, $tolerance);
+		
+		return $question_id;
+		
+	}
+
+	/**
+	* createFillin
+	*
+	* @param $quiz_id string
+	* @param $title string
+	* @param $body string
+	* @param $score int
+	* @param $feedback string
+	* @param $is_case_sensitive bool
+	*
+	* @return $question_id int
+	*/
+	public function createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive){
+		
+		$question_id = $this->create($quiz_id, 'E', $title, $body, $score, $feedback);
+				
+		$answer = new Answer;
+		$answer->create($question_id, 'E', '', 0, 0, $is_case_sensitive, 0);
+		
+		return $question_id;
+		
+	}
 	
 }

@@ -129,6 +129,9 @@
 <div id="fill-in-control-group" class="control-group hidden">
 	<label class="control-label" for="numerical">Fill in the blank answer</label>
 	<div class="controls">
+		<label class="checkbox inline">
+			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1"/> Case sensitive?
+		</label>
 		<p class="help-inline">
 			{literal}
 			<p>To create blanks, place curly braces around words. For example:</p>

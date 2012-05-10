@@ -105,7 +105,38 @@ class QuestionTest extends CDbTestCase {
 		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
 		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the essay question.");
 		
+	}
+	
+	public function testCreateNumerical(){
+		$quiz_id = 1;
+		$title = "Unit Test Numerical Title";
+		$body = "a number!";
+		$score = "10";
+		$feedback = "this is feedback";
+		$tolerance = 20;
 		
+		$question = new Question;		
+		$this->assertGreaterThan(0, $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance), "Failed asserting that createNumerical works with all items");
+		
+		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
+		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the numerical question.");		
+
+	}
+
+	public function testCreateFillin(){
+		$quiz_id = 1;
+		$title = "Unit Test Essay Title";
+		$body = "roses are {red}, violets are {blue}";
+		$score = "10";
+		$feedback = "this is feedback";
+		$is_case_sensitive = 1;
+		
+		$question = new Question;		
+		$this->assertGreaterThan(0, $question->createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive), "Failed asserting that createFillin works with all items");
+		
+		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
+		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the Fill in the Blank question.");		
+
 	}
 
 

@@ -149,14 +149,14 @@ class QuestionController extends Controller
 				// **********************************************************************
 
 				case 'numerical':
-					//$truefalse = Yii::app()->getRequest()->getParam('truefalse');
-					//$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+					$tolerance = Yii::app()->getRequest()->getParam('tolerance');
+					$question_id = $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance);
 					break;
 				// **********************************************************************
 
 				case 'fillin':
-					//$truefalse = Yii::app()->getRequest()->getParam('truefalse');
-					//$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+					(isset($_REQUEST['is_case_sensitive'])) ? $is_case_sensitive = 1 : $is_case_sensitive = 0;
+					$question_id = $question->createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive);
 					break;
 				// **********************************************************************
 					
