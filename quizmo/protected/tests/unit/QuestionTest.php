@@ -45,7 +45,6 @@ class QuestionTest extends CDbTestCase {
 		$body = "Unit test body...";
 		$score = "10";
 		$feedback = "this is feedback";
-		$multiple_radio_answer = 0;
 		$multiple_answers = array(
 			array("answer"=>"one", "is_correct"=>1),
 			array("answer"=>"two", "is_correct"=>0),
@@ -54,8 +53,13 @@ class QuestionTest extends CDbTestCase {
 
 		$question = new Question;
 		
-		$this->assertGreaterThan(0, $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers), "Failed asserting that create works with all items");
-
+		$this->assertGreaterThan(0, $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_answers), "Failed asserting that create works with all items");
+		
+		// now check to make sure the answers were put in		
+		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
+		$this->assertEquals(sizeof($multiple_answers), sizeof($answers), "Failed asserting that the appropriate number of answers were added for the question.");
+		
+		
 	}
 
   	public function testCreateTrueFalse(){

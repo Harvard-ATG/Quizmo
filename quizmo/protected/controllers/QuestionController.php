@@ -75,13 +75,26 @@ class QuestionController extends Controller
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
+		
 		$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
 		$multiple_answers = array();
 		// isset() won't work with the yii->getParam
+		// This produces an array of the form:
+		// array(
+		//		array(
+		//			'answer' => 'some answer',
+		//			'is_correct' => 1
+		//		), ...
+		//	)
 		for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
-			array_push($multiple_answers, Yii::app()->getRequest()->getParam('multiple_answer'.$i));
+			($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
+			array_push($multiple_answers, array(
+				'answer' => Yii::app()->getRequest()->getParam('multiple_answer'.$i),
+				'is_correct' => $correct
+			);
 		}
 		$truefalse = Yii::app()->getRequest()->getParam('truefalse');
+		
 		
 		$check_all_answers = array();
 		for($i = 0; isset($_REQUEST['check_all_answer'.$i]); $i++){
@@ -92,21 +105,44 @@ class QuestionController extends Controller
 			array_push($check_all_check_answers, Yii::app()->getRequest()->getParam('check_all_check_answers'.$i));
 		}
 
-		
+		error_log(var_export($check_all_answers, 1));
+		error_log(var_export($check_all_check_answers, 1));
 
-		//error_log(var_export($_REQUEST, 1));
+		error_log(var_export($_REQUEST, 1));
 
 
 		if($title != '' && $body != '' && $question_type != ''){
 			$question = new Question;
 			switch($question_type){
 				case 'multiple':
-					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_answers);
 					break;
 				case 'truefalse':
 					$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
 					break;
-			
+				case 'checkall':
+					// The problem with this is if the check isn't checked, it won't show in the POST
+					// so let's just go up to 20
+					// This produces an array of the form:
+					// array(
+					//		array(
+					//			'answer' => 'some answer',
+					//			'is_correct' => 1
+					//		), ...
+					//	)
+					$check_all_answers = array();
+					for($i = 0; $i < 30; $i++){
+						if(isset($_REQUEST['check_all_answer'.$i])){
+							(isset($_REQUEST['check_all_check_answer'.$i])) ? $correct = 1 : $correct = 0;
+							array_push($check_all_answers, array(
+								'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
+								'is_correct' => $correct
+							);
+						}
+					}
+
+					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $check_all_answers);
+					break;
 				
 				default:
 					error_log("unknown question type: $question_type");
@@ -114,7 +150,7 @@ class QuestionController extends Controller
 				
 			}
 			//$question_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
-			if($question_id != ''){
+			if(@$question_id != ''){
 				// now go to list
 				$this->forward('/question/index/'.$quiz_id);
 				return;
