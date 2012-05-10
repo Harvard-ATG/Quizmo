@@ -61,6 +61,7 @@ class QuestionController extends Controller
 	 */
 	public function actionCreate($id='')
 	{
+		$user_id = Yii::app()->user->getId();
 		$quiz = new Quiz;
 		//error_log("quiz/create");
 		
@@ -75,14 +76,23 @@ class QuestionController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
-		
 		$multiple_answers = array();
 		// isset() won't work with the yii->getParam
 		for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
 			array_push($multiple_answers, Yii::app()->getRequest()->getParam('multiple_answer'.$i));
 		}
+		$truefalse = Yii::app()->getRequest()->getParam('truefalse');
 		
-		$user_id = Yii::app()->user->getId();
+		$check_all_answers = array();
+		for($i = 0; isset($_REQUEST['check_all_answer'.$i]); $i++){
+			array_push($check_all_answers, Yii::app()->getRequest()->getParam('check_all_answer'.$i));
+		}
+		$check_all_check_answers = array();
+		for($i = 0; isset($_REQUEST['check_all_check_answers'.$i]); $i++){
+			array_push($check_all_check_answers, Yii::app()->getRequest()->getParam('check_all_check_answers'.$i));
+		}
+
+		
 
 		//error_log(var_export($_REQUEST, 1));
 
@@ -93,7 +103,10 @@ class QuestionController extends Controller
 				case 'multiple':
 					$question_id = $question->createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers);
 					break;
-				
+				case 'truefalse':
+					$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+					break;
+			
 				
 				default:
 					error_log("unknown question type: $question_type");

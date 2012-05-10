@@ -58,6 +58,21 @@ class QuestionTest extends CDbTestCase {
 
 	}
 
-   
+  	public function testCreateTrueFalse(){
+		$quiz_id = 1;
+		$title = "Unit Test TF Title";
+		$body = "true or false?";
+		$score = "10";
+		$feedback = "this is feedback";
+		$truefalse = true;
+		
+		$question = new Question;
+		
+		$this->assertGreaterThan(0, $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse), "Failed asserting that create works with all items");
+		
+	}
+
+
+
    
 }

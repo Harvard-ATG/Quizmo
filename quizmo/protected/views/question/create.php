@@ -24,17 +24,19 @@
 <script>
 $(document).ready(function(){
 		
+		/*
 	$('#question-form').bind('submit', function(){
 		alert("submit");
 		return false;
-	})
+	});
 	$('#question-form').bind('onsubmit', function(){
 		alert("onsubmit");
 		return false;
-	})
+	});
+	*/
 
-	$('#question-forma').submit(function() {
-		alert("asdf");
+	$('#question-form').submit(function() {
+		//alert("asdf");
 		returnval = true;
 		// validate data
 

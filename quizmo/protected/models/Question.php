@@ -181,7 +181,6 @@ class Question extends QActiveRecord
 	* @return $question_id int
 	*/
 	public function createMultipleChoice($quiz_id, $title, $body, $score, $feedback, $multiple_radio_answer, $multiple_answers){
-		error_log("createMultipleChoice");
 		if($title == '' || $body == ''){
 			return false;
 		}
@@ -206,7 +205,7 @@ class Question extends QActiveRecord
 		
 		foreach($multiple_answers as $multiple_answer){
 			$answer = new Answer;
-			$answer->createMultipleChoiceAnswer($question_id, $multiple_answer['answer'], $multiple_answer['is_correct']);
+			$answer->create($question_id, 'M', $multiple_answer['answer'], $multiple_answer['is_correct']);
 		}
 		
 		
@@ -215,8 +214,53 @@ class Question extends QActiveRecord
 	
 	}
 	
+	//$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+	/**
+	* createTrueFalse
+	*
+	* @param $quiz_id string
+	* @param $title string
+	* @param $body string
+	* @param $score int
+	* @param $feedback string
+	* @param $truefalse bool
+	*
+	* @return $question_id int
+	*/
+	public function createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse){
+		if($title == '' || $body == ''){
+			return false;
+		}
+		
+		$question_order = $this->getNextQuestionOrder($quiz_id);
+		$this->setAttributes(array(
+	        	'QUIZ_ID'=>$quiz_id,
+				'QUESTION_TYPE'=>'T',
+	        	'TITLE'=>$title,
+		        'BODY'=>$body,
+				'QUESTION_ORDER'=>$question_order,
+		        'POINTS'=>$score,
+				'FEEDBACK'=>$feedback,
+				'DELETED'=>0,
+	    ),false);
+		
+		$this->save(false);
+		$question_id = $this->ID;
+				
+		$answer = new Answer;
+		if($truefalse){
+			$true = 1;
+			$false = 0;
+		} else {
+			$true = 0;
+			$false = 1;			
+		}
+		$answer->create($question_id, 'T', 'true', $true);
+		$answer->create($question_id, 'T', 'false', $false);
+		
+		return $this->ID;
+		
 	
-	
-	
+	}
 	
 }
