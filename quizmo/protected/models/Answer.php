@@ -142,18 +142,19 @@ class Answer extends QActiveRecord
 	* This is probably called from Question::createMultipleChoice
 	*
 	* @param $question_id
+	* @param $question_type 'M', 'T', 'S', 'E', 'F', 'N'
 	* @param $answer string
 	* @param $is_correct (1, 0)
 	*
 	* @return boolean
 	*/
-	public function createMultipleChoiceAnswer($question_id, $answer, $is_correct){
+	public function create($question_id, $question_type, $answer, $is_correct){
 		
 		$answer_order = $this->getNextAnswerOrder($question_id);
 		
 		$this->setAttributes(array(
 	        	'QUESTION_ID'=>$question_id,
-				'QUESTION_TYPE'=>'M',
+				'QUESTION_TYPE'=>$question_type,
 	        	'ANSWER'=>$answer,
 				'ANSWER_ORDER'=>$answer_order,
 		        'IS_CORRECT'=>$is_correct,				
@@ -164,6 +165,8 @@ class Answer extends QActiveRecord
 		return $this->ID;
 	
 	}
+
+
 	
 	
 }

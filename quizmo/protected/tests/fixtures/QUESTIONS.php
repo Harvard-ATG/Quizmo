@@ -28,9 +28,9 @@ return array(
 	),
 	'question1' => array(
 		'QUIZ_ID' => '1',
-		'QUESTION_TYPE' => 'M',
-		'TITLE' => 'Multiple Choice Question 2',
-		'BODY' => "Pick a number, any number",
+		'QUESTION_TYPE' => 'T',
+		'TITLE' => 'True False Question 1',
+		'BODY' => "True or False",
 		'QUESTION_ORDER' => 2,
 		'POINTS' => '',
 		'FEEDBACK' => '',

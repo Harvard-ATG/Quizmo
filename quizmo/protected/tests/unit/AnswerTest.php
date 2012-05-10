@@ -26,14 +26,15 @@ class AnswerTest extends CDbTestCase {
 
 
 //	public function createMultipleChoiceAnswer($question_id, $answer, $is_correct){
-	public function testCreateMultipleChoice(){
+	public function testCreate(){
 		$question_id = 1;
+		$question_type = 'M';
 		$answer_txt = "Unit Test Answer";
 		$is_correct = 1;
 
 		$answer = new Answer;
 		
-		$this->assertGreaterThan(0, $answer->createMultipleChoiceAnswer($question_id, $answer_txt, $is_correct), "Failed asserting that create works with all items");
+		$this->assertGreaterThan(0, $answer->create($question_id, $question_type, $answer_txt, $is_correct), "Failed asserting that create works with all items");
 
 		
 	}

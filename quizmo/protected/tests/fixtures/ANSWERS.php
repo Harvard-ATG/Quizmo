@@ -48,6 +48,26 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
+	'answer3' => array(
+		'QUESTION_ID' => '2',
+		'QUESTION_TYPE' => 'T',
+		'TEXTAREA_ROWS' => '',
+		'ANSWER' => "True",
+		'IS_CASE_SENSITIVE' => '',
+		'ANSWER_ORDER' => 1,
+		'IS_CORRECT' => 1,
+		'TOLERANCE' => '',
+	),
+	'answer4' => array(
+		'QUESTION_ID' => '2',
+		'QUESTION_TYPE' => 'T',
+		'TEXTAREA_ROWS' => '',
+		'ANSWER' => "False",
+		'IS_CASE_SENSITIVE' => '',
+		'ANSWER_ORDER' => 2,
+		'IS_CORRECT' => 0,
+		'TOLERANCE' => '',
+	),
 	
 	
 );
