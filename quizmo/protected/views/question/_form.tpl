@@ -36,21 +36,21 @@
 		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="0"/>
 		</label>
-			<input type="text" id="multiple_answer0" name="multiple_answer1"/>
+			<input type="text" id="multiple_answer0" name="multiple_answer0"/>
 			<p class="help-inline"></p>
 	</div>
 	<div class="controls">
 		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="1"/>
 		</label>
-			<input type="text" id="multiple_answer1" name="multiple_answer2"/>
+			<input type="text" id="multiple_answer1" name="multiple_answer1"/>
 			<p class="help-inline"></p>
 	</div>
 	<div class="controls">
 		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="2"/>
 		</label>
-			<input type="text" id="multiple_answer2" name="multiple_answer3"/>
+			<input type="text" id="multiple_answer2" name="multiple_answer2"/>
 			<p class="help-inline"></p>
 		<p class="help-block"></p>
 	</div>
@@ -79,7 +79,7 @@
 		<label class="checkbox inline">
 			<input type="checkbox" id="check_all_check_answer1" name="check_all_check_answer1" value="1"/>
 		</label>
-			<input type="text" id="check_all_answer0" name="check_all_answer1"/>
+			<input type="text" id="check_all_answer0" name="check_all_answer0"/>
 			<p class="help-inline"></p>
 	</div>
 		
@@ -87,7 +87,7 @@
 		<label class="checkbox inline">
 			<input type="checkbox" id="check_all_check_answer2" name="check_all_check_answer2" value="1"/>
 		</label>
-			<input type="text" id="check_all_answer1" name="check_all_answer2"/>
+			<input type="text" id="check_all_answer1" name="check_all_answer1"/>
 			<p class="help-inline"></p>
 	</div>
 		
@@ -95,7 +95,7 @@
 		<label class="checkbox inline">
 			<input type="checkbox" id="check_all_check_answer3" name="check_all_check_answer3" value="1"/>
 		</label>
-			<input type="text" id="check_all_answer2" name="check_all_answer3"/>
+			<input type="text" id="check_all_answer2" name="check_all_answer2"/>
 			<p class="help-inline"></p>
 	</div>
 </div>
