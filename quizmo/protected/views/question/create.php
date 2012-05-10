@@ -8,14 +8,33 @@
 			'body'=>$body,
 			'question_type'=>$question_type,
 		)); ?>
+		
+		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
+
+		<div class="form-actions">
+			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
+			<button class="btn">Cancel</button>
+		</div>
+		
 	</fieldset>
+
 </form>
 
 
 <script>
 $(document).ready(function(){
+		
+	$('#question-form').bind('submit', function(){
+		alert("submit");
+		return false;
+	})
+	$('#question-form').bind('onsubmit', function(){
+		alert("onsubmit");
+		return false;
+	})
 
-	$('#question-form').submit(function() {
+	$('#question-forma').submit(function() {
+		alert("asdf");
 		returnval = true;
 		// validate data
 
@@ -46,7 +65,23 @@ $(document).ready(function(){
 			$("#question_type-control-group").removeClass("error");
 
 			if($("input:#question_type").val() == "multiple"){
+				if($("input:radio[name=multiple_radio_answer]:checked").val() == ''){
+					$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice correct answer required").show();
+					$("#multiple-choice-control-group").addClass("error");
+					returnval = false;					
+				} else {
+					multival = $("input:radio[name=multiple_radio_answer]:checked").val();
+					if($("input:#multiple_answer" + multival).val() == ''){
+						$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice needs an answer").show();
+						$("#multiple-choice-control-group").addClass("error");
+						returnval = false;											
+					} else {
+						$("#multiple-choice-control-group p.help-inline").text("").show();			
+						$("#multiple-choice-control-group").removeClass("error");					
+					}
+				}
 				
+
 			}
 
 

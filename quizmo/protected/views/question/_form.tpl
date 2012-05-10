@@ -159,12 +159,6 @@
 
 
 
-<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
-
-<div class="form-actions">
-	<input type="submit" class="btn btn-primary" value="Submit" />
-	<button class="btn">Cancel</button>
-</div>
 
 <script>
 
