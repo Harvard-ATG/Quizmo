@@ -10,7 +10,9 @@
 <script>
 $(document).ready(function(){
 	
-	$('#quiz-form').submit(function() {
+	$('#quiz-form').attr('onsubmit', '');
+	
+	$('#quiz-form_default').submit(function() {
 		// validate data
 		if ($("input:#title").val() == "") {
 			$("#title-control-group p.help-inline").text("Error: title required").show();

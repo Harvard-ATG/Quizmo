@@ -12,7 +12,8 @@
 		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
 
 		<div class="form-actions">
-			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
+			<button id="question-submit" type="submit" class="btn btn-primary">Submit</button>
+			<input id="question-submit" type="submit" class="btn btn-primary" value="something" />
 			<button class="btn">Cancel</button>
 		</div>
 		
@@ -24,18 +25,21 @@
 <script>
 $(document).ready(function(){
 		
-		/*
+	function blamo(){
+		alert("blamo");
+		
+	}
+		
 	$('#question-form').bind('submit', function(){
 		alert("submit");
-		return false;
+		//return false;
 	});
 	$('#question-form').bind('onsubmit', function(){
 		alert("onsubmit");
 		return false;
 	});
-	*/
 
-	$('#question-form').submit(function() {
+	$('#nononoquestion-form').submit(function() {
 		//alert("asdf");
 		returnval = true;
 		// validate data
