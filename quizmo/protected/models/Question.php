@@ -209,6 +209,7 @@ class Question extends QActiveRecord
 	* createMultipleChoice
 	*
 	* This can function for both Multiple-Choice and Check-All-that-Apply
+	* It also calls the create for all associated answers that were passed to it
 	*
 	* @param $quiz_id string
 	* @param $title string
