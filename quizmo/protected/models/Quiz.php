@@ -161,6 +161,26 @@ class Quiz extends QActiveRecord
 		
 	}
 	
+	/**
+	* getQuestionIds
+	*
+	* gets the array of question ids
+	*
+	* @param $quiz_id int
+	* @return $question_ids array of ints
+	*/
+	public function getQuestionIds($quiz_id){
+		
+		$questions = Question::model()->findAll('quiz_id=:quiz_id', array(':quiz_id' => $quiz_id));
+		$question_ids = array();
+		foreach($questions as $question){
+			array_push($question_ids, $question->ID);
+		}
+		
+		return $question_ids;
+		
+	}
+	
 	
 	
 }

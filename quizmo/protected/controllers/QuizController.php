@@ -165,6 +165,27 @@ class QuizController extends Controller
 		));
 		
 	}
+	
+	public function actionTake($id=''){
+		$quiz_id = $id;
+		$user_id = Yii::app()->user->id;
+		
+		// first we set the session quiz_id
+		// then we forward along to the question Take view
+		// OR we just go into this and flip through it via ajax
+		
+		// let's start with the ajax approach...
+		// for that we need to get a list of all question ids in the quiz
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		
+		$this->render('take', array(
+			'question_ids'=>$question_ids,
+			'user_id'=>$user_id
+			
+		));
+		
+		
+	}
 
 	/**
 	 * Manages all models.
