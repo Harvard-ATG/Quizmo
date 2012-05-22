@@ -41,22 +41,10 @@ Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 
 * Open the MAMP control panel. Go to _Preferences..._ then _Ports_ and set the Apache port to 80 and the mysql port to 3306. Click OK.  (Or just click the "Set to default Apache and MySQL ports" button)
 * Click Start Servers in the MAMP control panel. The Apache Server and MySQL Server status should become green.
-* Now set up a database in the MAMP phpmyadmin, just call it quizmo_dev
-* Then set up a new user under "privilages" -> Add new user:  
-* username:quizmo_dev 
-* password:quizmo_dev
-
-* Now we run the migrations:
+* Run the following shell script to install the application (setup config, create schema, etc):
 
 ```sh
-cd /Applications/MAMP/htdocs/Quizmo/quizmo/protected
-./yiic migrate
-[yes]
-```
-
-* PHPUnit needs some extras
-```sh
-pear install phpunit/PHPUnit_Selenium
+/Applications/MAMP/htdocs/Catool/scripts/install_mamp.sh
 ```
 
 * Now try to run the tests
@@ -64,7 +52,6 @@ pear install phpunit/PHPUnit_Selenium
 ```sh
 cd /Applications/MAMP/htdocs/Quizmo/quizmo/protected/tests
 phpunit unit
-phpunit functional
 ```
 
 * If there were no errors in the install process, you should now be able to open http://quizmo.harvard.edu/ in your web browser, at which point you will be prompted to login.
