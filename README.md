@@ -16,7 +16,7 @@ git clone git@github.com:jazahn/Quizmo.git Quizmo
 <VirtualHost *:80>
 	ServerName quizmo.harvard.edu
 	DocumentRoot "/Applications/MAMP/htdocs/Quizmo/quizmo"
-	<Directory /Applications/MAMP/htdocs/Catool/Quizmo/quizmo>
+	<Directory /Applications/MAMP/htdocs/Quizmo/quizmo>
 		Options All
 		AllowOverride All
 		Order deny,allow
