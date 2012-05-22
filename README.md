@@ -39,7 +39,7 @@ Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 127.0.0.1	quizmo.harvard.edu
 ```
 
-* Open the MAMP control panel. Go to _Preferences..._ then _Ports_ and set the Apache port to 80. Click OK.
+* Open the MAMP control panel. Go to _Preferences..._ then _Ports_ and set the Apache port to 80 and the mysql port to 3306. Click OK.  (Or just click the "Set to default Apache and MySQL ports" button)
 * Click Start Servers in the MAMP control panel. The Apache Server and MySQL Server status should become green.
 * Now set up a database in the MAMP phpmyadmin, just call it quizmo_dev
 * Then set up a new user under "privilages" -> Add new user:  
