@@ -82,7 +82,7 @@ class m120402_195425_Submissions extends CDbMigration
 
 	public function down()
 	{
-		Autoincrement::up('SUBMISSIONS', Yii::app()->db->driverName);
+		Autoincrement::down('SUBMISSIONS', Yii::app()->db->driverName);
 
 		
 		$this->dropTable('SUBMISSIONS');

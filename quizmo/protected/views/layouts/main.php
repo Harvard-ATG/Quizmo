@@ -46,12 +46,12 @@
           <div class="btn-group pull-right">
 	
 			<?php if(Yii::app()->user->isGuest) {?>
-            <a class="btn dropdown-toggle" href="/site/login">
+            <a id="login-btn" class="btn dropdown-toggle" href="/site/login">
               <i class="icon-user"></i> Login
               <span class="caret"></span>
             </a>
 			<?php } else {?>
-            <a class="btn" data-toggle="dropdown" href="#">
+            <a id="login-btn" class="btn" data-toggle="dropdown" href="#">
               <i class="icon-user"></i> <?php echo Yii::app()->user->name; ?>
               <span class="caret"></span>
             </a>

@@ -31,11 +31,23 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		//error_log("site/index");
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		//$this->render('index');
 
-		$this->forward('/collection/index');
+
+		if(Yii::app()->params['authMethod'] == 'isites'){
+			$other_id = Yii::app()->getRequest()->getParam('topicId');
+			$collection = Collection::getByOtherId($other_id);
+			Yii::app()->session['collection_id'] = $collection->ID;
+
+			// forward doesn't seem to send along the parameter...
+			$this->forward('/quiz/index/'.$collection->ID);
+		} else {
+			$this->forward('/collection/index');
+		}
+		
 	}
 
 	/**
@@ -80,7 +92,6 @@ class SiteController extends Controller
 	public function actionLogin()
 	{
 		
-		error_log("actionLogin");
 		
 		$identity = IdentityFactory::getIdentity();
 		Yii::app()->user->login($identity);
@@ -95,7 +106,6 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 
-		
 		IdentityFactory::logout();
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);

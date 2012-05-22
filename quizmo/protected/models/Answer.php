@@ -14,8 +14,11 @@
  * @property integer $is_correct
  * @property double $tolerance
  */
-class Answer extends CActiveRecord
+class Answer extends QActiveRecord
 {
+
+	public $sequenceName = 'ANSWERS_SEQ';	
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -60,6 +63,7 @@ class Answer extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'question' => array(self::BELONGS_TO, 'Question', 'QUESTION_ID'),
 		);
 	}
 
@@ -106,4 +110,66 @@ class Answer extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+
+	/**
+	* getNextAnswerOrder
+	*
+	* originally thinking of this just to be used internally
+	* when adding new questions -- to get the appropriate question_order
+	*
+	* @param $question_id int
+	*
+	* @return $answer_order int
+	*/
+	public function getNextAnswerOrder($question_id){
+
+		$criteria=new CDbCriteria;
+		$criteria->condition = 'question_id='.$question_id;
+		$criteria->order = "answer_order DESC";
+		
+		$answer = Answer::model()->find($criteria);
+		if(isset($answer->ANSWER_ORDER))
+			return $answer->ANSWER_ORDER+1;
+		else
+			return 1;
+
+	}
+	
+	/**
+	* createMultipleChoiceAnswer
+	*
+	* This is probably called from Question::createMultipleChoice
+	*
+	* @param $question_id
+	* @param $question_type 'M', 'T', 'S', 'E', 'F', 'N'
+	* @param $answer string
+	* @param $is_correct (1, 0)
+	*
+	* @return boolean
+	*/
+	public function create($question_id, $question_type, $answer, $is_correct, $textarea_rows=10, $is_case_sensitive=0, $tolerance=0){
+		
+		$answer_order = $this->getNextAnswerOrder($question_id);
+		
+		$this->setAttributes(array(
+	        	'QUESTION_ID'=>$question_id,
+				'QUESTION_TYPE'=>$question_type,
+	        	'ANSWER'=>$answer,
+				'ANSWER_ORDER'=>$answer_order,
+		        'IS_CORRECT'=>$is_correct,	
+				'TEXTAREA_ROWS'=>$textarea_rows,
+				'IS_CASE_SENSITIVE'=>$is_case_sensitive,
+				'TOLERANCE'=>$tolerance,
+	    ),false);
+		
+		$this->save(false);
+	
+		return $this->ID;
+	
+	}
+
+
+	
+	
 }

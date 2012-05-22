@@ -4,20 +4,23 @@
  * This is the model class for table "Quizes".
  *
  * The followings are the available columns in table 'Quizes':
- * @property integer $id
- * @property integer $collection_id
- * @property string $title
- * @property string $description
- * @property integer $visibility
- * @property string $state
- * @property integer $show_feedback
- * @property string $start_date
- * @property string $end_date
- * @property string $date_modified
- * @property integer $deleted
+ * @property integer $ID
+ * @property integer $COLLECTION_ID
+ * @property string $TITLE
+ * @property string $DESCRIPTION
+ * @property integer $VISIBILITY
+ * @property string $STATE
+ * @property integer $SHOW_FEEDBACK
+ * @property string $START_DATE
+ * @property string $END_DATE
+ * @property string $DATE_MODIFIED
+ * @property integer $DELETED
  */
-class Quiz extends CActiveRecord
+class Quiz extends QActiveRecord
 {
+	
+	public $sequenceName = 'QUIZES_SEQ';	
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -62,6 +65,8 @@ class Quiz extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'questions' => array(self::HAS_MANY, 'QUESTIONS', 'QUIZ_ID'),
+			'collection' => array(self::BELONGS_TO, 'Collection', 'COLLECTION_ID'),
 		);
 	}
 
@@ -96,20 +101,86 @@ class Quiz extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->id);
-		$criteria->compare('COLLECTION_ID',$this->collection_id);
-		$criteria->compare('TITLE',$this->title,true);
-		$criteria->compare('DESCRIPTION',$this->description,true);
-		$criteria->compare('VISIBILITY',$this->visibility);
-		$criteria->compare('STATE',$this->state,true);
-		$criteria->compare('SHOW_FEEDBACK',$this->show_feedback);
-		$criteria->compare('START_DATE',$this->start_date,true);
-		$criteria->compare('END_DATE',$this->end_date,true);
-		$criteria->compare('DATE_MODIFIED',$this->date_modified,true);
-		$criteria->compare('DELETED',$this->deleted);
+		$criteria->compare('ID',$this->ID);
+		$criteria->compare('COLLECTION_ID',$this->COLLECTION_ID);
+		$criteria->compare('TITLE',$this->TITLE,true);
+		$criteria->compare('DESCRIPTION',$this->DESCRIPTION,true);
+		$criteria->compare('VISIBILITY',$this->VISIBILITY);
+		$criteria->compare('STATE',$this->STATE,true);
+		$criteria->compare('SHOW_FEEDBACK',$this->SHOW_FEEDBACK);
+		$criteria->compare('START_DATE',$this->START_DATE,true);
+		$criteria->compare('END_DATE',$this->END_DATE,true);
+		$criteria->compare('DATE_MODIFIED',$this->DATE_MODIFIED,true);
+		$criteria->compare('DELETED',$this->DELETED);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	* This is meant to make printing a list easy...  json probably better, but this works for now...
+	*/
+	public function getQuizArrayByCollectionId($collection_id){
+		
+		$quizes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
+		
+		$quizArray = array();
+		foreach($quizes as $quiz){
+			$qa = array();
+			$qa['link'] = "/question/index/".$quiz->ID;
+			foreach($quiz as $key=>$value){
+				$qa[$key] = $value;
+			}
+			array_push($quizArray, $qa);
+		}
+		return $quizArray;
+	
+	}
+	
+	public function create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback){
+		
+		if($title == ''){
+			return false;
+		}
+		$this->setAttributes(array(
+	        	'COLLECTION_ID'=>$collection_id,
+	        	'TITLE'=>$title,
+		        'DESCRIPTION'=>$description,
+		        'STATE'=>$state,
+				'START_DATE'=>$start_date,
+				'END_DATE'=>$end_date,
+				'VISIBILITY'=>$visibility,
+				'SHOW_FEEDBACK'=>$show_feedback,
+				'DELETED'=>0,
+				
+	    ),false);
+		
+		$this->save(false);
+		return $this->ID;
+		
+	}
+	
+	/**
+	* getQuestionIds
+	*
+	* gets the array of question ids
+	*
+	* @param $quiz_id int
+	* @return $question_ids array of ints
+	*/
+	public function getQuestionIds($quiz_id){
+		
+		$questions = Question::model()->findAll('quiz_id=:quiz_id', array(':quiz_id' => $quiz_id));
+		$question_ids = array();
+		foreach($questions as $question){
+			array_push($question_ids, $question->ID);
+		}
+		
+		return $question_ids;
+		
+	}
+	
+	
+	
 }

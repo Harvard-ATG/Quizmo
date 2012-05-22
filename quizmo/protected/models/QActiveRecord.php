@@ -5,17 +5,19 @@ class QActiveRecord extends CActiveRecord {
 	
 	public function afterSave(){
 
+
 		if(Yii::app()->db->driverName == 'oci'){
-
-			try {
-				$connection=Yii::app()->db;
-				$sql = "select {$this->sequenceName}.currval from dual";
-				$result = $connection->createCommand($sql)->queryRow();
+			if(!isset($this->ID)){
+				try {
+					$connection=Yii::app()->db;
+					$sql = "select {$this->sequenceName}.currval from dual";
+					$result = $connection->createCommand($sql)->queryRow();
 							
-				$this->ID = $result['CURRVAL'];
+					$this->ID = $result['CURRVAL'];
 
-			} catch (Exception $e) {
-				//echo("Error: $e\n");
+				} catch (Exception $e) {
+					//echo("Error: $e\n");
+				}
 			}
 			
 		} else {

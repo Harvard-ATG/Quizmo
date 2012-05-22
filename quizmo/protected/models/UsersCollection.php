@@ -104,6 +104,28 @@ class UsersCollection extends QActiveRecord
 		));
 	}
 	
+	/**
+	* Gets an array of collections with a link
+	*/
+	public function getCollectionArrayByUserId($user_id){
+		$userscollections = UsersCollection::model()->findAll('user_id=:user_id', array(':user_id' => $user_id));
+			
+		$collectionArray = array();
+		foreach($userscollections as $userscollection){
+			$collection = $userscollection->collection;
+			$collArr = array();
+			foreach($collection as $key=>$value){
+				$collArr[$key] = $value;
+			}
+			//$collectionLinks[$collection->ID] = "collection/view/".$collection->ID;
+			$collArr['link'] = "/quiz/index/".$collection->ID;
+			
+			array_push($collectionArray, $collArr);
+		}
+		
+		return $collectionArray;
+	}
+	
 	public function addUserToCollection($user_id, $collection_id, $permission='enrollee'){
 		
 		$conditions = 'collection_id=:collection_id AND user_id=:user_id';

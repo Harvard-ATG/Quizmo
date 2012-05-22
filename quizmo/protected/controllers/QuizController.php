@@ -6,7 +6,7 @@ class QuizController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	//public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -59,23 +59,47 @@ class QuizController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id='')
 	{
-		$model=new Quiz;
+		$quiz = new Quiz;
+		//error_log("quiz/create");
+		$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
+		$collection_id = ($collection_id == '') ? Yii::app()->getRequest()->getParam('collection_id') : $collection_id;
+		if($collection_id != '') Yii::app()->session['collection_id'] = $collection_id;
+		$title = Yii::app()->getRequest()->getParam('title');
+		$description = Yii::app()->getRequest()->getParam('description');
+		$state = Yii::app()->getRequest()->getParam('state');
+		$start_date = Yii::app()->getRequest()->getParam('start_date');
+		$end_date = Yii::app()->getRequest()->getParam('end_date');
+		$visibility = Yii::app()->getRequest()->getParam('visibility');
+		if($visibility == '') $visibility = 0;
+		$show_feedback = Yii::app()->getRequest()->getParam('show_feedback');
+		if($show_feedback == '') $show_feedback = 0;
+		$user_id = Yii::app()->user->getId();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Quiz']))
-		{
-			$model->attributes=$_POST['Quiz'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		if($title != ''){
+			
+			//$collection_id = Yii::app()->getRequest()->getParam('collection_id');
+			$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
+			if($quiz_id != ''){
+				// now go to list
+				$this->forward('/quiz/index/'.$collection_id, true);
+
+			}
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+			'collection_id'=>$collection_id,
+			'title'=>$title,
+			'description'=>$description,
+			'state'=>$state,
+			'start_date'=>$start_date,
+			'end_date'=>$end_date,
+			'visibility'=>$visibility,
+			'show_feedback'=>$show_feedback,
 		));
+
 	}
 
 	/**
@@ -123,14 +147,44 @@ class QuizController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	* Lists all models.
+	* @param $id => in this case, $id refers to collection_id
 	 */
-	public function actionIndex()
+	public function actionIndex($id='')
 	{
-		$dataProvider=new CActiveDataProvider('Quiz');
+		error_log("quiz/index");
+		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
+		$user_id = Yii::app()->user->id;
+		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			//'dataProvider'=>$dataProvider,
+			'quizes'=>$quizes,
+			'sizeofquizes'=>sizeof($quizes),
+			'user_id'=>$user_id,
+			'collection_id'=>$collection_id,
 		));
+		
+	}
+	
+	public function actionTake($id=''){
+		$quiz_id = $id;
+		$user_id = Yii::app()->user->id;
+		
+		// first we set the session quiz_id
+		// then we forward along to the question Take view
+		// OR we just go into this and flip through it via ajax
+		
+		// let's start with the ajax approach...
+		// for that we need to get a list of all question ids in the quiz
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		
+		$this->render('take', array(
+			'question_ids'=>$question_ids,
+			'user_id'=>$user_id
+			
+		));
+		
+		
 	}
 
 	/**

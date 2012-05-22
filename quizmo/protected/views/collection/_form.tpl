@@ -23,7 +23,7 @@
 	</div>
 </div>
 <div id="description-control-group" class="control-group">
-	<label class="control-label" for="title">Description</label>
+	<label class="control-label" for="description">Description</label>
 	<div class="controls">
 		<textarea class="input-xlarge" id="description" name="description"></textarea>
 		<p class="help-inline"></p>

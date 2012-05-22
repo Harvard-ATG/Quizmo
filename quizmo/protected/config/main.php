@@ -52,6 +52,7 @@ return CMap::mergeArray(
 					'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 					'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 					'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+					'<controller:\w+>/<action:\w+>/<cact:\w+>'=>'<controller>/<cact>',
 				),
 			),
 
@@ -83,7 +84,7 @@ return CMap::mergeArray(
 			'viewRenderer'=>array(
 		  		'class'=>'ext.smarty-renderer.ESmartyViewRenderer',
 		    	'fileExtension' => '.tpl',
-		    	//'pluginsDir' => 'application.smartyPlugins',
+		    	'pluginsDir' => 'application.smartyPlugins',
 		    	//'configDir' => 'application.smartyConfig',
 		    	//'prefilters' => array(array('MyClass','filterMethod')),
 		    	//'postfilters' => array(),
@@ -94,8 +95,8 @@ return CMap::mergeArray(
 			),
 			
 			'session' => array (
-	    		//'autoStart' => true,
-				//'sessionName' => 'QUIZMO',
+	    		'autoStart' => true,
+				'sessionName' => 'QUIZMO',
 	    		//'cookieMode' => 'only',
 	    		//'savePath' => '/web/quizmo/var/tmp/',
 			),

@@ -2,6 +2,12 @@
 
 return array(
 	
+	'collection0' => array(
+		'OTHER_ID' => 'icb.topic1066689',
+		'TITLE' => 'icb.topic1066689',
+		'DESCRIPTION' => '',
+		'DELETED' => 0,
+	),
 	'collection1' => array(
 		'OTHER_ID' => '1234',
 		'TITLE' => 'Collection 1 Title',

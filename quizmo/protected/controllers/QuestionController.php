@@ -6,7 +6,7 @@ class QuestionController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	//public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -59,23 +59,128 @@ class QuestionController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id='')
 	{
-		$model=new Question;
+		$user_id = Yii::app()->user->getId();
+		$quiz = new Quiz;
+		//error_log("quiz/create");
+		
+		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
+		$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
+		if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Question']))
-		{
-			$model->attributes=$_POST['Question'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		$title = Yii::app()->getRequest()->getParam('title');
+		$body = Yii::app()->getRequest()->getParam('body');
+		$question_type = Yii::app()->getRequest()->getParam('question_type');
+		$score = Yii::app()->getRequest()->getParam('score');
+		$feedback = Yii::app()->getRequest()->getParam('feedback');
+		
+		
+		
+		
+		error_log(var_export($_REQUEST, 1));
+
+
+		if($title != '' && $body != '' && $question_type != ''){
+			$question = new Question;
+			switch($question_type){
+				// **********************************************************************
+				case 'multiple':
+					$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
+					$multiple_answers = array();
+					// isset() won't work with the yii->getParam
+					// This produces an array of the form:
+					// array(
+					//		array(
+					//			'answer' => 'some answer',
+					//			'is_correct' => 1
+					//		), ...
+					//	)
+					for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
+						($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
+						array_push($multiple_answers, array(
+							'answer' => Yii::app()->getRequest()->getParam('multiple_answer'.$i),
+							'is_correct' => $correct
+						));
+					}
+					// Maybe this should be moved to the model?
+					// ANSWER: No.  It is just getting params, that cannot be moved to the model
+					//Answer::multipleChoiceAnswers($multiple_radio_answer, )
+					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers);
+					break;
+				// **********************************************************************
+				
+				case 'truefalse':
+					$truefalse = Yii::app()->getRequest()->getParam('truefalse');
+					$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
+					break;
+				// **********************************************************************
+				
+				case 'checkall':
+					// The problem with this is if the check isn't checked, it won't show in the POST
+					// so let's just go up to 20
+					// This produces an array of the form:
+					// array(
+					//		array(
+					//			'answer' => 'some answer',
+					//			'is_correct' => 1
+					//		), ...
+					//	)
+					$check_all_answers = array();
+					for($i = 0; $i < 30; $i++){
+						if(isset($_REQUEST['check_all_answer'.$i])){
+							(isset($_REQUEST['check_all_check_answer'.$i])) ? $correct = 1 : $correct = 0;
+							array_push($check_all_answers, array(
+								'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
+								'is_correct' => $correct
+							));
+						}
+					}
+
+					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $check_all_answers);
+					break;
+				// **********************************************************************
+
+				case 'essay':
+					$textarea_rows = Yii::app()->getRequest()->getParam('textarea_rows');
+					$question_id = $question->createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows);
+					break;
+				// **********************************************************************
+
+				case 'numerical':
+					$tolerance = Yii::app()->getRequest()->getParam('tolerance');
+					$question_id = $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance);
+					break;
+				// **********************************************************************
+
+				case 'fillin':
+					(isset($_REQUEST['is_case_sensitive'])) ? $is_case_sensitive = 1 : $is_case_sensitive = 0;
+					$question_id = $question->createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive);
+					break;
+				// **********************************************************************
+					
+				
+				default:
+					error_log("unknown question type: $question_type");
+					break;
+				
+			}
+			//$question_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
+			if(@$question_id != ''){
+				// now go to list
+				$this->forward('/question/index/'.$quiz_id);
+				return;
+			}
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+			'quiz_id'=>$quiz_id,
+			'title'=>$title,
+			'body'=>$body,
+			'question_type'=>$question_type,
 		));
+
 	}
 
 	/**
@@ -125,12 +230,20 @@ class QuestionController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($id='')
 	{
-		$dataProvider=new CActiveDataProvider('Question');
+		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
+		Yii::app()->session['quiz_id'] = $quiz_id;
+		$user_id = Yii::app()->user->id;
+		$questions = Question::getQuestionArrayByQuizId($quiz_id);
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'questions'=>$questions,
+			'sizeofquestions'=>sizeof($questions),
+			'user_id'=>$user_id,
+			'quiz_id'=>$quiz_id,
 		));
+
 	}
 
 	/**

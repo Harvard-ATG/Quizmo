@@ -8,7 +8,7 @@
 	<div class="row-fluid">
 
 		<!-- {*$this->widget('LinkWidget', ['href' => $collection.ID, 'text' => $collection.TITLE], true)*}<br/> -->
-		<a href="{$collectionLinks[$collection.ID]}">{$collection.TITLE}:{$collectionLinks[$collection.ID]}</a>
+		<a href="{$collection['link']}">{$collection['TITLE']}:{$collection['link']}</a>
 	</div>
 {/foreach}
 </div>

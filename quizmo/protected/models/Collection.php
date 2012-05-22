@@ -13,7 +13,7 @@
 class Collection extends QActiveRecord
 {
 
-	public $ID;
+	//public $ID;
 	public $sequenceName = 'COLLECTIONS_SEQ';	
 	
 	/**
@@ -59,8 +59,8 @@ class Collection extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Quizes' => array(self::HAS_MANY, 'QUIZES', 'COLLECTION_ID'),
-			'UsersCollections' => array(self::HAS_MANY, 'USERSCOLLECTIONS', 'COLLECTION_ID'),
+			'quizes' => array(self::HAS_MANY, 'QUIZES', 'COLLECTION_ID'),
+			'userscollections' => array(self::HAS_MANY, 'USERSCOLLECTIONS', 'COLLECTION_ID'),
 		);
 	}
 
@@ -105,6 +105,10 @@ class Collection extends QActiveRecord
 	}
 	
 	public function create($title, $description, $other_id='', $deleted=0){
+		
+		if($title == ''){
+			return false;
+		}
 		$this->setAttributes(array(
 		        'OTHER_ID'=>$other_id,
 		        'TITLE'=>$title,
@@ -115,6 +119,13 @@ class Collection extends QActiveRecord
 		
 		$this->save();
 		return $this->ID;
+	}
+	
+	public function getByOtherId($other_id){
+		$collection = Collection::model()->find('other_id=:other_id', array(':other_id' => $other_id));
+		//$this->find('other_id=:other_id', array(':other_id' => $other_id));
+		return $collection;		
+
 	}
 	
 }

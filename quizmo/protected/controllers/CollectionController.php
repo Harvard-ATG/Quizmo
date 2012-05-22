@@ -80,21 +80,12 @@ class CollectionController extends Controller
 			}
 		}
 
-		$this->render('create');
+		$this->render('create', array(
+			'title' => $title,
+			'description' => $description,
+		));
 		
-		
 
-
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		// we basically want a form that allows us to enter:
-			// Collection name
-			// Collection description
-		// nothing needs to come from the db for this
-
-		//$this->render('create',array());
 	}
 
 	/**
@@ -105,7 +96,6 @@ class CollectionController extends Controller
 	public function actionUpdate($id='')
 	{
 		
-		error_log("actionUpdate");
 		$model=$this->loadModel($id);
 		
 		if($id == ''){
@@ -166,26 +156,12 @@ class CollectionController extends Controller
 	{	
 		$user_id = Yii::app()->user->id;
 		
-		// userscollection->getCollectionsById
-		$userscollections = UsersCollection::model()->findAll('user_id=:user_id', array(':user_id' => $user_id));
-			
-		$collections = array();
-		$collectionLinks = array();
-		foreach($userscollections as $userscollection){
-			$collection = $userscollection->collection;
-			$collectionLinks[$collection->ID] = "collection/view/".$collection->ID;
-			
-			array_push($collections, $collection);
-			//foreach($collection as $key => $value){
-			//	error_log("$key => $value");
-			//}
-		}
-		
-		
+		$collections = UsersCollection::getCollectionArrayByUserId($user_id);
+		//$collections = UsersCollection::getCollectionArrayAll();
 		
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,
-			'collectionLinks'=>$collectionLinks,
+			//'collectionLinks'=>$collectionLinks,
 			'collections'=>$collections,
 			'user_id'=>$user_id,
 		));
