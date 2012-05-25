@@ -4,10 +4,7 @@
 
 <div id="quizes-container" class="span12 row-fluid">
 	<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
-	New Quiz:
 
-		{url url="/quiz/create/$collection_id"}
-		<pre>{url url="/quiz/create/$collection_id"}</pre><br/>
 {if $sizeofquizes > 0}
 	<table class="table">
 		<tr>
@@ -17,7 +14,7 @@
 
 		<tr>
 			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>
-			<td>Take Quiz</td>
+			<td><a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a></td>
 		</tr>
 					
 <!--	<a href="{$quiz['link']}">{$quiz['TITLE']}:{$quiz['link']}</a> -->
