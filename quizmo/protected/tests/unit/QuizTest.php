@@ -10,6 +10,8 @@ class QuizTest extends CDbTestCase {
 	public $fixtures=array(
 		'collections'=>'Collection',
 		'quizes'=>'Quiz',
+		'questions'=>'Question',
+		'users'=>'User',
 	);
 	
 
@@ -43,6 +45,14 @@ class QuizTest extends CDbTestCase {
 		$this->markTestIncomplete(
           "This test still needs a correct date format.  It's a timestamp now, should be a date."
         );
+	}
+	
+	public function testGetQuestionIds(){
+		$quiz_id = 1;
+		$quiz = new Quiz;
+		$this->assertGreaterThan(0, $quiz->getQuestionIds($quiz_id), "Failed asserting that getQuestionIds returns greater than 1 for unit test quiz_id 1.");
+		
+		
 	}
    
 }
