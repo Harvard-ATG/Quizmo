@@ -41,10 +41,16 @@ Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 
 * Open the MAMP control panel. Go to _Preferences..._ then _Ports_ and set the Apache port to 80 and the mysql port to 3306. Click OK.  (Or just click the "Set to default Apache and MySQL ports" button)
 * Click Start Servers in the MAMP control panel. The Apache Server and MySQL Server status should become green.
+* Add the following line to your .profile to add the php to your PATH:
+
+```sh
+export PATH="/Applications/MAMP/bin/php5.3/bin:$PATH"
+```
+
 * Run the following shell script to install the application (setup config, create schema, etc):
 
 ```sh
-/Applications/MAMP/htdocs/Catool/scripts/install_mamp.sh
+/Applications/MAMP/htdocs/Quizmo/mamp-install.sh
 ```
 
 * Now try to run the tests
