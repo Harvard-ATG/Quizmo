@@ -50,8 +50,13 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id)
 	{
+		
+		$question = new Question;
+		$question = $question->model()->findByPk($id);
+		//$questionArr = $question->getQuestionById($id);
+		
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'question'=>$question,
 		));
 	}
 
@@ -76,11 +81,6 @@ class QuestionController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		
-		
-		
-		
-		error_log(var_export($_REQUEST, 1));
-
 
 		if($title != '' && $body != '' && $question_type != ''){
 			$question = new Question;

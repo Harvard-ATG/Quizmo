@@ -337,4 +337,19 @@ class Question extends QActiveRecord
 		
 	}
 	
+	/**
+	* getQuestionViewById
+	*
+	* this should return the question and answers in an array that will be easily interpretted by the template
+	* @param $question_id
+	*
+	* @return array()
+	*/
+	public function getQuestionById($question_id){
+		$this->findByPk($question_id);
+		
+		
+		
+	}
+	
 }
