@@ -36,7 +36,7 @@ $(document).ready(function(){
 	
 	//load the first question...
 	var current_question_id = current_item.attr("name");
-	$('#questions-container').load('/question/view/' + current_question_id);
+	$('#questions-container').load(url('/question/view/' + current_question_id));
 	
 	// add the click listener for the numbered buttons
 	$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
