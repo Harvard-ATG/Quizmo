@@ -9,9 +9,7 @@
 
 <script>
 $(document).ready(function(){
-	
-	$('#quiz-form').attr('onsubmit', '');
-	
+		
 	$('#quiz-form_default').submit(function() {
 		// validate data
 		if ($("input:#title").val() == "") {
