@@ -179,6 +179,7 @@ class QuizController extends Controller
 		$question_ids = Quiz::getQuestionIds($quiz_id);
 		
 		$this->render('take', array(
+			'question_ids_json'=>json_encode($question_ids),
 			'question_ids'=>$question_ids,
 			'user_id'=>$user_id
 			
