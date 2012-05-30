@@ -46,14 +46,15 @@ class QuestionController extends Controller
 
 	/**
 	 * Displays a particular model.
+	 * @todo set the layout to ajax so the general layout doesn't do all the calls twice
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
 	{
 		
-		$question = new Question;
-		$question = $question->model()->findByPk($id);
-		//$questionArr = $question->getQuestionById($id);
+		//$question = new Question;
+		//$question = $question->model()->findByPk($id);
+		$question = Question::getQuestionViewById($id);
 		
 		$this->render('view',array(
 			'question'=>$question,

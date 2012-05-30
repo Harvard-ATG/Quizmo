@@ -63,6 +63,7 @@ class Question extends QActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'quiz' => array(self::BELONGS_TO, 'Quiz', 'QUIZ_ID'),
+			'answer' => array(self::HAS_MANY, 'Answer', 'QUESTION_ID'),
 		);
 	}
 
@@ -345,11 +346,27 @@ class Question extends QActiveRecord
 	*
 	* @return array()
 	*/
-	public function getQuestionById($question_id){
-		$this->findByPk($question_id);
+	public function getQuestionViewById($question_id){
+		$question = Question::model()->findByPk($question_id);
+		$answers = $question->answer;
+		error_log(sizeof($answers));
+
+		$questionArr = array();
+		foreach($question as $key => $value){
+			$questionArr[strtolower($key)] = $value;
+			
+		}
+		$answerArr = array();
+		foreach($answers as $answer){
+			$answerInnerArr = array();
+			foreach($answer as $key => $value){
+				$answerInnerArr[strtolower($key)] = $value;		
+			}
+			array_push($answerArr, $answerInnerArr);
+		}
+		$questionArr['answers'] = $answerArr;
 		
-		
-		
+		return $questionArr;
 	}
 	
 }
