@@ -1,0 +1,1654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a5" title="">
+  <file path="Answer.php" hash="59665fd6c013eb68308136e676b74edb" package="Default">
+    <class final="false" abstract="false" namespace="" line="21" package="app\Model">
+      <name>Answer</name>
+      <full_name>\Answer</full_name>
+      <extends>QActiveRecord</extends>
+      <docblock line="21">
+        <description><![CDATA[Answer]]></description>
+        <long-description><![CDATA[<p>This is the model class for table "Answers".</p>
+
+<p>The followings are the available columns in table 'Answers':<br>
+integer $id <br>
+integer $question_id <br>
+string $question_type <br>
+integer $textarea_rows <br>
+string $answer <br>
+integer $is_case_sensitive <br>
+integer $answer_order <br>
+integer $is_correct <br>
+double $tolerance <br></p>]]></long-description>
+        <tag line="21" name="package" description="app.Model"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="31" namespace="" package="Default">
+        <name>$sequenceName</name>
+        <default><![CDATA['ANSWERS_SEQ']]></default>
+        <docblock line="31">
+          <description><![CDATA[sequenceName]]></description>
+          <long-description><![CDATA[<p>this is needed by QActiveRecord for Oracle</p>]]></long-description>
+          <tag line="31" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="42" package="app\Model">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="42">
+          <description><![CDATA[model]]></description>
+          <long-description><![CDATA[<p>Returns the static model of the specified AR class.
+created originally by Yii's Gii</p>]]></long-description>
+          <tag line="42" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="42" name="return" description="the static model class" type="\Answer">
+            <type by_reference="false">\Answer</type>
+          </tag>
+        </docblock>
+        <argument line="42">
+          <name>$className</name>
+          <default><![CDATA[__CLASS__]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="54" package="app\Model">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="54">
+          <description><![CDATA[tableName]]></description>
+          <long-description><![CDATA[<p>created originally by Yii's Gii</p>]]></long-description>
+          <tag line="54" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="66" package="app\Model">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="66">
+          <description><![CDATA[rules]]></description>
+          <long-description><![CDATA[<p>created originally by Yii's Gii</p>]]></long-description>
+          <tag line="66" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="88" package="app\Model">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="88">
+          <description><![CDATA[relations]]></description>
+          <long-description><![CDATA[<p>created originally by Yii's Gii</p>]]></long-description>
+          <tag line="88" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="104" package="app\Model">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="104">
+          <description><![CDATA[attributeLabels]]></description>
+          <long-description><![CDATA[<p>created originally by Yii's Gii</p>]]></long-description>
+          <tag line="104" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="127" package="app\Model">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="127">
+          <description><![CDATA[search]]></description>
+          <long-description><![CDATA[<p>created originally by Yii's Gii
+Retrieves a list of models based on the current search/filter conditions.</p>]]></long-description>
+          <tag line="127" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="161" package="app\Model">
+        <name>getNextAnswerOrder</name>
+        <full_name>getNextAnswerOrder</full_name>
+        <docblock line="161">
+          <description><![CDATA[getNextAnswerOrder]]></description>
+          <long-description><![CDATA[<p>originally thinking of this just to be used internally
+when adding new questions -- to get the appropriate question_order</p>]]></long-description>
+          <tag line="161" name="param" description="" type="integer" variable="$question_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="161" name="return" description="$answer_order" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="161">
+          <name>$question_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="190" package="app\Model">
+        <name>create</name>
+        <full_name>create</full_name>
+        <docblock line="190">
+          <description><![CDATA[create]]></description>
+          <long-description><![CDATA[<p>This is probably called from Question::createMultipleChoice</p>]]></long-description>
+          <tag line="190" name="param" description="" type="integer" variable="$question_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="190" name="param" description="'M', 'T', 'S', 'E', 'F', 'N'" type="string" variable="$question_type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="190" name="param" description="" type="string" variable="$answer">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="190" name="param" description="(1, 0)" type="boolean" variable="$is_correct">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="190" name="param" description="" type="integer" variable="$textarea_rows">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="190" name="param" description="" type="boolean" variable="$is_case_sensitive">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="190" name="param" description="" type="float" variable="$tolerance">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag line="190" name="return" description="" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="190">
+          <name>$question_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="190">
+          <name>$question_type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="190">
+          <name>$answer</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="190">
+          <name>$is_correct</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="190">
+          <name>$textarea_rows</name>
+          <default><![CDATA[10]]></default>
+          <type/>
+        </argument>
+        <argument line="190">
+          <name>$is_case_sensitive</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+        <argument line="190">
+          <name>$tolerance</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Collection.php" hash="bbf69d44abbcdc1a804be2adfe28a4a5" package="Default">
+    <class final="false" abstract="false" namespace="" line="17" package="app\Model">
+      <name>Collection</name>
+      <full_name>\Collection</full_name>
+      <extends>QActiveRecord</extends>
+      <docblock line="17">
+        <description><![CDATA[Collection]]></description>
+        <long-description><![CDATA[<p>This is the model class for table "Collections".</p>
+
+<p>The followings are the available columns in table 'Collections':
+integer $id
+string $other_id
+string $title
+string $description
+integer $deleted</p>]]></long-description>
+        <tag line="17" name="package" description="app.Model"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="27" namespace="" package="Default">
+        <name>$sequenceName</name>
+        <default><![CDATA['COLLECTIONS_SEQ']]></default>
+        <docblock line="27">
+          <description><![CDATA[sequenceName]]></description>
+          <long-description><![CDATA[<p>this is needed by QActiveRecord for Oracle</p>]]></long-description>
+          <tag line="27" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="35" package="app\Model">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="35">
+          <description><![CDATA[created originally by Yii's Gii
+Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="35" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="35" name="return" description="the static model class" type="\Collection">
+            <type by_reference="false">\Collection</type>
+          </tag>
+        </docblock>
+        <argument line="35">
+          <name>$className</name>
+          <default><![CDATA[__CLASS__]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="44" package="app\Model">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="44">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="44" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="53" package="app\Model">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="53">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="53" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="71" package="app\Model">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="71">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="71" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="85" package="app\Model">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="85">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="85" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="100" package="app\Model">
+        <name>primaryKey</name>
+        <full_name>primaryKey</full_name>
+        <docblock line="100">
+          <description><![CDATA[primaryKey]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="100" name="return" description="" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="109" package="app\Model">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="109">
+          <description><![CDATA[created originally by Yii's Gii
+Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="109" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="135" package="app\Model">
+        <name>create</name>
+        <full_name>create</full_name>
+        <docblock line="135">
+          <description><![CDATA[create]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="135" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="135" name="param" description="" type="string" variable="$description">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="135" name="param" description="" type="integer" variable="$other_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="135" name="param" description="" type="boolean" variable="$deleted">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="135" name="return" description="$collection_id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="135">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="135">
+          <name>$description</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="135">
+          <name>$other_id</name>
+          <default><![CDATA['']]></default>
+          <type/>
+        </argument>
+        <argument line="135">
+          <name>$deleted</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="157" package="app\Model">
+        <name>getByOtherId</name>
+        <full_name>getByOtherId</full_name>
+        <docblock line="157">
+          <description><![CDATA[getByOtherId]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="157" name="param" description="" type="integer" variable="$other_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="157" name="return" description="Collection" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="157">
+          <name>$other_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="QActiveRecord.php" hash="4166a17679269fed6827476004cac866" package="Default">
+    <class final="false" abstract="false" namespace="" line="10" package="app\Model">
+      <name>QActiveRecord</name>
+      <full_name>\QActiveRecord</full_name>
+      <extends>CActiveRecord</extends>
+      <docblock line="10">
+        <description><![CDATA[This is the base class for all models]]></description>
+        <long-description><![CDATA[<p>Currently only does the auto_increment for Oracle</p>]]></long-description>
+        <tag line="10" name="link" description="http://blogs.law.harvard.edu/acts/2012/04/05/yii-handling-getlastinsertid-with-oracle/" link="http://blogs.law.harvard.edu/acts/2012/04/05/yii-handling-getlastinsertid-with-oracle/"/>
+        <tag line="10" name="package" description="app.Model"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="15" package="app\Model">
+        <name>afterSave</name>
+        <full_name>afterSave</full_name>
+        <docblock line="15">
+          <description><![CDATA[currently only does anything for Oracle]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Question.php" hash="813cc8a4fd821e1cab582a6d2d4a7a2d" package="Default">
+    <class final="false" abstract="false" namespace="" line="18" package="app/Model">
+      <name>Question</name>
+      <full_name>\Question</full_name>
+      <extends>QActiveRecord</extends>
+      <docblock line="18">
+        <description><![CDATA[This is the model class for table "Questions".]]></description>
+        <long-description><![CDATA[<p>The followings are the available columns in table 'Questions': <br>
+integer $id <br>
+integer $quiz_id <br>
+string $question_type <br>
+string $title <br>
+string $body <br>
+integer $question_order <br>
+integer $points <br>
+string $feedback <br>
+integer $deleted <br></p>]]></long-description>
+        <tag line="18" name="package" description="app/Model"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="25" namespace="" package="Default">
+        <name>$sequenceName</name>
+        <default><![CDATA['QUESTIONS_SEQ']]></default>
+        <docblock line="25">
+          <description><![CDATA[this is needed by QActiveRecord for Oracle]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="25" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="33" package="app/Model">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="33">
+          <description><![CDATA[created originally by Yii's Gii
+Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="33" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="33" name="return" description="the static model class" type="\Question">
+            <type by_reference="false">\Question</type>
+          </tag>
+        </docblock>
+        <argument line="33">
+          <name>$className</name>
+          <default><![CDATA[__CLASS__]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="42" package="app/Model">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="42">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="42" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="51" package="app/Model">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="51">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="51" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="69" package="app/Model">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="69">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="69" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="83" package="app/Model">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="83">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="83" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="103" package="app/Model">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="103">
+          <description><![CDATA[created originally by Yii's Gii
+Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="103" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="136" package="app/Model">
+        <name>getQuestionArrayByQuizId</name>
+        <full_name>getQuestionArrayByQuizId</full_name>
+        <docblock line="136">
+          <description><![CDATA[getQuestionArrayByQuizId]]></description>
+          <long-description><![CDATA[<p>this is just to simplify the array vars for the view</p>]]></long-description>
+          <tag line="136" name="param" description="" type="integer" variable="$quiz_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="136" name="return" description="array( array(ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, QUESTION_ORDER, POINTS, FEEDBACK, DELETED, link) )" type="\array()">
+            <type by_reference="false">\array()</type>
+          </tag>
+        </docblock>
+        <argument line="136">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="162" package="app/Model">
+        <name>getNextQuestionOrder</name>
+        <full_name>getNextQuestionOrder</full_name>
+        <docblock line="162">
+          <description><![CDATA[getNextQuestionOrder]]></description>
+          <long-description><![CDATA[<p>originally thinking of this just to be used internally
+when adding new questions -- to get the appropriate question_order</p>]]></long-description>
+          <tag line="162" name="param" description="" type="integer" variable="$quiz_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="162" name="return" description="$quetion_order" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="162">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="193" package="app/Model">
+        <name>create</name>
+        <full_name>create</full_name>
+        <docblock line="193">
+          <description><![CDATA[create]]></description>
+          <long-description><![CDATA[<p>Base model method for all questions (doesn't handle any answers)</p>]]></long-description>
+          <tag line="193" name="param" description="" type="string" variable="$quiz_id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="193" name="param" description="" type="string" variable="$question_type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="193" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="193" name="param" description="" type="string" variable="$body">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="193" name="param" description="" type="integer" variable="$score">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="193" name="param" description="" type="string" variable="$feedback">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="193" name="return" description="$question_id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="193">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="193">
+          <name>$question_type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="193">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="193">
+          <name>$body</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="193">
+          <name>$score</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="193">
+          <name>$feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="234" package="app/Model">
+        <name>createMultipleChoice</name>
+        <full_name>createMultipleChoice</full_name>
+        <docblock line="234">
+          <description><![CDATA[createMultipleChoice]]></description>
+          <long-description><![CDATA[<p>This can function for both Multiple-Choice and Check-All-that-Apply
+It also calls the create for all associated answers that were passed to it</p>]]></long-description>
+          <tag line="234" name="param" description="" type="string" variable="$quiz_id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="234" name="param" description="" type="string" variable="$question_type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="234" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="234" name="param" description="" type="string" variable="$body">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="234" name="param" description="" type="integer" variable="$score">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="234" name="param" description="" type="string" variable="$feedback">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="234" name="param" description="array of strings" type="array" variable="$multiple_answers">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="234" name="return" description="$question_id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="234">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$question_type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$body</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$score</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="234">
+          <name>$multiple_answers</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="261" package="app/Model">
+        <name>createTrueFalse</name>
+        <full_name>createTrueFalse</full_name>
+        <docblock line="261">
+          <description><![CDATA[createTrueFalse]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="261" name="param" description="" type="string" variable="$quiz_id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="261" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="261" name="param" description="" type="string" variable="$body">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="261" name="param" description="" type="integer" variable="$score">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="261" name="param" description="" type="string" variable="$feedback">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="261" name="param" description="" type="boolean" variable="$truefalse">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="261" name="return" description="int" type="\$question_id">
+            <type by_reference="false">\$question_id</type>
+          </tag>
+        </docblock>
+        <argument line="261">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="261">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="261">
+          <name>$body</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="261">
+          <name>$score</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="261">
+          <name>$feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="261">
+          <name>$truefalse</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="293" package="app/Model">
+        <name>createEssay</name>
+        <full_name>createEssay</full_name>
+        <docblock line="293">
+          <description><![CDATA[createEssay]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="293" name="param" description="" type="string" variable="$quiz_id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="293" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="293" name="param" description="" type="string" variable="$body">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="293" name="param" description="" type="integer" variable="$score">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="293" name="param" description="" type="string" variable="$feedback">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="293" name="param" description="" type="integer" variable="$textarea_rows">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="293" name="return" description="$question_id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="293">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="293">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="293">
+          <name>$body</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="293">
+          <name>$score</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="293">
+          <name>$feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="293">
+          <name>$textarea_rows</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="316" package="app/Model">
+        <name>createNumerical</name>
+        <full_name>createNumerical</full_name>
+        <docblock line="316">
+          <description><![CDATA[createNumerical]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="316" name="param" description="" type="integer" variable="$quiz_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="316" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="316" name="param" description="" type="string" variable="$body">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="316" name="param" description="" type="integer" variable="$score">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="316" name="param" description="" type="string" variable="$feedback">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="316" name="param" description="" type="float" variable="$tolerance">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag line="316" name="return" description="$question_id" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="316">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="316">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="316">
+          <name>$body</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="316">
+          <name>$score</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="316">
+          <name>$feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="316">
+          <name>$tolerance</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="339" package="app/Model">
+        <name>createFillin</name>
+        <full_name>createFillin</full_name>
+        <docblock line="339">
+          <description><![CDATA[createFillin]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="339" name="param" description="" type="integer" variable="$quiz_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="339" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="339" name="param" description="" type="string" variable="$body">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="339" name="param" description="" type="integer" variable="$score">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="339" name="param" description="" type="string" variable="$feedback">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="339" name="param" description="" type="boolean" variable="$is_case_sensitive">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="339" name="return" description="int" type="\$question_id">
+            <type by_reference="false">\$question_id</type>
+          </tag>
+        </docblock>
+        <argument line="339">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="339">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="339">
+          <name>$body</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="339">
+          <name>$score</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="339">
+          <name>$feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="339">
+          <name>$is_case_sensitive</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="358" package="app/Model">
+        <name>getQuestionViewById</name>
+        <full_name>getQuestionViewById</full_name>
+        <docblock line="358">
+          <description><![CDATA[getQuestionViewById]]></description>
+          <long-description><![CDATA[<p>this should return the question and answers in an array that will be easily interpretted by the template</p>]]></long-description>
+          <tag line="358" name="param" description="" type="integer" variable="$question_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="358" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="358">
+          <name>$question_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Quiz.php" hash="77a6a74ce03c124639173edece3324f5" package="Default">
+    <class final="false" abstract="false" namespace="" line="21" package="app\Model">
+      <name>Quiz</name>
+      <full_name>\Quiz</full_name>
+      <extends>QActiveRecord</extends>
+      <docblock line="21">
+        <description><![CDATA[This is the model class for table "Quizes".]]></description>
+        <long-description><![CDATA[<p>The followings are the available columns in table 'Quizes': <br>
+integer $ID <br>
+integer $COLLECTION_ID <br>
+string $TITLE <br>
+string $DESCRIPTION <br>
+integer $VISIBILITY <br>
+string $STATE <br>
+integer $SHOW_FEEDBACK <br>
+string $START_DATE <br>
+string $END_DATE <br>
+string $DATE_MODIFIED <br>
+integer $DELETED <br></p>]]></long-description>
+        <tag line="21" name="package" description="app.Model"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="28" namespace="" package="Default">
+        <name>$sequenceName</name>
+        <default><![CDATA['QUIZES_SEQ']]></default>
+        <docblock line="28">
+          <description><![CDATA[this is needed by QActiveRecord for Oracle]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="28" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="36" package="app\Model">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="36">
+          <description><![CDATA[created originally by Yii's Gii
+Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="36" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="36" name="return" description="the static model class" type="\Quiz">
+            <type by_reference="false">\Quiz</type>
+          </tag>
+        </docblock>
+        <argument line="36">
+          <name>$className</name>
+          <default><![CDATA[__CLASS__]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="45" package="app\Model">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="45">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="45" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="54" package="app\Model">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="54">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="54" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="73" package="app\Model">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="73">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="73" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="87" package="app\Model">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="87">
+          <description><![CDATA[created originally by Yii's Gii]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="87" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="109" package="app\Model">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="109">
+          <description><![CDATA[created originally by Yii's Gii
+Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="109" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="138" package="app\Model">
+        <name>getQuizArrayByCollectionId</name>
+        <full_name>getQuizArrayByCollectionId</full_name>
+        <docblock line="138">
+          <description><![CDATA[This is meant to make printing a list easy...  json probably better, but this works for now...]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="138" name="param" description="" type="integer" variable="$collection_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="138" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="138">
+          <name>$collection_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="167" package="app\Model">
+        <name>create</name>
+        <full_name>create</full_name>
+        <docblock line="167">
+          <description><![CDATA[create]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="167" name="param" description="" type="integer" variable="$collection_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="167" name="param" description="" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="167" name="param" description="" type="string" variable="$description">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="167" name="param" description="" type="string" variable="$state">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="167" name="param" description="" type="\date" variable="$start_date">
+            <type by_reference="false">\date</type>
+          </tag>
+          <tag line="167" name="param" description="" type="\date" variable="$end_date">
+            <type by_reference="false">\date</type>
+          </tag>
+          <tag line="167" name="param" description="" type="boolean" variable="$visibility">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="167" name="param" description="" type="boolean" variable="$show_feedback">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="167" name="return" description="$this-&gt;ID" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="167">
+          <name>$collection_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$description</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$state</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$start_date</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$end_date</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$visibility</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$show_feedback</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="196" package="app\Model">
+        <name>getQuestionIds</name>
+        <full_name>getQuestionIds</full_name>
+        <docblock line="196">
+          <description><![CDATA[gets the array of question ids]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="196" name="param" description="" type="integer" variable="$quiz_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="196" name="return" description="$question_ids array of ints" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="196">
+          <name>$quiz_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Response.php" hash="7f42e9eacbcb8a399cd2a8d5a76492b0" package="Default">
+    <class final="false" abstract="false" namespace="" line="17" package="Default">
+      <name>Response</name>
+      <full_name>\Response</full_name>
+      <extends>CActiveRecord</extends>
+      <docblock line="17">
+        <description><![CDATA[This is the model class for table "Responses".]]></description>
+        <long-description><![CDATA[<p>The followings are the available columns in table 'Responses':</p>]]></long-description>
+        <tag line="17" name="property" description="" type="integer" variable="$id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="17" name="property" description="" type="integer" variable="$question_id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="17" name="property" description="" type="string" variable="$question_type">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="17" name="property" description="" type="integer" variable="$user_id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="17" name="property" description="" type="string" variable="$response">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="17" name="property" description="" type="string" variable="$score_state">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="17" name="property" description="" type="integer" variable="$score">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="17" name="property" description="" type="string" variable="$date_modified">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="17" name="property" description="" type="integer" variable="$modified_by">
+          <type by_reference="false">integer</type>
+        </tag>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="24" package="Default">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="24">
+          <description><![CDATA[Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="24" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="24" name="return" description="the static model class" type="\Response">
+            <type by_reference="false">\Response</type>
+          </tag>
+        </docblock>
+        <argument line="24">
+          <name>$className</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="32" package="Default">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="32">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="40" package="Default">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="40">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="58" package="Default">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="58">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="58" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="69" package="Default">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="69">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="69" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="88" package="Default">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="88">
+          <description><![CDATA[Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="88" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="32" code="50012">No short description for method tableName()</error>
+      <error line="40" code="50012">No short description for method rules()</error>
+      <error line="58" code="50012">No short description for method relations()</error>
+      <error line="69" code="50012">No short description for method attributeLabels()</error>
+    </parse_markers>
+  </file>
+  <file path="Submission.php" hash="d11011d2662871735356bf5b01c69d8d" package="Default">
+    <class final="false" abstract="false" namespace="" line="13" package="Default">
+      <name>Submission</name>
+      <full_name>\Submission</full_name>
+      <extends>CActiveRecord</extends>
+      <docblock line="13">
+        <description><![CDATA[This is the model class for table "Submissions".]]></description>
+        <long-description><![CDATA[<p>The followings are the available columns in table 'Submissions':</p>]]></long-description>
+        <tag line="13" name="property" description="" type="integer" variable="$id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="13" name="property" description="" type="integer" variable="$quiz_id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="13" name="property" description="" type="integer" variable="$user_id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="13" name="property" description="" type="string" variable="$status">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="13" name="property" description="" type="string" variable="$date_modified">
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="20" package="Default">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="20">
+          <description><![CDATA[Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="20" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="20" name="return" description="the static model class" type="\Submission">
+            <type by_reference="false">\Submission</type>
+          </tag>
+        </docblock>
+        <argument line="20">
+          <name>$className</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="28" package="Default">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="28">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="28" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="36" package="Default">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="36">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="36" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="53" package="Default">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="53">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="53" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="64" package="Default">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="64">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="64" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="79" package="Default">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="79">
+          <description><![CDATA[Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="79" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="28" code="50012">No short description for method tableName()</error>
+      <error line="36" code="50012">No short description for method rules()</error>
+      <error line="53" code="50012">No short description for method relations()</error>
+      <error line="64" code="50012">No short description for method attributeLabels()</error>
+    </parse_markers>
+  </file>
+  <file path="User.php" hash="5ad1efef07b7ebbecd4fe0a6558a9f02" package="Default">
+    <class final="false" abstract="false" namespace="" line="13" package="Default">
+      <name>User</name>
+      <full_name>\User</full_name>
+      <extends>QActiveRecord</extends>
+      <docblock line="13">
+        <description><![CDATA[This is the model class for table "Users".]]></description>
+        <long-description><![CDATA[<p>The followings are the available columns in table 'Users':</p>]]></long-description>
+        <tag line="13" name="property" description="" type="integer" variable="$id">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="13" name="property" description="" type="string" variable="$external_id">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="13" name="property" description="" type="string" variable="$name">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="13" name="property" description="" type="string" variable="$fname">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="13" name="property" description="" type="string" variable="$lname">
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="17" namespace="" package="Default">
+        <name>$sequenceName</name>
+        <default><![CDATA['USERS_SEQ']]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="24" package="Default">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="24">
+          <description><![CDATA[Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="24" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="24" name="return" description="the static model class" type="\User">
+            <type by_reference="false">\User</type>
+          </tag>
+        </docblock>
+        <argument line="24">
+          <name>$className</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="32" package="Default">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="32">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="40" package="Default">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="40">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="55" package="Default">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="55">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="55" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="69" package="Default">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="69">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="69" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="80" package="Default">
+        <name>primaryKey</name>
+        <full_name>primaryKey</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="88" package="Default">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="88">
+          <description><![CDATA[Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="88" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="17" code="50018">No DocBlock was found for property $sequenceName</error>
+      <error line="32" code="50012">No short description for method tableName()</error>
+      <error line="40" code="50012">No short description for method rules()</error>
+      <error line="55" code="50012">No short description for method relations()</error>
+      <error line="69" code="50012">No short description for method attributeLabels()</error>
+      <error line="80" code="50010">No DocBlock was found for method primaryKey()</error>
+    </parse_markers>
+  </file>
+  <file path="UsersCollection.php" hash="0d54dcb0bf3552df1be9471d0ec701ef" package="Default">
+    <class final="false" abstract="false" namespace="" line="16" package="Default">
+      <name>UsersCollection</name>
+      <full_name>\UsersCollection</full_name>
+      <extends>QActiveRecord</extends>
+      <docblock line="16">
+        <description><![CDATA[This is the model class for table "USERS_COLLECTIONS".]]></description>
+        <long-description><![CDATA[<p>The followings are the available columns in table 'USERS_COLLECTIONS':</p>]]></long-description>
+        <tag line="16" name="property" description="" type="integer" variable="$ID">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="16" name="property" description="" type="integer" variable="$COLLECTION_ID">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="16" name="property" description="" type="integer" variable="$USER_ID">
+          <type by_reference="false">integer</type>
+        </tag>
+        <tag line="16" name="property" description="The followings are the available model relations:" type="string" variable="$PERMISSION">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="16" name="property" description="" type="\COLLECTIONS" variable="$cOLLECTION">
+          <type by_reference="false">\COLLECTIONS</type>
+        </tag>
+        <tag line="16" name="property" description="" type="\USERS" variable="$uSER">
+          <type by_reference="false">\USERS</type>
+        </tag>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="19" namespace="" package="Default">
+        <name>$sequenceName</name>
+        <default><![CDATA['USERS_COLLECTIONS_SEQ']]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="26" package="Default">
+        <name>model</name>
+        <full_name>model</full_name>
+        <docblock line="26">
+          <description><![CDATA[Returns the static model of the specified AR class.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="26" name="param" description="active record class name." type="string" variable="$className">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="26" name="return" description="the static model class" type="\UsersCollection">
+            <type by_reference="false">\UsersCollection</type>
+          </tag>
+        </docblock>
+        <argument line="26">
+          <name>$className</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="34" package="Default">
+        <name>tableName</name>
+        <full_name>tableName</full_name>
+        <docblock line="34">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="34" name="return" description="the associated database table name" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="42" package="Default">
+        <name>rules</name>
+        <full_name>rules</full_name>
+        <docblock line="42">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="42" name="return" description="validation rules for model attributes." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="59" package="Default">
+        <name>relations</name>
+        <full_name>relations</full_name>
+        <docblock line="59">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="59" name="return" description="relational rules." type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="72" package="Default">
+        <name>attributeLabels</name>
+        <full_name>attributeLabels</full_name>
+        <docblock line="72">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="72" name="return" description="customized attribute labels (name=&gt;label)" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="82" package="Default">
+        <name>primaryKey</name>
+        <full_name>primaryKey</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="90" package="Default">
+        <name>search</name>
+        <full_name>search</full_name>
+        <docblock line="90">
+          <description><![CDATA[Retrieves a list of models based on the current search/filter conditions.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="90" name="return" description="the data provider that can return the models based on the search/filter conditions." type="\CActiveDataProvider">
+            <type by_reference="false">\CActiveDataProvider</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="110" package="Default">
+        <name>getCollectionArrayByUserId</name>
+        <full_name>getCollectionArrayByUserId</full_name>
+        <docblock line="110">
+          <description><![CDATA[Gets an array of collections with a link]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+        <argument line="110">
+          <name>$user_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="129" package="Default">
+        <name>addUserToCollection</name>
+        <full_name>addUserToCollection</full_name>
+        <argument line="129">
+          <name>$user_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$collection_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$permission</name>
+          <default><![CDATA['enrollee']]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="19" code="50018">No DocBlock was found for property $sequenceName</error>
+      <error line="34" code="50012">No short description for method tableName()</error>
+      <error line="42" code="50012">No short description for method rules()</error>
+      <error line="59" code="50012">No short description for method relations()</error>
+      <error line="72" code="50012">No short description for method attributeLabels()</error>
+      <error line="82" code="50010">No DocBlock was found for method primaryKey()</error>
+      <error line="110" code="50015">Argument $user_id is missing from the Docblock of getCollectionArrayByUserId()</error>
+      <error line="129" code="50010">No DocBlock was found for method addUserToCollection()</error>
+    </parse_markers>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="app/Model" full_name="app/Model"/>
+  <package name="app" full_name="app">
+    <package name="Model" full_name="app\Model"/>
+  </package>
+  <namespace name="" full_name=""/>
+  <marker count="0">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>
