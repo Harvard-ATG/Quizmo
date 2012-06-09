@@ -3,25 +3,32 @@
 /**
  * This is the model class for table "Quizes".
  *
- * The followings are the available columns in table 'Quizes':
- * @property integer $ID
- * @property integer $COLLECTION_ID
- * @property string $TITLE
- * @property string $DESCRIPTION
- * @property integer $VISIBILITY
- * @property string $STATE
- * @property integer $SHOW_FEEDBACK
- * @property string $START_DATE
- * @property string $END_DATE
- * @property string $DATE_MODIFIED
- * @property integer $DELETED
+ * The followings are the available columns in table 'Quizes': <br>
+ * integer $ID <br>
+ * integer $COLLECTION_ID <br>
+ * string $TITLE <br>
+ * string $DESCRIPTION <br>
+ * integer $VISIBILITY <br>
+ * string $STATE <br>
+ * integer $SHOW_FEEDBACK <br>
+ * string $START_DATE <br>
+ * string $END_DATE <br>
+ * string $DATE_MODIFIED <br>
+ * integer $DELETED <br>
+ *
+ * @package app.Model
  */
 class Quiz extends QActiveRecord
 {
 	
+	/**
+	 * this is needed by QActiveRecord for Oracle
+	 * @var string
+	 */
 	public $sequenceName = 'QUIZES_SEQ';	
 	
 	/**
+	 * created originally by Yii's Gii
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Quiz the static model class
@@ -32,6 +39,7 @@ class Quiz extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -40,6 +48,7 @@ class Quiz extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -58,6 +67,7 @@ class Quiz extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -71,6 +81,7 @@ class Quiz extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
@@ -91,6 +102,7 @@ class Quiz extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
@@ -120,6 +132,8 @@ class Quiz extends QActiveRecord
 	
 	/**
 	* This is meant to make printing a list easy...  json probably better, but this works for now...
+	* @param integer $collection_id
+	* @return array
 	*/
 	public function getQuizArrayByCollectionId($collection_id){
 		
@@ -138,6 +152,18 @@ class Quiz extends QActiveRecord
 	
 	}
 	
+	/**
+	* create
+	* @param integer $collection_id
+	* @param string $title
+	* @param string $description
+	* @param string $state
+	* @param date $start_date
+	* @param date $end_date
+	* @param boolean $visibility
+	* @param boolean $show_feedback
+	* @return integer $this->ID
+	*/
 	public function create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback){
 		
 		if($title == ''){
@@ -162,12 +188,10 @@ class Quiz extends QActiveRecord
 	}
 	
 	/**
-	* getQuestionIds
-	*
 	* gets the array of question ids
 	*
-	* @param $quiz_id int
-	* @return $question_ids array of ints
+	* @param integer $quiz_id
+	* @return array $question_ids array of ints
 	*/
 	public function getQuestionIds($quiz_id){
 		

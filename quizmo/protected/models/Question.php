@@ -3,23 +3,29 @@
 /**
  * This is the model class for table "Questions".
  *
- * The followings are the available columns in table 'Questions':
- * @property integer $id
- * @property integer $quiz_id
- * @property string $question_type
- * @property string $title
- * @property string $body
- * @property integer $question_order
- * @property integer $points
- * @property string $feedback
- * @property integer $deleted
+ * The followings are the available columns in table 'Questions': <br>
+ * integer $id <br>
+ * integer $quiz_id <br>
+ * string $question_type <br>
+ * string $title <br>
+ * string $body <br>
+ * integer $question_order <br>
+ * integer $points <br>
+ * string $feedback <br>
+ * integer $deleted <br>
+ * @package app/Model
  */
 class Question extends QActiveRecord
 {
 	
+	/**
+	 * this is needed by QActiveRecord for Oracle
+	 * @var string
+	 */
 	public $sequenceName = 'QUESTIONS_SEQ';	
 	
 	/**
+	 * created originally by Yii's Gii
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Question the static model class
@@ -30,6 +36,7 @@ class Question extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -38,6 +45,7 @@ class Question extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -55,6 +63,7 @@ class Question extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -68,6 +77,7 @@ class Question extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
@@ -86,6 +96,7 @@ class Question extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
@@ -116,8 +127,7 @@ class Question extends QActiveRecord
 	*
 	* this is just to simplify the array vars for the view
 	*
-	* @param $quiz_id
-	*
+	* @param integer $quiz_id
 	* @return array()
 	* array(
 	* 	array(ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, QUESTION_ORDER, POINTS, FEEDBACK, DELETED, link)
@@ -125,7 +135,6 @@ class Question extends QActiveRecord
 	*/
 	public function getQuestionArrayByQuizId($quiz_id){
 		
-		error_log($quiz_id);
 		$questions = Question::model()->findAll('quiz_id=:quiz_id', array(':quiz_id' => $quiz_id));
 		
 		$questionArray = array();
@@ -147,9 +156,8 @@ class Question extends QActiveRecord
 	* originally thinking of this just to be used internally
 	* when adding new questions -- to get the appropriate question_order
 	*
-	* @param $quiz_id int
-	*
-	* @return $quetion_order int
+	* @param integer $quiz_id
+	* @return integer $quetion_order
 	*/
 	public function getNextQuestionOrder($quiz_id){
 		error_log("getNextQuestionOrder");
@@ -173,13 +181,14 @@ class Question extends QActiveRecord
 	*
 	* Base model method for all questions (doesn't handle any answers)
 	*
-	* @param $quiz_id string
-	* @param $title string
-	* @param $body string
-	* @param $score int
-	* @param $feedback string
+	* @param string $quiz_id 
+	* @param string $question_type
+	* @param string $title 
+	* @param string $body 
+	* @param integer $score 
+	* @param string $feedback 
 	*
-	* @return $question_id int
+	* @return integer $question_id 
 	*/
 	public function create($quiz_id, $question_type, $title, $body, $score, $feedback){
 		if($title == '' || $body == ''){
@@ -212,15 +221,15 @@ class Question extends QActiveRecord
 	* This can function for both Multiple-Choice and Check-All-that-Apply
 	* It also calls the create for all associated answers that were passed to it
 	*
-	* @param $quiz_id string
-	* @param $title string
-	* @param $body string
-	* @param $score int
-	* @param $feedback string
-	* @param $multiple_radio_answer int
-	* @param $multiple_answers array of strings
+	* @param string $quiz_id
+	* @param string $question_type
+	* @param string $title 
+	* @param string $body 
+	* @param integer $score 
+	* @param string $feedback 
+	* @param array $multiple_answers array of strings
 	*
-	* @return $question_id int
+	* @return integer $question_id
 	*/
 	public function createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers){
 		
@@ -240,12 +249,12 @@ class Question extends QActiveRecord
 	/**
 	* createTrueFalse
 	*
-	* @param $quiz_id string
-	* @param $title string
-	* @param $body string
-	* @param $score int
-	* @param $feedback string
-	* @param $truefalse bool
+	* @param string $quiz_id 
+	* @param string $title 
+	* @param string $body 
+	* @param integer $score 
+	* @param string $feedback 
+	* @param boolean $truefalse 
 	*
 	* @return $question_id int
 	*/
@@ -272,14 +281,14 @@ class Question extends QActiveRecord
 	/**
 	* createEssay
 	*
-	* @param $quiz_id string
-	* @param $title string
-	* @param $body string
-	* @param $score int
-	* @param $feedback string
-	* @param $textarea_rows int
+	* @param string $quiz_id 
+	* @param string $title 
+	* @param string $body 
+	* @param integer $score 
+	* @param string $feedback 
+	* @param integer $textarea_rows 
 	*
-	* @return $question_id int
+	* @return integer $question_id 
 	*/
 	public function createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows){
 		
@@ -295,14 +304,14 @@ class Question extends QActiveRecord
 	/**
 	* createNumerical
 	*
-	* @param $quiz_id string
-	* @param $title string
-	* @param $body string
-	* @param $score int
-	* @param $feedback string
-	* @param $tolerance float
+	* @param integer $quiz_id 
+	* @param string $title 
+	* @param string $body 
+	* @param integer $score 
+	* @param string $feedback 
+	* @param float $tolerance 
 	*
-	* @return $question_id int
+	* @return integer $question_id 
 	*/
 	public function createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance){
 		
@@ -318,12 +327,12 @@ class Question extends QActiveRecord
 	/**
 	* createFillin
 	*
-	* @param $quiz_id string
-	* @param $title string
-	* @param $body string
-	* @param $score int
-	* @param $feedback string
-	* @param $is_case_sensitive bool
+	* @param integer $quiz_id 
+	* @param string $title 
+	* @param string $body 
+	* @param integer $score 
+	* @param string $feedback 
+	* @param boolean $is_case_sensitive 
 	*
 	* @return $question_id int
 	*/
@@ -342,9 +351,9 @@ class Question extends QActiveRecord
 	* getQuestionViewById
 	*
 	* this should return the question and answers in an array that will be easily interpretted by the template
-	* @param $question_id
+	* @param integer $question_id
 	*
-	* @return array()
+	* @return array
 	*/
 	public function getQuestionViewById($question_id){
 		$question = Question::model()->findByPk($question_id);

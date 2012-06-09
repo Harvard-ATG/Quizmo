@@ -1,22 +1,33 @@
 <?php
 
 /**
+ * Collection
+ *
  * This is the model class for table "Collections".
  *
  * The followings are the available columns in table 'Collections':
- * @property integer $id
- * @property string $other_id
- * @property string $title
- * @property string $description
- * @property integer $deleted
+ * integer $id
+ * string $other_id
+ * string $title
+ * string $description
+ * integer $deleted
+ *
+ * @package app.Model
  */
 class Collection extends QActiveRecord
 {
 
-	//public $ID;
+	/**
+	 * sequenceName
+	 *
+	 * this is needed by QActiveRecord for Oracle
+	 * 
+	 * @var string
+	 */
 	public $sequenceName = 'COLLECTIONS_SEQ';	
 	
 	/**
+	 * created originally by Yii's Gii
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Collection the static model class
@@ -27,6 +38,7 @@ class Collection extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -35,6 +47,7 @@ class Collection extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -52,6 +65,7 @@ class Collection extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -65,6 +79,7 @@ class Collection extends QActiveRecord
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
@@ -77,12 +92,17 @@ class Collection extends QActiveRecord
 			'DELETED' => 'Deleted',
 		);
 	}
-	
+
+	/**
+	* primaryKey
+	* @return integer 
+	*/
 	public function primaryKey(){
 		return 'ID';
 	}
 
 	/**
+	 * created originally by Yii's Gii
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
@@ -104,6 +124,14 @@ class Collection extends QActiveRecord
 		));
 	}
 	
+	/**
+	* create
+	* @param string $title
+	* @param string $description
+	* @param integer $other_id
+	* @param boolean $deleted
+	* @return integer $collection_id
+	*/
 	public function create($title, $description, $other_id='', $deleted=0){
 		
 		if($title == ''){
@@ -121,6 +149,11 @@ class Collection extends QActiveRecord
 		return $this->ID;
 	}
 	
+	/**
+	* getByOtherId
+	* @param integer $other_id
+	* @return object Collection
+	*/
 	public function getByOtherId($other_id){
 		$collection = Collection::model()->find('other_id=:other_id', array(':other_id' => $other_id));
 		//$this->find('other_id=:other_id', array(':other_id' => $other_id));

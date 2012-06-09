@@ -1,8 +1,17 @@
 <?php
 // https://gist.github.com/2312855
+/**
+* This is the base class for all models
+* 
+* Currently only does the auto_increment for Oracle
+* @link http://blogs.law.harvard.edu/acts/2012/04/05/yii-handling-getlastinsertid-with-oracle/
+* @package app.Model
+*/
 class QActiveRecord extends CActiveRecord {
 	
-	
+	/**
+	* currently only does anything for Oracle
+	*/
 	public function afterSave(){
 
 

@@ -1,26 +1,41 @@
 <?php
 
 /**
+ * Answer
+ *
  * This is the model class for table "Answers".
  *
- * The followings are the available columns in table 'Answers':
- * @property integer $id
- * @property integer $question_id
- * @property string $question_type
- * @property integer $textarea_rows
- * @property string $answer
- * @property integer $is_case_sensitive
- * @property integer $answer_order
- * @property integer $is_correct
- * @property double $tolerance
+ * The followings are the available columns in table 'Answers':<br>
+ * integer $id <br>
+ * integer $question_id <br>
+ * string $question_type <br>
+ * integer $textarea_rows <br>
+ * string $answer <br>
+ * integer $is_case_sensitive <br>
+ * integer $answer_order <br>
+ * integer $is_correct <br>
+ * double $tolerance <br>
+ *
+ * @package app.Model
  */
 class Answer extends QActiveRecord
 {
 
+	/**
+	 * sequenceName
+	 *
+	 * this is needed by QActiveRecord for Oracle
+	 * 
+	 * @var string
+	 */
 	public $sequenceName = 'ANSWERS_SEQ';	
 
 	/**
+	 * model
+	 *
 	 * Returns the static model of the specified AR class.
+	 * created originally by Yii's Gii
+	 * 
 	 * @param string $className active record class name.
 	 * @return Answer the static model class
 	 */
@@ -30,6 +45,10 @@ class Answer extends QActiveRecord
 	}
 
 	/**
+	 * tableName
+	 *
+	 * created originally by Yii's Gii
+	 *
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -38,6 +57,10 @@ class Answer extends QActiveRecord
 	}
 
 	/**
+	 * rules
+	 *
+	 * created originally by Yii's Gii
+	 *
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -56,6 +79,10 @@ class Answer extends QActiveRecord
 	}
 
 	/**
+	 * relations
+	 *
+	 * created originally by Yii's Gii
+	 *
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -68,6 +95,10 @@ class Answer extends QActiveRecord
 	}
 
 	/**
+	 * attributeLabels
+	 *
+	 * created originally by Yii's Gii
+	 *
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
@@ -86,7 +117,11 @@ class Answer extends QActiveRecord
 	}
 
 	/**
+	 * search
+	 *
+	 * created originally by Yii's Gii
 	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
@@ -110,6 +145,7 @@ class Answer extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
 
 
 	/**
@@ -118,9 +154,9 @@ class Answer extends QActiveRecord
 	* originally thinking of this just to be used internally
 	* when adding new questions -- to get the appropriate question_order
 	*
-	* @param $question_id int
+	* @param integer $question_id 
 	*
-	* @return $answer_order int
+	* @return integer $answer_order
 	*/
 	public function getNextAnswerOrder($question_id){
 
@@ -137,16 +173,19 @@ class Answer extends QActiveRecord
 	}
 	
 	/**
-	* createMultipleChoiceAnswer
+	* create
 	*
 	* This is probably called from Question::createMultipleChoice
 	*
-	* @param $question_id
-	* @param $question_type 'M', 'T', 'S', 'E', 'F', 'N'
-	* @param $answer string
-	* @param $is_correct (1, 0)
+	* @param integer $question_id
+	* @param string $question_type 'M', 'T', 'S', 'E', 'F', 'N'
+	* @param string $answer
+	* @param boolean $is_correct (1, 0)
+	* @param integer $textarea_rows
+	* @param boolean $is_case_sensitive
+	* @param float $tolerance
 	*
-	* @return boolean
+	* @return integer
 	*/
 	public function create($question_id, $question_type, $answer, $is_correct, $textarea_rows=10, $is_case_sensitive=0, $tolerance=0){
 		
