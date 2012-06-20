@@ -1,3 +1,6 @@
 [submodule "yii"]
 	path = yii
 	url = git@github.com:jazahn/yii.git
+[submodule "quizmo/protected/extensions/yii-facebook-opengraph"]
+	path = quizmo/protected/extensions/yii-facebook-opengraph
+	url = git@github.com:jazahn/yii-facebook-opengraph.git
