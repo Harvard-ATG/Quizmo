@@ -4,3 +4,6 @@
 [submodule "quizmo/protected/extensions/yii-facebook-opengraph"]
 	path = quizmo/protected/extensions/yii-facebook-opengraph
 	url = git@github.com:jazahn/yii-facebook-opengraph.git
+[submodule "quizmo/protected/extensions/smarty-renderer"]
+	path = quizmo/protected/extensions/smarty-renderer
+	url = git@github.com:jazahn/smarty-renderer.git
