@@ -7,3 +7,6 @@
 [submodule "quizmo/protected/extensions/smarty-renderer"]
 	path = quizmo/protected/extensions/smarty-renderer
 	url = git@github.com:jazahn/smarty-renderer.git
+[submodule "quizmo/protected/extensions/isitestool"]
+	path = quizmo/protected/extensions/isitestool
+	url = git@github.com:jazahn/yii-isitestool
