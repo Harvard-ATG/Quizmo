@@ -10,3 +10,6 @@
 [submodule "quizmo/protected/extensions/isitestool"]
 	path = quizmo/protected/extensions/isitestool
 	url = git@github.com:jazahn/yii-isitestool
+[submodule "quizmo/protected/extensions/harvard_person"]
+	path = quizmo/protected/extensions/harvard_person
+	url = git@github.com:jazahn/yii-HarvardPerson.git
