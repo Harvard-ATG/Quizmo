@@ -31,7 +31,7 @@ class CollectionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','edit'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -89,6 +89,38 @@ class CollectionController extends Controller
 	}
 
 	/**
+	 * Edits a model.
+	 * If edit is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @todo implement collection::edit
+	 */
+	public function actionEdit($id)
+	{
+		$collection = new Collection;
+		// then this is a create action
+		$title = Yii::app()->getRequest()->getParam('title');
+		$description = Yii::app()->getRequest()->getParam('description');
+		$user_id = Yii::app()->user->getId();
+		
+		if($title != ''){
+			// not implemented
+			// $collection_id = $collection->edit($title, $description);
+			if($collection_id != ''){
+				$this->redirect('index');
+				return;
+			}
+		}
+
+		$this->render('edit', array(
+			'id' => $id,
+			'title' => $title,
+			'description' => $description,
+		));
+		
+
+	}
+
+	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
@@ -133,13 +165,14 @@ class CollectionController extends Controller
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
+	 * @todo set deleted flag
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
+		if(Yii::app()->request->isPostRequest) {
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+			// $this->loadModel($id)->delete();
+			
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
