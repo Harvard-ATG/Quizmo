@@ -51,6 +51,7 @@ return CMap::mergeArray(
 				'rules'=>array(
 					'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 					'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+					'<controller:\w+>/<action:\w+>/<id:\d+>/<id2:\d+>'=>'<controller>/<action>',
 					'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 					'<controller:\w+>/<action:\w+>/<cact:\w+>'=>'<controller>/<cact>',
 				),
@@ -112,7 +113,6 @@ return CMap::mergeArray(
 			'adminEmail'=>'jcleveng@fas.harvard.edu',
 			'authMethod'=>'facebook',
 			//'authMethod'=>'isites',
-			'default_redirect'=>'http://quizmo.harvard.edu',
 		),
 
 		// comment this if you don't want the login to be forced (if you want to allow viewer level guests)
