@@ -1,22 +1,28 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/quiz/index/{$quiz_id}">Quiz</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/question/index/{$quiz_id}">Questions</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Edit Question</li>
+</ul>
+
 <div class="row-fluid">
 	<h1 class="span12">Questions</h1>
 </div>
 
 <form id="question-form" class="form-horizontal row-fluid isites-form" action="/question/create">
 	<fieldset>
-		<?php if($question_id == ''){ ?>
-		<legend>Create Question</legend>
-		<?php } else { ?>
 		<legend>Edit Question</legend>
-		<?php } ?>
 		
-		<?php echo $this->renderPartial('_form', array(
-			'quiz_id'=>$quiz_id,
-			'title'=>$title, 
-			'body'=>$body,
-			'question_type'=>$question_type,
-			'question_id'=>$question_id
-		)); ?>
+		{include file='protected/views/question/_form.tpl'
+			quiz_id = $quiz_id
+			title = $title
+			body = $body
+			question_type = $question_type
+			question_id = $question_id
+		}
 		
 		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
 
