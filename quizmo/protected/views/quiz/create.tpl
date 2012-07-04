@@ -2,7 +2,14 @@
 	<fieldset>
 		<legend>Create Quiz</legend>
 
-		<?php echo $this->renderPartial('_form', array('collection_id'=>$collection_id, 'title'=>$title, 'description'=>$description, 'state'=>$state, 'start_date'=>$start_date, 'end_date'=>$end_date,)); ?>
+		{include file = 'protected/views/quiz/_form.tpl'
+			collection_id = $collection_id
+			title = $title
+			description = $description
+			state = $state
+			start_date = $start_date
+			end_date = $end_date
+		}
 	</fieldset>
 </form>
 
