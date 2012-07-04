@@ -59,8 +59,9 @@ class CollectionController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'index' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id='')
 	{
+		$collection_id = $id;
 		$collection = new Collection;
 		// then this is a create action
 		$title = Yii::app()->getRequest()->getParam('title');
@@ -69,6 +70,7 @@ class CollectionController extends Controller
 		
 		
 		if($title != ''){
+			
 			$collection_id = $collection->create($title, $description);
 			if($collection_id != ''){
 				// then add the user to the collection as an owner
@@ -83,6 +85,7 @@ class CollectionController extends Controller
 		$this->render('create', array(
 			'title' => $title,
 			'description' => $description,
+			'collection_id' => $collection_id
 		));
 		
 

@@ -1,7 +1,11 @@
 
 <form id="collection-form" class="form-horizontal row-fluid" action="/collection/create" method="post">
 	<fieldset>
+		{if $collection_id == ''}
 		<legend>Create Collection</legend>
+		{else}
+		<legend>Edit Collection</legend>
+		{/if}
 
 		{include file = 'protected/views/collection/_form.tpl'
 			title = $title

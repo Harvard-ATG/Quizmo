@@ -18,7 +18,7 @@
 					<a href="{$collection['link']}">{$collection['TITLE']}</a>
 				</td>
 				<td>
-					<a class="btn" href="/collection/edit/{$collection['ID']}">Edit</a>
+					<a class="btn" href="/collection/create/{$collection['ID']}">Edit</a>
 				</td>
 				<td>
 					<!-- <a class="btn collection-delete/{$collection['ID']}" href="#">Delete</a> -->
