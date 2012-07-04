@@ -61,13 +61,15 @@ class QuizController extends Controller
 	 *
 	 * @param number $id refers to the collection_id
 	 */
-	public function actionCreate($id='')
+	public function actionCreate($id='', $id2='')
 	{
 		$quiz = new Quiz;
 		//error_log("quiz/create");
 		$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
 		$collection_id = ($collection_id == '') ? Yii::app()->getRequest()->getParam('collection_id') : $collection_id;
 		if($collection_id != '') Yii::app()->session['collection_id'] = $collection_id;
+		$quiz_id = $id2;
+		
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
 		$state = Yii::app()->getRequest()->getParam('state');
@@ -92,6 +94,7 @@ class QuizController extends Controller
 		}
 
 		$this->render('create', array(
+			'quiz_id'=>$quiz_id,
 			'collection_id'=>$collection_id,
 			'title'=>$title,
 			'description'=>$description,

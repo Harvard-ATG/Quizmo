@@ -68,9 +68,9 @@ class QuestionController extends Controller
 	public function actionCreate($id='', $id2='')
 	{
 		$user_id = Yii::app()->user->getId();
+		$collection_id = Yii::app()->session['collection_id'];
 		$quiz = new Quiz;
-		error_log("quiz/create");
-		error_log($id." -- ".$id2);
+		//error_log("quiz/create");
 		
 		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
 		$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
@@ -177,6 +177,7 @@ class QuestionController extends Controller
 		}
 
 		$this->render('create', array(
+			'collection_id'=>$collection_id,
 			'quiz_id'=>$quiz_id,
 			'title'=>$title,
 			'body'=>$body,
@@ -236,11 +237,13 @@ class QuestionController extends Controller
 	public function actionIndex($id='')
 	{
 		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
+		$collection_id = Yii::app()->session['collection_id'];
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
 
 		$this->render('index',array(
+			'collection_id'=>$collection_id,
 			'questions'=>$questions,
 			'sizeofquestions'=>sizeof($questions),
 			'user_id'=>$user_id,

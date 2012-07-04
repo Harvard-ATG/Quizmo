@@ -1,7 +1,18 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Edit Quiz</li>
+</ul>
+
 <form id="quiz-form" class="form-horizontal row-fluid isites-form" action="/quiz/create">
 	<fieldset>
-		<legend>Create Quiz</legend>
-
+		{if $quiz_id == ''}
+			<legend>Create Quiz</legend>
+		{else}
+			<legend>Edit Quiz</legend>
+		{/if}
+		
 		{include file = 'protected/views/quiz/_form.tpl'
 			collection_id = $collection_id
 			title = $title

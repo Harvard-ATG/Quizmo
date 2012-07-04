@@ -17,7 +17,7 @@
 			<td>
 				<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				<a href="{url url='/question/index/'|cat:$quiz['ID']}">Edit Questions</a><br/>
-				<a href="{url url='/quiz/edit/'|cat:$quiz['ID']}">Edit Settings</a><br/>
+				<a href="{url url='/quiz/create/'|cat:$collection_id|cat:'/'|cat:$quiz['ID']}">Edit Settings</a><br/>
 
 				<a data-toggle="modal" href="#quiz-delete-modal-{$quiz['ID']}" >Delete</a>
 				<div class="modal hide" id="quiz-delete-modal-{$quiz['ID']}">

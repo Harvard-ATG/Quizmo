@@ -1,16 +1,12 @@
 <ul class="breadcrumb">
   <li>
-    <a href="/quiz/index/{$quiz_id}">Quiz</a> <span class="divider">/</span>
+    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
   </li>
   <li>
     <a href="/question/index/{$quiz_id}">Questions</a> <span class="divider">/</span>
   </li>
   <li class="active">Edit Question</li>
 </ul>
-
-<div class="row-fluid">
-	<h1 class="span12">Questions</h1>
-</div>
 
 <form id="question-form" class="form-horizontal row-fluid isites-form" action="/question/create">
 	<fieldset>
