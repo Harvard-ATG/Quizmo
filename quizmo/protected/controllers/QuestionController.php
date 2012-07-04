@@ -62,19 +62,20 @@ class QuestionController extends Controller
 	}
 
 	/**
-	 * Creates a new model.
+	 * Creates a new model
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id='')
+	public function actionCreate($id='', $id2='')
 	{
 		$user_id = Yii::app()->user->getId();
 		$quiz = new Quiz;
-		//error_log("quiz/create");
+		error_log("quiz/create");
+		error_log($id." -- ".$id2);
 		
 		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
 		$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
 		if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
-
+		$question_id = $id2;
 
 		$title = Yii::app()->getRequest()->getParam('title');
 		$body = Yii::app()->getRequest()->getParam('body');
@@ -180,6 +181,7 @@ class QuestionController extends Controller
 			'title'=>$title,
 			'body'=>$body,
 			'question_type'=>$question_type,
+			'question_id'=>$question_id
 		));
 
 	}
