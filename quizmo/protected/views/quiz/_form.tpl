@@ -56,6 +56,6 @@
 
 <div class="form-actions">
 	<input type="submit" class="btn btn-primary" value="Submit" />
-	<button class="btn">Cancel</button>
+	<a class="btn" href={url url="/quiz/index/$collection_id"}>Cancel</a>
 </div>
 
