@@ -90,7 +90,7 @@ return array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'F',
 		'TITLE' => 'Fill in Question 8',
-		'BODY' => "You put the lime in the {Coconut}",
+		'BODY' => "You put the {lime} in the {Coconut} and {drink} it all up",
 		'QUESTION_ORDER' => 8,
 		'POINTS' => '20',
 		'FEEDBACK' => 'question 8 feedback',
