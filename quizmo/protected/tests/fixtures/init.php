@@ -1,6 +1,7 @@
 <?php
 
 $reset_order = array(
+	'SUBMISSIONS',
 	'USERS_COLLECTIONS',
 	'ANSWERS',
 	'QUESTIONS',
