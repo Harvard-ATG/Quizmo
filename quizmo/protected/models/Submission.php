@@ -12,6 +12,11 @@
  */
 class Submission extends CActiveRecord
 {
+	
+	const STARTED = 'U';
+	const UNFINISHED = 'U';
+	const SUBMITTED = 'S';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -92,5 +97,39 @@ class Submission extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 * set the submission for the given user and quiz to started/unfinished
+	 * @param number $user_id
+	 * @param number $quiz_id
+	 */
+	public function startQuiz($user_id, $quiz_id){
+		
+		$submission = Submission::model()->find('user_id=:user_id AND quiz_id=:quiz_id', 
+			array(
+				':user_id' => $user_id,			
+				':quiz_id' => $quiz_id,			
+			)
+		);
+
+		if($submission == null){
+			// create new user
+			$submission = new Submission;
+			
+			// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
+			//    the sequence is at at the save()
+
+			$submission->USER_ID = $user_id;
+			$submission->QUIZ_ID = $quiz_id;
+			$submission->STATUS = Submission::STARTED;
+
+			$submission->save();
+
+		} else { 
+			// do nothing, the submission already exists
+		}
+		
+		
 	}
 }

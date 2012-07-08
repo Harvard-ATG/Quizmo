@@ -230,6 +230,14 @@ class QuizController extends Controller
 		
 	}
 	
+	/**
+	 * action for taking a quiz
+	 *
+	 * this should start a submission for the user/quiz pair 
+	 * and send along a list of questions for the view to grab via ajaxification
+	 * 
+	 * @param number $id
+	 */
 	public function actionTake($id=''){
 		$quiz_id = $id;
 		$user_id = Yii::app()->user->id;
@@ -241,6 +249,9 @@ class QuizController extends Controller
 		// let's start with the ajax approach...
 		// for that we need to get a list of all question ids in the quiz
 		$question_ids = Quiz::getQuestionIds($quiz_id);
+		
+		// mark the quiz as started for the user
+		Submission::startQuiz($user_id, $quiz_id);
 		
 		$this->render('take', array(
 			'question_ids_json'=>json_encode($question_ids),
