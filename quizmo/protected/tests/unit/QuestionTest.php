@@ -19,7 +19,7 @@ class QuestionTest extends CDbTestCase {
 		
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
 		// this is based on the fixtures..
-		$this->assertEquals(5, sizeof($questions));
+		$this->assertEquals(8, sizeof($questions));
 		
 		
 	}
@@ -28,7 +28,7 @@ class QuestionTest extends CDbTestCase {
 
 	public function testGetNextQuestionOrder(){
 		$quiz_id = 1;
-		$number = 6;
+		$number = 9;
 		
 		$question_order = Question::getNextQuestionOrder($quiz_id);
 		// this is based on the fixtures..
