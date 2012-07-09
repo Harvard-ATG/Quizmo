@@ -23,14 +23,22 @@ class ResponseTest extends CDbTestCase {
 		$this->assertNull($response);
 		
 		// then submit the question
-		Response::submitEssayQuestion($user_id, $question_id, $response_text);
+		$this->assertTrue(Response::submitEssayQuestion($user_id, $question_id, $response_text));
 		
 		// then check that it's there
 		// with the type set
 		// with only one
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertEquals($response->QUESTION_TYPE, Question::ESSAY);
+		$this->assertEquals(count($response), 1);
 		
 		// then delete
-		
+		$response->delete();
 
 	}
 	
