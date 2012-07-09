@@ -31,7 +31,7 @@ class Response extends QActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Responses';
+		return 'RESPONSES';
 	}
 
 	/**
