@@ -16,7 +16,7 @@ class SubmittingUnstartedQuizException extends Exception { }
  * @property string $STATUS
  * @property string $DATE_MODIFIED
  */
-class Submission extends CActiveRecord
+class Submission extends QActiveRecord
 {
 	
 	const STARTED = 'U';

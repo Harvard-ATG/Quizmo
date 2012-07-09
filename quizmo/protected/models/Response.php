@@ -14,7 +14,7 @@
  * @property string $DATE_MODIFIED
  * @property integer $MODIFIED_BY
  */
-class Response extends CActiveRecord
+class Response extends QActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
