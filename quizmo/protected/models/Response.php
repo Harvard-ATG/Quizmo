@@ -16,6 +16,11 @@
  */
 class Response extends QActiveRecord
 {
+	
+	const NOT_SCORED = 'N';
+	const AUTO_SCORED = 'A';
+	const MANUAL_SCORED = 'M';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -106,4 +111,60 @@ class Response extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	 * submits an essay question
+	 * @param number $user_id
+	 * @param number $question_id
+	 * @param string $essay
+	 * @return boolean
+	 */
+	public function submitEssayQuestion($user_id, $question_id, $essay, $modified_by=''){
+		if($modified_by == '')
+			$modified_by = $user_id;
+			
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+
+		try {
+			if($response == null){
+				// create new
+				$response = new Response;
+
+				// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
+				//    the sequence is at at the save()
+
+				$response->USER_ID = $user_id;
+				$response->QUESTION_ID = $question_id;
+				$response->QUESTION_TYPE = Question::ESSAY;
+				$response->RESPONSE = $essay;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+				
+			} else {  
+				//edit existing
+
+				$response->QUESTION_TYPE = Question::ESSAY;
+				$response->RESPONSE = $essay;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+
+			}
+		} catch (Exception $e){
+			error_log($e->getTraceAsString());
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
 }
