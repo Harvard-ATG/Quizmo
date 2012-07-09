@@ -6,7 +6,10 @@
 */
 class ResponseTest extends CDbTestCase {
    
-	
+	public $fixtures=array(
+		'answers'=>'Answer',
+		'responses'=>'Response'
+	);
 
 	public function testSubmitEssayQuestion(){
 		$question_id = 1;
@@ -42,8 +45,121 @@ class ResponseTest extends CDbTestCase {
 
 	}
 	
+	public function testSubmitNumericalQuestion(){
+		$question_id = 1;
+		$user_id = 4;
+		$response_text = 3.4;
 
+		// first make sure it doesn't already exist
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertNull($response);
+		
+		// then submit the question
+		$this->assertTrue(Response::submitNumericalQuestion($user_id, $question_id, $response_text));
+		
+		// then check that it's there
+		// with the type set
+		// with only one
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertEquals($response->QUESTION_TYPE, Question::NUMERICAL);
+		$this->assertEquals(count($response), 1);
+		
+		// then delete
+		$response->delete();
 
+	}
+
+	public function testSubmitMultipleSelectionQuestion(){
+		$question_id = 6;
+		$user_id = 4;
+		$answer_array = array(
+			9, 10, 11
+		);
+
+		// first make sure it doesn't already exist
+		$responses = Response::model()->findAll('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertEquals(count($responses), 0);
+		
+		// then submit the question's answers
+		$this->assertTrue(Response::submitMultipleSelectionQuestion($user_id, $question_id, $answer_array));			
+		
+		// then check that it's there
+		// with the type set
+		// with the right number of them
+		$responses = Response::model()->findAll('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		
+		
+		foreach($responses as $response){
+			$this->assertEquals($response->QUESTION_TYPE, Question::MULTIPLE_SELECTION);			
+		}
+		$this->assertEquals(count($responses), count($answer_array));
+		
+		// then delete them all
+		foreach($responses as $response){
+			$response->delete();			
+		}
+
+	}
+
+	public function testSubmitMultipleChoiceQuestion(){
+		$question_id = 1;
+		$user_id = 4;
+		$answer_id = 1;
+
+		// first make sure it doesn't already exist
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertNull($response);
+		
+		// then submit the question's answers
+		$this->assertTrue(Response::submitMultipleChoiceQuestion($user_id, $question_id, $answer_id));			
+		
+		// then check that it's there
+		// with the type set
+		// with only 1
+		$responses = Response::model()->findAll('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		
+		
+		foreach($responses as $response){
+			$this->assertEquals($response->QUESTION_TYPE, Question::MULTIPLE_CHOICE);			
+		}
+		$this->assertEquals(count($responses), 1);
+		
+		// then delete them all
+		foreach($responses as $response){
+			$response->delete();			
+		}
+
+	}
 
    
 }
