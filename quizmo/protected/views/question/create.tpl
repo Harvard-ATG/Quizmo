@@ -1,20 +1,30 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/question/index/{$quiz_id}">Questions</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Edit Question</li>
+</ul>
+
 <form id="question-form" class="form-horizontal row-fluid isites-form" action="/question/create">
 	<fieldset>
-		<legend>Create Question</legend>
-
-		<?php echo $this->renderPartial('_form', array(
-			'quiz_id'=>$quiz_id,
-			'title'=>$title, 
-			'body'=>$body,
-			'question_type'=>$question_type,
-		)); ?>
+		<legend>Edit Question</legend>
+		
+		{include file='protected/views/question/_form.tpl'
+			quiz_id = $quiz_id
+			title = $title
+			body = $body
+			question_type = $question_type
+			question_id = $question_id
+		}
 		
 		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
 
 		<div class="form-actions">
 			<button id="question-submit" type="submit" class="btn btn-primary">Submit</button>
-			<input id="question-submit" type="submit" class="btn btn-primary" value="something" />
-			<button class="btn">Cancel</button>
+			<a class="btn" href="/question/index/<?php echo $quiz_id; ?>">Cancel</a>
 		</div>
 		
 	</fieldset>

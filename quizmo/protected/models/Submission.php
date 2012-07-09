@@ -1,17 +1,28 @@
 <?php
 
 /**
+ * self explanitory exception
+ */
+class SubmittingUnstartedQuizException extends Exception { }
+
+
+/**
  * This is the model class for table "Submissions".
  *
  * The followings are the available columns in table 'Submissions':
- * @property integer $id
- * @property integer $quiz_id
- * @property integer $user_id
- * @property string $status
- * @property string $date_modified
+ * @property integer $ID
+ * @property integer $QUIZ_ID
+ * @property integer $USER_ID
+ * @property string $STATUS
+ * @property string $DATE_MODIFIED
  */
-class Submission extends CActiveRecord
+class Submission extends QActiveRecord
 {
+	
+	const STARTED = 'U';
+	const UNFINISHED = 'U';
+	const SUBMITTED = 'S';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -92,5 +103,67 @@ class Submission extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 * set the submission for the given user and quiz to started/unfinished
+	 * @param number $user_id
+	 * @param number $quiz_id
+	 */
+	public function startQuiz($user_id, $quiz_id){
+		
+		$submission = Submission::model()->find('user_id=:user_id AND quiz_id=:quiz_id', 
+			array(
+				':user_id' => $user_id,			
+				':quiz_id' => $quiz_id,			
+			)
+		);
+
+		if($submission == null){
+			// create new user
+			$submission = new Submission;
+			
+			// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
+			//    the sequence is at at the save()
+
+			$submission->USER_ID = $user_id;
+			$submission->QUIZ_ID = $quiz_id;
+			$submission->STATUS = Submission::STARTED;
+
+			$submission->save();
+
+		} else { 
+			// do nothing, the submission already exists
+		}
+		
+	}
+	
+	/**
+	 * set the submission for the given user and quiz to submitted
+	 * @param number $user_id
+	 * @param number $quiz_id
+	 */
+	public function submitQuiz($user_id, $quiz_id){
+		
+		$submission = Submission::model()->find('user_id=:user_id AND quiz_id=:quiz_id', 
+			array(
+				':user_id' => $user_id,			
+				':quiz_id' => $quiz_id,			
+			)
+		);
+
+		try {
+			if($submission != null){
+				$submission->STATUS = Submission::SUBMITTED;
+				$submission->save();
+				
+			} else {  
+				throw new SubmittingUnstartedQuizException();
+			}
+		} catch (SubmittingUnstartedQuizException $e){
+			return false;
+		}
+		
+		return true;
 	}
 }

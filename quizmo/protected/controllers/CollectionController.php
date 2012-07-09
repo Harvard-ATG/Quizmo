@@ -31,7 +31,7 @@ class CollectionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','edit'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -59,8 +59,9 @@ class CollectionController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'index' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id='')
 	{
+		$collection_id = $id;
 		$collection = new Collection;
 		// then this is a create action
 		$title = Yii::app()->getRequest()->getParam('title');
@@ -69,6 +70,7 @@ class CollectionController extends Controller
 		
 		
 		if($title != ''){
+			
 			$collection_id = $collection->create($title, $description);
 			if($collection_id != ''){
 				// then add the user to the collection as an owner
@@ -81,6 +83,39 @@ class CollectionController extends Controller
 		}
 
 		$this->render('create', array(
+			'title' => $title,
+			'description' => $description,
+			'collection_id' => $collection_id
+		));
+		
+
+	}
+
+	/**
+	 * Edits a model.
+	 * If edit is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @todo implement collection::edit
+	 */
+	public function actionEdit($id)
+	{
+		$collection = new Collection;
+		// then this is a create action
+		$title = Yii::app()->getRequest()->getParam('title');
+		$description = Yii::app()->getRequest()->getParam('description');
+		$user_id = Yii::app()->user->getId();
+		
+		if($title != ''){
+			// not implemented
+			// $collection_id = $collection->edit($title, $description);
+			if($collection_id != ''){
+				$this->redirect('index');
+				return;
+			}
+		}
+
+		$this->render('edit', array(
+			'id' => $id,
 			'title' => $title,
 			'description' => $description,
 		));
@@ -133,13 +168,14 @@ class CollectionController extends Controller
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
+	 * @todo set deleted flag
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
+		if(Yii::app()->request->isPostRequest) {
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+			// $this->loadModel($id)->delete();
+			
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))

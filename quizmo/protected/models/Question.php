@@ -18,6 +18,13 @@
 class Question extends QActiveRecord
 {
 	
+	const ESSAY = 'E';
+	const MULTIPLE_CHOICE = 'M';
+	const MULTIPLE_SELECTION = 'S';
+	const FILLIN = 'F';
+	const TRUE_FALSE = 'T';
+	const NUMERICAL = 'N';
+	
 	/**
 	 * this is needed by QActiveRecord for Oracle
 	 * @var string
@@ -160,7 +167,7 @@ class Question extends QActiveRecord
 	* @return integer $quetion_order
 	*/
 	public function getNextQuestionOrder($quiz_id){
-		error_log("getNextQuestionOrder");
+		//error_log("getNextQuestionOrder");
 		$criteria=new CDbCriteria;
 		//$criteria->select = 'max(QUESTION_ORDER) AS max_question_order';
 		$criteria->condition = 'quiz_id='.$quiz_id;
@@ -260,7 +267,7 @@ class Question extends QActiveRecord
 	*/
 	public function createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse){
 
-		$question_id = $this->create($quiz_id, 'T', $title, $body, $score, $feedback);
+		$question_id = $this->create($quiz_id, Question::TRUE_FALSE, $title, $body, $score, $feedback);
 				
 		if($truefalse){
 			$true = 1;
@@ -270,9 +277,9 @@ class Question extends QActiveRecord
 			$false = 1;			
 		}
 		$answer = new Answer;
-		$answer->create($question_id, 'T', 'true', $true);
+		$answer->create($question_id, Question::TRUE_FALSE, 'true', $true);
 		$answer = new Answer;
-		$answer->create($question_id, 'T', 'false', $false);
+		$answer->create($question_id, Question::TRUE_FALSE, 'false', $false);
 		
 		return $question_id;
 		
@@ -292,10 +299,10 @@ class Question extends QActiveRecord
 	*/
 	public function createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows){
 		
-		$question_id = $this->create($quiz_id, 'E', $title, $body, $score, $feedback);
+		$question_id = $this->create($quiz_id, Question::ESSAY, $title, $body, $score, $feedback);
 				
 		$answer = new Answer;
-		$answer->create($question_id, 'E', '', 0, $textarea_rows);
+		$answer->create($question_id, Question::ESSAY, '', 0, $textarea_rows);
 		
 		return $question_id;
 		
@@ -315,10 +322,10 @@ class Question extends QActiveRecord
 	*/
 	public function createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance){
 		
-		$question_id = $this->create($quiz_id, 'E', $title, $body, $score, $feedback);
+		$question_id = $this->create($quiz_id, Question::NUMERICAL, $title, $body, $score, $feedback);
 				
 		$answer = new Answer;
-		$answer->create($question_id, 'E', '', 0, 10, 0, $tolerance);
+		$answer->create($question_id, Question::NUMERICAL, '', 0, 10, 0, $tolerance);
 		
 		return $question_id;
 		
@@ -338,10 +345,10 @@ class Question extends QActiveRecord
 	*/
 	public function createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive){
 		
-		$question_id = $this->create($quiz_id, 'E', $title, $body, $score, $feedback);
+		$question_id = $this->create($quiz_id, Question::FILLIN, $title, $body, $score, $feedback);
 				
 		$answer = new Answer;
-		$answer->create($question_id, 'E', '', 0, 0, $is_case_sensitive, 0);
+		$answer->create($question_id, Question::FILLIN, '', 0, 0, $is_case_sensitive, 0);
 		
 		return $question_id;
 		
@@ -358,7 +365,6 @@ class Question extends QActiveRecord
 	public function getQuestionViewById($question_id){
 		$question = Question::model()->findByPk($question_id);
 		$answers = $question->answer;
-		error_log(sizeof($answers));
 
 		$questionArr = array();
 		foreach($question as $key => $value){

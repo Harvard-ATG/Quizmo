@@ -114,16 +114,12 @@
 		<input type="text" class="span1" id="numerical_answer" name="numerical_answer" value="{*$numerical_answer*}"/>
 		<p class="help-inline"></p>
 	</div>
-	<label class="control-label" for="numerical">Upper Bound</label>
+	<label class="control-label" for="numerical">Tolerance</label>
 	<div class="controls">
-		<input type="text" class="span1" id="numerical_upper_bound" name="numerical_upper_bound" value="{*$numerical_upper_bound*}"/>
+		<input type="text" class="span1" id="tolerance" name="tolerance" value="{*$tolerance*}"/>
 		<p class="help-inline"></p>
 	</div>
-	<label class="control-label" for="numerical">Lower Bound</label>
-	<div class="controls">
-		<input type="text" class="span1" id="numerical_lower_bound" name="numerical_lower_bound" value="{*$numerical_lower_bound*}"/>
-		<p class="help-inline"></p>
-	</div>
+
 </div>
 
 <div id="fill-in-control-group" class="control-group hidden">

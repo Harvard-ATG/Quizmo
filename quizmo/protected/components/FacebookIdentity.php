@@ -64,7 +64,7 @@ array (
 class FacebookIdentity extends UserIdentity {
 	
 	public function __construct(){
-				
+		//error_log("FacebookIdentity::construct");
 		$this->authenticate();
 			
 	}
@@ -74,6 +74,8 @@ class FacebookIdentity extends UserIdentity {
 	//  https://developers.facebook.com/blog/post/500/
 	private function checkAccessToken(){
 		
+		//error_log("FacebookIdentity::checkAccessToken");
+
 		$app_id = Yii::app()->facebook->appId;
 		$app_secret = Yii::app()->facebook->secret; 
 		//$my_url = "http://dev2.webroots.fas.harvard.edu:8240/index.php";
@@ -139,6 +141,9 @@ class FacebookIdentity extends UserIdentity {
 	  //returns error code 400 which PHP obeys and wipes out 
 	  //the response.
 	private function curl_get_file_contents($URL) {
+
+		//error_log("FacebookIdentity::curl_get_file_contents");
+
 	    $c = curl_init();
 	    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 	    curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
@@ -152,6 +157,9 @@ class FacebookIdentity extends UserIdentity {
 	  }	
 	
 	public function authenticate(){
+
+		//error_log("FacebookIdentity::authenticate");
+
 		// getUser can sometimes be set when the user is in fact not logged in
 		// therefore the only for sure way to detect if a user is logged in is to try an api call on /me
 		try {
@@ -171,6 +179,7 @@ class FacebookIdentity extends UserIdentity {
 			
 			$this->external_id = $facebookuser['id'];
 			
+			//error_log("going to setup (passed api(/me))");
 			$this->setup();
 
 		} catch (FacebookApiException $e){
@@ -180,6 +189,7 @@ class FacebookIdentity extends UserIdentity {
 			//error_log(var_export($_SERVER, 1));
 			
 			$redirect_uri = (@$_SERVER['SCRIPT_URI']) ? $_SERVER['SCRIPT_URI'] : $_SERVER['HTTP_REFERER'];
+			$redirect_uri = "http://quizmo.harvard.edu/site/login";
 			
 			// if redirect_uri is the logout url, we'll end up with an infinite loop...
 			if(preg_match("/(.*)\/site\/logout/", $redirect_uri, $matches)){
@@ -187,6 +197,7 @@ class FacebookIdentity extends UserIdentity {
 			}
 			
 			//Controller::redirect(Yii::app()->facebook->getLoginUrl());
+			//error_log("redirecting to ".Yii::app()->facebook->getLoginUrl(array('redirect_uri'=>$redirect_uri, 'cancel_url'=>$redirect_uri)));
 			Controller::redirect(Yii::app()->facebook->getLoginUrl(array('redirect_uri'=>$redirect_uri, 'cancel_url'=>$redirect_uri)));
 			
 		}
@@ -196,12 +207,16 @@ class FacebookIdentity extends UserIdentity {
 	}
 	
 	public function logout(){
+
+		//error_log("FacebookIdentity::logout");
+
 		try {
 			Yii::app()->facebook->api("/me");
 			@session_destroy();
 			$logoutUrl = Yii::app()->facebook->getLogoutUrl();
 			Yii::app()->facebook->destroySession();
 			
+			//error_log("redirecting to $logoutUrl");
 			$this->redirect($logoutUrl);
 			
 		} catch (FacebookApiException $e){

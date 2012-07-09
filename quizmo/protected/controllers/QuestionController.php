@@ -62,19 +62,20 @@ class QuestionController extends Controller
 	}
 
 	/**
-	 * Creates a new model.
+	 * Creates a new model
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($id='')
+	public function actionCreate($id='', $id2='')
 	{
 		$user_id = Yii::app()->user->getId();
+		$collection_id = Yii::app()->session['collection_id'];
 		$quiz = new Quiz;
 		//error_log("quiz/create");
 		
 		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
 		$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
 		if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
-
+		$question_id = $id2;
 
 		$title = Yii::app()->getRequest()->getParam('title');
 		$body = Yii::app()->getRequest()->getParam('body');
@@ -108,7 +109,7 @@ class QuestionController extends Controller
 					// Maybe this should be moved to the model?
 					// ANSWER: No.  It is just getting params, that cannot be moved to the model
 					//Answer::multipleChoiceAnswers($multiple_radio_answer, )
-					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, Question::MULTIPLE_CHOICE, $title, $body, $score, $feedback, $multiple_answers);
 					break;
 				// **********************************************************************
 				
@@ -139,7 +140,7 @@ class QuestionController extends Controller
 						}
 					}
 
-					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $check_all_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, Question::MULTIPLE_SELECTION, $title, $body, $score, $feedback, $check_all_answers);
 					break;
 				// **********************************************************************
 
@@ -176,10 +177,12 @@ class QuestionController extends Controller
 		}
 
 		$this->render('create', array(
+			'collection_id'=>$collection_id,
 			'quiz_id'=>$quiz_id,
 			'title'=>$title,
 			'body'=>$body,
 			'question_type'=>$question_type,
+			'question_id'=>$question_id
 		));
 
 	}
@@ -234,11 +237,13 @@ class QuestionController extends Controller
 	public function actionIndex($id='')
 	{
 		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
+		$collection_id = Yii::app()->session['collection_id'];
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
 
 		$this->render('index',array(
+			'collection_id'=>$collection_id,
 			'questions'=>$questions,
 			'sizeofquestions'=>sizeof($questions),
 			'user_id'=>$user_id,

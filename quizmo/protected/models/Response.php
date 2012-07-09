@@ -1,21 +1,31 @@
 <?php
 
 /**
+ * self explanitory exception
+ */
+class IncorrectQuestionTypeException extends Exception { }
+
+/**
  * This is the model class for table "Responses".
  *
  * The followings are the available columns in table 'Responses':
- * @property integer $id
- * @property integer $question_id
- * @property string $question_type
- * @property integer $user_id
- * @property string $response
- * @property string $score_state
- * @property integer $score
- * @property string $date_modified
- * @property integer $modified_by
+ * @property integer $ID
+ * @property integer $QUESTION_ID
+ * @property string $QUESTION_TYPE
+ * @property integer $USER_ID
+ * @property string $RESPONSE
+ * @property string $SCORE_STATE
+ * @property integer $SCORE
+ * @property string $DATE_MODIFIED
+ * @property integer $MODIFIED_BY
  */
-class Response extends CActiveRecord
+class Response extends QActiveRecord
 {
+	
+	const NOT_SCORED = 'N';
+	const AUTO_SCORED = 'A';
+	const MANUAL_SCORED = 'M';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -31,7 +41,7 @@ class Response extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Responses';
+		return 'RESPONSES';
 	}
 
 	/**
@@ -106,4 +116,250 @@ class Response extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	 * submits an essay question
+	 * @param number $user_id
+	 * @param number $question_id
+	 * @param string $essay
+	 * @param number $modified_by should be user_id if not specified
+	 * @return boolean
+	 */
+	public function submitEssayQuestion($user_id, $question_id, $essay, $modified_by=''){
+		if($modified_by == '')
+			$modified_by = $user_id;
+			
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+
+		try {
+			if($response == null){
+				// create new
+				$response = new Response;
+
+				// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
+				//    the sequence is at at the save()
+
+				$response->USER_ID = $user_id;
+				$response->QUESTION_ID = $question_id;
+				$response->QUESTION_TYPE = Question::ESSAY;
+				$response->RESPONSE = $essay;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+				
+			} else {  
+				//edit existing
+
+				$response->QUESTION_TYPE = Question::ESSAY;
+				$response->RESPONSE = $essay;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+
+			}
+		} catch (Exception $e){
+			error_log($e->getTraceAsString());
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
+	/**
+	 * submits a numerical question
+	 * @param number $user_id
+	 * @param number $question_id
+	 * @param number $number
+	 * @param number $modified_by should be user_id if not specified
+	 * @return boolean
+	 */
+	public function submitNumericalQuestion($user_id, $question_id, $number, $modified_by=''){
+		if($modified_by == '')
+			$modified_by = $user_id;
+			
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+
+		try {
+			if($response == null){
+				// create new
+				$response = new Response;
+
+				// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
+				//    the sequence is at at the save()
+
+				$response->USER_ID = $user_id;
+				$response->QUESTION_ID = $question_id;
+				$response->QUESTION_TYPE = Question::NUMERICAL;
+				$response->RESPONSE = $number;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+				
+			} else {  
+				//edit existing
+
+				$response->QUESTION_TYPE = Question::NUMERICAL;
+				$response->RESPONSE = $number;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+
+			}
+		} catch (Exception $e){
+			error_log($e->getTraceAsString());
+			return false;
+		}
+		
+		return true;
+		
+	}
+
+	/**
+	 * submits a multiple selection question
+	 * @param number $user_id
+	 * @param number $question_id
+	 * @param array $answers an array of answer_ids
+	 * @param number $modified_by should be user_id if not specified
+	 * @return boolean
+	 */
+	public function submitMultipleSelectionQuestion($user_id, $question_id, $answers, $modified_by=''){
+		if($modified_by == '')
+			$modified_by = $user_id;
+
+		try {
+			
+			// remove all previous answers for this question
+			$responses = Response::model()->findAll(
+				'user_id=:user_id AND question_id=:question_id', 
+				array(
+					':user_id' => $user_id,			
+					':question_id' => $question_id,			
+				)
+			);
+			foreach($responses as $response){
+				$response->delete();
+			}
+			
+
+			// go through each $answers as $answer_id and add it
+			foreach($answers as $answer_id){
+				$response = Response::model()->find(
+					'user_id=:user_id AND question_id=:question_id AND response=:answer_id', 
+					array(
+						':user_id' => $user_id,			
+						':question_id' => $question_id,			
+						':answer_id' => $answer_id,			
+					)
+				);
+			
+				if($responses == null){
+					// create new
+					$response = new Response;
+
+					$response->USER_ID = $user_id;
+					$response->QUESTION_ID = $question_id;
+					$response->QUESTION_TYPE = Question::MULTIPLE_SELECTION;
+					$response->RESPONSE = $answer_id;
+					$response->SCORE_STATE = Response::NOT_SCORED;
+					$resposne->MODIFIED_BY = $modified_by;
+				
+					$response->save();
+				
+				} else {  
+					// edit existing
+					// not needed
+
+				}
+			
+
+			}
+		} catch (Exception $e){
+			error_log($e->getTraceAsString());
+			return false;
+		}
+		
+		return true;
+		
+	}
+
+	/**
+	 * submits a multiple choice question
+	 * @param number $user_id
+	 * @param number $question_id
+	 * @param array $answers an array of answer_ids
+	 * @param number $modified_by should be user_id if not specified
+	 * @return boolean
+	 */
+	public function submitMultipleChoiceQuestion($user_id, $question_id, $answer_id, $modified_by=''){
+		if($modified_by == '')
+			$modified_by = $user_id;
+
+		try {
+			
+			// remove all previous answers for this question
+			$responses = Response::model()->findAll(
+				'user_id=:user_id AND question_id=:question_id', 
+				array(
+					':user_id' => $user_id,			
+					':question_id' => $question_id,			
+				)
+			);
+			foreach($responses as $response){
+				$response->delete();
+			}
+			
+
+			$response = Response::model()->find(
+				'user_id=:user_id AND question_id=:question_id', 
+				array(
+					':user_id' => $user_id,			
+					':question_id' => $question_id,			
+				)
+			);
+			
+			if($response == null){
+				// create new
+				$response = new Response;
+
+				$response->USER_ID = $user_id;
+				$response->QUESTION_ID = $question_id;
+				$response->QUESTION_TYPE = Question::MULTIPLE_CHOICE;
+				$response->RESPONSE = $answer_id;
+				$response->SCORE_STATE = Response::NOT_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				
+				$response->save();
+				
+			} else {  
+				// edit existing
+				// not needed
+
+
+			}
+
+		} catch (Exception $e){
+			error_log($e->getTraceAsString());
+			return false;
+		}
+		
+		return true;
+		
+	}
+
+	
 }

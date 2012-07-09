@@ -30,7 +30,7 @@
 	</div>
 	<div class="form-actions">
 		<input type="submit" class="btn btn-primary" value="Submit" />
-		<button class="btn">Cancel</button>
+		<a class="btn" href="/collection/index/">Cancel</a>
 	</div>
 </div>
 
