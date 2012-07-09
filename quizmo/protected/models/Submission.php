@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * self explanitory exception
+ */
 class SubmittingUnstartedQuizException extends Exception { }
 
 
@@ -7,11 +10,11 @@ class SubmittingUnstartedQuizException extends Exception { }
  * This is the model class for table "Submissions".
  *
  * The followings are the available columns in table 'Submissions':
- * @property integer $id
- * @property integer $quiz_id
- * @property integer $user_id
- * @property string $status
- * @property string $date_modified
+ * @property integer $ID
+ * @property integer $QUIZ_ID
+ * @property integer $USER_ID
+ * @property string $STATUS
+ * @property string $DATE_MODIFIED
  */
 class Submission extends CActiveRecord
 {

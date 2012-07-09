@@ -4,15 +4,15 @@
  * This is the model class for table "Responses".
  *
  * The followings are the available columns in table 'Responses':
- * @property integer $id
- * @property integer $question_id
- * @property string $question_type
- * @property integer $user_id
- * @property string $response
- * @property string $score_state
- * @property integer $score
- * @property string $date_modified
- * @property integer $modified_by
+ * @property integer $ID
+ * @property integer $QUESTION_ID
+ * @property string $QUESTION_TYPE
+ * @property integer $USER_ID
+ * @property string $RESPONSE
+ * @property string $SCORE_STATE
+ * @property integer $SCORE
+ * @property string $DATE_MODIFIED
+ * @property integer $MODIFIED_BY
  */
 class Response extends CActiveRecord
 {
