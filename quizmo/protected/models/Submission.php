@@ -1,5 +1,8 @@
 <?php
 
+class SubmittingUnstartedQuizException extends Exception { }
+
+
 /**
  * This is the model class for table "Submissions".
  *
@@ -130,6 +133,34 @@ class Submission extends CActiveRecord
 			// do nothing, the submission already exists
 		}
 		
+	}
+	
+	/**
+	 * set the submission for the given user and quiz to submitted
+	 * @param number $user_id
+	 * @param number $quiz_id
+	 */
+	public function submitQuiz($user_id, $quiz_id){
 		
+		$submission = Submission::model()->find('user_id=:user_id AND quiz_id=:quiz_id', 
+			array(
+				':user_id' => $user_id,			
+				':quiz_id' => $quiz_id,			
+			)
+		);
+
+		try {
+			if($submission != null){
+				$submission->STATUS = Submission::SUBMITTED;
+				$submission->save();
+				
+			} else {  
+				throw new SubmittingUnstartedQuizException();
+			}
+		} catch (SubmittingUnstartedQuizException $e){
+			return false;
+		}
+		
+		return true;
 	}
 }
