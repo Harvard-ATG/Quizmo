@@ -109,7 +109,7 @@ class QuestionController extends Controller
 					// Maybe this should be moved to the model?
 					// ANSWER: No.  It is just getting params, that cannot be moved to the model
 					//Answer::multipleChoiceAnswers($multiple_radio_answer, )
-					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, Question::MULTIPLE_CHOICE, $title, $body, $score, $feedback, $multiple_answers);
 					break;
 				// **********************************************************************
 				
@@ -140,7 +140,7 @@ class QuestionController extends Controller
 						}
 					}
 
-					$question_id = $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $check_all_answers);
+					$question_id = $question->createMultipleChoice($quiz_id, Question::MULTIPLE_SELECTION, $title, $body, $score, $feedback, $check_all_answers);
 					break;
 				// **********************************************************************
 
