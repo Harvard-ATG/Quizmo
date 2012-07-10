@@ -1,8 +1,8 @@
 <?php
 
 $reset_order = array(
-	'SUBMISSIONS',
 	'USERS_COLLECTIONS',
+	'SUBMISSIONS',
 	'ANSWERS',
 	'QUESTIONS',
 	'QUIZES',
