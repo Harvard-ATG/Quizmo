@@ -96,63 +96,6 @@ class QuizController extends Controller
 		$this->render('create', array(
 			'quiz_id'=>$quiz_id,
 			'collection_id'=>$collection_id,
-			'title'=>$title,
-			'description'=>$description,
-			'state'=>$state,
-			'start_date'=>$start_date,
-			'end_date'=>$end_date,
-			'visibility'=>$visibility,
-			'show_feedback'=>$show_feedback,
-		));
-
-	}
-
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 *
-	 * @param string $id refers to the quiz_id
-	 * @todo implement quiz::edit
-	 */
-	public function actionEdit($id='')
-	{
-		$quiz = new Quiz;
-		//error_log("quiz/create");
-		$quiz_id = $id;
-		$title = Yii::app()->getRequest()->getParam('title');
-		$description = Yii::app()->getRequest()->getParam('description');
-		$state = Yii::app()->getRequest()->getParam('state');
-		$start_date = Yii::app()->getRequest()->getParam('start_date');
-		$end_date = Yii::app()->getRequest()->getParam('end_date');
-		$visibility = Yii::app()->getRequest()->getParam('visibility');
-		if($visibility == '') $visibility = 0;
-		$show_feedback = Yii::app()->getRequest()->getParam('show_feedback');
-		if($show_feedback == '') $show_feedback = 0;
-		$user_id = Yii::app()->user->getId();
-		
-		
-		// if we're submitted, we'll have a title set here
-		if($title != ''){
-			
-			//$collection_id = Yii::app()->getRequest()->getParam('collection_id');
-			//$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
-			if($quiz_id != ''){
-				// now go to list
-				$this->forward('/quiz/index/'.$collection_id, true);
-
-			}
-		}
-
-		// TODO
-		// set values here
-		if($quiz_id != ''){
-			$collection_id = "1";
-			
-		}
-
-
-		$this->render('edit', array(
-			'collection_id'=>$collection_id,
 			'quiz_id'=>$quiz_id,
 			'title'=>$title,
 			'description'=>$description,
