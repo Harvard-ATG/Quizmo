@@ -6,7 +6,13 @@
 */
 class SubmissionTest extends CDbTestCase {
    
-	
+	public $fixtures=array(
+		'collections'=>'Collection',
+		'users'=>'User',
+		'userscollections'=>'UsersCollection',
+		'quizes'=>'Quiz',
+		'submissions'=>'Submission',
+	);
 
 	public function testStartQuiz(){
 		$quiz_id = 1;

@@ -96,6 +96,7 @@ class QuizController extends Controller
 		$this->render('create', array(
 			'quiz_id'=>$quiz_id,
 			'collection_id'=>$collection_id,
+			'quiz_id'=>$quiz_id,
 			'title'=>$title,
 			'description'=>$description,
 			'state'=>$state,
@@ -106,6 +107,7 @@ class QuizController extends Controller
 		));
 
 	}
+
 
 	/**
 	 * Creates a new model.
