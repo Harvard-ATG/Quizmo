@@ -300,6 +300,7 @@ class Response extends QActiveRecord
 	/**
 	 * submits a multiple choice question
 	 * @param number $user_id
+	 * @param string $question_type
 	 * @param number $question_id
 	 * @param array $answers an array of answer_ids
 	 * @param number $modified_by should be user_id if not specified
@@ -361,6 +362,68 @@ class Response extends QActiveRecord
 		
 	}
 
+	/**
+	 * submits a multiple choice question
+	 * @param number $user_id
+	 * @param number $question_id
+	 * @param array $answers an array of string answers
+	 * @param number $modified_by should be user_id if not specified
+	 * @return boolean
+	 */
+	public function submitFillinQuestion($user_id, $question_id, $answers, $modified_by=''){
+		if($modified_by == '')
+			$modified_by = $user_id;
+
+		try {
+			
+			// remove all previous answers for this question
+			$responses = Response::model()->findAll(
+				'user_id=:user_id AND question_id=:question_id', 
+				array(
+					':user_id' => $user_id,			
+					':question_id' => $question_id,			
+				)
+			);
+			foreach($responses as $response){
+				$response->delete();
+			}
+			
+
+			// go through each $answers as $answer_id and add it
+			foreach($answers as $answer){
+				// this part isn't really necessary...
+				$response = Response::model()->find(
+					'user_id=:user_id AND question_id=:question_id AND response=:answer', 
+					array(
+						':user_id' => $user_id,			
+						':question_id' => $question_id,			
+						':answer' => $answer,			
+					)
+				);
+				if($response == null){
+					// create new
+					$response = new Response;
+
+					$response->USER_ID = $user_id;
+					$response->QUESTION_ID = $question_id;
+					$response->QUESTION_TYPE = Question::FILLIN;
+					$response->RESPONSE = $answer;
+					$response->SCORE_STATE = Response::NOT_SCORED;
+					$resposne->MODIFIED_BY = $modified_by;
+				
+					$response->save();
+
+				} else {  
+					// edit existing
+					// not needed
+				}
+			}
+		} catch (Exception $e){
+			error_log($e->getTraceAsString());
+			return false;
+		}
+		
+		return true;
 
 	}
 	
