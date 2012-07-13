@@ -20,7 +20,7 @@ function smarty_function_fillin($params, &$smarty){
 	foreach($matches as $val){
 		foreach($val as $key => $match){
 			error_log($match);
-			$new_input = "<input class='input-small' type='text'/>";
+			$new_input = "<input class='input-small fillin-text' type='text'/>";
 			$question = preg_replace("/".addslashes($match)."/", $new_input, $question);
 		}
 		//error_log(var_export($match, 1));
