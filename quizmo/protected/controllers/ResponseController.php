@@ -31,7 +31,7 @@ class ResponseController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'submitQuestion'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -100,6 +100,38 @@ class ResponseController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionSubmitQuestion()
+	{
+		error_log("actionSubmitQuestion");
+		$user_id = Yii::app()->user->getId();
+		$question_id = Yii::app()->getRequest()->getParam('question_id');
+		$answer_id = Yii::app()->getRequest()->getParam('answer_id');
+		$answer = Yii::app()->getRequest()->getParam('answer');
+		$question_type = Yii::app()->getRequest()->getParam('question_type');
+		
+		switch($question_type){
+			case Question::MULTIPLE_CHOICE:
+				$response = Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id);
+			break;
+			case Question::TRUE_FALSE:
+				$response = Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id);
+			break;
+			case Question::ESSAY:
+				//$response = Response::submitEssayQuestion($user_id, $question_type, $question_id, $answer_id);
+			break;
+			
+			
+		}
+		
+		
+		Yii::app()->end();
 	}
 
 	/**
