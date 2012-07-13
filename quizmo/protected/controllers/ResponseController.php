@@ -138,7 +138,7 @@ class ResponseController extends Controller
 			case Question::FILLIN:
 				// set the answers
 				// submit the answers
-				$response = Response::submitFillinQuestion($user_id, $question_id, $answer);
+				$response = Response::submitFillinQuestion($user_id, $question_id, $answers);
 			break;
 			
 			
