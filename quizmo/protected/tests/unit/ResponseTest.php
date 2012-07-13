@@ -162,5 +162,47 @@ class ResponseTest extends CDbTestCase {
 
 	}
 
+	public function testSubmitFillinQuestion(){
+		$question_id = 8;
+		$user_id = 4;
+		$answers = array(
+			"lime", "coconut", "drink"
+		);
+
+		// first make sure it doesn't already exist
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertNull($response);
+		
+		// then submit the question's answers
+		$this->assertTrue(Response::submitFillinQuestion($user_id, $question_id, $answers));			
+		
+		// then check that it's there
+		// with the type set
+		// with 3 responses
+		$responses = Response::model()->findAll('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		
+		
+		foreach($responses as $response){
+			$this->assertEquals($response->QUESTION_TYPE, Question::FILLIN);			
+		}
+		$this->assertEquals(count($responses), 3);
+		
+		// then delete them all
+		foreach($responses as $response){
+			$response->delete();			
+		}
+
+	}
+
    
 }
