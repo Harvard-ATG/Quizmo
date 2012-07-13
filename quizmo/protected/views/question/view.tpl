@@ -127,12 +127,26 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea class="input-xlarge" rows="9"></textarea>
+			<textarea id="essay-text" class="input-xlarge" rows="9"></textarea>
 		</div>
 	</div>
 	<script>
 		submitQuestion = function(){
 			console.log("E");
+			// get the answer
+			answer = $('#essay-text').val();
+			// set the data
+			data = {
+				question_id: '{$question.id}',
+				question_type: '{$question.question_type}',
+				answer: answer
+			}
+			// send the ajax
+			$.ajax({
+				type: 'POST',
+				url: '/response/submitQuestion',
+				data: data
+			});
 		}
 	</script>
 
