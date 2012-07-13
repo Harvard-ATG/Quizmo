@@ -24,6 +24,10 @@
 <input type="hidden" id="question_ids" value='{$question_ids_json}'/>
 
 <script>
+submitQuestion = function(){
+	console.log("ERROR: submitting blank!");
+}
+
 $(document).ready(function(){
 	//var question_ids = {$question_ids_json};
 	//var question_ids = eval($('#question_ids').val());
@@ -40,6 +44,8 @@ $(document).ready(function(){
 	
 	// add the click listener for the numbered buttons
 	$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
+		submitQuestion();
+		
 		this_question_button = $(e.currentTarget);
 		this_question_id = this_question_button.attr("name");
 		
@@ -50,6 +56,7 @@ $(document).ready(function(){
 			current_item = this_question_button;
 			current_item.addClass("active");
 			if(current_item.attr("id") == "question_1"){
+				console.log(current_item.attr("id") + "bam?");
 				prev_button.addClass("disabled");
 			} else {
 				prev_button.removeClass("disabled");
@@ -59,6 +66,8 @@ $(document).ready(function(){
 	});
 	
 	prev_button.click(function(e){
+		submitQuestion();
+		
 		prev_item = current_item.prev("button");
 		prev_item_quesion_id = prev_item.attr("name");
 		$('#questions-container').load('/question/view/' + prev_item_quesion_id);
@@ -67,6 +76,7 @@ $(document).ready(function(){
 		current_item = prev_item;
 		current_item.addClass("active");
 		if(current_item.attr("id") == "question_1"){
+			console.log(current_item.attr("id") + "bam?");
 			prev_button.addClass("disabled");
 		} else {
 			prev_button.removeClass("disabled");
@@ -75,6 +85,8 @@ $(document).ready(function(){
 	});
 
 	next_button.click(function(e){
+		submitQuestion();
+		
 		next_item = current_item.next("button");
 		next_item_quesion_id = next_item.attr("name");
 		$('#questions-container').load('/question/view/' + next_item_quesion_id);
@@ -83,6 +95,7 @@ $(document).ready(function(){
 		current_item = next_item;
 		current_item.addClass("active");
 		if(current_item.attr("id") == "question_1"){
+			console.log(current_item.attr("id") + "bam?");
 			prev_button.addClass("disabled");
 		} else {
 			prev_button.removeClass("disabled");

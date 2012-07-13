@@ -36,6 +36,7 @@ tolerance=>
 {/foreach}
 -->
 
+
 <h3>
 	{$question['title']}
 </h3>
@@ -55,13 +56,34 @@ tolerance=>
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" name="answer1" value="idmaybe">
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer1" value="{$question.answers[$key].answer_id}">
 					{$question.answers[$key].answer}
 				</input>
 			</label>
 			{/foreach}
 		</div>
 	</div>
+	<script>
+		submitQuestion = function(){
+			console.log("M/T");
+			// get value of radio
+			answer = $('input:radio[name=answer1]:checked').val();
+			// set data
+			data = {
+				answer_id: answer_id,
+				question_type: '{$question.question_type}'
+			}
+			// submit value via ajax
+			$.ajax({
+				type: 'POST',
+				url: '/response/submitQuestion',
+				data: data
+				//success: success,
+				//dataType: dataType
+			});
+		}
+	</script>
+
 	{elseif $question.question_type == 'S'}
 	<div class="control-group">
 		<label class="control-label"></label>
@@ -75,6 +97,12 @@ tolerance=>
 			{/foreach}
 		</div>
 	</div>
+	<script>
+		submitQuestion = function(){
+			console.log("S");
+		}
+	</script>
+
 	{elseif $question.question_type == 'E'}
 	<div class="control-group">
 		<label class="control-label"></label>
@@ -82,6 +110,12 @@ tolerance=>
 			<textarea class="input-xlarge" rows="9"></textarea>
 		</div>
 	</div>
+	<script>
+		submitQuestion = function(){
+			console.log("E");
+		}
+	</script>
+
 	{elseif $question.question_type == 'N'}
 	<div class="control-group">
 		<label class="control-label"></label>
@@ -89,8 +123,19 @@ tolerance=>
 			<input type="text" class="input-xlarge"/>
 		</div>
 	</div>
+	<script>
+		submitQuestion = function(){
+			console.log("N");
+		}
+	</script>
+
 	{elseif $question.question_type == 'F'}
-		<!-- do nothing -->
+	<script>
+		submitQuestion = function(){
+			console.log("F");
+		}
+	</script>
+
 	{else}
 		ERROR!!!  Undefined question_type
 	{/if}
