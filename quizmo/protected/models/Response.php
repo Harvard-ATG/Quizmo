@@ -305,7 +305,7 @@ class Response extends QActiveRecord
 	 * @param number $modified_by should be user_id if not specified
 	 * @return boolean
 	 */
-	public function submitMultipleChoiceQuestion($user_id, $question_id, $answer_id, $modified_by=''){
+	public function submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id, $modified_by=''){
 		if($modified_by == '')
 			$modified_by = $user_id;
 
@@ -338,7 +338,7 @@ class Response extends QActiveRecord
 
 				$response->USER_ID = $user_id;
 				$response->QUESTION_ID = $question_id;
-				$response->QUESTION_TYPE = Question::MULTIPLE_CHOICE;
+				$response->QUESTION_TYPE = $question_type;
 				$response->RESPONSE = $answer_id;
 				$response->SCORE_STATE = Response::NOT_SCORED;
 				$resposne->MODIFIED_BY = $modified_by;
@@ -361,5 +361,7 @@ class Response extends QActiveRecord
 		
 	}
 
+
+	}
 	
 }
