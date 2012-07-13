@@ -181,6 +181,23 @@ tolerance=>
 	<script>
 		submitQuestion = function(){
 			console.log("F");
+			// get the answer
+			answers = [];
+			$('.fillin-text').each(function () {
+				answers.push($(this).val());
+			});
+			// set the data
+			data = {
+				question_id: '{$question.id}',
+				question_type: '{$question.question_type}',
+				answers: answers
+			}
+			// send the ajax
+			$.ajax({
+				type: 'POST',
+				url: '/response/submitQuestion',
+				data: data
+			});
 		}
 	</script>
 
