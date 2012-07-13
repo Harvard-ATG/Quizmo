@@ -154,12 +154,26 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<input type="text" class="input-xlarge"/>
+			<input id="numerical-text" type="text" class="input-xlarge"/>
 		</div>
 	</div>
 	<script>
 		submitQuestion = function(){
 			console.log("N");
+			// get the answer
+			answer = $('#numerical-text').val();
+			// set the data
+			data = {
+				question_id: '{$question.id}',
+				question_type: '{$question.question_type}',
+				answer: answer
+			}
+			// send the ajax
+			$.ajax({
+				type: 'POST',
+				url: '/response/submitQuestion',
+				data: data
+			});
 		}
 	</script>
 
