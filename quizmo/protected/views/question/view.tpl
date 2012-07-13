@@ -56,7 +56,7 @@ tolerance=>
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" id="answer{$question.answers[$key].id}" name="answer1" value="{$question.answers[$key].answer_id}">
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer1" value="{$question.answers[$key].id}">
 					{$question.answers[$key].answer}
 				</input>
 			</label>
@@ -67,11 +67,12 @@ tolerance=>
 		submitQuestion = function(){
 			console.log("M/T");
 			// get value of radio
-			answer = $('input:radio[name=answer1]:checked').val();
+			answer_id = $('input:radio[name=answer1]:checked').val();
 			// set data
 			data = {
-				answer_id: answer_id,
-				question_type: '{$question.question_type}'
+				question_id: '{$question.id}',
+				question_type: '{$question.question_type}',
+				answer_id: answer_id
 			}
 			// submit value via ajax
 			$.ajax({
@@ -90,7 +91,7 @@ tolerance=>
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="idmaybe">
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}">
 					{$question.answers[$key].answer}
 				</input>
 			</label>
@@ -100,6 +101,25 @@ tolerance=>
 	<script>
 		submitQuestion = function(){
 			console.log("S");
+			// get the answers
+			answers = [];
+			$('input[type=checkbox]').each(function () {
+				if (this.checked) {
+					answers.push($(this).val());
+				}
+			});
+			// set the data
+			data = {
+				question_id: '{$question.id}',
+				question_type: '{$question.question_type}',
+				answers: answers
+			}
+			// send the ajax
+			$.ajax({
+				type: 'POST',
+				url: '/response/submitQuestion',
+				data: data
+			});
 		}
 	</script>
 

@@ -114,6 +114,7 @@ class ResponseController extends Controller
 		$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$answer_id = Yii::app()->getRequest()->getParam('answer_id');
 		$answer = Yii::app()->getRequest()->getParam('answer');
+		$answers = Yii::app()->getRequest()->getParam('answers');
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
 		
 		switch($question_type){
@@ -124,7 +125,20 @@ class ResponseController extends Controller
 				$response = Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id);
 			break;
 			case Question::ESSAY:
-				//$response = Response::submitEssayQuestion($user_id, $question_type, $question_id, $answer_id);
+				$response = Response::submitEssayQuestion($user_id, $question_id, $answer);
+			break;
+			case Question::NUMERICAL:
+				$response = Response::submitNumericalQuestion($user_id, $question_id, $answer);
+			break;
+			case Question::MULTIPLE_SELECTION:
+				// set the answers
+				// submit the answers
+				$response = Response::submitMultipleSelectionQuestion($user_id, $question_id, $answers);
+			break;
+			case Question::FILLIN:
+				// set the answers
+				// submit the answers
+				$response = Response::submitFillinQuestion($user_id, $question_id, $answer);
 			break;
 			
 			
