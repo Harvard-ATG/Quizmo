@@ -8,8 +8,8 @@
 return CMap::mergeArray(
 	require(dirname(__FILE__).'/database.php'),
 	require(dirname(__FILE__).'/facebook.php'),
-	require(dirname(__FILE__).'/ldap.php'),
-	require(dirname(__FILE__).'/isites.php'),
+	//require(dirname(__FILE__).'/ldap.php'),
+	//require(dirname(__FILE__).'/isites.php'),
 	array(
 		'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 		'name'=>'Quizmo',
@@ -24,10 +24,9 @@ return CMap::mergeArray(
 			'application.models.*',
 			'application.components.*',
 		),
-		
+
 		// need to change this for isites
-		//'layout'=>"main",
-		'layout'=>"isites",
+		'layout'=>"main",
 
 		'modules'=>array(
 			// uncomment the following to enable the Gii tool
@@ -52,7 +51,9 @@ return CMap::mergeArray(
 				'rules'=>array(
 					'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 					'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+					'<controller:\w+>/<action:\w+>/<id:\d+>/<id2:\d+>'=>'<controller>/<action>',
 					'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+					'<controller:\w+>/<action:\w+>/<cact:\w+>'=>'<controller>/<cact>',
 				),
 			),
 
@@ -80,11 +81,10 @@ return CMap::mergeArray(
 				),
 			),
 
-			
+
 			'viewRenderer'=>array(
 		  		'class'=>'ext.smarty-renderer.ESmartyViewRenderer',
 		    	'fileExtension' => '.tpl',
-		    	//'pluginsDir' => 'ext.smarty-renderer.plugins',
 		    	'pluginsDir' => 'application.smartyPlugins',
 		    	//'configDir' => 'application.smartyConfig',
 		    	//'prefilters' => array(array('MyClass','filterMethod')),
@@ -94,14 +94,14 @@ return CMap::mergeArray(
 		    	//   ... any Smarty object parameter
 		    	//)
 			),
-			
+
 			'session' => array (
 	    		'autoStart' => true,
 				'sessionName' => 'QUIZMO',
 	    		//'cookieMode' => 'only',
-	    		'savePath' => '/web/quizmo/var/tmp/',
+	    		//'savePath' => '/web/quizmo/var/tmp/',
 			),
-			
+
 		),
 
 
@@ -111,21 +111,21 @@ return CMap::mergeArray(
 		'params'=>array(
 			// this is used in contact page
 			'adminEmail'=>'jcleveng@fas.harvard.edu',
-			//'authMethod'=>'facebook',
-			'authMethod'=>'isites',
-			'default_redirect'=>'http://quizmo.harvard.edu',
+			'authMethod'=>'facebook',
+			//'authMethod'=>'isites',
 		),
 
 		// comment this if you don't want the login to be forced (if you want to allow viewer level guests)
 		// NOTE: gii will not work with this on
 		// NOTE: isites needs this...
+		/*
 		'behaviors' => array(
 		    'onBeginRequest' => array(
 		        'class' => 'application.components.RequireLogin',
 		    )
 		),
-		
-		
+		*/
+
 
 	)
 );
