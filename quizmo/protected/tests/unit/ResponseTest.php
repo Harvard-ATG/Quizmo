@@ -123,6 +123,7 @@ class ResponseTest extends CDbTestCase {
 
 	public function testSubmitMultipleChoiceQuestion(){
 		$question_id = 1;
+		$question_type = Question::MULTIPLE_CHOICE;
 		$user_id = 4;
 		$answer_id = 1;
 
@@ -136,7 +137,7 @@ class ResponseTest extends CDbTestCase {
 		$this->assertNull($response);
 		
 		// then submit the question's answers
-		$this->assertTrue(Response::submitMultipleChoiceQuestion($user_id, $question_id, $answer_id));			
+		$this->assertTrue(Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id));			
 		
 		// then check that it's there
 		// with the type set
