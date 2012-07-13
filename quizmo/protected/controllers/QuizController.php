@@ -258,7 +258,8 @@ class QuizController extends Controller
 		$this->render('take', array(
 			'question_ids_json'=>json_encode($question_ids),
 			'question_ids'=>$question_ids,
-			'user_id'=>$user_id
+			'user_id'=>$user_id,
+			'quiz_id'=>$quiz_id
 			
 		));
 		

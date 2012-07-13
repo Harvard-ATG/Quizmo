@@ -56,7 +56,6 @@ $(document).ready(function(){
 			current_item = this_question_button;
 			current_item.addClass("active");
 			if(current_item.attr("id") == "question_1"){
-				console.log(current_item.attr("id") + "bam?");
 				prev_button.addClass("disabled");
 			} else {
 				prev_button.removeClass("disabled");
@@ -76,7 +75,6 @@ $(document).ready(function(){
 		current_item = prev_item;
 		current_item.addClass("active");
 		if(current_item.attr("id") == "question_1"){
-			console.log(current_item.attr("id") + "bam?");
 			prev_button.addClass("disabled");
 		} else {
 			prev_button.removeClass("disabled");
@@ -88,6 +86,10 @@ $(document).ready(function(){
 		submitQuestion();
 		
 		next_item = current_item.next("button");
+		// if next_item is 0, send us to the quiz page
+		if(next_item.length == 0){
+			window.location.href = "/quiz/index/{$quiz_id}";
+		}
 		next_item_quesion_id = next_item.attr("name");
 		$('#questions-container').load('/question/view/' + next_item_quesion_id);
 		
@@ -95,7 +97,6 @@ $(document).ready(function(){
 		current_item = next_item;
 		current_item.addClass("active");
 		if(current_item.attr("id") == "question_1"){
-			console.log(current_item.attr("id") + "bam?");
 			prev_button.addClass("disabled");
 		} else {
 			prev_button.removeClass("disabled");
