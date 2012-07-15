@@ -31,7 +31,7 @@ class QuizController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','take', 'edit'),
+				'actions'=>array('create','update','take', 'edit', 'results'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -264,6 +264,17 @@ class QuizController extends Controller
 		));
 		
 		
+	}
+	
+	/**
+	 * total results
+	 * @param number $id
+	 */
+	public function actionResults($id){		
+		
+		$this->render('results', array(
+			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID
+		));
 	}
 
 	/**
