@@ -2,6 +2,7 @@
 
 $reset_order = array(
 	'USERS_COLLECTIONS',
+	'RESPONSES',
 	'SUBMISSIONS',
 	'ANSWERS',
 	'QUESTIONS',
