@@ -51,8 +51,17 @@ class QuizTest extends CDbTestCase {
 		$quiz_id = 1;
 		$quiz = new Quiz;
 		$this->assertGreaterThan(0, $quiz->getQuestionIds($quiz_id), "Failed asserting that getQuestionIds returns greater than 1 for unit test quiz_id 1.");
+
+	}
+
+	public function testGetQuiz(){
+		$quiz_id = 1;
+		$title = 'dev quiz prime';
+		$collection_id = 1;
 		
-		
+		$quiz = Quiz::getQuiz($quiz_id);
+		$this->assertEquals($title, $quiz->TITLE);
+		$this->assertEquals($collection_id, $quiz->COLLECTION_ID);
 	}
    
 }
