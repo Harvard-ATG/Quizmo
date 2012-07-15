@@ -2,6 +2,14 @@
 
 return array(
 	
+	/*
+	'user1' => array(
+		'NAME' => 'JaZahn Clevenger',
+		'EXTERNAL_ID' => '80719647',
+		'FNAME' => 'JaZahn',
+		'LNAME' => 'Clevenger',
+	),
+	*/
 	'user1' => array(
 		'NAME' => 'JaZahn Clevenger',
 		'EXTERNAL_ID' => '1074810815',

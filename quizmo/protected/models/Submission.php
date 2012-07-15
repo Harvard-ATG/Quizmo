@@ -23,6 +23,8 @@ class Submission extends QActiveRecord
 	const UNFINISHED = 'U';
 	const SUBMITTED = 'S';
 	
+	public $sequenceName = 'SUBMISSIONS_SEQ';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
