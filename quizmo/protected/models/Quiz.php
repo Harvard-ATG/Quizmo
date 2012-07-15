@@ -205,6 +205,16 @@ class Quiz extends QActiveRecord
 		
 	}
 	
+	/**
+	 * simple get for a quiz object
+	 *
+	 * @param integer $quiz_id
+	 * @return object Quiz
+	 */
+	public function getQuiz($quiz_id){
+		$quiz = Quiz::model()->find('id=:quiz_id', array(':quiz_id'=>$quiz_id));
+		return $quiz;
+	}
 	
 	
 }
