@@ -203,6 +203,17 @@ class ResponseTest extends CDbTestCase {
 		}
 
 	}
+	
+	function testGetResults(){
+		$quiz_id = 1;
+		$count = 3;
+		
+		// get the results
+		$results = Response::getResults($quiz_id);
+		// assert that there are 3 people in the results 
+		$this->assertEquals($count, sizeof($results));
+		
+	}
 
    
 }
