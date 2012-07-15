@@ -15,14 +15,14 @@ class UserIdentityTest extends CDbTestCase {
 	*/
 	public $identities = array(
 		'user1' => array(
-			'userid' => '12345678',
+			'userid' => '12345678asdf',
 			'name' => 'Leeroy Jenkins',
 			'collections' => array(
 				'12345' => 'enrollee'
 			),
 		),
 		'user2' => array(
-			'userid' => '12341234',
+			'userid' => '12341234asdf',
 			'name' => 'Justin Timberlake',
 		),
 	);

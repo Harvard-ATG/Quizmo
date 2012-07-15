@@ -18,7 +18,7 @@
 
 return array(
 	
-	'answer0' => array(
+	'answer1' => array(
 		'QUESTION_ID' => '1',
 		'QUESTION_TYPE' => 'M',
 		'TEXTAREA_ROWS' => '',
@@ -28,7 +28,7 @@ return array(
 		'IS_CORRECT' => 1,
 		'TOLERANCE' => '',
 	),
-	'answer1' => array(
+	'answer2' => array(
 		'QUESTION_ID' => '1',
 		'QUESTION_TYPE' => 'M',
 		'TEXTAREA_ROWS' => '',
@@ -38,7 +38,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
-	'answer2' => array(
+	'answer3' => array(
 		'QUESTION_ID' => '1',
 		'QUESTION_TYPE' => 'M',
 		'TEXTAREA_ROWS' => '',
@@ -48,7 +48,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
-	'answer3' => array(
+	'answer4' => array(
 		'QUESTION_ID' => '2',
 		'QUESTION_TYPE' => 'T',
 		'TEXTAREA_ROWS' => '',
@@ -58,7 +58,7 @@ return array(
 		'IS_CORRECT' => 1,
 		'TOLERANCE' => '',
 	),
-	'answer4' => array(
+	'answer5' => array(
 		'QUESTION_ID' => '2',
 		'QUESTION_TYPE' => 'T',
 		'TEXTAREA_ROWS' => '',
@@ -68,7 +68,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
-	'answer5' => array(
+	'answer6' => array(
 		'QUESTION_ID' => '3',
 		'QUESTION_TYPE' => 'N',
 		'TEXTAREA_ROWS' => '',
@@ -78,7 +78,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '3',
 	),
-	'answer6' => array(
+	'answer7' => array(
 		'QUESTION_ID' => '4',
 		'QUESTION_TYPE' => 'N',
 		'TEXTAREA_ROWS' => '',
@@ -88,7 +88,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '.5',
 	),
-	'answer7' => array(
+	'answer8' => array(
 		'QUESTION_ID' => '5',
 		'QUESTION_TYPE' => 'E',
 		'TEXTAREA_ROWS' => '10',
@@ -98,7 +98,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
-	'answer8' => array(
+	'answer9' => array(
 		'QUESTION_ID' => '6',
 		'QUESTION_TYPE' => 'S',
 		'TEXTAREA_ROWS' => '',
@@ -108,7 +108,7 @@ return array(
 		'IS_CORRECT' => 1,
 		'TOLERANCE' => '',
 	),
-	'answer9' => array(
+	'answer10' => array(
 		'QUESTION_ID' => '6',
 		'QUESTION_TYPE' => 'S',
 		'TEXTAREA_ROWS' => '',
@@ -118,7 +118,7 @@ return array(
 		'IS_CORRECT' => 1,
 		'TOLERANCE' => '',
 	),
-	'answer10' => array(
+	'answer11' => array(
 		'QUESTION_ID' => '6',
 		'QUESTION_TYPE' => 'S',
 		'TEXTAREA_ROWS' => '',
@@ -128,7 +128,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
-	'answer11' => array(
+	'answer12' => array(
 		'QUESTION_ID' => '7',
 		'QUESTION_TYPE' => 'E',
 		'TEXTAREA_ROWS' => '10',
@@ -138,7 +138,7 @@ return array(
 		'IS_CORRECT' => 0,
 		'TOLERANCE' => '',
 	),
-	'answer12' => array(
+	'answer13' => array(
 		'QUESTION_ID' => '8',
 		'QUESTION_TYPE' => 'F',
 		'TEXTAREA_ROWS' => '',

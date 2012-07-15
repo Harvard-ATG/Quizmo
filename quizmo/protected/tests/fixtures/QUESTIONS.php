@@ -16,7 +16,7 @@
 
 return array(
 	
-	'question0' => array(
+	'question1' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'M',
 		'TITLE' => 'Multiple Choice Question 1',
@@ -26,7 +26,7 @@ return array(
 		'FEEDBACK' => '',
 		'DELETED' => 0,
 	),
-	'question1' => array(
+	'question2' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'T',
 		'TITLE' => 'True False Question 2',
@@ -36,7 +36,7 @@ return array(
 		'FEEDBACK' => '',
 		'DELETED' => 0,
 	),
-	'question2' => array(
+	'question3' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'N',
 		'TITLE' => 'Numerical Question 3',
@@ -46,7 +46,7 @@ return array(
 		'FEEDBACK' => 'question 3 feedback',
 		'DELETED' => 0,
 	),
-	'question3' => array(
+	'question4' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'N',
 		'TITLE' => 'Numerical Question 4',
@@ -56,7 +56,7 @@ return array(
 		'FEEDBACK' => 'question 4 feedback',
 		'DELETED' => 0,
 	),
-	'question4' => array(
+	'question5' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'E',
 		'TITLE' => 'Essay Question 5',
@@ -66,7 +66,7 @@ return array(
 		'FEEDBACK' => 'question 5 feedback',
 		'DELETED' => 0,
 	),
-	'question5' => array(
+	'question6' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'S',
 		'TITLE' => 'Multiple Selection Question 6',
@@ -76,7 +76,7 @@ return array(
 		'FEEDBACK' => 'question 6 feedback',
 		'DELETED' => 0,
 	),
-	'question6' => array(
+	'question7' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'E',
 		'TITLE' => 'Essay Question 7',
@@ -86,7 +86,7 @@ return array(
 		'FEEDBACK' => 'question 7 feedback',
 		'DELETED' => 0,
 	),
-	'question7' => array(
+	'question8' => array(
 		'QUIZ_ID' => '1',
 		'QUESTION_TYPE' => 'F',
 		'TITLE' => 'Fill in Question 8',
