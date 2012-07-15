@@ -429,4 +429,39 @@ class Response extends QActiveRecord
 
 	}
 	
+	/**
+	 * gets an array of results for a quiz
+	 *
+	 * @param integer $quiz_id
+	 * @return array
+	 */
+	public function getResults($quiz_id){
+
+		// first get all the questions for the quiz
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		
+		// turn the array into a string
+		$question_id_string = implode(", ", $question_ids);
+		
+		// then responses for all the questions
+		$responses = Response::model()->findAll(
+			"question_id in ($question_id_string)"
+		);
+		
+		$results = array();
+		// run through them, add to the results array
+		foreach($responses as $response){
+			foreach($response as $key => $value){
+				error_log("$key => $value");
+			}
+			
+			$results[$response->USER_ID] = array();
+			array_push($results[$response->USER_ID], $response);
+
+		}
+
+		return $results;
+	}
+	
+	
 }
