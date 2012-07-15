@@ -13,7 +13,7 @@ class ResponseTest extends CDbTestCase {
 
 	public function testSubmitEssayQuestion(){
 		$question_id = 1;
-		$user_id = 4;
+		$user_id = 5;
 		$response_text = "this is an essay";
 
 		// first make sure it doesn't already exist
@@ -47,7 +47,7 @@ class ResponseTest extends CDbTestCase {
 	
 	public function testSubmitNumericalQuestion(){
 		$question_id = 1;
-		$user_id = 4;
+		$user_id = 5;
 		$response_text = 3.4;
 
 		// first make sure it doesn't already exist
@@ -81,7 +81,7 @@ class ResponseTest extends CDbTestCase {
 
 	public function testSubmitMultipleSelectionQuestion(){
 		$question_id = 6;
-		$user_id = 4;
+		$user_id = 5;
 		$answer_array = array(
 			9, 10, 11
 		);
@@ -124,7 +124,7 @@ class ResponseTest extends CDbTestCase {
 	public function testSubmitMultipleChoiceQuestion(){
 		$question_id = 1;
 		$question_type = Question::MULTIPLE_CHOICE;
-		$user_id = 4;
+		$user_id = 5;
 		$answer_id = 1;
 
 		// first make sure it doesn't already exist
@@ -164,7 +164,7 @@ class ResponseTest extends CDbTestCase {
 
 	public function testSubmitFillinQuestion(){
 		$question_id = 8;
-		$user_id = 4;
+		$user_id = 5;
 		$answers = array(
 			"lime", "coconut", "drink"
 		);
