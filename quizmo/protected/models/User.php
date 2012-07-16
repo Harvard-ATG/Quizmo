@@ -102,4 +102,15 @@ class User extends QActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	 * gets name!  just catting the fname and lname
+	 * @param string $external_id
+	 * @return string name
+	 */
+	public function getName($external_id){
+		$user = User::model()->findByAttributes(array('EXTERNAL_ID'=>$external_id));
+		return $user->FNAME . " " . $user->LNAME;
+		
+	}
 }
