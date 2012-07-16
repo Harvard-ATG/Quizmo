@@ -214,6 +214,13 @@ class ResponseTest extends CDbTestCase {
 		$this->assertEquals($count, sizeof($results));
 		
 	}
+	
+	public function testGetTotalScoreByUser(){
+		$user_id = 2;
+		$score = 8;
+		
+		$this->assertEquals($score, Response::getTotalScoreByUser($user_id));
+	}
 
    
 }
