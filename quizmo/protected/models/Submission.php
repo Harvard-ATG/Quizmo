@@ -180,6 +180,8 @@ class Submission extends QActiveRecord
 	 */
 	public function getStatusByUser($user_id){
 		$submission = Submission::model()->findByAttributes(array('USER_ID'=>$user_id));
+		if($submission == null)
+			return Submission::NOT_STARTED;
 		return $submission->STATUS;
 	}
 }

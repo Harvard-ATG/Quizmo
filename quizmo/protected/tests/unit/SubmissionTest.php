@@ -91,6 +91,13 @@ class SubmissionTest extends CDbTestCase {
 		
 	}
 
+	public function shouldReturnNotStarted(){
+		$user_id = 1;
+		$submission_status = Submission::NOT_STARTED;
+		
+		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id));
+		
+	}
 
    
 }
