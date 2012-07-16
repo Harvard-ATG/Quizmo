@@ -21,7 +21,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 1,
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -31,7 +31,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 4,
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -41,7 +41,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 1,
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -51,7 +51,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 2,
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -61,7 +61,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 'I am the very model of a modern major general',
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -71,7 +71,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 9,
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -91,7 +91,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => '',
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
@@ -101,7 +101,7 @@ return array(
 		'USER_ID' => 2,
 		'RESPONSE' => 'lime',
 		'SCORE_STATE' => 'U',
-		'SCORE' => 0,
+		'SCORE' => 1,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
