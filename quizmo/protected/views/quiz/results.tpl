@@ -15,6 +15,9 @@
 				Name
 			</th>
 			<th>
+				Status
+			</th>
+			<th>
 				Score
 			</th>
 			<th>
@@ -23,9 +26,29 @@
 		</tr>
 	</thead>
 	<tbody>
+		{foreach from=$results key=key item=value}
+		<tr>
+			<td>
+				{$results[$key].name} 
+			</td>
+			<td>
+				{$results[$key].status} 
+			</td>
+			<td>
+				{$results[$key].score} 
+			</td>
+			<td>
+				Delete 
+			</td>
+		</tr>
+		{/foreach}
+		<!--
 		<tr>
 			<td>
 				JaZahn Clevenger
+			</td>
+			<td>
+				Finished
 			</td>
 			<td>
 				100
@@ -39,6 +62,9 @@
 				Michael Hilborn
 			</td>
 			<td>
+				Finished
+			</td>
+			<td>
 				56
 			</td>
 			<td>
@@ -48,6 +74,9 @@
 		<tr>
 			<td>
 				Arthur Barrett
+			</td>
+			<td>
+				Finished
 			</td>
 			<td>
 				98
@@ -61,11 +90,15 @@
 				Shannon Rice
 			</td>
 			<td>
+				Finished
+			</td>
+			<td>
 				74
 			</td>
 			<td>
 				Delete
 			</td>
 		</tr>
+		-->
 	</tbody>	
 </table>

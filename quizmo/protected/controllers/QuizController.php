@@ -270,10 +270,13 @@ class QuizController extends Controller
 	 * total results
 	 * @param number $id
 	 */
-	public function actionResults($id){		
+	public function actionResults($id){	
+		
+		$results = Response::getResults($id);	
 		
 		$this->render('results', array(
-			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID
+			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID,
+			'results'=>$results
 		));
 	}
 
