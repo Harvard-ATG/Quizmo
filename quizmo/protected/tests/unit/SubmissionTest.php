@@ -82,6 +82,14 @@ class SubmissionTest extends CDbTestCase {
 		$submission->delete();
 		
 	}
+	
+	public function testGetStatusByUser(){
+		$user_id = 2;
+		$submission_status = Submission::SUBMITTED;
+		
+		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id));
+		
+	}
 
 
    

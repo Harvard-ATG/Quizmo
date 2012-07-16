@@ -19,9 +19,13 @@ class SubmittingUnstartedQuizException extends Exception { }
 class Submission extends QActiveRecord
 {
 	
+	const NOT_STARTED = 'N'; // this one may never be used
 	const STARTED = 'U';
 	const UNFINISHED = 'U';
 	const SUBMITTED = 'S';
+	const FINISHED = 'F';
+	const GRADED = 'F';
+	
 	
 	public $sequenceName = 'SUBMISSIONS_SEQ';
 	
@@ -167,5 +171,15 @@ class Submission extends QActiveRecord
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * gets status from user_id
+	 * @param number $user_id
+	 * @return string char, Submission::status
+	 */
+	public function getStatusByUser($user_id){
+		$submission = Submission::model()->findByAttributes(array('USER_ID'=>$user_id));
+		return $submission->STATUS;
 	}
 }
