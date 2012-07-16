@@ -461,11 +461,11 @@ class Response extends QActiveRecord
 		foreach($results as $key => $value){
 			$user_id = $key;
 			$name = User::getName($user_id);
-			//$status = Submission::getStatusByUser($user_id);
-			//$score = Response::getTotalScoreByUser($user_id);
+			$status = Submission::getStatusByUser($user_id);
+			$score = Response::getTotalScoreByUser($user_id);
 			$results[$key]['name'] = $name;
-			//$results[$key]['status'] = $status;
-			//$results[$key]['score'] = $score;
+			$results[$key]['status'] = $status;
+			$results[$key]['score'] = $score;
 		}
 
 		return $results;
