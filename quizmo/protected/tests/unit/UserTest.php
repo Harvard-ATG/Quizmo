@@ -49,10 +49,20 @@ class UserTest extends CDbTestCase {
 	 */
 	public function testGetName(){
 		
+		$id = 1;
+		$name = $this->users['user1']['FNAME'] . " " . $this->users['user1']['LNAME'];
+
+		$this->assertEquals($name, User::getName($id));		
+	}
+
+	/**
+	 * testing getNameByExternal
+	 */
+	public function testGetNameByExternal(){
+		
 		$external_id = $this->users['user1']['EXTERNAL_ID'];
 		$name = $this->users['user1']['FNAME'] . " " . $this->users['user1']['LNAME'];
 
-		$this->assertEquals($name, User::getName($external_id));		
+		$this->assertEquals($name, User::getNameByExternal($external_id));		
 	}
-
 }

@@ -105,10 +105,21 @@ class User extends QActiveRecord
 	
 	/**
 	 * gets name!  just catting the fname and lname
+	 * @param string $id user_id
+ 	 * @return string name
+	 */
+	public function getName($id){
+		$user = User::model()->findByPk($id);
+		return $user->FNAME . " " . $user->LNAME;
+		
+	}
+	
+	/**
+	 * gets name!  just catting the fname and lname
 	 * @param string $external_id
 	 * @return string name
 	 */
-	public function getName($external_id){
+	public function getNameByExternal($external_id){
 		$user = User::model()->findByAttributes(array('EXTERNAL_ID'=>$external_id));
 		return $user->FNAME . " " . $user->LNAME;
 		
