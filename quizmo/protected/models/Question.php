@@ -355,13 +355,13 @@ class Question extends QActiveRecord
 	}
 	
 	/**
-	* getQuestionViewById
-	*
-	* this should return the question and answers in an array that will be easily interpretted by the template
-	* @param integer $question_id
-	*
-	* @return array
-	*/
+	 * getQuestionViewById
+	 *
+	 * this should return the question and answers in an array that will be easily interpretted by the template
+	 * @param integer $question_id
+	 *
+	 * @return array
+	 */
 	public function getQuestionViewById($question_id){
 		$question = Question::model()->findByPk($question_id);
 		$answers = $question->answer;
@@ -382,6 +382,43 @@ class Question extends QActiveRecord
 		$questionArr['answers'] = $answerArr;
 		
 		return $questionArr;
+	}
+	
+	/**
+	 * getQuestionViewById
+	 *
+	 * this should return the question and answers in an array that will be easily interpretted by the template
+	 * @param integer $question_id
+	 *
+	 * @return array
+	 */
+	public function getQuestionViewsByQuizId($quiz_id){
+		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+
+		$output = array();
+		foreach($questions as $question){
+			$answers = $question->answer;
+
+			$questionArr = array();
+			foreach($question as $key => $value){
+				$questionArr[strtolower($key)] = $value;
+			
+			}
+			$answerArr = array();
+			foreach($answers as $answer){
+				$answerInnerArr = array();
+				foreach($answer as $key => $value){
+					$answerInnerArr[strtolower($key)] = $value;		
+				}
+				array_push($answerArr, $answerInnerArr);
+			}
+			$questionArr['answers'] = $answerArr;
+		
+			array_push($output, $questionArr);
+		}
+		
+		return $output;
+	
 	}
 	
 }

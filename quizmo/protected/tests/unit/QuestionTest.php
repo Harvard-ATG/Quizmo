@@ -156,7 +156,18 @@ class QuestionTest extends CDbTestCase {
 		
 	}
 	public function testGetQuestionViewsByQuizId(){
+		$quiz_id = 1;
+		$question_count = 8;
+		$question_id = 2;
+		$question_type = Question::TRUE_FALSE;
 		
+		$questions = Question::getQuestionViewsByQuizId($quiz_id);
+		// check the number is right
+		$this->assertEquals($question_count, count($questions));
+		// check the second question id is right 
+		$this->assertEquals($question_id, $questions[1]['id']);
+		// check the second question type is right
+		$this->assertEquals($question_type, $questions[1]['question_type']);
 
 
 	}
