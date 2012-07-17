@@ -31,7 +31,7 @@ class QuizController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','take', 'edit', 'results'),
+				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -275,8 +275,28 @@ class QuizController extends Controller
 		$results = Response::getResults($id);	
 		
 		$this->render('results', array(
+			'quiz_id'=>$id,
 			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID,
 			'results'=>$results
+		));
+	}
+
+	/**
+	 * total results for an individual
+	 * @param number $id quiz_id
+	 * @param number $id2 user_id
+	 */
+	public function actionIndividualResults($id, $id2){	
+		
+		$quiz_id = $id;
+		$user_id = $id2;
+		
+		
+		$this->render('individual_results', array(
+			'user_id'=>$user_id,
+			'quiz_id'=>$quiz_id,
+			'name'=>User::getName($user_id),
+			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID
 		));
 	}
 

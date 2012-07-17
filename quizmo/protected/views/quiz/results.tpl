@@ -26,16 +26,16 @@
 		</tr>
 	</thead>
 	<tbody>
-		{foreach from=$results key=key item=value}
+		{foreach from=$results key=user_id item=value}
 		<tr>
 			<td>
-				{$results[$key].name} 
+				<a href="/quiz/individualResults/{$quiz_id}/{$user_id}">{$results[$user_id].name}</a> 
 			</td>
 			<td>
-				{$results[$key].status} 
+				{$results[$user_id].status} 
 			</td>
 			<td>
-				{$results[$key].score} 
+				{$results[$user_id].score} 
 			</td>
 			<td>
 				Delete 
