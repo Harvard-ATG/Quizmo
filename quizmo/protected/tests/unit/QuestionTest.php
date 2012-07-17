@@ -10,6 +10,7 @@ class QuestionTest extends CDbTestCase {
 	public $fixtures=array(
 		'quizes'=>'Quiz',
 		'questions'=>'Question',
+		'answers'=>'Answer',
 	);
 	
 
@@ -139,6 +140,25 @@ class QuestionTest extends CDbTestCase {
 
 	}
 
+	public function testGetQuestionViewById(){
+		$question_id = 1;
+		$question_type = Question::MULTIPLE_CHOICE;
+		
+		$question =  Question::getQuestionViewById($question_id);
+		
+		// check that the question is the right type
+		$this->assertEquals($question_type, $question['question_type']);
+		// check that it has an associated answer
+		$this->assertNotNull($question['answers'][0]);
+		// check that the answer is of the same type
+		$this->assertEquals($question['question_type'], $question['answers'][0]['question_type']);
+		
+		
+	}
+	public function testGetQuestionViewsByQuizId(){
+		
 
+
+	}
    
 }
