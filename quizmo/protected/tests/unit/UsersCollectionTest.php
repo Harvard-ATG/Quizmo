@@ -10,11 +10,11 @@ class UsersCollectionTest extends CDbTestCase {
 	public $fixtures=array(
 		'collections'=>'Collection',
 		'users'=>'User',
-		'userscollections'=>'UsersCollection',
 		'quizes'=>'Quiz',
 		'submissions'=>'Submission',
 		'questions'=>'Question',
-		'answers'=>'Answer'
+		'answers'=>'Answer',
+		'userscollections'=>'UsersCollection',
 	);
 	
 	/**
