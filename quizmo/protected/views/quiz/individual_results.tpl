@@ -15,18 +15,14 @@
 	<div class="span2">
 		<img src="/img/user-icon.png"/>
 	</div>
-	{foreach from=$questions item=question_id}
-	<div class="span8 well">
-		{* include file = 'protected/views/question/_view.tpl'
-			question_id = $question_id
-			title = $title
-			description = $description
-			state = $state
-			start_date = $start_date
-			end_date = $end_date
-		*}
-	</div>
-	{/foreach}
+</div>
+{foreach from=$questions item=question}
+<div class="span8 well">{$question.id}
+	{include file = 'protected/views/question/_view.tpl'
+		question = $question
+	}
+</div>
+{/foreach}
 	
 </div>
 

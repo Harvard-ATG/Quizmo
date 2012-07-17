@@ -292,11 +292,14 @@ class QuizController extends Controller
 		$user_id = $id2;
 		
 		
+		
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'name'=>User::getName($user_id),
-			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID
+			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID,
+			'question_ids'=>Quiz::getQuestionIds($quiz_id),
+			'questions'=>Question::getQuestionViewsByQuizId($quiz_id)
 		));
 	}
 
