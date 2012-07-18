@@ -392,18 +392,22 @@ class Question extends QActiveRecord
 	 *
 	 * @return array
 	 */
-	public function getQuestionViewsByQuizId($quiz_id){
+	public function getQuestionViewsByQuizId($quiz_id, $user_id){
 		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
 
 		$output = array();
 		foreach($questions as $question){
 			$answers = $question->answer;
+			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question->ID));
 
+			// questions
 			$questionArr = array();
 			foreach($question as $key => $value){
 				$questionArr[strtolower($key)] = $value;
 			
 			}
+			
+			// answers
 			$answerArr = array();
 			foreach($answers as $answer){
 				$answerInnerArr = array();
@@ -413,12 +417,37 @@ class Question extends QActiveRecord
 				array_push($answerArr, $answerInnerArr);
 			}
 			$questionArr['answers'] = $answerArr;
+			
+			// responses
+			$responseArr = array();
+			foreach($responses as $response){
+				$responseInnerArr = array();
+				foreach($response as $key => $value){
+					$responseInnerArr[strtolower($key)] = $value;		
+				}
+				array_push($responseArr, $responseInnerArr);
+			}
+			$questionArr['responses'] = $responseArr;
 		
 			array_push($output, $questionArr);
 		}
 		
 		return $output;
 	
+	}
+	
+	/**
+	 * gets the total score from the questions
+	 * @param number $quiz_id
+	 * @return number score
+	 */
+	public function getTotalScore($quiz_id){
+		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+		$score = 0;
+		foreach($questions as $question){
+			$score += $question->POINTS;
+		}
+		return $score;
 	}
 	
 }

@@ -155,21 +155,37 @@ class QuestionTest extends CDbTestCase {
 		
 		
 	}
+	
 	public function testGetQuestionViewsByQuizId(){
+		$user_id = 2;
 		$quiz_id = 1;
 		$question_count = 8;
 		$question_id = 2;
 		$question_type = Question::TRUE_FALSE;
 		
-		$questions = Question::getQuestionViewsByQuizId($quiz_id);
+		$questions = Question::getQuestionViewsByQuizId($quiz_id, $user_id);
 		// check the number is right
 		$this->assertEquals($question_count, count($questions));
 		// check the second question id is right 
-		//$this->assertEquals($question_id, $questions[1]['id']);
+		$this->assertEquals($question_id, $questions[1]['id']);
 		// check the second question type is right
-		//$this->assertEquals($question_type, $questions[1]['question_type']);
-		$this->markTestIncomplete();
+		$this->assertEquals($question_type, $questions[1]['question_type']);
+		// check the second question has answers associated
+		$this->assertNotNull($questions[1]['answers']);
+		// check the second question has a response associated
+		$this->assertNotNull($questions[1]['responses']);
+		
+		
+		//$this->markTestIncomplete();
 
+	}
+	
+	public function testGetTotalScore(){
+		$total_score = 35;
+		$quiz_id = 1;
+		
+		$this->assertEquals($total_score, Question::getTotalScore($quiz_id));
+		
 	}
    
 }
