@@ -19,7 +19,7 @@ function smarty_function_fillin($params, &$smarty){
 	preg_match_all("/\{[^}]*\}/", $question, $matches);
 	foreach($matches as $val){
 		foreach($val as $key => $match){
-			error_log($match);
+			//error_log($match);
 			$new_input = "<input class='input-small fillin-text' type='text'/>";
 			$question = preg_replace("/".addslashes($match)."/", $new_input, $question);
 		}
