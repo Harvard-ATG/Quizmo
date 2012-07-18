@@ -43,7 +43,7 @@ class QuizTest extends CDbTestCase {
 		//$this->assertFalse($quiz->create('', $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback), "Failed asserting that create fails without a collection_id");
 		
 		$this->markTestIncomplete(
-          "This test still needs a correct date format.  It's a timestamp now, should be a date."
+          "This test still needs a correct date format.  It's a timestamp, not sure how to deal with..."
         );
 	}
 	

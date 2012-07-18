@@ -26,7 +26,7 @@ class Response extends QActiveRecord
 	const AUTO_SCORED = 'A';
 	const MANUAL_SCORED = 'M';
 	
-	public $sequenceName1 = 'RESPONSES_SEQ';
+	public $sequenceName = 'RESPONSES_SEQ';
 	
 	/**
 	 * Returns the static model of the specified AR class.

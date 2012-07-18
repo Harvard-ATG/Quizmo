@@ -13,6 +13,7 @@ class UsersCollectionTest extends CDbTestCase {
 		'quizes'=>'Quiz',
 		'submissions'=>'Submission',
 		'questions'=>'Question',
+		'responses'=>'Response',
 		'answers'=>'Answer',
 		'userscollections'=>'UsersCollection',
 	);
