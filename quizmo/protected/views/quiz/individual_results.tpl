@@ -9,20 +9,31 @@
 </ul>
 
 <div class="row-fluid">
-	<h1 class="span12">Individual Results</h1>
+	<h1 class="span12">Question Results for {$name}</h1>
 </div>
-<div class="span12">
+
+<div class="row-fluid">
 	<div class="span2">
 		<img src="/img/user-icon.png"/>
 	</div>
+	<div class="span2 well">
+		Score: {$score} / {$total_score}
+	</div>
 </div>
+
+<div class="row-fluid">
+<table class="table table-bordered table-striped">
+	<tbody>
 {foreach from=$questions item=question}
-<div class="span8 well">{$question.id}
+		<tr>
+			<td>
 	{include file = 'protected/views/question/_view.tpl'
 		question = $question
 	}
-</div>
+			</td>
+		</tr>
 {/foreach}
-	
+	</tbody>
+</table>
 </div>
 
