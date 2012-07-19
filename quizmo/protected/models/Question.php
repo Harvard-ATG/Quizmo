@@ -395,6 +395,10 @@ class Question extends QActiveRecord
 	public function getQuestionViewsByQuizId($quiz_id, $user_id){
 		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
 
+		foreach($questions as $question){
+			echo("$question->ID\n");
+		}
+
 		$output = array();
 		foreach($questions as $question){
 			$answers = $question->answer;

@@ -36,6 +36,24 @@ class QActiveRecord extends CActiveRecord {
 		
 	}
 	
+	public function scopes()
+    {
+        return array(
+            'sort_order'=>array(
+                'order'=>'SORT_ORDER ASC'
+            ),
+            'id_order'=>array(
+                'order'=>'ID ASC'
+            ),
+        );
+    }
+	
+	public function defaultScope()
+	{
+	    return array(
+	    	'order'=>'ID ASC'
+	    );
+	}
 	
 }
 
