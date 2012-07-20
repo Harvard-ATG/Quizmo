@@ -14,17 +14,28 @@ function smarty_function_fillin($params, &$smarty){
 
 	//error_log("fillin...");
 	$question = $params['question'];
+	$responses = null;
+	if(isset($params['responses']))
+		$responses = $params['responses'];
 	//$question = "you put the {lime} in the {coconut} and {drink} it all up";
+	//$responses = array(array(response=>lime), array(response=>coconut), array(response=>drink))
 	
 	preg_match_all("/\{[^}]*\}/", $question, $matches);
+	$responses_index = 0;
 	foreach($matches as $val){
 		foreach($val as $key => $match){
 			//error_log($match);
-			$new_input = "<input class='input-small fillin-text' type='text'/>";
+			if($responses == null){
+				$new_input = "<input class='input-small fillin-text' type='text'/>";				
+			} else {
+				//error_log("$response...");
+				$response = $responses[$responses_index]['response'];
+				$responses_index++;
+				$new_input = "<input class='input-small fillin-text' type='text' value='$response' />";
+			}
 			$question = preg_replace("/".addslashes($match)."/", $new_input, $question);
 		}
 		//error_log(var_export($match, 1));
-		
 	}
 	
 

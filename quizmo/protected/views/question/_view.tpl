@@ -1,7 +1,7 @@
 <div id="question-quiz-view" class="well" style="height: 200px">
 	<div class="lead">
 		{if $question.question_type == 'F'}
-			{fillin question=$question.body}
+			{fillin question=$question.body responses=$question.responses}
 		{else}
 			{$question['body']}
 		{/if}
