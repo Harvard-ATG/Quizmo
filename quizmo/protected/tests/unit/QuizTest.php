@@ -73,5 +73,12 @@ class QuizTest extends CDbTestCase {
 		$this->assertEquals($title, $quiz->TITLE);
 		$this->assertEquals($collection_id, $quiz->COLLECTION_ID);
 	}
+	
+	public function testGetCollectionId(){
+		$quiz_id = 1;
+		$collection_id = 1;
+		
+		$this->assertEquals($collection_id, Quiz::getCollectionId($quiz_id));
+	}
    
 }

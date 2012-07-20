@@ -218,6 +218,15 @@ class Quiz extends QActiveRecord
 		return $quiz;
 	}
 	
+	/**
+	 * gets the collection_id
+	 * @param number $quiz_id
+	 * @return number $collection_id
+	 */
+	public function getCollectionId($quiz_id){
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		return $quiz->COLLECTION_ID;
+	}
 	
 	
 }
