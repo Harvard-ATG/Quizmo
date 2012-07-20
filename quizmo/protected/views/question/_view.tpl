@@ -13,7 +13,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].is_correct}checked{/if}>
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked{/if}>
 					{$question.answers[$key].answer} {$question.answers[$key].is_correct} 
 				</input>
 			</label>
@@ -27,7 +27,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}">
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked{/if}>
 					{$question.answers[$key].answer}
 				</input>
 			</label>
@@ -40,7 +40,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="input-xlarge" rows="9"></textarea>
+			<textarea id="essay-text" class="input-xlarge" rows="9">{$question.responses[0].response}</textarea>
 		</div>
 	</div>
 
@@ -49,7 +49,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<input id="numerical-text" type="text" class="input-xlarge"/>
+			<input id="numerical-text" type="text" class="input-xlarge" value="{$question.responses[0].response}" />
 		</div>
 	</div>
 
