@@ -73,7 +73,7 @@ class m120402_195435_Questions extends CDbMigration
 			'QUESTION_TYPE' => 'string NOT NULL',
 			'TITLE' => 'string',
 			'BODY' => "string",
-			'QUESTION_ORDER' => 'integer',
+			'SORT_ORDER' => 'integer',
 			'POINTS' => 'integer',
 			'FEEDBACK' => 'string',
 			'DELETED' => 'integer NOT NULL',

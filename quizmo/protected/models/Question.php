@@ -9,7 +9,7 @@
  * string $question_type <br>
  * string $title <br>
  * string $body <br>
- * integer $question_order <br>
+ * integer $sort_order <br>
  * integer $points <br>
  * string $feedback <br>
  * integer $deleted <br>
@@ -61,11 +61,11 @@ class Question extends QActiveRecord
 		// will receive user inputs.
 		return array(
 			array('QUIZ_ID, QUESTION_TYPE, DELETED', 'required'),
-			array('QUIZ_ID, QUESTION_ORDER, POINTS, DELETED', 'numerical', 'integerOnly'=>true),
+			array('QUIZ_ID, SORT_ORDER, POINTS, DELETED', 'numerical', 'integerOnly'=>true),
 			array('QUESTION_TYPE, TITLE, BODY, FEEDBACK', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, QUESTION_ORDER, POINTS, FEEDBACK, DELETED', 'safe', 'on'=>'search'),
+			array('ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, SORT_ORDER, POINTS, FEEDBACK, DELETED', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,7 +95,7 @@ class Question extends QActiveRecord
 			'QUESTION_TYPE' => 'Question Type',
 			'TITLE' => 'Title',
 			'BODY' => 'Body',
-			'QUESTION_ORDER' => 'Question Order',
+			'SORT_ORDER' => 'Question Order',
 			'POINTS' => 'Points',
 			'FEEDBACK' => 'Feedback',
 			'DELETED' => 'Deleted',
@@ -119,7 +119,7 @@ class Question extends QActiveRecord
 		$criteria->compare('QUESTION_TYPE',$this->QUESTION_TYPE,true);
 		$criteria->compare('TITLE',$this->TITLE,true);
 		$criteria->compare('BODY',$this->BODY,true);
-		$criteria->compare('QUESTION_ORDER',$this->QUESTION_ORDER);
+		$criteria->compare('SORT_ORDER',$this->SORT_ORDER);
 		$criteria->compare('POINTS',$this->POINTS);
 		$criteria->compare('FEEDBACK',$this->FEEDBACK,true);
 		$criteria->compare('DELETED',$this->DELETED);
@@ -137,7 +137,7 @@ class Question extends QActiveRecord
 	* @param integer $quiz_id
 	* @return array()
 	* array(
-	* 	array(ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, QUESTION_ORDER, POINTS, FEEDBACK, DELETED, link)
+	* 	array(ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, SORT_ORDER, POINTS, FEEDBACK, DELETED, link)
 	* )
 	*/
 	public function getQuestionArrayByQuizId($quiz_id){
@@ -161,7 +161,7 @@ class Question extends QActiveRecord
 	* getNextQuestionOrder
 	*
 	* originally thinking of this just to be used internally
-	* when adding new questions -- to get the appropriate question_order
+	* when adding new questions -- to get the appropriate sort_order
 	*
 	* @param integer $quiz_id
 	* @return integer $quetion_order
@@ -169,15 +169,14 @@ class Question extends QActiveRecord
 	public function getNextQuestionOrder($quiz_id){
 		//error_log("getNextQuestionOrder");
 		$criteria=new CDbCriteria;
-		//$criteria->select = 'max(QUESTION_ORDER) AS max_question_order';
+		//$criteria->select = 'max(SORT_ORDER) AS max_sort_order';
 		$criteria->condition = 'quiz_id='.$quiz_id;
-		$criteria->order = "question_order DESC";
+		$criteria->order = "sort_order DESC";
 		
 		$question = Question::model()->find($criteria);
 
-
-		if(isset($question->QUESTION_ORDER))
-			return $question->QUESTION_ORDER+1;
+		if(isset($question->SORT_ORDER))
+			return $question->SORT_ORDER+1;
 		else
 			return 1;
 
@@ -202,13 +201,13 @@ class Question extends QActiveRecord
 			return false;
 		}
 		
-		$question_order = $this->getNextQuestionOrder($quiz_id);
+		$sort_order = $this->getNextQuestionOrder($quiz_id);
 		$this->setAttributes(array(
 	        	'QUIZ_ID'=>$quiz_id,
 				'QUESTION_TYPE'=>$question_type,
 	        	'TITLE'=>$title,
 		        'BODY'=>$body,
-				'QUESTION_ORDER'=>$question_order,
+				'SORT_ORDER'=>$sort_order,
 		        'POINTS'=>$score,
 				'FEEDBACK'=>$feedback,
 				'DELETED'=>0,
@@ -393,11 +392,7 @@ class Question extends QActiveRecord
 	 * @return array
 	 */
 	public function getQuestionViewsByQuizId($quiz_id, $user_id){
-		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
-
-		foreach($questions as $question){
-			echo("$question->ID\n");
-		}
+		$questions = Question::model()->sort_order()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
 
 		$output = array();
 		foreach($questions as $question){
