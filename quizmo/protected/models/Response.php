@@ -486,4 +486,30 @@ class Response extends QActiveRecord
 
 	}
 	
+	/**
+	 * checks if a user got an answer correct.
+	 * this only works for MC, TF, MS... 
+	 * @param number $user_id
+	 * @param number $answer_id
+	 * @return boolean
+	 */
+	public function isAnswerCorrect($user_id, $answer_id){
+		// get answer
+		$answer = Answer::model()->findByPk($answer_id);
+		if($answer->IS_CORRECT != 1)
+			return false;
+
+		// get responses
+		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$answer->QUESTION_ID));
+		
+		// check if it's correct
+		foreach($responses as $response){
+			if($response->RESPONSE == $answer_id){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 }

@@ -227,5 +227,14 @@ class ResponseTest extends CDbTestCase {
 		$this->assertEquals($score, Response::getTotalScoreByUser($user_id));
 	}
 
-   
+	public function testIsAnswerCorrect(){
+		$user_id = 2;
+		$correct_answer_id = 1;
+		$incorrect_answer_id = 2;
+		
+		$this->assertTrue(Response::isAnswerCorrect($user_id, $correct_answer_id));
+		$this->assertFalse(Response::isAnswerCorrect($user_id, $incorrect_answer_id));
+		
+	}
+
 }
