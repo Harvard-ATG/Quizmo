@@ -8,6 +8,9 @@ Disclaimer: the configuration provided below is intended for a sandbox environme
   
 ```sh
 git clone git@github.com:jazahn/Quizmo.git Quizmo
+cd Quizmo
+git submodule init
+git submodule update
 ```
    
 * Add the following section to your Apache vhosts config <code>/Applications/MAMP/conf/apache/extra/httpd-vhosts.conf</code>:
