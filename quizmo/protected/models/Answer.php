@@ -12,7 +12,7 @@
  * integer $textarea_rows <br>
  * string $answer <br>
  * integer $is_case_sensitive <br>
- * integer $answer_order <br>
+ * integer $sort_order <br>
  * integer $is_correct <br>
  * double $tolerance <br>
  *
@@ -69,12 +69,12 @@ class Answer extends QActiveRecord
 		// will receive user inputs.
 		return array(
 			array('QUESTION_ID, QUESTION_TYPE, IS_CORRECT', 'required'),
-			array('QUESTION_ID, TEXTAREA_ROWS, IS_CASE_SENSITIVE, ANSWER_ORDER, IS_CORRECT', 'numerical', 'integerOnly'=>true),
+			array('QUESTION_ID, TEXTAREA_ROWS, IS_CASE_SENSITIVE, SORT_ORDER, IS_CORRECT', 'numerical', 'integerOnly'=>true),
 			array('TOLERANCE', 'numerical'),
 			array('QUESTION_TYPE, ANSWER', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ID, QUESTION_ID, QUESTION_TYPE, TEXTAREA_ROWS, ANSWER, IS_CASE_SENSITIVE, ANSWER_ORDER, IS_CORRECT, TOLERANCE', 'safe', 'on'=>'search'),
+			array('ID, QUESTION_ID, QUESTION_TYPE, TEXTAREA_ROWS, ANSWER, IS_CASE_SENSITIVE, SORT_ORDER, IS_CORRECT, TOLERANCE', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -110,7 +110,7 @@ class Answer extends QActiveRecord
 			'TEXTAREA_ROWS' => 'Textarea Rows',
 			'ANSWER' => 'Answer',
 			'IS_CASE_SENSITIVE' => 'Is Case Sensitive',
-			'ANSWER_ORDER' => 'Answer Order',
+			'SORT_ORDER' => 'Answer Order',
 			'IS_CORRECT' => 'Is Correct',
 			'TOLERANCE' => 'Tolerance',
 		);
@@ -137,7 +137,7 @@ class Answer extends QActiveRecord
 		$criteria->compare('TEXTAREA_ROWS',$this->textarea_rows);
 		$criteria->compare('ANSWER',$this->answer,true);
 		$criteria->compare('IS_CASE_SENSITIVE',$this->is_case_sensitive);
-		$criteria->compare('ANSWER_ORDER',$this->answer_order);
+		$criteria->compare('SORT_ORDER',$this->sort_order);
 		$criteria->compare('IS_CORRECT',$this->is_correct);
 		$criteria->compare('TOLERANCE',$this->tolerance);
 
@@ -156,17 +156,17 @@ class Answer extends QActiveRecord
 	*
 	* @param integer $question_id 
 	*
-	* @return integer $answer_order
+	* @return integer $sort_order
 	*/
 	public function getNextAnswerOrder($question_id){
 
 		$criteria=new CDbCriteria;
 		$criteria->condition = 'question_id='.$question_id;
-		$criteria->order = "answer_order DESC";
+		$criteria->order = "sort_order DESC";
 		
 		$answer = Answer::model()->find($criteria);
-		if(isset($answer->ANSWER_ORDER))
-			return $answer->ANSWER_ORDER+1;
+		if(isset($answer->SORT_ORDER))
+			return $answer->SORT_ORDER+1;
 		else
 			return 1;
 
@@ -189,13 +189,13 @@ class Answer extends QActiveRecord
 	*/
 	public function create($question_id, $question_type, $answer, $is_correct, $textarea_rows=10, $is_case_sensitive=0, $tolerance=0){
 		
-		$answer_order = $this->getNextAnswerOrder($question_id);
+		$sort_order = $this->getNextAnswerOrder($question_id);
 		
 		$this->setAttributes(array(
 	        	'QUESTION_ID'=>$question_id,
 				'QUESTION_TYPE'=>$question_type,
 	        	'ANSWER'=>$answer,
-				'ANSWER_ORDER'=>$answer_order,
+				'SORT_ORDER'=>$sort_order,
 		        'IS_CORRECT'=>$is_correct,	
 				'TEXTAREA_ROWS'=>$textarea_rows,
 				'IS_CASE_SENSITIVE'=>$is_case_sensitive,

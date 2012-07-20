@@ -63,7 +63,7 @@ class m120402_195455_Answers extends CDbMigration
 			'TEXTAREA_ROWS' => 'integer',
 			'ANSWER' => 'string',
 			'IS_CASE_SENSITIVE' => 'integer',
-			'ANSWER_ORDER' => 'integer',
+			'SORT_ORDER' => 'integer',
 			'IS_CORRECT' => 'integer NOT NULL',
 			'TOLERANCE' => 'float',
 		));	
