@@ -8,6 +8,9 @@
 <div class="row-fluid">
 	<h1 class="span12">Results</h1>
 </div>
+<div class="row-fluid">
+	<h6 class="span12">Export</h6>
+</div>
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
@@ -29,7 +32,7 @@
 		{foreach from=$results key=user_id item=value}
 		<tr>
 			<td>
-				<a href="/quiz/individualResults/{$quiz_id}/{$user_id}">{$results[$user_id].name}</a> 
+				<a href='{url url="/quiz/individualResults/$quiz_id/$user_id"}'>{$results[$user_id].name}</a> 
 			</td>
 			<td>
 				{$results[$user_id].status} 
