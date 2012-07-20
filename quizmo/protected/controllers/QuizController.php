@@ -31,7 +31,7 @@ class QuizController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults'),
+				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults', 'submit'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -218,10 +218,10 @@ class QuizController extends Controller
 	 */
 	public function actionIndex($id='')
 	{
-		error_log("quiz/index");
+		//error_log("quiz/index");
 		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
 		$user_id = Yii::app()->user->id;
-		$quizes = Quiz::getQuizArrayByCollectionId($collection_id);
+		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,
 			'quizes'=>$quizes,
@@ -238,7 +238,7 @@ class QuizController extends Controller
 	 * this should start a submission for the user/quiz pair 
 	 * and send along a list of questions for the view to grab via ajaxification
 	 * 
-	 * @param number $id
+	 * @param number $id quiz_id
 	 */
 	public function actionTake($id=''){
 		$quiz_id = $id;
@@ -263,8 +263,29 @@ class QuizController extends Controller
 			
 		));
 		
-		
 	}
+	
+	/**
+	 * submits a quiz for scoring
+	 * @param number $id quiz_id
+	 */
+	public function actionSubmit($id){
+		$quiz_id = $id;
+		$user_id = Yii::app()->user->id;
+		
+		Submission::submitQuiz($user_id, $quiz_id);
+		
+		$collection_id = Quiz::getCollectionId($quiz_id);
+		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
+		$this->render('index',array(
+			//'dataProvider'=>$dataProvider,
+			'quizes'=>$quizes,
+			'sizeofquizes'=>sizeof($quizes),
+			'user_id'=>$user_id,
+			'collection_id'=>$collection_id,
+		));
+	
+	 }
 	
 	/**
 	 * total results

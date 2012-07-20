@@ -18,6 +18,15 @@
 				<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				<a href="{url url='/question/index/'|cat:$quiz['ID']}">Edit Questions</a><br/>
 				<a href="{url url='/quiz/create/'|cat:$collection_id|cat:'/'|cat:$quiz['ID']}">Edit Settings</a><br/>
+				{if $quiz.status == 'N'}
+					<!-- not started -->
+				{elseif $quiz.status == 'S'}
+					<!-- submitted -->
+					<a href='{url url="/quiz/individualResults/"|cat:$quiz['ID']|cat:"/"|cat:$user_id}'>My Results</a><br/>
+				{else}
+					<!-- started -->
+					<a href='{url url="/quiz/submit/"|cat:$quiz['ID']}'>Submit</a><br/>
+				{/if}
 				<a href="{url url='/quiz/results/'|cat:$quiz['ID']}">Results</a><br/>
 
 				<a data-toggle="modal" href="#quiz-delete-modal-{$quiz['ID']}" >Delete</a>
