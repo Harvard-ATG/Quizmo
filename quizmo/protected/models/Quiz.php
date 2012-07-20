@@ -135,7 +135,7 @@ class Quiz extends QActiveRecord
 	* @param integer $collection_id
 	* @return array
 	*/
-	public function getQuizArrayByCollectionId($collection_id){
+	public function getQuizArrayByCollectionId($collection_id, $user_id){
 		
 		$quizes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
 		
@@ -143,6 +143,8 @@ class Quiz extends QActiveRecord
 		foreach($quizes as $quiz){
 			$qa = array();
 			$qa['link'] = "/question/index/".$quiz->ID;
+			$status = Submission::getStatusByUser($user_id, $quiz->ID);
+			$qa['status'] = $status;
 			foreach($quiz as $key=>$value){
 				$qa[$key] = $value;
 			}

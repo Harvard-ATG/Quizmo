@@ -21,11 +21,16 @@ class QuizTest extends CDbTestCase {
 	
 
 	public function testGetQuizArrayByCollectionId(){
+		$user_id = 2;
+		$quiz_id = 1;
+		$submission_status = Submission::SUBMITTED;
 		$collection_id = 1;
-		
-		$collections = Quiz::getQuizArrayByCollectionId($collection_id);
+				
+		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		// this is based on the fixtures..
-		$this->assertEquals(4, sizeof($collections));
+		$this->assertEquals(4, sizeof($quizes));
+		// get user_id 2's submission status
+		$this->assertEquals(Submission::SUBMITTED, $quizes[0]['status']);
 		
 		
 	}
