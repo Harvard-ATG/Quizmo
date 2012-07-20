@@ -176,10 +176,11 @@ class Submission extends QActiveRecord
 	/**
 	 * gets status from user_id
 	 * @param number $user_id
+	 * @param number $quiz_id
 	 * @return string char, Submission::status
 	 */
-	public function getStatusByUser($user_id){
-		$submission = Submission::model()->findByAttributes(array('USER_ID'=>$user_id));
+	public function getStatusByUser($user_id, $quiz_id){
+		$submission = Submission::model()->findByAttributes(array('USER_ID'=>$user_id, 'QUIZ_ID'=>$quiz_id));
 		if($submission == null)
 			return Submission::NOT_STARTED;
 		return $submission->STATUS;

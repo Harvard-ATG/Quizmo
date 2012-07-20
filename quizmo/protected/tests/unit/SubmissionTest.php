@@ -87,6 +87,7 @@ class SubmissionTest extends CDbTestCase {
 	
 	public function testGetStatusByUser(){
 		$user_id = 2;
+		$quiz_id = 1;
 		$submission_status = Submission::SUBMITTED;
 		
 		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id));
@@ -97,7 +98,7 @@ class SubmissionTest extends CDbTestCase {
 		$user_id = 1;
 		$submission_status = Submission::NOT_STARTED;
 		
-		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id));
+		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id, $quiz_id));
 		
 	}
 
