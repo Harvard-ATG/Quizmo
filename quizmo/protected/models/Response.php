@@ -461,8 +461,8 @@ class Response extends QActiveRecord
 		foreach($results as $key => $value){
 			$user_id = $key;
 			$name = User::getName($user_id);
-			$status = Submission::getStatusByUser($user_id);
-			$score = Response::getTotalScoreByUser($user_id);
+			$status = Submission::getStatusByUser($user_id, $quiz_id);
+			$score = Response::getTotalScoreByUser($user_id, $quiz_id);
 			$results[$key]['name'] = $name;
 			$results[$key]['status'] = $status;
 			$results[$key]['score'] = $score;
@@ -474,13 +474,17 @@ class Response extends QActiveRecord
 	/**
 	 * gets the total score by the user... 
 	 * @param number $user_id
+	 * @param number $quiz_id
 	 * @return number
 	 */
-	public function getTotalScoreByUser($user_id){
+	public function getTotalScoreByUser($user_id, $quiz_id){
 		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id));
+		$question_ids = Quiz::getQuestionIds($quiz_id);
 		$score = 0;
 		foreach($responses as $response){
-			$score += $response->SCORE;
+			if(in_array($response->QUESTION_ID, $question_ids)){
+				$score += $response->SCORE;				
+			}
 		}
 		return $score;
 
