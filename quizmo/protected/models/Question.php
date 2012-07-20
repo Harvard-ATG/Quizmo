@@ -164,7 +164,7 @@ class Question extends QActiveRecord
 	* when adding new questions -- to get the appropriate sort_order
 	*
 	* @param integer $quiz_id
-	* @return integer $quetion_order
+	* @return integer $sort_order
 	*/
 	public function getNextQuestionOrder($quiz_id){
 		//error_log("getNextQuestionOrder");
@@ -406,17 +406,6 @@ class Question extends QActiveRecord
 			
 			}
 			
-			// answers
-			$answerArr = array();
-			foreach($answers as $answer){
-				$answerInnerArr = array();
-				foreach($answer as $key => $value){
-					$answerInnerArr[strtolower($key)] = $value;		
-				}
-				array_push($answerArr, $answerInnerArr);
-			}
-			$questionArr['answers'] = $answerArr;
-			
 			// responses
 			$responseArr = array();
 			foreach($responses as $response){
@@ -427,6 +416,27 @@ class Question extends QActiveRecord
 				array_push($responseArr, $responseInnerArr);
 			}
 			$questionArr['responses'] = $responseArr;
+
+			// answers
+			$answerArr = array();
+			foreach($answers as $answer){
+				$answerInnerArr = array();
+				foreach($answer as $key => $value){
+					$answerInnerArr[strtolower($key)] = $value;		
+				}
+
+				// for mc ms and tf the answer arr needs to know if it's correctly answered
+				if(Response::isAnswerCorrect($user_id, $answer->ID)){
+					$answerInnerArr['response_correct'] = true;
+				} else {
+					$answerInnerArr['response_correct'] = false;
+				}
+				
+				array_push($answerArr, $answerInnerArr);
+
+			}
+			$questionArr['answers'] = $answerArr;
+			
 		
 			array_push($output, $questionArr);
 		}
