@@ -1,9 +1,9 @@
 <ul class="breadcrumb">
   <li>
-    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
+    <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
   <li>
-    <a href="/quiz/results/{$quiz_id}">Results</a> <span class="divider">/</span>
+    <a href='{url url="/quiz/results/$quiz_id"}'>Results</a> <span class="divider">/</span>
   </li>
   <li class="active">{$name}</li>
 </ul>
