@@ -10,8 +10,13 @@ class QuizTest extends CDbTestCase {
 	public $fixtures=array(
 		'collections'=>'Collection',
 		'quizes'=>'Quiz',
-		'questions'=>'Question',
 		'users'=>'User',
+		'submissions'=>'Submission',
+		'questions'=>'Question',
+		'responses'=>'Response',
+		'answers'=>'Answer',
+		'userscollections'=>'UsersCollection',
+		
 	);
 	
 
