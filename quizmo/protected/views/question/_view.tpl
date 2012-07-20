@@ -13,7 +13,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked{/if}>
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked="checked"{/if}>
 					{$question.answers[$key].answer} {$question.answers[$key].is_correct} 
 				</input>
 			</label>
@@ -27,7 +27,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked{/if}>
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked="checked"{/if}>
 					{$question.answers[$key].answer}
 				</input>
 			</label>
