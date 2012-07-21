@@ -2,9 +2,10 @@
 	<h1 class="span12">Taking the quiz</h1>
 </div>
 
-<div id="questions-container" class="span12 row-fluid">
+<div class="row-fluid well"  style="height: 300px">
+<div id="questions-container">
 
-
+</div>
 </div>
 
 <div id="quiz-controls" class="btn-toolbar">
@@ -40,8 +41,9 @@ $(document).ready(function(){
 	
 	//load the first question...
 	var current_question_id = current_item.attr("name");
-	$('#questions-container').load(url('/question/view/' + current_question_id));
-	
+	{literal}
+	$('#questions-container').load(url('/question/view/' + current_question_id), function(){$(this).fadeIn('slow')}).hide();
+	{/literal}
 	// add the click listener for the numbered buttons
 	$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
 		submitQuestion();
@@ -51,36 +53,46 @@ $(document).ready(function(){
 		
 		// only perform the actions if the button is not already active
 		if(!this_question_button.hasClass("active")){
-			$('#questions-container').load('/question/view/' + this_question_id);
+			{literal}
+			$('#questions-container').load('/question/view/' + this_question_id, function(){$(this).fadeIn('slow')}).hide();
+			{/literal}
 			current_item.removeClass("active");
 			current_item = this_question_button;
 			current_item.addClass("active");
 			if(current_item.attr("id") == "question_1"){
 				prev_button.addClass("disabled");
+				prev_button.unbind("click");
 			} else {
 				prev_button.removeClass("disabled");
+				prev_button.click(prevclickfun);
 			}
 		}
 		
 	});
-	
-	prev_button.click(function(e){
+		
+	prevclickfun = function(e){
 		submitQuestion();
 		
 		prev_item = current_item.prev("button");
 		prev_item_quesion_id = prev_item.attr("name");
-		$('#questions-container').load('/question/view/' + prev_item_quesion_id);
+		{literal}
+		$('#questions-container').load('/question/view/' + prev_item_quesion_id, function(){$(this).fadeIn('slow')}).hide();
+		{/literal}
 		
 		current_item.removeClass("active");
 		current_item = prev_item;
 		current_item.addClass("active");
 		if(current_item.attr("id") == "question_1"){
 			prev_button.addClass("disabled");
+			prev_button.unbind("click");
 		} else {
 			prev_button.removeClass("disabled");
+			prev_button.click(prevclickfun);
 		}
 
-	});
+	};
+	//prev_button.click(prevclickfun);
+	
 
 	next_button.click(function(e){
 		submitQuestion();
@@ -91,15 +103,19 @@ $(document).ready(function(){
 			window.location.href = "/quiz/index/{$quiz_id}";
 		}
 		next_item_quesion_id = next_item.attr("name");
-		$('#questions-container').load('/question/view/' + next_item_quesion_id);
+		{literal}
+		$('#questions-container').load('/question/view/' + next_item_quesion_id, function(){$(this).fadeIn('slow')}).hide();
+		{/literal}
 		
 		current_item.removeClass("active");
 		current_item = next_item;
 		current_item.addClass("active");
 		if(current_item.attr("id") == "question_1"){
 			prev_button.addClass("disabled");
+			prev_button.unbind("click");
 		} else {
 			prev_button.removeClass("disabled");
+			prev_button.click(prevclickfun);
 		}
 		
 	});
