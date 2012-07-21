@@ -317,7 +317,7 @@ class QuizController extends Controller
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'name'=>User::getName($user_id),
-			'score'=>Response::getTotalScoreByUser($user_id),
+			'score'=>Response::getTotalScoreByUser($user_id, $quiz_id),
 			'total_score'=>Question::getTotalScore($quiz_id),
 			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID,
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
