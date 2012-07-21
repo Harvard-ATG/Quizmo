@@ -28,7 +28,7 @@ class m120402_194059_Quizes extends CDbMigration
 			'ID' => 'pk',
 			'COLLECTION_ID' => 'integer NOT NULL',
 			'TITLE' => 'string NOT NULL',
-			'DESCRIPTION' => 'string',
+			'DESCRIPTION' => 'text',
 			'VISIBILITY' => "integer NOT NULL",
 			'STATE' => 'string',
 			'SHOW_FEEDBACK' => 'integer',

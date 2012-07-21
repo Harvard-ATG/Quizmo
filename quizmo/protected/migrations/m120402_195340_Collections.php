@@ -57,7 +57,7 @@ class m120402_195340_Collections extends CDbMigration
 			'ID' => 'pk',
 			'OTHER_ID' => 'string',
 			'TITLE' => 'string NOT NULL',
-			'DESCRIPTION' => 'string',
+			'DESCRIPTION' => 'text',
 			'DELETED' => "integer NOT NULL",
 		));	
 

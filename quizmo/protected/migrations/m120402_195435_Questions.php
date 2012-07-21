@@ -72,10 +72,10 @@ class m120402_195435_Questions extends CDbMigration
 			'QUIZ_ID' => 'integer NOT NULL',
 			'QUESTION_TYPE' => 'string NOT NULL',
 			'TITLE' => 'string',
-			'BODY' => "string",
+			'BODY' => "text",
 			'SORT_ORDER' => 'integer',
 			'POINTS' => 'integer',
-			'FEEDBACK' => 'string',
+			'FEEDBACK' => 'text',
 			'DELETED' => 'integer NOT NULL',
 		));	
 

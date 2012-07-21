@@ -104,7 +104,7 @@ class m120402_195445_Responses extends CDbMigration
 			'QUESTION_ID' => 'integer NOT NULL',
 			'QUESTION_TYPE' => 'string NOT NULL',
 			'USER_ID' => 'integer NOT NULL',
-			'RESPONSE' => 'string',
+			'RESPONSE' => 'text',
 			'SCORE_STATE' => "string",
 			'SCORE' => 'integer',
 			'DATE_MODIFIED' => 'datetime',
