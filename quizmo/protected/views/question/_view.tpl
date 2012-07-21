@@ -13,8 +13,8 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked="checked"{/if}>
-					{$question.answers[$key].answer} {$question.answers[$key].is_correct} 
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if}>
+					{$question.answers[$key].answer} {if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{/if} 
 				</input>
 			</label>
 			{/foreach}
@@ -27,8 +27,8 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response_correct}checked="checked"{/if}>
-					{$question.answers[$key].answer}
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if}>
+					{$question.answers[$key].answer} {if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{/if} 
 				</input>
 			</label>
 			{/foreach}
