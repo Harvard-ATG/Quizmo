@@ -41,7 +41,7 @@ tolerance=>
 	{$question['title']}
 </h3>
 
-<div id="question-quiz-view" class="well" style="height: 200px">
+<div id="question-quiz-view">
 	<div class="lead">
 		{if $question.question_type == 'F'}
 			{fillin question=$question.body responses=$question.responses}
@@ -99,14 +99,11 @@ tolerance=>
 	</div>
 	<script>
 		submitQuestion = function(){
-			console.log("{$question.question_type}");
 			// get the answers
 			answers = [];
 			$('input[type=checkbox]').each(function () {
 				//if (this.checked) {
 				if ($(this).attr('checked')) {
-					console.log("checked");
-					console.log(this);
 					answers.push($(this).val());
 				}
 			});
