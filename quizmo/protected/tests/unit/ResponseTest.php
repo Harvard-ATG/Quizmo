@@ -238,4 +238,14 @@ class ResponseTest extends CDbTestCase {
 		
 	}
 
+	public function testIsAnswerSelected(){
+		$user_id = 2;
+		$correct_answer_id = 1;
+		$incorrect_answer_id = 2;
+		
+		$this->assertTrue(Response::isAnswerSelected($user_id, $correct_answer_id));
+		$this->assertFalse(Response::isAnswerSelected($user_id, $incorrect_answer_id));
+		
+	}
+
 }

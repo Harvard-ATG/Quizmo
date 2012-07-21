@@ -515,5 +515,26 @@ class Response extends QActiveRecord
 		return false;
 	}
 	
+	/**
+	 * checks if a user got an answer correct.
+	 * this only works for MC, TF, MS... 
+	 * @param number $user_id
+	 * @param number $answer_id
+	 * @return boolean
+	 */
+	public function isAnswerSelected($user_id, $answer_id){
+		// get answer
+		$answer = Answer::model()->findByPk($answer_id);
+		
+		// get responses
+		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$answer->QUESTION_ID));
+		
+		foreach($responses as $response){
+			if($response->RESPONSE == $answer_id){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
