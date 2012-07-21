@@ -1,7 +1,7 @@
 <div id="question-quiz-view" class="well" style="height: 200px">
 	<div class="lead">
 		{if $question.question_type == 'F'}
-			{fillin question=$question.body responses=$question.responses}
+			{fillin question=$question.body responses=$question.responses disabled=1}
 		{else}
 			{$question['body']}
 		{/if}
@@ -13,7 +13,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if}>
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled>
 					{$question.answers[$key].answer} {if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{/if} 
 				</input>
 			</label>
@@ -27,7 +27,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if}>
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled>
 					{$question.answers[$key].answer} {if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{/if} 
 				</input>
 			</label>
@@ -40,7 +40,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="input-xlarge" rows="9">{$question.responses[0].response}</textarea>
+			<textarea id="essay-text" class="span10 input-xlarge disabled" rows="9" disabled>{$question.responses[0].response}</textarea>
 		</div>
 	</div>
 
@@ -49,7 +49,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<input id="numerical-text" type="text" class="input-xlarge" value="{$question.responses[0].response}" />
+			<input id="numerical-text" type="text" class="input-small disabled" value="{$question.responses[0].response}" disabled/>
 		</div>
 	</div>
 

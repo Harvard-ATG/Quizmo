@@ -19,6 +19,11 @@ function smarty_function_fillin($params, &$smarty){
 		$responses = $params['responses'];
 	//$question = "you put the {lime} in the {coconut} and {drink} it all up";
 	//$responses = array(array(response=>lime), array(response=>coconut), array(response=>drink))
+	$disabled = '';
+	if(isset($params['disabled'])){
+		$disabled = " disabled ";
+		error_log("disabled!");
+	}
 	
 	preg_match_all("/\{[^}]*\}/", $question, $matches);
 	$responses_index = 0;
@@ -31,7 +36,7 @@ function smarty_function_fillin($params, &$smarty){
 				//error_log("$response...");
 				$response = $responses[$responses_index]['response'];
 				$responses_index++;
-				$new_input = "<input class='input-small fillin-text' type='text' value='$response' />";
+				$new_input = "<input class='input-small fillin-text $disabled' type='text' value='$response' $disabled/>";
 			}
 			$question = preg_replace("/".addslashes($match)."/", $new_input, $question);
 		}
