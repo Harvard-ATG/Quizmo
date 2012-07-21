@@ -26,6 +26,7 @@ class UserIdentity extends CUserIdentity
 	 * Overriding constructor to help with testing
 	 */
 	public function __construct($id='', $userid='', $name='') {
+		error_log("UserIdentity::construct");
 		$this->username = $id;
 		//$this->id = $id;
 		$this->userid = $userid;
@@ -43,21 +44,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		//error_log("UserIdentity authenticate()");
-		/*
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		else if($users[$this->username]!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
-		return !$this->errorCode;
-		*/
+
 		$this->errorCode=self::ERROR_NONE;
 		
 		return !$this->errorCode;
@@ -71,7 +58,9 @@ class UserIdentity extends CUserIdentity
 	*
 	*/
 	protected function setup(){
-
+		
+		error_log("UserIdentity::setup");
+		
 		// if username is set, then we are logged in
 		if($this->external_id){
 			
