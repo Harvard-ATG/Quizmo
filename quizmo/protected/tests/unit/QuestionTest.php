@@ -181,7 +181,7 @@ class QuestionTest extends CDbTestCase {
 		// check the second question has a response associated
 		$this->assertNotNull($questions[1]['responses']);
 		// check the first question, first answer is right
-		$this->assertTrue($questions[0]['answers'][0]['response_correct']);
+		$this->assertTrue($questions[0]['answers'][0]['response']);
 		
 		//$this->markTestIncomplete();
 
