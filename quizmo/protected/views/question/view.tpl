@@ -44,7 +44,7 @@ tolerance=>
 <div id="question-quiz-view" class="well" style="height: 200px">
 	<div class="lead">
 		{if $question.question_type == 'F'}
-			{fillin question=$question.body}
+			{fillin question=$question.body responses=$question.responses}
 		{else}
 			{$question['body']}
 		{/if}
@@ -56,7 +56,7 @@ tolerance=>
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" id="answer{$question.answers[$key].id}" name="answer1" value="{$question.answers[$key].id}">
+				<input type="radio" id="answer{$question.answers[$key].id}" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if}>
 					{$question.answers[$key].answer}
 				</input>
 			</label>
@@ -65,7 +65,6 @@ tolerance=>
 	</div>
 	<script>
 		submitQuestion = function(){
-			console.log("M/T");
 			// get value of radio
 			answer_id = $('input:radio[name=answer1]:checked').val();
 			// set data
@@ -91,7 +90,7 @@ tolerance=>
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}">
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if}>
 					{$question.answers[$key].answer}
 				</input>
 			</label>
@@ -100,11 +99,14 @@ tolerance=>
 	</div>
 	<script>
 		submitQuestion = function(){
-			console.log("S");
+			console.log("{$question.question_type}");
 			// get the answers
 			answers = [];
 			$('input[type=checkbox]').each(function () {
-				if (this.checked) {
+				//if (this.checked) {
+				if ($(this).attr('checked')) {
+					console.log("checked");
+					console.log(this);
 					answers.push($(this).val());
 				}
 			});
@@ -127,12 +129,11 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="input-xlarge" rows="9"></textarea>
+			<textarea id="essay-text" class="input-xlarge" rows="9">{if isset($question.responses[0])}{$question.responses[0].response}{/if}</textarea>
 		</div>
 	</div>
 	<script>
 		submitQuestion = function(){
-			console.log("E");
 			// get the answer
 			answer = $('#essay-text').val();
 			// set the data
@@ -154,12 +155,11 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<input id="numerical-text" type="text" class="input-xlarge"/>
+			<input id="numerical-text" type="text" class="input-xlarge" value="{if isset($question.responses[0])}{$question.responses[0].response}{/if}"/>
 		</div>
 	</div>
 	<script>
 		submitQuestion = function(){
-			console.log("N");
 			// get the answer
 			answer = $('#numerical-text').val();
 			// set the data
@@ -180,7 +180,6 @@ tolerance=>
 	{elseif $question.question_type == 'F'}
 	<script>
 		submitQuestion = function(){
-			console.log("F");
 			// get the answer
 			answers = [];
 			$('.fillin-text').each(function () {

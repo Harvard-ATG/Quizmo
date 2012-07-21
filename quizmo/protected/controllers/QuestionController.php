@@ -51,10 +51,11 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$user_id = Yii::app()->user->getId();
 		
 		//$question = new Question;
 		//$question = $question->model()->findByPk($id);
-		$question = Question::getQuestionViewById($id);
+		$question = Question::getQuestionViewById($id, $user_id);
 		
 		$this->render('view',array(
 			'question'=>$question,
