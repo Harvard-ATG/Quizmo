@@ -240,6 +240,7 @@ class Response extends QActiveRecord
 	 * @return boolean
 	 */
 	public function submitMultipleSelectionQuestion($user_id, $question_id, $answers, $modified_by=''){
+		
 		if($modified_by == '')
 			$modified_by = $user_id;
 
@@ -255,9 +256,20 @@ class Response extends QActiveRecord
 			);
 			foreach($responses as $response){
 				$response->delete();
+				$response = null;
 			}
 			
+			// have to get responses again after the delete
+			$responses = Response::model()->findAll(
+				'user_id=:user_id AND question_id=:question_id', 
+				array(
+					':user_id' => $user_id,			
+					':question_id' => $question_id,			
+				)
+			);
 
+
+			
 			// go through each $answers as $answer_id and add it
 			foreach($answers as $answer_id){
 				$response = Response::model()->find(
@@ -268,7 +280,7 @@ class Response extends QActiveRecord
 						':answer_id' => $answer_id,			
 					)
 				);
-			
+				
 				if($responses == null){
 					// create new
 					$response = new Response;
