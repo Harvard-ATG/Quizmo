@@ -358,24 +358,46 @@ class Question extends QActiveRecord
 	 *
 	 * this should return the question and answers in an array that will be easily interpretted by the template
 	 * @param integer $question_id
-	 *
+	 * @param integer $user_id
 	 * @return array
 	 */
-	public function getQuestionViewById($question_id){
+	public function getQuestionViewById($question_id, $user_id){
 		$question = Question::model()->findByPk($question_id);
 		$answers = $question->answer;
+		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_id));
 
 		$questionArr = array();
 		foreach($question as $key => $value){
 			$questionArr[strtolower($key)] = $value;
 			
 		}
+
+		// responses
+		$responseArr = array();
+		foreach($responses as $response){
+			$responseInnerArr = array();
+			foreach($response as $key => $value){
+				$responseInnerArr[strtolower($key)] = $value;		
+			}
+			array_push($responseArr, $responseInnerArr);
+		}
+		$questionArr['responses'] = $responseArr;
+
+		// answers
 		$answerArr = array();
 		foreach($answers as $answer){
 			$answerInnerArr = array();
 			foreach($answer as $key => $value){
 				$answerInnerArr[strtolower($key)] = $value;		
 			}
+
+			// for mc ms and tf the answer arr needs to know if it's answered
+			if(Response::isAnswerSelected($user_id, $answer->ID)){
+				$answerInnerArr['response'] = true;
+			} else {
+				$answerInnerArr['response'] = false;
+			}			
+			
 			array_push($answerArr, $answerInnerArr);
 		}
 		$questionArr['answers'] = $answerArr;

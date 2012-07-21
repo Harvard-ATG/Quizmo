@@ -142,10 +142,11 @@ class QuestionTest extends CDbTestCase {
 	}
 
 	public function testGetQuestionViewById(){
+		$user_id = 2;
 		$question_id = 1;
 		$question_type = Question::MULTIPLE_CHOICE;
 		
-		$question =  Question::getQuestionViewById($question_id);
+		$question =  Question::getQuestionViewById($question_id, $user_id);
 		
 		// check that the question is the right type
 		$this->assertEquals($question_type, $question['question_type']);
@@ -153,6 +154,10 @@ class QuestionTest extends CDbTestCase {
 		$this->assertNotNull($question['answers'][0]);
 		// check that the answer is of the same type
 		$this->assertEquals($question['question_type'], $question['answers'][0]['question_type']);
+		// check the question has a response associated
+		$this->assertNotNull($question['responses']);
+		// check the question's first answer is right
+		$this->assertTrue($question['answers'][0]['response']);
 		
 		
 	}
