@@ -448,10 +448,10 @@ class Question extends QActiveRecord
 				}
 
 				// for mc ms and tf the answer arr needs to know if it's correctly answered
-				if(Response::isAnswerCorrect($user_id, $answer->ID)){
-					$answerInnerArr['response_correct'] = true;
+				if(Response::isAnswerSelected($user_id, $answer->ID)){
+					$answerInnerArr['response'] = true;
 				} else {
-					$answerInnerArr['response_correct'] = false;
+					$answerInnerArr['response'] = false;
 				}
 				
 				array_push($answerArr, $answerInnerArr);
