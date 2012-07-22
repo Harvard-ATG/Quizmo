@@ -27,9 +27,15 @@
 {foreach from=$questions item=question}
 		<tr>
 			<td>
-	{include file = 'protected/views/question/_view.tpl'
-		question = $question
-	}
+			{include file = 'protected/views/question/_view.tpl'
+				question = $question
+			}
+			</td>
+			<td nowrap>
+			{include file = 'protected/views/response/_score.tpl'
+				score = $question.score
+				points = $question.points
+			}
 			</td>
 		</tr>
 {/foreach}
