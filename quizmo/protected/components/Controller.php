@@ -31,4 +31,13 @@ class Controller extends CController
 	    return true;
 	}
 	
+	protected function url($url){
+		if(Yii::app()->params['authMethod'] == 'isites'){
+			$url = Yii::app()->isitestool->url($url);
+		} else {
+			$url = Yii::app()->createUrl($url);
+		}
+		return $url;
+	}
+	
 }
