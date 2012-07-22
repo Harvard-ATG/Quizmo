@@ -88,8 +88,8 @@ class QuizController extends Controller
 			$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 			if($quiz_id != ''){
 				// now go to list
-				$this->forward('/quiz/index/'.$collection_id, true);
-
+				//$this->forward('/quiz/index/'.$collection_id, true);
+				$this->redirect($this->url('/quiz/index/'.$collection_id));
 			}
 		}
 
@@ -140,7 +140,8 @@ class QuizController extends Controller
 			//$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 			if($quiz_id != ''){
 				// now go to list
-				$this->forward('/quiz/index/'.$collection_id, true);
+				//$this->forward('/quiz/index/'.$collection_id, true);
+				$this->redirect($this->url('/quiz/index/'.$collection_id));
 
 			}
 		}

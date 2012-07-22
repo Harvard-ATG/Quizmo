@@ -43,9 +43,12 @@ class SiteController extends Controller
 			Yii::app()->session['collection_id'] = $collection->ID;
 
 			// forward doesn't seem to send along the parameter...
-			$this->forward('/quiz/index/'.$collection->ID);
+			//$this->forward('/quiz/index/'.$collection->ID);
+			$this->redirect($this->url('/quiz/index/'.$collection->ID));
 		} else {
+			// forward is cleaner in this case
 			$this->forward('/collection/index');
+			//$this->redirect($this->url('/collection/index'));
 		}
 		
 	}

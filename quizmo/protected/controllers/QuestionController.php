@@ -172,7 +172,8 @@ class QuestionController extends Controller
 			//$question_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 			if(@$question_id != ''){
 				// now go to list
-				$this->forward('/question/index/'.$quiz_id);
+				//$this->forward('/question/index/'.$quiz_id);
+				$this->redirect($this->url('/question/index/'.$quiz_id));
 				return;
 			}
 		}
