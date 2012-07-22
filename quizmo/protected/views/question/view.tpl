@@ -126,7 +126,7 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="input-xlarge" rows="9">{if isset($question.responses[0])}{$question.responses[0].response}{/if}</textarea>
+			<textarea id="essay-text" class="span10 input-xlarge" rows="9">{if isset($question.responses[0])}{$question.responses[0].response}{/if}</textarea>
 		</div>
 	</div>
 	<script>
@@ -152,7 +152,7 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<input id="numerical-text" type="text" class="input-xlarge" value="{if isset($question.responses[0])}{$question.responses[0].response}{/if}"/>
+			<input id="numerical-text" type="text" class="input-small" value="{if isset($question.responses[0])}{$question.responses[0].response}{/if}"/>
 		</div>
 	</div>
 	<script>
