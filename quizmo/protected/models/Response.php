@@ -145,7 +145,6 @@ class Response extends QActiveRecord
 			if($response == null){
 				// create new
 				$response = new Response;
-echo("creating\n");
 				// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
 				//    the sequence is at at the save()
 
@@ -160,7 +159,6 @@ echo("creating\n");
 				
 			} else {  
 				//edit existing
-echo("editing\n");
 				$response->QUESTION_TYPE = Question::ESSAY;
 				$response->RESPONSE = $essay;
 				$response->SCORE_STATE = Response::NOT_SCORED;
