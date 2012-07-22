@@ -40,7 +40,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="span10 input-xlarge disabled" rows="9" disabled>{$question.responses[0].response}</textarea>
+			<textarea id="essay-text" class="span12 input-xlarge disabled" rows="9" disabled>{$question.responses[0].response}</textarea>
 		</div>
 	</div>
 
