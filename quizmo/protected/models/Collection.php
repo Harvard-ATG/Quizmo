@@ -58,6 +58,7 @@ class Collection extends QActiveRecord
 			array('TITLE, DELETED', 'required'),
 			array('DELETED', 'numerical', 'integerOnly'=>true),
 			array('OTHER_ID, TITLE, DESCRIPTION', 'length', 'max'=>255),
+			array('DESCRIPTION', 'length', 'max'=>3900),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('ID, OTHER_ID, TITLE, DESCRIPTION, DELETED', 'safe', 'on'=>'search'),

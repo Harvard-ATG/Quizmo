@@ -58,7 +58,8 @@ class Quiz extends QActiveRecord
 		return array(
 			array('COLLECTION_ID, TITLE, VISIBILITY, DELETED', 'required'),
 			array('COLLECTION_ID, VISIBILITY, SHOW_FEEDBACK, DELETED', 'numerical', 'integerOnly'=>true),
-			array('TITLE, DESCRIPTION, STATE', 'length', 'max'=>255),
+			array('TITLE, STATE', 'length', 'max'=>255),
+			array('DESCRIPTION', 'length', 'max'=>3900),
 			array('START_DATE, END_DATE, DATE_MODIFIED', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

@@ -62,7 +62,8 @@ class Question extends QActiveRecord
 		return array(
 			array('QUIZ_ID, QUESTION_TYPE, DELETED', 'required'),
 			array('QUIZ_ID, SORT_ORDER, POINTS, DELETED', 'numerical', 'integerOnly'=>true),
-			array('QUESTION_TYPE, TITLE, BODY, FEEDBACK', 'length', 'max'=>255),
+			array('QUESTION_TYPE, TITLE, FEEDBACK', 'length', 'max'=>255),
+			array('BODY', 'length', 'max'=>3900),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('ID, QUIZ_ID, QUESTION_TYPE, TITLE, BODY, SORT_ORDER, POINTS, FEEDBACK, DELETED', 'safe', 'on'=>'search'),
