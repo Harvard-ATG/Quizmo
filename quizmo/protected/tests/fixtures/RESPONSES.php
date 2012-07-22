@@ -73,7 +73,7 @@ return array(
 
 		Vestibulum sagittis nunc ut ante laoreet suscipit. Aenean consectetur nunc vitae nulla lobortis posuere.',
 		'SCORE_STATE' => 'U',
-		'SCORE' => 1,
+		'SCORE' => 10,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => ''
 	),
