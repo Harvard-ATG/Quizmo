@@ -30,7 +30,8 @@ function smarty_function_fillin($params, &$smarty){
 	foreach($matches as $val){
 		foreach($val as $key => $match){
 			//error_log($match);
-			if($responses == null){
+			//if($responses == null){
+			if(!isset($responses[$responses_index])){
 				$new_input = "<input class='input-small fillin-text' type='text'/>";				
 			} else {
 				//error_log("$response...");
