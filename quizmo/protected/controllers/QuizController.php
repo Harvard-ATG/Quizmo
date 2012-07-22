@@ -276,6 +276,7 @@ class QuizController extends Controller
 		
 		Submission::submitQuiz($user_id, $quiz_id);
 		
+/*
 		$collection_id = Quiz::getCollectionId($quiz_id);
 		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$this->render('index',array(
@@ -285,6 +286,8 @@ class QuizController extends Controller
 			'user_id'=>$user_id,
 			'collection_id'=>$collection_id,
 		));
+*/
+		$this->redirect($this->url('/quiz/individualResults/'.$quiz_id."/".$user_id));
 	
 	 }
 	
