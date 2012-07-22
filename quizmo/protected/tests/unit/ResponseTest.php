@@ -15,6 +15,19 @@ class ResponseTest extends CDbTestCase {
 		$question_id = 1;
 		$user_id = 5;
 		$response_text = "this is an essay";
+		$response_text2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tortor metus, congue eu ullamcorper a, dictum mattis justo. Sed volutpat varius mauris, faucibus blandit risus dapibus quis. Sed sed justo massa, sed sollicitudin dui. Integer id accumsan dolor. In sed felis nisl. Integer quis magna ante. Morbi ornare laoreet ante eu viverra. Morbi sodales metus magna, at pretium lectus. Etiam congue tincidunt vestibulum.
+
+		Phasellus luctus libero eget ligula ultrices condimentum. Integer eget sapien diam. Nunc blandit imperdiet scelerisque. Vivamus eu erat viverra felis accumsan molestie. Vivamus auctor commodo imperdiet. Integer neque massa, fringilla viverra tincidunt vitae, luctus quis tortor. Quisque vitae auctor sem. Donec auctor euismod nulla at rhoncus. Ut quis pellentesque nibh. Fusce placerat, nulla vitae accumsan eleifend, purus dolor gravida velit, eget dictum turpis ipsum eu quam. Nunc blandit lorem sit amet nulla suscipit gravida. Integer erat nulla, pretium at porttitor vitae, suscipit a nisl. Nullam nec erat mi. Nulla sed neque odio, vel tristique nunc. Duis id aliquam massa. Cras euismod varius ligula, tempus gravida enim elementum vitae.
+
+		Suspendisse potenti. Morbi consequat condimentum tellus a pellentesque. Aliquam fringilla mattis nisi id bibendum. Phasellus vehicula, lectus lobortis malesuada elementum, purus risus blandit lacus, sed suscipit tellus lacus at urna. Cras sapien tortor, facilisis id dapibus aliquet, pellentesque et diam. Morbi in lacus nec nunc ullamcorper tristique a nec ligula. Proin elementum risus et diam vulputate convallis. Vivamus in dolor velit, feugiat mollis sem. Nam eu nunc sem. Praesent hendrerit velit ac massa dignissim lobortis. Donec ut viverra magna.
+
+		Phasellus in neque erat, nec aliquet ante. Ut at ipsum nisi, cursus fermentum erat. Quisque eget laoreet nibh. Nunc in neque est. Quisque consectetur, est id pretium placerat, tortor nisl pulvinar arcu, sit amet euismod ipsum lorem et arcu. Etiam eu turpis justo, at ultrices leo. Sed tincidunt bibendum felis at feugiat. Vivamus at placerat felis. Nulla id nisl lectus, id feugiat urna. Phasellus suscipit eros ultrices nunc imperdiet dapibus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc erat ligula, imperdiet eu posuere a, feugiat a diam.
+
+		Nullam imperdiet ultrices arcu non egestas. Vestibulum eget sem ante. Nunc venenatis turpis vel augue gravida imperdiet. Praesent fermentum imperdiet ligula sed gravida. In volutpat dolor sed nulla vulputate posuere. Pellentesque aliquet nunc et tellus varius id varius tortor adipiscing. Vivamus convallis orci at massa sodales vel fermentum augue consectetur. Morbi in mauris lorem, vitae tincidunt orci. Nullam a dolor justo. Mauris scelerisque velit ut augue consequat consectetur.
+
+		Morbi gravida ipsum et enim iaculis lacinia. Vestibulum blandit, dui eu commodo tincidunt, elit nibh tincidunt nibh, at volutpat mauris ipsum a eros. Mauris sit amet mi sed ligula hendrerit pellentesque. Sed vestibulum eros non magna volutpat porta. Integer rhoncus ullamcorper mauris, vitae viverra nibh interdum eget. Pellentesque sollicitudin aliquet eros, at porttitor lacus dapibus vitae. Quisque placerat orci at lectus dictum vitae congue dolor aliquam. Fusce feugiat justo facilisis diam volutpat at fermentum mi convallis. Aliquam at neque ut libero aliquet placerat sed nec lacus. Cras dictum tincidunt elit id fringilla. Nullam vehicula risus eget orci fermentum at pulvinar ligula lacinia. Vivamus est elit, pellentesque non eleifend eu, volutpat id arcu. Suspendisse in rutrum nulla.
+
+		Mauris tempor fringilla neque, eu molestie dui ornare at. Phasellus egestas blandit mollis. Mauris euismod, velit convallis ullamcorper iaculis, urna metus dictum lacus, viverra tincidunt orci felis sit amet est. Suspendisse pharetra consequat ipsum, at fermentum massa scelerisque at. Donec rutrum ipsum sed.";
 
 		// first make sure it doesn't already exist
 		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
@@ -38,7 +51,26 @@ class ResponseTest extends CDbTestCase {
 			)
 		);
 		$this->assertEquals($response->QUESTION_TYPE, Question::ESSAY);
+		$this->assertEquals($response->RESPONSE, $response_text);
 		$this->assertEquals(count($response), 1);
+		
+		// submit a second to make sure it overwrites
+		$this->assertTrue(Response::submitEssayQuestion($user_id, $question_id, $response_text2));
+		
+		// then check that it's there
+		// with the type set
+		// with only one
+		$response = Response::model()->find('user_id=:user_id AND question_id=:question_id', 
+			array(
+				':user_id' => $user_id,			
+				':question_id' => $question_id,			
+			)
+		);
+		$this->assertEquals($response->QUESTION_TYPE, Question::ESSAY);
+		$this->assertEquals($response->RESPONSE, $response_text2);
+		$this->assertEquals(count($response), 1);
+		
+		
 		
 		// then delete
 		$response->delete();

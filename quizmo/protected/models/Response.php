@@ -56,7 +56,7 @@ class Response extends QActiveRecord
 		return array(
 			array('QUESTION_ID, QUESTION_TYPE, USER_ID', 'required'),
 			array('QUESTION_ID, USER_ID, SCORE, MODIFIED_BY', 'numerical', 'integerOnly'=>true),
-			array('QUESTION_TYPE, RESPONSE, SCORE_STATE', 'length', 'max'=>255),
+			array('QUESTION_TYPE, SCORE_STATE', 'length', 'max'=>255),
 			array('DATE_MODIFIED', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -128,6 +128,8 @@ class Response extends QActiveRecord
 	 * @return boolean
 	 */
 	public function submitEssayQuestion($user_id, $question_id, $essay, $modified_by=''){
+		//error_log("submitEssayQuestion");
+		//error_log("$user_id, $question_id, $essay");
 		if($modified_by == '')
 			$modified_by = $user_id;
 			
@@ -142,7 +144,7 @@ class Response extends QActiveRecord
 			if($response == null){
 				// create new
 				$response = new Response;
-
+echo("creating\n");
 				// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
 				//    the sequence is at at the save()
 
@@ -157,13 +159,13 @@ class Response extends QActiveRecord
 				
 			} else {  
 				//edit existing
-
+echo("editing\n");
 				$response->QUESTION_TYPE = Question::ESSAY;
 				$response->RESPONSE = $essay;
 				$response->SCORE_STATE = Response::NOT_SCORED;
 				$resposne->MODIFIED_BY = $modified_by;
 				
-				$response->save();
+				$response->save(false);
 
 			}
 		} catch (Exception $e){
