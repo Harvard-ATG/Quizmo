@@ -419,12 +419,16 @@ class Question extends QActiveRecord
 
 		$output = array();
 		foreach($questions as $question){
+			$score = 0;
 			$answers = $question->answer;
 			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question->ID));
 
 			// questions
 			$questionArr = array();
 			foreach($question as $key => $value){
+				if($key == 'POINTS' && $value == ''){
+					$value = 0;
+				}
 				$questionArr[strtolower($key)] = $value;
 			
 			}
@@ -434,6 +438,9 @@ class Question extends QActiveRecord
 			foreach($responses as $response){
 				$responseInnerArr = array();
 				foreach($response as $key => $value){
+					if($key == 'SCORE'){
+						$score += $value;
+					}
 					$responseInnerArr[strtolower($key)] = $value;		
 				}
 				array_push($responseArr, $responseInnerArr);
@@ -460,6 +467,7 @@ class Question extends QActiveRecord
 			}
 			$questionArr['answers'] = $answerArr;
 			
+			$questionArr['score'] = $score;
 		
 			array_push($output, $questionArr);
 		}
