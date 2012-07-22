@@ -32,13 +32,33 @@ submitQuestion = function(){
 $(document).ready(function(){
 	//var question_ids = {$question_ids_json};
 	//var question_ids = eval($('#question_ids').val());
-	var prev_button = $('#quiz-controls .btn-group button[name=prev]');
-	var next_button = $('#quiz-controls .btn-group button[name=next]');
+	prev_button = $('#quiz-controls .btn-group button[name=prev]');
+	next_button = $('#quiz-controls .btn-group button[name=next]');
 	prev_button.addClass("disabled");
 	
-	var current_item = $('#question_1');
+	current_item = $('#question_1');
 	current_item.addClass("active");
 	
+	prevclickfun = function(e){
+		submitQuestion();
+		
+		prev_item = current_item.prev("button");
+		prev_item_quesion_id = prev_item.attr("name");
+		
+		{literal}
+		$('#questions-container').load('/question/view/' + prev_item_quesion_id, function(){$(this).fadeIn('slow')}).hide();
+		{/literal}
+		
+		current_item.removeClass("active");
+		current_item = prev_item;
+		current_item.addClass("active");
+		if(current_item.attr("id") == "question_1"){
+			prev_button.addClass("disabled");
+			prev_button.unbind("click");
+		} 
+	};
+
+
 	//load the first question...
 	var current_question_id = current_item.attr("name");
 	{literal}
@@ -64,33 +84,13 @@ $(document).ready(function(){
 				prev_button.unbind("click");
 			} else {
 				prev_button.removeClass("disabled");
+				prev_button.unbind("click");
 				prev_button.click(prevclickfun);
 			}
 		}
 		
 	});
 		
-	prevclickfun = function(e){
-		submitQuestion();
-		
-		prev_item = current_item.prev("button");
-		prev_item_quesion_id = prev_item.attr("name");
-		{literal}
-		$('#questions-container').load('/question/view/' + prev_item_quesion_id, function(){$(this).fadeIn('slow')}).hide();
-		{/literal}
-		
-		current_item.removeClass("active");
-		current_item = prev_item;
-		current_item.addClass("active");
-		if(current_item.attr("id") == "question_1"){
-			prev_button.addClass("disabled");
-			prev_button.unbind("click");
-		} else {
-			prev_button.removeClass("disabled");
-			prev_button.click(prevclickfun);
-		}
-
-	};
 	//prev_button.click(prevclickfun);
 	
 
@@ -115,6 +115,7 @@ $(document).ready(function(){
 			prev_button.unbind("click");
 		} else {
 			prev_button.removeClass("disabled");
+			prev_button.unbind("click");
 			prev_button.click(prevclickfun);
 		}
 		
