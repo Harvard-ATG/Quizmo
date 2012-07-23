@@ -549,5 +549,26 @@ class Response extends QActiveRecord
 		}
 		return false;
 	}
+
+	/**
+	 * gets the score
+	 * @param number $response_id
+	 * @return number $score
+	 */
+	public function getScore($response_id){
+		$response = Response::model()->findByPk($response_id);
+		return $response->SCORE;
+
+	}
+	
+	/**
+	 * grades response, sets the score
+	 * @param number $response_id
+	 * @param number $score
+	 * @return boolean
+	 */
+	public function setScore($response_id, $score){
+		
+	}
 	
 }

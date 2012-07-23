@@ -279,5 +279,30 @@ class ResponseTest extends CDbTestCase {
 		$this->assertFalse(Response::isAnswerSelected($user_id, $incorrect_answer_id));
 		
 	}
-
+	
+	public function testGetScore(){
+		$response_id = 1;
+		$score = 1;
+		
+		// check getScore
+		$this->assertEquals($score, Response::getScore($response_id));
+		
+	}
+	/*
+	public function testSetScore(){
+		$response_id = 1;
+		$pre_score = 1;
+		$post_score = 2;
+		
+		// get score
+		$score = Response::getScore($response_id);
+		$this->assertEquals($pre_score, $score);
+		// call grade, check status
+		$this->assertTrue(Response::setScore($response_id, $post_score));
+		// get score
+		$score = Response::getScore($response_id);
+		$this->assertEquals($post_score, $score);
+		
+	}
+	*/
 }
