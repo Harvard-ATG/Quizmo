@@ -32,10 +32,19 @@
 			}
 			</td>
 			<td nowrap>
-			{include file = 'protected/views/response/_score.tpl'
-				score = $question.score
-				points = $question.points
-			}
+			{if true}
+				{include file = 'protected/views/response/_grade.tpl'
+					response_id = $question.responses[0].id
+					score = $question.score
+					points = $question.points
+					user_id = $user_id
+				}
+			{else}
+				{include file = 'protected/views/response/_score.tpl'
+					score = $question.score
+					points = $question.points
+				}
+			{/if}
 			</td>
 		</tr>
 {/foreach}
@@ -43,3 +52,21 @@
 </table>
 </div>
 
+<script>
+	updateScore = function(response_id, user_id, score){
+		// compose data
+		data = {
+			response_id: response_id,
+			user_id: user_id,
+			score: score
+		}
+		// send the ajax
+		$.ajax({
+			type: 'POST',
+			url: '/response/grade',
+			data: data
+		});
+		
+		
+	}
+</script>

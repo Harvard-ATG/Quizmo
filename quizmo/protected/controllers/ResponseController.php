@@ -31,7 +31,7 @@ class ResponseController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'submitQuestion'),
+				'actions'=>array('create','update', 'submitQuestion', 'grade'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -109,7 +109,7 @@ class ResponseController extends Controller
 	 */
 	public function actionSubmitQuestion()
 	{
-		error_log("actionSubmitQuestion");
+		//error_log("actionSubmitQuestion");
 		$user_id = Yii::app()->user->getId();
 		$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$answer_id = Yii::app()->getRequest()->getParam('answer_id');
@@ -143,9 +143,20 @@ class ResponseController extends Controller
 			
 			
 		}
-		
-		
+			
 		Yii::app()->end();
+	}
+	
+	/**
+	 * grade response
+	 */
+	public function actionGrade(){
+		$response_id = Yii::app()->getRequest()->getParam('response_id');
+		$user_id = Yii::app()->getRequest()->getParam('user_id');
+		$score = Yii::app()->getRequest()->getParam('score');
+		
+		Response::grade($response_id, $user_id, $score);
+		
 	}
 
 	/**
