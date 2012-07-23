@@ -288,7 +288,7 @@ class ResponseTest extends CDbTestCase {
 		$this->assertEquals($score, Response::getScore($response_id));
 		
 	}
-	/*
+
 	public function testSetScore(){
 		$response_id = 1;
 		$pre_score = 1;
@@ -304,5 +304,5 @@ class ResponseTest extends CDbTestCase {
 		$this->assertEquals($post_score, $score);
 		
 	}
-	*/
+
 }

@@ -56,9 +56,10 @@ class Response extends QActiveRecord
 		return array(
 			array('QUESTION_ID, QUESTION_TYPE, USER_ID', 'required'),
 			array('QUESTION_ID, USER_ID, SCORE, MODIFIED_BY', 'numerical', 'integerOnly'=>true),
-			array('QUESTION_TYPE, SCORE_STATE', 'length', 'max'=>255),
+			array('SCORE_STATE', 'length', 'max'=>255),
+			array('QUESTION_TYPE', 'length', 'max'=>1),
 			array('RESPONSE', 'length', 'max'=>3900),
-			array('DATE_MODIFIED', 'length', 'max'=>6),
+		//	array('DATE_MODIFIED', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('ID, QUESTION_ID, QUESTION_TYPE, USER_ID, RESPONSE, SCORE_STATE, SCORE, DATE_MODIFIED, MODIFIED_BY', 'safe', 'on'=>'search'),
@@ -568,7 +569,12 @@ class Response extends QActiveRecord
 	 * @return boolean
 	 */
 	public function setScore($response_id, $score){
-		
+		// get response
+		$response = Response::model()->findByPk($response_id);
+		// set SCORE
+		$response->SCORE = $score;
+		// save
+		return $response->save();
 	}
 	
 }
