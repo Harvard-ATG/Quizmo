@@ -573,8 +573,10 @@ class Response extends QActiveRecord
 		$response = Response::model()->findByPk($response_id);
 		// set SCORE
 		$response->SCORE = $score;
+		// set SCORE_STATE
+		$response->SCORE_STATE = Response::MANUAL_SCORED;
 		// save
-		return $response->save();
+		return $response->save(false);
 	}
 	
 }

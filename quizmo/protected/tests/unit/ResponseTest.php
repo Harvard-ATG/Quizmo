@@ -300,8 +300,10 @@ class ResponseTest extends CDbTestCase {
 		// call grade, check status
 		$this->assertTrue(Response::setScore($response_id, $post_score));
 		// get score
-		$score = Response::getScore($response_id);
-		$this->assertEquals($post_score, $score);
+		$response = Response::model()->findByPk($response_id);
+		//$score = Response::getScore($response_id);
+		$this->assertEquals($post_score, $response->SCORE);
+		$this->assertEquals(Response::MANUAL_SCORED, $response->SCORE_STATE);
 		
 	}
 
