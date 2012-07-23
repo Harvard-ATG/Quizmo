@@ -175,13 +175,13 @@ class Quiz extends QActiveRecord
 		$this->setAttributes(array(
 	        	'COLLECTION_ID'=>$collection_id,
 	        	'TITLE'=>$title,
-		        'DESCRIPTION'=>$description,
 		        'STATE'=>$state,
 				'START_DATE'=>$start_date,
 				'END_DATE'=>$end_date,
 				'VISIBILITY'=>$visibility,
 				'SHOW_FEEDBACK'=>$show_feedback,
 				'DELETED'=>0,
+		        'DESCRIPTION'=>$description,
 				
 	    ),false);
 		
