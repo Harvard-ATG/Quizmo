@@ -168,6 +168,8 @@ class QuestionTest extends CDbTestCase {
 		$question_count = 8;
 		$question_id = 2;
 		$question_type = Question::TRUE_FALSE;
+		$score = 1;
+		$points = 0;
 		
 		$questions = Question::getQuestionViewsByQuizId($quiz_id, $user_id);
 		// check the number is right
@@ -182,6 +184,10 @@ class QuestionTest extends CDbTestCase {
 		$this->assertNotNull($questions[1]['responses']);
 		// check the first question, first answer is right
 		$this->assertTrue($questions[0]['answers'][0]['response']);
+		// check the score
+		$this->assertEquals($score, $questions[0]['score']);
+		// check the points
+		$this->assertEquals($points, $questions[0]['points']);
 		
 		//$this->markTestIncomplete();
 

@@ -255,7 +255,7 @@ class ResponseTest extends CDbTestCase {
 	public function testGetTotalScoreByUser(){
 		$user_id = 2;
 		$quiz_id = 1;
-		$score = 8;
+		$score = 17;
 		
 		$this->assertEquals($score, Response::getTotalScoreByUser($user_id, $quiz_id));
 	}
