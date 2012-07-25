@@ -200,5 +200,11 @@ class QuestionTest extends CDbTestCase {
 		$this->assertEquals($total_score, Question::getTotalScore($quiz_id));
 		
 	}
+	
+	public function testGetQuizId(){
+		$question_id = 1;
+		$quiz_id = 1;
+		$this->assertEquals($quiz_id, Question::getQuizId($question_id));
+	}
    
 }

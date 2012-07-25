@@ -495,4 +495,14 @@ class Question extends QActiveRecord
 		return $score;
 	}
 	
+	/**
+	 * gets the quiz_id
+	 * @param number $question_id
+	 * @return number $quiz_id
+	 */
+	public function getQuizId($question_id){
+		$question = Question::model()->findByPk($question_id);
+		return $question->QUIZ_ID;
+		
+	}
 }
