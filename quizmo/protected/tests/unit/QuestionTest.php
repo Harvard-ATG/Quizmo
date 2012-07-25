@@ -8,7 +8,7 @@ class QuestionTest extends CDbTestCase {
    
 
 	public $fixtures=array(
-		'quizes'=>'Quiz',
+		'quizzes'=>'Quiz',
 		'questions'=>'Question',
 		'answers'=>'Answer',
 		'responses'=>'Response',

@@ -6,7 +6,7 @@ $reset_order = array(
 	'SUBMISSIONS',
 	'ANSWERS',
 	'QUESTIONS',
-	'QUIZES',
+	'QUIZZES',
 	'USERS',
 	'COLLECTIONS',
 );

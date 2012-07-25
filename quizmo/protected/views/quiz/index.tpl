@@ -1,16 +1,16 @@
 <div class="row-fluid">
-	<h1 class="span12">Quizes</h1>
+	<h1 class="span12">Quizzes</h1>
 </div>
 
-<div id="quizes-container" class="span12 row-fluid">
+<div id="quizzes-container" class="span12 row-fluid">
 	<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
 
-{if $sizeofquizes > 0}
+{if $sizeofquizzes > 0}
 	<table class="table table-condensed">
 		<tr>
 			<th>Quiz</th><th>Actions</th>
 		</tr>
-{foreach from=$quizes item=quiz}
+{foreach from=$quizzes item=quiz}
 
 		<tr>
 			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>

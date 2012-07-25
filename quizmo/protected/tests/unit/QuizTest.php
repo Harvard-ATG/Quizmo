@@ -9,7 +9,7 @@ class QuizTest extends CDbTestCase {
 
 	public $fixtures=array(
 		'collections'=>'Collection',
-		'quizes'=>'Quiz',
+		'quizzes'=>'Quiz',
 		'users'=>'User',
 		'submissions'=>'Submission',
 		'questions'=>'Question',
@@ -26,11 +26,11 @@ class QuizTest extends CDbTestCase {
 		$submission_status = Submission::SUBMITTED;
 		$collection_id = 1;
 				
-		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
+		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		// this is based on the fixtures..
-		$this->assertEquals(4, sizeof($quizes));
+		$this->assertEquals(4, sizeof($quizzes));
 		// get user_id 2's submission status
-		$this->assertEquals(Submission::SUBMITTED, $quizes[0]['status']);
+		$this->assertEquals(Submission::SUBMITTED, $quizzes[0]['status']);
 		
 		
 	}

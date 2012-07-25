@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "Quizes".
+ * This is the model class for table "Quizzes".
  *
- * The followings are the available columns in table 'Quizes': <br>
+ * The followings are the available columns in table 'Quizzes': <br>
  * integer $ID <br>
  * integer $COLLECTION_ID <br>
  * string $TITLE <br>
@@ -25,7 +25,7 @@ class Quiz extends QActiveRecord
 	 * this is needed by QActiveRecord for Oracle
 	 * @var string
 	 */
-	public $sequenceName = 'QUIZES_SEQ';	
+	public $sequenceName = 'QUIZZES_SEQ';	
 	
 	/**
 	 * created originally by Yii's Gii
@@ -44,7 +44,7 @@ class Quiz extends QActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'QUIZES';
+		return 'QUIZZES';
 	}
 
 	/**
@@ -138,10 +138,10 @@ class Quiz extends QActiveRecord
 	*/
 	public function getQuizArrayByCollectionId($collection_id, $user_id){
 		
-		$quizes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
+		$quizzes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
 		
 		$quizArray = array();
-		foreach($quizes as $quiz){
+		foreach($quizzes as $quiz){
 			$qa = array();
 			$qa['link'] = "/question/index/".$quiz->ID;
 			$status = Submission::getStatusByUser($user_id, $quiz->ID);

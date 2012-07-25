@@ -10,7 +10,7 @@ class SubmissionTest extends CDbTestCase {
 		'collections'=>'Collection',
 		'users'=>'User',
 		'userscollections'=>'UsersCollection',
-		'quizes'=>'Quiz',
+		'quizzes'=>'Quiz',
 		'questions'=>'Question',
 		'responses'=>'Response',
 		'submissions'=>'Submission',

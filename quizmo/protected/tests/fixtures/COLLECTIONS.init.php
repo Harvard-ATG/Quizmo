@@ -4,6 +4,6 @@ $this->truncateTable('RESPONSES');
 $this->truncateTable('ANSWERS');
 $this->truncateTable('QUESTIONS');
 $this->truncateTable('SUBMISSIONS');
-$this->truncateTable('QUIZES');
+$this->truncateTable('QUIZZES');
 $this->truncateTable('COLLECTIONS');
 ?>

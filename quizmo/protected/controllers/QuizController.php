@@ -222,11 +222,11 @@ class QuizController extends Controller
 		//error_log("quiz/index");
 		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
 		$user_id = Yii::app()->user->id;
-		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
+		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,
-			'quizes'=>$quizes,
-			'sizeofquizes'=>sizeof($quizes),
+			'quizzes'=>$quizzes,
+			'sizeofquizzes'=>sizeof($quizzes),
 			'user_id'=>$user_id,
 			'collection_id'=>$collection_id,
 		));
@@ -278,11 +278,11 @@ class QuizController extends Controller
 		
 /*
 		$collection_id = Quiz::getCollectionId($quiz_id);
-		$quizes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
+		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$this->render('index',array(
 			//'dataProvider'=>$dataProvider,
-			'quizes'=>$quizes,
-			'sizeofquizes'=>sizeof($quizes),
+			'quizzes'=>$quizzes,
+			'sizeofquizzes'=>sizeof($quizzes),
 			'user_id'=>$user_id,
 			'collection_id'=>$collection_id,
 		));

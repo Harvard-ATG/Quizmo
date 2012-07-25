@@ -1,8 +1,8 @@
 <?php
 /**
- * These are the fixtures for table "Quizes".
+ * These are the fixtures for table "Quizzes".
  *
- * The followings are the available columns in table 'Quizes':
+ * The followings are the available columns in table 'Quizzes':
  * @property integer $ID
  * @property integer $COLLECTION_ID
  * @property string $TITLE

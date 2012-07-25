@@ -4,12 +4,12 @@ class m120410_165101_fk_questions extends CDbMigration
 {
 	public function up()
 	{
-		$this->addForeignKey("FK_QUESTIONS_QUIZES", "QUESTIONS", "QUIZ_ID", "QUIZES", "ID");
+		$this->addForeignKey("FK_QUESTIONS_QUIZZES", "QUESTIONS", "QUIZ_ID", "QUIZZES", "ID");
 	}
 
 	public function down()
 	{
-		$this->dropForeignKey("FK_QUESTIONS_QUIZES", "QUESTIONS");
+		$this->dropForeignKey("FK_QUESTIONS_QUIZZES", "QUESTIONS");
 	}
 
 	/*

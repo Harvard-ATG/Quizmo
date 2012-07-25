@@ -19,12 +19,12 @@
  */
 require_once("Autoincrement.php");
 
-class m120402_194059_Quizes extends CDbMigration
+class m120402_194059_Quizzes extends CDbMigration
 {
 	public function up()
 	{
 		
-		$this->createTable('QUIZES', array(
+		$this->createTable('QUIZZES', array(
 			'ID' => 'pk',
 			'COLLECTION_ID' => 'integer NOT NULL',
 			'TITLE' => 'string NOT NULL',
@@ -38,7 +38,7 @@ class m120402_194059_Quizes extends CDbMigration
 			'DELETED' => "integer NOT NULL",
 		));	
 		
-		Autoincrement::up('QUIZES', Yii::app()->db->driverName);
+		Autoincrement::up('QUIZZES', Yii::app()->db->driverName);
 
 
 	}
@@ -46,9 +46,9 @@ class m120402_194059_Quizes extends CDbMigration
 	public function down()
 	{
 
-		Autoincrement::down('QUIZES', Yii::app()->db->driverName);
+		Autoincrement::down('QUIZZES', Yii::app()->db->driverName);
 		
-		$this->dropTable('QUIZES');
+		$this->dropTable('QUIZZES');
 		
 	}
 
