@@ -239,11 +239,12 @@ class QuestionController extends Controller
 	public function actionIndex($id='')
 	{
 		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
-		$collection_id = Yii::app()->session['collection_id'];
+		//$collection_id = Yii::app()->session['collection_id'];
+		$collection_id = Quiz::getCollectionId($quiz_id);
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
-
+error_log($collection_id."---");
 		$this->render('index',array(
 			'collection_id'=>$collection_id,
 			'questions'=>$questions,
