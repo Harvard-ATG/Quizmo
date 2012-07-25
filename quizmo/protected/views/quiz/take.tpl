@@ -29,6 +29,15 @@ submitQuestion = function(){
 	console.log("ERROR: submitting blank!");
 }
 
+loadQuestion = function(question_id){
+	data = {
+		ajax: true
+	};
+	{literal}
+	$('#questions-container').load('/question/view/' + question_id, data, function(){$(this).fadeIn('slow')}).hide();
+	{/literal}	
+}
+
 $(document).ready(function(){
 	//var question_ids = {$question_ids_json};
 	//var question_ids = eval($('#question_ids').val());
@@ -43,11 +52,9 @@ $(document).ready(function(){
 		submitQuestion();
 		
 		prev_item = current_item.prev("button");
-		prev_item_quesion_id = prev_item.attr("name");
+		prev_item_question_id = prev_item.attr("name");
 		
-		{literal}
-		$('#questions-container').load('/question/view/' + prev_item_quesion_id, function(){$(this).fadeIn('slow')}).hide();
-		{/literal}
+		loadQuestion(prev_item_question_id);
 		
 		current_item.removeClass("active");
 		current_item = prev_item;
@@ -61,9 +68,7 @@ $(document).ready(function(){
 
 	//load the first question...
 	var current_question_id = current_item.attr("name");
-	{literal}
-	$('#questions-container').load(url('/question/view/' + current_question_id), function(){$(this).fadeIn('slow')}).hide();
-	{/literal}
+	loadQuestion(current_question_id);
 	// add the click listener for the numbered buttons
 	$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
 		submitQuestion();
@@ -73,9 +78,7 @@ $(document).ready(function(){
 		
 		// only perform the actions if the button is not already active
 		if(!this_question_button.hasClass("active")){
-			{literal}
-			$('#questions-container').load('/question/view/' + this_question_id, function(){$(this).fadeIn('slow')}).hide();
-			{/literal}
+			loadQuestion(this_question_id);
 			current_item.removeClass("active");
 			current_item = this_question_button;
 			current_item.addClass("active");
@@ -102,10 +105,8 @@ $(document).ready(function(){
 		if(next_item.length == 0){
 			window.location.href = "/quiz/index/{$quiz_id}";
 		}
-		next_item_quesion_id = next_item.attr("name");
-		{literal}
-		$('#questions-container').load('/question/view/' + next_item_quesion_id, function(){$(this).fadeIn('slow')}).hide();
-		{/literal}
+		next_item_question_id = next_item.attr("name");
+		loadQuestion(next_item_question_id);
 		
 		current_item.removeClass("active");
 		current_item = next_item;

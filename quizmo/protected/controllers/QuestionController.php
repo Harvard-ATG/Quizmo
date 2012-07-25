@@ -53,6 +53,7 @@ class QuestionController extends Controller
 	{
 		$question_id = $id;
 		$user_id = Yii::app()->user->getId();
+		$isajax = Yii::app()->getRequest()->getParam('ajax');
 		
 		//$question = new Question;
 		//$question = $question->model()->findByPk($id);
@@ -62,7 +63,8 @@ class QuestionController extends Controller
 		$this->render('view',array(
 			'question'=>$question,
 			'quiz_id'=>$quiz_id,
-			'collection_id'=>Quiz::getCollectionId($quiz_id)
+			'collection_id'=>Quiz::getCollectionId($quiz_id),
+			'isajax'=>$isajax
 		));
 	}
 
