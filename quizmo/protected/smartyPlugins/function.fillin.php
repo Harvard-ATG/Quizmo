@@ -22,7 +22,6 @@ function smarty_function_fillin($params, &$smarty){
 	$disabled = '';
 	if(isset($params['disabled'])){
 		$disabled = " disabled ";
-		error_log("disabled!");
 	}
 	
 	preg_match_all("/\{[^}]*\}/", $question, $matches);
