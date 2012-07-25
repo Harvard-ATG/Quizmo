@@ -51,14 +51,18 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$question_id = $id;
 		$user_id = Yii::app()->user->getId();
 		
 		//$question = new Question;
 		//$question = $question->model()->findByPk($id);
-		$question = Question::getQuestionViewById($id, $user_id);
+		$question = Question::getQuestionViewById($question_id, $user_id);
+		$quiz_id = Question::getQuizId($question_id);
 		
 		$this->render('view',array(
 			'question'=>$question,
+			'quiz_id'=>$quiz_id,
+			'collection_id'=>Quiz::getCollectionId($quiz_id)
 		));
 	}
 
@@ -244,7 +248,7 @@ class QuestionController extends Controller
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
-error_log($collection_id."---");
+
 		$this->render('index',array(
 			'collection_id'=>$collection_id,
 			'questions'=>$questions,

@@ -35,7 +35,17 @@ tolerance=>
 {$key}=>{$question.answers[0].$key}<br/>
 {/foreach}
 -->
-
+{if isset($collection_id)}
+<ul class="breadcrumb">
+  <li>
+    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="/question/index/{$quiz_id}">Questions</a> <span class="divider">/</span>
+  </li>
+  <li class="active">{$question['title']}</li>
+</ul>
+{/if}
 
 <h3>
 	{$question['title']}
