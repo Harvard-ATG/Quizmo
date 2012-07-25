@@ -1,0 +1,1 @@
+Score: {$score} / {$total_score}

@@ -31,7 +31,7 @@ class QuizController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults', 'submit'),
+				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults', 'submit', 'totalScore'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -328,45 +328,20 @@ class QuizController extends Controller
 			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id)
 		));
 	}
-
+	
 	/**
-	 * Manages all models.
+	 * this handles the view for the score on the individual_results page
 	 */
-	public function actionAdmin()
-	{
-		$model=new Quiz('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Quiz']))
-			$model->attributes=$_GET['Quiz'];
-
-		$this->render('admin',array(
-			'model'=>$model,
+	public function actionTotalScore(){
+		
+		$user_id = Yii::app()->getRequest()->getParam('user_id');
+		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
+		
+		$this->render('total_score',array(
+			'score'=>Response::getTotalScoreByUser($user_id, $quiz_id),
+			'total_score'=>Question::getTotalScore($quiz_id)
 		));
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
-	{
-		$model=Quiz::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='quiz-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
 }

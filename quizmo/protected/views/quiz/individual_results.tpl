@@ -16,7 +16,7 @@
 	<div class="span2">
 		<img src="/img/user-icon.png"/>
 	</div>
-	<div class="span2 well">
+	<div id="total_score" class="span2 well">
 		Score: {$score} / {$total_score}
 	</div>
 </div>
@@ -53,6 +53,20 @@
 </div>
 
 <script>
+
+	updateTotalScore = function(){
+		// compose data
+		data = {
+			user_id: '{$user_id}',
+			quiz_id: '{$quiz_id}'
+		};
+		// load ajax
+		$('#total_score').load(
+			'/quiz/totalScore', 
+			data
+		);
+	}
+
 	updateScore = function(response_id, user_id, score){
 		// compose data
 		data = {
@@ -64,9 +78,14 @@
 		$.ajax({
 			type: 'POST',
 			url: '/response/grade',
-			data: data
+			data: data,
+			success: updateTotalScore
 		});
-		
-		
+			
 	}
+	
+	$(document).ready(function(){
+		updateTotalScore();
+	});
+	
 </script>
