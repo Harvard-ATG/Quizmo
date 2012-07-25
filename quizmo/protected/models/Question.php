@@ -447,6 +447,11 @@ class Question extends QActiveRecord
 			}
 			$questionArr['responses'] = $responseArr;
 
+			if(sizeof($responseArr) == 0){
+				$questionArr['responses'][0]['id'] = '';
+				$questionArr['responses'][0]['response'] = '';
+			}
+			
 			// answers
 			$answerArr = array();
 			foreach($answers as $answer){
