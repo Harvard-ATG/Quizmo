@@ -16,15 +16,17 @@
 	<label class="control-label" for="state">Quiz Availability</label>
 	<div class="controls">
 		<label class="radio">
-			<input type="radio" name="state" id="state1" value="O" /> Open
+			<input type="radio" name="state" id="state1" value="O" {if $state == 'O'}checked="checked"{/if}/> Open
 		</label>		
 		<label class="radio">
-			<input type="radio" name="state" id="state2" value="C" /> Closed
+			<input type="radio" name="state" id="state2" value="C" {if $state == 'C'}checked="checked"{/if}/> Closed
 		</label>		
 		<label class="radio">
-			<input type="radio" name="state" id="state3" value="S" /> Scheduled
+			<input type="radio" name="state" id="state3" value="S" {if $state == 'S'}checked="checked"{/if}/> Scheduled
 		</label>		
 		<p class="help-block">You will be able to open or schedule a quiz after you have added questions.</p>
+
+<!--
 		<label class="control-label" for="start_date">Display start</label>
 		<div class="controls">
 			<input type="text" class="input-xlarge span2" id="start_date" name="start_date" value="{$start_date}"/>
@@ -35,16 +37,18 @@
 			<input type="text" class="input-xlarge span2" id="end_date" name="end_date" value="{$end_date}"/>
 			<p class="help-inline"></p>
 		</div>
+-->
+
 	</div>
 	
 	<div class="controls">
 		<label class="checkbox">
-			<input type="checkbox" id="visibility" name="visibility" value="1"/>
+			<input type="checkbox" id="visibility" name="visibility" value="1" {if $visibility == 1}checked="checked"{/if}/>
 			Show quiz availability on student's list of quizzes
 			<p class="help-inline"></p>
 		</label>
 		<label class="checkbox">
-			<input type="checkbox" id="show_feedback" name="show_feedback" value="1"/>
+			<input type="checkbox" id="show_feedback" name="show_feedback" value="1" {if $show_feedback == 1}checked="checked"{/if}/>
 			Show correct answers to student after student submits quiz
 			<p class="help-inline"></p>
 		</label>

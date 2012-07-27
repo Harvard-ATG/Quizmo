@@ -65,9 +65,10 @@ class QuizController extends Controller
 	{
 		$quiz = new Quiz;
 		//error_log("quiz/create");
-		$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
-		$collection_id = ($collection_id == '') ? Yii::app()->getRequest()->getParam('collection_id') : $collection_id;
-		if($collection_id != '') Yii::app()->session['collection_id'] = $collection_id;
+		//$collection_id = ($id == '') ? Yii::app()->session['collection_id'] : $id;
+		//$collection_id = ($collection_id == '') ? Yii::app()->getRequest()->getParam('collection_id') : $collection_id;
+		//if($collection_id != '') Yii::app()->session['collection_id'] = $collection_id;
+		$collection_id = $id;
 		$quiz_id = $id2;
 		
 		$title = Yii::app()->getRequest()->getParam('title');
@@ -81,22 +82,49 @@ class QuizController extends Controller
 		if($show_feedback == '') $show_feedback = 0;
 		$user_id = Yii::app()->user->getId();
 
-
-		if($title != ''){
-			
-			//$collection_id = Yii::app()->getRequest()->getParam('collection_id');
-			$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
-			if($quiz_id != ''){
-				// now go to list
-				//$this->forward('/quiz/index/'.$collection_id, true);
+		// if quiz_id isset, this is an edit
+		if($quiz_id != ''){
+			// findByPk the quiz
+			$quiz = Quiz::model()->findByPk($quiz_id);
+			if(isset($_REQUEST['title'])){
+				// set the ID
+				$quiz->ID = $quiz_id;
+				// perform create/edit with the request params
+				$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 				$this->redirect($this->url('/quiz/index/'.$collection_id));
+				
+			} else {
+				// get all elements to send back
+				$title = $quiz->TITLE;
+				$description = $quiz->DESCRIPTION;
+				$state = $quiz->STATE;
+				$start_date = $quiz->START_DATE;
+				$end_date = $quiz->END_DATE;
+				$visibility = $quiz->VISIBILITY;
+				$show_feedback = $quiz->SHOW_FEEDBACK;					
 			}
+			
+		} else {
+			// if there's no quiz_id, but there is a title, then it's ready to be set
+			if($title != ''){
+
+				//$collection_id = Yii::app()->getRequest()->getParam('collection_id');
+				$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
+				// if there's a quiz_id now, it's done creating
+				if($quiz_id != ''){
+					// now go to list
+					//$this->forward('/quiz/index/'.$collection_id, true);
+					$this->redirect($this->url('/quiz/index/'.$collection_id));
+				}
+			}						
+			
 		}
+
+
 
 		$this->render('create', array(
 			'quiz_id'=>$quiz_id,
 			'collection_id'=>$collection_id,
-			'quiz_id'=>$quiz_id,
 			'title'=>$title,
 			'description'=>$description,
 			'state'=>$state,

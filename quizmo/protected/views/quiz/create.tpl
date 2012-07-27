@@ -5,7 +5,7 @@
   <li class="active">Edit Quiz</li>
 </ul>
 
-<form id="quiz-form" class="form-horizontal row-fluid isites-form" action="/quiz/create">
+<form id="quiz-form" class="form-horizontal row-fluid isites-form" action="/quiz/create/{$collection_id}/{$quiz_id}">
 	<fieldset>
 		{if $quiz_id == ''}
 			<legend>Create Quiz</legend>
@@ -20,6 +20,8 @@
 			state = $state
 			start_date = $start_date
 			end_date = $end_date
+			visibility = $visibility
+			show_feedback = $show_feedback
 		}
 	</fieldset>
 </form>
