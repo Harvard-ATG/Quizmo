@@ -71,6 +71,7 @@ class QuestionController extends Controller
 	/**
 	 * Creates a new model
 	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * @todo break out the massive switch statement into a model or component so it can be unit tested
 	 */
 	public function actionCreate($id='', $id2='')
 	{
@@ -79,9 +80,10 @@ class QuestionController extends Controller
 		$quiz = new Quiz;
 		//error_log("quiz/create");
 		
-		$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
-		$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
-		if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
+		//$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
+		//$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
+		//if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
+		$quiz_id = $id;
 		$question_id = $id2;
 
 		$title = Yii::app()->getRequest()->getParam('title');
@@ -91,8 +93,14 @@ class QuestionController extends Controller
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		
 
+		// else it's a create
 		if($title != '' && $body != '' && $question_type != ''){
-			$question = new Question;
+			// this needs to be put into the question model or its own component so a unit test can be written on it
+			if($question_id != ''){
+				$question = Question::model()->findByPk($question_id);
+			} else {
+				$question = new Question;					
+			}
 			switch($question_type){
 				// **********************************************************************
 				case 'multiple':
@@ -119,13 +127,13 @@ class QuestionController extends Controller
 					$question_id = $question->createMultipleChoice($quiz_id, Question::MULTIPLE_CHOICE, $title, $body, $score, $feedback, $multiple_answers);
 					break;
 				// **********************************************************************
-				
+
 				case 'truefalse':
 					$truefalse = Yii::app()->getRequest()->getParam('truefalse');
 					$question_id = $question->createTrueFalse($quiz_id, $title, $body, $score, $feedback, $truefalse);
 					break;
 				// **********************************************************************
-				
+
 				case 'checkall':
 					// The problem with this is if the check isn't checked, it won't show in the POST
 					// so let's just go up to 20
@@ -168,12 +176,12 @@ class QuestionController extends Controller
 					$question_id = $question->createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive);
 					break;
 				// **********************************************************************
-					
-				
+
+
 				default:
 					error_log("unknown question type: $question_type");
 					break;
-				
+
 			}
 			//$question_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
 			if(@$question_id != ''){
@@ -184,40 +192,20 @@ class QuestionController extends Controller
 			}
 		}
 
+		
+
 		$this->render('create', array(
 			'collection_id'=>$collection_id,
 			'quiz_id'=>$quiz_id,
 			'title'=>$title,
 			'body'=>$body,
 			'question_type'=>$question_type,
-			'question_id'=>$question_id
+			'question_id'=>$question_id,
+			'question'=>Question::getQuestionViewById($question_id)
 		));
 
 	}
 
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Question']))
-		{
-			$model->attributes=$_POST['Question'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
 
 	/**
 	 * Deletes a particular model.
@@ -276,29 +264,6 @@ class QuestionController extends Controller
 		));
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
-	{
-		$model=Question::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='question-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
+
 }

@@ -1,14 +1,14 @@
 <div id="title-control-group" class="control-group">
 	<label class="control-label" for="title">Title</label>
 	<div class="controls">
-		<input type="text" class="input-xlarge" id="title" name="title" value="{$title}"/>
+		<input type="text" class="input-xlarge" id="title" name="title" value="{if $question}{$question.title}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 </div>
 <div id="body-control-group" class="control-group">
 	<label class="control-label" for="body">Question</label>
 	<div class="controls">
-		<textarea class="input-xlarge" id="body" name="body">{$body}</textarea>
+		<textarea class="input-xlarge" id="body" name="body">{if $question}{$question.body}{/if}</textarea>
 		<p class="help-inline"></p>
 	</div>
 </div>
@@ -32,6 +32,18 @@
 
 <div id="multiple-choice-control-group" class="control-group hidden">
 	<label class="control-label" for="state">Multiple Choice Answers</label>
+	{if $question}
+		{foreach from=$question.answers item=answer name=answers}
+		{assign iteration $smarty.foreach.answers.iteration}
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" id="multiple_radio_answer{$iteration}" name="multiple_radio_answer" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
+			</label>
+				<input type="text" id="multiple_answer0" name="multiple_answer0" value="{$answer.answer}"/>
+				<p class="help-inline"></p>
+		</div>			
+		{/foreach}
+	{else}
 	<div class="controls">
 		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="0"/>
@@ -54,10 +66,22 @@
 			<p class="help-inline"></p>
 		<p class="help-block"></p>
 	</div>
+	{/if}
 </div>
 
 <div id="true-false-control-group" class="control-group hidden">
 	<label class="control-label" for="state">True/False Answers</label>
+	{if $question}
+		{foreach from=$question.answers item=answer name=answers}
+		{assign iteration $smarty.foreach.answers.iteration}
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" id="true_false_answer{$iteration}" name="truefalse" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>{$answer.answer}
+			</label>
+				<p class="help-inline"></p>
+		</div>			
+		{/foreach}
+	{else}
 	<div class="controls">
 		<label class="radio">
 			<input type="radio" id="true_answer" name="truefalse" value="true"/> True
@@ -71,10 +95,23 @@
 		</label>
 		<p class="help-block"></p>
 	</div>
+	{/if}
 </div>
 
 <div id="check-all-control-group" class="control-group hidden">
 	<label class="control-label" for="check-all">Check All Answers</label>
+	{if $question}
+		{foreach from=$question.answers item=answer name=answers}
+		{assign iteration $smarty.foreach.answers.iteration}
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" id="check_all_check_answer{$iteration}" name="check_all_check_answer{$iteration}" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
+			</label>
+				<input type="text" id="check_all_answer{$iteration}" name="check_all_answer{$iteration}" value="{$answer.answer}"/>
+				<p class="help-inline"></p>
+		</div>			
+		{/foreach}
+	{else}
 	<div class="controls">
 		<label class="checkbox inline">
 			<input type="checkbox" id="check_all_check_answer0" name="check_all_check_answer0" value="1"/>
@@ -98,12 +135,13 @@
 			<input type="text" id="check_all_answer2" name="check_all_answer2"/>
 			<p class="help-inline"></p>
 	</div>
+	{/if}
 </div>
 
 <div id="essay-control-group" class="control-group hidden">
 	<label class="control-label" for="essay">Text Field Size For Essay (Area where student will enter their essay text)</label>
 	<div class="controls">
-		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{*$textarea_rows*}"/> rows in student response field.
+		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{if $question}{$question.answers[0].textarea_rows}{/if}"/> rows in student response field.
 		<p class="help-inline"></p>
 	</div>	
 </div>
@@ -126,7 +164,7 @@
 	<label class="control-label" for="numerical">Fill in the blank answer</label>
 	<div class="controls">
 		<label class="checkbox inline">
-			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1"/> Case sensitive?
+			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if $question}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
 		</label>
 		<p class="help-inline">
 			{literal}
@@ -148,14 +186,14 @@
 <div id="score-control-group" class="control-group">
 	<label class="control-label" for="score">Score</label>
 	<div class="controls">
-		<input type="text" class="span1 input-xlarge" id="score" name="score" value="{*$score*}"/>
+		<input type="text" class="span1 input-xlarge" id="score" name="score" value="{if $question}{$question.points}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 </div>
 <div id="feedback-control-group" class="control-group">
 	<label class="control-label" for="feedback">Feedback</label>
 	<div class="controls">
-		<textarea class="input-xlarge" id="feedback" name="feedback">{*$feedback*}</textarea>
+		<textarea class="input-xlarge" id="feedback" name="feedback">{if $question}{$question.feedback}{/if}</textarea>
 		<p class="help-inline"></p>
 	</div>
 </div>
