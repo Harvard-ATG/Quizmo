@@ -364,6 +364,9 @@ class Question extends QActiveRecord
 	 */
 	public function getQuestionViewById($question_id, $user_id=null){
 		$question = Question::model()->findByPk($question_id);
+		if($question == null){
+			return null;
+		}
 		$answers = $question->answer;
 		if($user_id)
 			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_id));
