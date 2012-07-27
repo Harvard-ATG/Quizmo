@@ -362,10 +362,11 @@ class Question extends QActiveRecord
 	 * @param integer $user_id
 	 * @return array
 	 */
-	public function getQuestionViewById($question_id, $user_id){
+	public function getQuestionViewById($question_id, $user_id=null){
 		$question = Question::model()->findByPk($question_id);
 		$answers = $question->answer;
-		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_id));
+		if($user_id)
+			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_id));
 
 		$questionArr = array();
 		foreach($question as $key => $value){
@@ -374,16 +375,18 @@ class Question extends QActiveRecord
 		}
 
 		// responses
-		$responseArr = array();
-		foreach($responses as $response){
-			$responseInnerArr = array();
-			foreach($response as $key => $value){
-				$responseInnerArr[strtolower($key)] = $value;		
+		if($user_id){
+			$responseArr = array();
+			foreach($responses as $response){
+				$responseInnerArr = array();
+				foreach($response as $key => $value){
+					$responseInnerArr[strtolower($key)] = $value;		
+				}
+				array_push($responseArr, $responseInnerArr);
 			}
-			array_push($responseArr, $responseInnerArr);
+			$questionArr['responses'] = $responseArr;
 		}
-		$questionArr['responses'] = $responseArr;
-
+		
 		// answers
 		$answerArr = array();
 		foreach($answers as $answer){
