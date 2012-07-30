@@ -60,7 +60,7 @@ class Quiz extends QActiveRecord
 			array('COLLECTION_ID, VISIBILITY, SHOW_FEEDBACK, DELETED', 'numerical', 'integerOnly'=>true),
 			array('TITLE, STATE', 'length', 'max'=>255),
 			array('DESCRIPTION', 'length', 'max'=>3900),
-			array('START_DATE, END_DATE, DATE_MODIFIED', 'length', 'max'=>6),
+			//array('START_DATE, END_DATE, DATE_MODIFIED', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('ID, COLLECTION_ID, TITLE, DESCRIPTION, VISIBILITY, STATE, SHOW_FEEDBACK, START_DATE, END_DATE, DATE_MODIFIED, DELETED', 'safe', 'on'=>'search'),
@@ -129,6 +129,17 @@ class Quiz extends QActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 * defaultScope ensures that every find operation makes sure it's not deleted
+	 */
+	public function defaultScope()
+	{
+	    return array(
+		    'condition'=>'DELETED!=1',
+	    	'order'=>'ID ASC'
+	    );
 	}
 	
 	/**
@@ -229,5 +240,17 @@ class Quiz extends QActiveRecord
 		return $quiz->COLLECTION_ID;
 	}
 	
+	/**
+	 * sets the deleted flag
+	 * @param number $question_id
+	 * @return boolean
+	 */
+	public function setDeleted($quiz_id){
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		$quiz->DELETED = 1;
+		
+		return($quiz->save());
+		
+	}
 	
 }

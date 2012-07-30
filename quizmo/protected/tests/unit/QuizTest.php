@@ -80,5 +80,15 @@ class QuizTest extends CDbTestCase {
 		
 		$this->assertEquals($collection_id, Quiz::getCollectionId($quiz_id));
 	}
+	
+	public function testSetDeleted(){
+		$quiz_id = 2;
+		$this->assertTrue(Quiz::setDeleted($quiz_id));
+		// check that it's actually deleted
+		// resetScope takes away default scope
+		$this->assertEquals(1, Quiz::model()->resetScope()->findByPk($quiz_id)->DELETED);
+		
+	}
+	
    
 }
