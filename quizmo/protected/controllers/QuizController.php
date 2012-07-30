@@ -31,7 +31,7 @@ class QuizController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults', 'submit', 'totalScore'),
+				'actions'=>array('create','update','take', 'edit', 'results', 'individualResults', 'submit', 'totalScore', 'delete'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -222,23 +222,19 @@ class QuizController extends Controller
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Sets the flag as deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete()
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
+		$this->layout = false;
+		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
+		
+		if(!Quiz::setDeleted($quiz_id))
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+
+		echo json_encode(array('quiz_id'=>$quiz_id));
+		Yii::app()->end();
+		
 	}
 
 	/**

@@ -12,7 +12,7 @@
 		</tr>
 {foreach from=$quizzes item=quiz}
 
-		<tr>
+		<tr class="quiz-row-{$quiz['ID']}">
 			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>
 			<td>
 				{if $quiz.status != 'S'}
@@ -59,3 +59,35 @@
 {/if}
 
 </div>
+
+<script>
+	removeDiv = function(data){
+		quiz_id = data.quiz_id;
+		$('tr.quiz-row-'+quiz_id).hide(400);
+		
+	
+	}
+	failure = function(){
+		alert("failure saving");
+	}
+	$(document).ready(function(){
+		$('.quiz-delete-action').click(function(e){
+			// get the quiz_id from eventObject
+			quiz_id = e.currentTarget.name;
+			// form data
+			data = {
+				quiz_id: quiz_id
+			};
+			// now send the delete query
+			$.ajax({
+				type: 'POST',
+				url: '/quiz/delete',
+				data: data,
+				dataType: 'json',
+				error: failure,
+				success: removeDiv
+			});
+		});
+		
+	});
+</script>
