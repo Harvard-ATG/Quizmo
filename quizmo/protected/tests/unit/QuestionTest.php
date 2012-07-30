@@ -211,7 +211,8 @@ class QuestionTest extends CDbTestCase {
 		$question_id = 2;
 		$this->assertTrue(Question::setDeleted($question_id));
 		// check that it's actually deleted
-		$this->assertEquals(1, Question::model()->findByPk($question_id)->DELETED);
+		// resetScope takes away default scope
+		$this->assertEquals(1, Question::model()->resetScope()->findByPk($question_id)->DELETED);
 		
 	}
    
