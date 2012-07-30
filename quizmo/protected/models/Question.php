@@ -511,4 +511,18 @@ class Question extends QActiveRecord
 		return $question->QUIZ_ID;
 		
 	}
+	
+	/**
+	 * sets the deleted flag
+	 * @param number $question_id
+	 * @return boolean
+	 */
+	public function setDeleted($question_id){
+		$question = Question::model()->findByPk($question_id);
+		$question->DELETED = 1;
+		
+		return($question->save());
+		
+	}
+	
 }

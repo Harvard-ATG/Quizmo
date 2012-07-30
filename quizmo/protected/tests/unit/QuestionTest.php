@@ -206,5 +206,13 @@ class QuestionTest extends CDbTestCase {
 		$quiz_id = 1;
 		$this->assertEquals($quiz_id, Question::getQuizId($question_id));
 	}
+	
+	public function testSetDeleted(){
+		$question_id = 2;
+		$this->assertTrue(Question::setDeleted($question_id));
+		// check that it's actually deleted
+		$this->assertEquals(1, Question::model()->findByPk($question_id)->DELETED);
+		
+	}
    
 }
