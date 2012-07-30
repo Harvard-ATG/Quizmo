@@ -130,6 +130,9 @@ class Question extends QActiveRecord
 		));
 	}
 	
+	/**
+	 * defaultScope ensures that every find operation makes sure it's not deleted
+	 */
 	public function defaultScope()
 	{
 	    return array(
