@@ -130,6 +130,14 @@ class Question extends QActiveRecord
 		));
 	}
 	
+	public function defaultScope()
+	{
+	    return array(
+		    'condition'=>'DELETED!=1',
+	    	'order'=>'ID ASC'
+	    );
+	}
+	
 	/**
 	* getQuestionArrayByQuizId
 	*
