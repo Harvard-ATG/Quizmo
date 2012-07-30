@@ -21,7 +21,7 @@
 		<tbody>
 {foreach from=$questions item=question}
 
-		<tr>
+		<tr class="question-row-{$question['ID']}">
 			<td><a href="{$question['link']}">{$question['TITLE']}</a></td>
 			<td>
 				<a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">Edit</a><br/>
@@ -52,3 +52,38 @@
 {/if}
 
 </div>
+
+<script>
+	removeDiv = function(data){
+		question_id = data.question_id;
+		//$('.question-delete-action[name="'+question_id+'"]').hide();
+		$('tr.question-row-'+question_id).hide(400);
+		//console.log($('.question-delete-action[name="'+question_id+'"]'));
+		
+	
+	}
+	failure = function(){
+		alert("failure saving");
+	}
+	$(document).ready(function(){
+		$('.question-delete-action').click(function(e){
+			// get the question_id from eventObject
+			question_id = e.currentTarget.name;
+			// form data
+			data = {
+				question_id: question_id
+			};
+			console.log(data);
+			// now send the delete query
+			$.ajax({
+				type: 'POST',
+				url: '/question/delete',
+				data: data,
+				dataType: 'json',
+				error: failure,
+				success: removeDiv
+			});
+		});
+		
+	});
+</script>
