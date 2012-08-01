@@ -253,6 +253,16 @@ class Question extends QActiveRecord
 		
 		$question_id = $this->create($quiz_id, $question_type, $title, $body, $score, $feedback);
 				
+		// first remove all answers
+		// get all answers
+		$answers = Answer::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
+		// run through them
+		foreach($answers as $answer){
+			// delete them all
+			$answer->delete();
+		}
+		
+		// then run through the answers...
 		foreach($multiple_answers as $multiple_answer){
 			$answer = new Answer;
 			$answer->create($question_id, $question_type, $multiple_answer['answer'], $multiple_answer['is_correct']);

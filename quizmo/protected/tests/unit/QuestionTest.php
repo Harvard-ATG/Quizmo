@@ -74,6 +74,12 @@ class QuestionTest extends CDbTestCase {
 		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
 		$this->assertEquals(sizeof($multiple_answers), sizeof($answers), "Failed asserting that the appropriate number of answers were added for the multiple-choice question.");
 		
+		// send another create, which should do an update
+		$this->assertGreaterThan(0, $question->createMultipleChoice($quiz_id, $question_type, $title, $body, $score, $feedback, $multiple_answers), "Failed asserting that create works as an edit with all items");
+		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
+		// and test the sizeof again
+		$this->assertEquals(sizeof($multiple_answers), sizeof($answers), "Failed asserting that the appropriate number of answers were added for the multiple-choice question.");
+		
 		
 	}
 
