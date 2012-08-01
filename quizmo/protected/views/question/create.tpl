@@ -104,6 +104,7 @@ $(document).ready(function(){
 	// functions for showing the question types
 	showMultipleChoice = function(){
 		$('#multiple-choice-control-group').removeClass('hidden');
+		$('#question-type-multiple').removeClass('disabled');
 		$('#true-false-control-group').addClass('hidden');
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
@@ -115,6 +116,7 @@ $(document).ready(function(){
 	showTrueFalse = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
 		$('#true-false-control-group').removeClass('hidden');
+		$('#question-type-truefalse').removeClass('disabled');
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
@@ -126,6 +128,7 @@ $(document).ready(function(){
 		$('#multiple-choice-control-group').addClass('hidden');
 		$('#true-false-control-group').addClass('hidden');
 		$('#check-all-control-group').removeClass('hidden');
+		$('#question-type-checkall').removeClass('disabled');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
 		$('#fill-in-control-group').addClass('hidden');
@@ -137,6 +140,7 @@ $(document).ready(function(){
 		$('#true-false-control-group').addClass('hidden');
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').removeClass('hidden');
+		$('#question-type-essay').removeClass('disabled');
 		$('#numerical-control-group').addClass('hidden');
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("essay");		
@@ -148,6 +152,7 @@ $(document).ready(function(){
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').removeClass('hidden');
+		$('#question-type-numerical').removeClass('disabled');
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("numerical");		
 		$('#question-type-numerical').addClass('active');	
@@ -159,6 +164,7 @@ $(document).ready(function(){
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
 		$('#fill-in-control-group').removeClass('hidden');
+		$('#question-type-fillin').removeClass('disabled');
 		$('#question_type').val("fillin");		
 		$('#question-type-fillin').addClass('active');	
 	}
@@ -174,6 +180,7 @@ $(document).ready(function(){
 		$('#question-type-fillin').click(showFillin);
 	} else {
 		// set the show if it's an edit
+		$(".question_type_btn").addClass("disabled");
 		if(question_type == 'M'){
 			showMultipleChoice();
 		}
