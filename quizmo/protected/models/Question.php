@@ -330,6 +330,15 @@ class Question extends QActiveRecord
 	public function createEssay($quiz_id, $title, $body, $score, $feedback, $textarea_rows){
 		
 		$question_id = $this->create($quiz_id, Question::ESSAY, $title, $body, $score, $feedback);
+
+		// first remove all answers
+		// get all answers
+		$answers = Answer::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
+		// run through them
+		foreach($answers as $answer){
+			// delete them all
+			$answer->delete();
+		}
 				
 		$answer = new Answer;
 		$answer->create($question_id, Question::ESSAY, '', 0, $textarea_rows);
@@ -354,6 +363,15 @@ class Question extends QActiveRecord
 		
 		$question_id = $this->create($quiz_id, Question::NUMERICAL, $title, $body, $score, $feedback);
 				
+		// first remove all answers
+		// get all answers
+		$answers = Answer::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
+		// run through them
+		foreach($answers as $answer){
+			// delete them all
+			$answer->delete();
+		}
+
 		$answer = new Answer;
 		$answer->create($question_id, Question::NUMERICAL, '', 0, 10, 0, $tolerance);
 		
