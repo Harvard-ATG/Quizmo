@@ -149,12 +149,12 @@
 <div id="numerical-control-group" class="control-group hidden">
 	<label class="control-label" for="numerical">Numerical Answer</label>
 	<div class="controls">
-		<input type="text" class="span1" id="numerical_answer" name="numerical_answer" value="{*$numerical_answer*}"/>
+		<input type="text" class="span1" id="numerical_answer" name="numerical_answer" value="{if $question}{$question.answers[0].answer}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 	<label class="control-label" for="numerical">Tolerance</label>
 	<div class="controls">
-		<input type="text" class="span1" id="tolerance" name="tolerance" value="{*$tolerance*}"/>
+		<input type="text" class="span1" id="tolerance" name="tolerance" value="{if $question}{$question.answers[0].tolerance}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 
