@@ -290,6 +290,15 @@ class Question extends QActiveRecord
 
 		$question_id = $this->create($quiz_id, Question::TRUE_FALSE, $title, $body, $score, $feedback);
 				
+		// first remove all answers
+		// get all answers
+		$answers = Answer::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
+		// run through them
+		foreach($answers as $answer){
+			// delete them all
+			$answer->delete();
+		}
+
 		if($truefalse){
 			$true = 1;
 			$false = 0;
