@@ -25,7 +25,7 @@
 
 		<div class="form-actions">
 			<button id="question-submit" type="submit" class="btn btn-primary">Submit</button>
-			<a class="btn" href="/question/index/<?php echo $quiz_id; ?>">Cancel</a>
+			<a class="btn" href="/question/index/{$quiz_id}">Cancel</a>
 		</div>
 		
 	</fieldset>
