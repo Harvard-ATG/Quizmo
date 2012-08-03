@@ -31,7 +31,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		//error_log("site/index");
+		error_log("site/index");
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		//$this->render('index');
@@ -44,7 +44,8 @@ class SiteController extends Controller
 
 			// forward doesn't seem to send along the parameter...
 			//$this->forward('/quiz/index/'.$collection->ID);
-			$this->redirect($this->url('/quiz/index/'.$collection->ID));
+			
+			$this->jsredirect($this->url('/quiz/index/'.$collection->ID));
 		} else {
 			// forward is cleaner in this case
 			$this->forward('/collection/index');
@@ -114,4 +115,15 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 		
 	}
+	
+	public function actionJsredirect(){
+		
+		if(isset(Yii::app()->session['jsredirect'])){
+			$this->render('jsredirect',array(
+				'url'=>Yii::app()->session['jsredirect'],
+			));
+		}
+		
+	}
+	
 }

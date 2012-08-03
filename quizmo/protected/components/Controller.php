@@ -40,4 +40,12 @@ class Controller extends CController
 		return $url;
 	}
 	
+	protected function jsredirect($url){
+		// set the redirect in a session
+		Yii::app()->session['jsredirect'] = $url;
+		
+		// forward to the jsredirect action
+		$this->forward('/site/jsredirect');
+	}
+	
 }
