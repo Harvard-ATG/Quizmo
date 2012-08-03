@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li>
-    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
+    <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
   <li class="active">Edit Quiz</li>
 </ul>
