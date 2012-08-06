@@ -32,11 +32,7 @@ class QuestionController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','delete'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'roles'=>array('admin','super'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -246,22 +242,6 @@ class QuestionController extends Controller
 		));
 
 	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Question('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Question']))
-			$model->attributes=$_GET['Question'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
 
 
 }
