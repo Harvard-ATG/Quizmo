@@ -16,11 +16,13 @@ class UserIdentity extends CUserIdentity
 
 	public $id;
 	protected $external_id;
-	protected $name;
-	protected $fname;
-	protected $lname;
+	public $name;
+	public $fname;
+	public $lname;
 	// this is a hash of collections and permissions
 	protected $collections;
+	public $perm;
+	public $perm_id;
 	
 	/**
 	 * Overriding constructor to help with testing

@@ -36,19 +36,24 @@ class IsitesIdentity extends UserIdentity {
 		$perm = '';
 		if(Yii::app()->isitestool->isGuest()){
 			$perm = 'guest';
+			$this->perm_id = UserIdentity::GUEST;
 		}
 		if(Yii::app()->isitestool->isEnrollee()){
 			$perm = 'enrollee';
+			$this->perm_id = UserIdentity::ENROLLEE;
 		}
 		if(Yii::app()->isitestool->isAdmin()){
 			$perm = 'admin';
+			$this->perm_id = UserIdentity::ADMIN;
 		}
 		if(Yii::app()->isitestool->isSuper()){
 			$perm = 'super';
+			$this->perm_id = UserIdentity::SUPER;
 		}
 		// set the collection we are logging in to with the highest level permission
 		// TODO: use isites search service to get the collection name
 		$this->collections[$this->topicId] = $perm;
+		$this->perm = $perm;
 
 		
 		$this->setup();
