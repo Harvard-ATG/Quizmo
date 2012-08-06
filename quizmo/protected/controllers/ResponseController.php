@@ -26,12 +26,8 @@ class ResponseController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'submitQuestion'),
+				'actions'=>array('submitQuestion'),
 				'roles'=>array('enrollee','admin','super'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -93,11 +89,11 @@ class ResponseController extends Controller
 	 * grade response
 	 */
 	public function actionGrade(){
-		error_log("actionGrade");
+		//error_log("actionGrade");
 		$response_id = Yii::app()->getRequest()->getParam('response_id');
 		$user_id = Yii::app()->getRequest()->getParam('user_id');
 		$score = Yii::app()->getRequest()->getParam('score');
-		error_log($score);
+		//error_log($score);
 		Response::setScore($response_id, $score);
 		
 	}
