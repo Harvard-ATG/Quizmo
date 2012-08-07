@@ -220,16 +220,29 @@ class QuizController extends Controller
 	public function actionIndex($id='')
 	{
 		//error_log("quiz/index");
-		$collection_id = ($id=='') ? Yii::app()->session['collection_id'] : $id;
+		$collection_id = $id;
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
-		$this->render('index',array(
-			//'dataProvider'=>$dataProvider,
-			'quizzes'=>$quizzes,
-			'sizeofquizzes'=>sizeof($quizzes),
-			'user_id'=>$user_id,
-			'collection_id'=>$collection_id,
-		));
+		$perm_id = Yii::app()->user->perm_id;
+		
+		if($perm_id >= UserIdentity::ADMIN){
+			$this->render('index',array(
+				//'dataProvider'=>$dataProvider,
+				'quizzes'=>$quizzes,
+				'sizeofquizzes'=>sizeof($quizzes),
+				'user_id'=>$user_id,
+				'collection_id'=>$collection_id,
+			));
+		} else {
+			$this->render('index',array(
+				//'dataProvider'=>$dataProvider,
+				'quizzes'=>$quizzes,
+				'sizeofquizzes'=>sizeof($quizzes),
+				'user_id'=>$user_id,
+				'collection_id'=>$collection_id,
+			));
+
+		}			
 		
 	}
 	
