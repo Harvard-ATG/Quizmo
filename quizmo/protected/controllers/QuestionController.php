@@ -72,7 +72,6 @@ class QuestionController extends Controller
 	public function actionCreate($id='', $id2='')
 	{
 		$user_id = Yii::app()->user->getId();
-		$collection_id = Yii::app()->session['collection_id'];
 		$quiz = new Quiz;
 		//error_log("quiz/create");
 		
@@ -81,6 +80,7 @@ class QuestionController extends Controller
 		//if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
 		$quiz_id = $id;
 		$question_id = $id2;
+		$collection_id = Quiz::getCollectionId($quiz_id);
 
 		$title = Yii::app()->getRequest()->getParam('title');
 		$body = Yii::app()->getRequest()->getParam('body');
