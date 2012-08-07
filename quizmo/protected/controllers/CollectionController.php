@@ -106,7 +106,6 @@ class CollectionController extends Controller
 		));
 		
 
-	}
 
 	}
 
