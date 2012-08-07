@@ -226,7 +226,7 @@ class QuizController extends Controller
 		$perm_id = Yii::app()->user->perm_id;
 		
 		if($perm_id >= UserIdentity::ADMIN){
-			$this->render('index',array(
+			$this->render('admindex',array(
 				//'dataProvider'=>$dataProvider,
 				'quizzes'=>$quizzes,
 				'sizeofquizzes'=>sizeof($quizzes),
