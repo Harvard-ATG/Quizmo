@@ -25,16 +25,20 @@
 <input type="hidden" id="question_ids" value='{$question_ids_json}'/>
 
 <script>
+
 submitQuestion = function(){
 	console.log("ERROR: submitting blank!");
 }
 
 loadQuestion = function(question_id){
+	
 	data = {
+		question_id: question_id,
 		ajax: true
 	};
+	url = "{url url='/question/view' ajax=1}";
 	{literal}
-	$('#questions-container').load('/question/view/' + question_id, data, function(){$(this).fadeIn('slow')}).hide();
+	$('#questions-container').load(url, data, function(){$(this).fadeIn('slow')}).hide();
 	{/literal}	
 }
 
