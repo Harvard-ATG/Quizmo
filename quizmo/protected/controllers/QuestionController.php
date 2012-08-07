@@ -48,6 +48,8 @@ class QuestionController extends Controller
 	public function actionView($id)
 	{
 		$question_id = $id;
+		if(isset(Yii::app()->getRequest()->getParam('question_id')))
+			$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$user_id = Yii::app()->user->getId();
 		$isajax = Yii::app()->getRequest()->getParam('ajax');
 		
