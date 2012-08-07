@@ -38,10 +38,10 @@ tolerance=>
 {if !$isajax}
 <ul class="breadcrumb">
   <li>
-    <a href="/quiz/index/{$collection_id}">Quizzes</a> <span class="divider">/</span>
+    <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
   <li>
-    <a href="/question/index/{$quiz_id}">Questions</a> <span class="divider">/</span>
+    <a href='{url url="/question/index/$quiz_id"}'>Questions</a> <span class="divider">/</span>
   </li>
   <li class="active">{$question['title']}</li>
 </ul>
