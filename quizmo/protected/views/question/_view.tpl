@@ -13,7 +13,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="radio">
-				<input type="radio" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled />
+				<input type="radio" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled="disabled" />
 
 				{if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{else}<i class="icon-empty"></i>{/if} {$question.answers[$key].answer}  
 
@@ -28,7 +28,7 @@
 		<div class="controls">
 			{foreach from=$question.answers key=key item=value}			
 			<label class="checkbox">
-				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled>
+				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled="disabled">
 				
 				{if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{else}<i class="icon-empty"></i>{/if} {$question.answers[$key].answer}  
 
@@ -43,7 +43,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="span12 input-xlarge disabled" rows="9" disabled>{$question.responses[0].response}</textarea>
+			<textarea id="essay-text" class="span12 input-xlarge disabled" rows="9" disabled="disabled">{$question.responses[0].response}</textarea>
 		</div>
 	</div>
 
@@ -52,7 +52,7 @@
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<input id="numerical-text" type="text" class="input-small disabled" value="{$question.responses[0].response}" disabled/>
+			<input id="numerical-text" type="text" class="input-small disabled" value="{$question.responses[0].response}" disabled="disabled"/>
 		</div>
 	</div>
 

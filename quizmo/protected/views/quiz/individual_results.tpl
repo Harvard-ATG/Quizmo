@@ -31,7 +31,7 @@
 				question = $question
 			}
 			</td>
-			<td nowrap>
+			<td nowrap="nowrap">
 			{if true}
 				{include file = 'protected/views/response/_grade.tpl'
 					response_id = $question.responses[0].id
