@@ -5,7 +5,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 <head>    
 </head>
 <body>
-	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"></a>
+	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"> </a>
 	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
 <!--
@@ -31,7 +31,6 @@ $host = "http://".$_SERVER['HTTP_HOST'];
     <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
-    <script src="<?php echo $host; ?>/js/url.js"></script>
 	
 <style>
 #isites-scale-portal-content .topic .content table, #isites-scale-portal-content .topic .content table {
@@ -39,11 +38,9 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 }
 </style>
 
-    <div class="container">
 
 		<?php echo $content; ?>
 
-    </div> <!-- /container -->
 
   </body>
 </html>
