@@ -1,8 +1,8 @@
-<div class="row-fluid">
-	<h1 class="span12">Taking the quiz</h1>
+<div>
+	<h1>Taking the quiz</h1>
 </div>
 
-<div class="row-fluid well"  style="height: 300px">
+<div class="well"  style="height: 300px">
 <div id="questions-container">
 
 </div>
