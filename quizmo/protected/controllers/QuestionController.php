@@ -45,10 +45,11 @@ class QuestionController extends Controller
 	 * @todo set the layout to ajax so the general layout doesn't do all the calls twice
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($id='')
 	{
+		//$this->layout = false;
 		$question_id = $id;
-		if(isset(Yii::app()->getRequest()->getParam('question_id')))
+		if(isset($_REQUEST['question_id']))
 			$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$user_id = Yii::app()->user->getId();
 		$isajax = Yii::app()->getRequest()->getParam('ajax');
