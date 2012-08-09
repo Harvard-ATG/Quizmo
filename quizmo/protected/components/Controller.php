@@ -25,10 +25,12 @@ class Controller extends CController
 	// added for facebook-opengraph
 	protected function afterRender($view, &$output){
 	    parent::afterRender($view,$output);
-	    //Yii::app()->facebook->addJsCallback($js); // use this if you are registering any $js code you want to run asyc
-	    Yii::app()->facebook->initJs($output); // this initializes the Facebook JS SDK on all pages
-	    Yii::app()->facebook->renderOGMetaTags(); // this renders the OG tags
-	    return true;
+		if(Yii::app()->params['authMethod'] == 'facebook'){
+		    //Yii::app()->facebook->addJsCallback($js); // use this if you are registering any $js code you want to run asyc
+			Yii::app()->facebook->initJs($output); // this initializes the Facebook JS SDK on all pages
+	    	Yii::app()->facebook->renderOGMetaTags(); // this renders the OG tags
+	    }
+		return true;
 	}
 	
 	protected function url($url){

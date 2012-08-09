@@ -1,6 +1,5 @@
-<div class="row-fluid">
-	<h1 class="span12">Quizzes</h1>
-</div>
+<h1>Quizzes</h1>
+
 
 <div id="quizzes-container">
 

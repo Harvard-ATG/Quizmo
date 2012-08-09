@@ -1,8 +1,7 @@
-<div class="row-fluid">
-	<h1 class="span12">Quizzes</h1>
-</div>
+	<h1>Quizzes</h1>
 
-<div id="quizzes-container" class="span12 row-fluid">
+
+<div id="quizzes-container">
 	<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
 
 {if $sizeofquizzes > 0}

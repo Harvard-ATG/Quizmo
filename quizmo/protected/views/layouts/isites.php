@@ -6,8 +6,10 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 </head>
 <body>
 	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"> </a>
-	<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
+	<style>
+	<?php include("css/bootstrap-isites.css"); ?>
+	</style>
+
 <!--
 	<link href="<?php echo $host; ?>/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo $host; ?>/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
@@ -32,15 +34,10 @@ $host = "http://".$_SERVER['HTTP_HOST'];
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
 	
-<style>
-#isites-scale-portal-content .topic .content table, #isites-scale-portal-content .topic .content table {
-	width: 100%;
-}
-</style>
 
-
+		<div class="bootstrapped">
 		<?php echo $content; ?>
-
+		</div>
 
   </body>
 </html>
