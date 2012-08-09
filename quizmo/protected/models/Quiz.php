@@ -157,6 +157,9 @@ class Quiz extends QActiveRecord
 			$qa['link'] = "/question/index/".$quiz->ID;
 			$status = Submission::getStatusByUser($user_id, $quiz->ID);
 			$qa['status'] = $status;
+			$question_count = count(Quiz::getQuestionIds($quiz->ID));
+			$qa['question_count'] = $question_count;
+			
 			foreach($quiz as $key=>$value){
 				$qa[$key] = $value;
 			}
