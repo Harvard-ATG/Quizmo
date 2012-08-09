@@ -84,9 +84,10 @@ tolerance=>
 				answer_id: answer_id
 			}
 			// submit value via ajax
+			submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
-				url: '/response/submitQuestion',
+				url: submit_url,
 				data: data
 				//success: success,
 				//dataType: dataType
@@ -124,9 +125,10 @@ tolerance=>
 				answers: answers
 			}
 			// send the ajax
+			submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
-				url: '/response/submitQuestion',
+				url: submit_url,
 				data: data
 			});
 		}
@@ -150,9 +152,10 @@ tolerance=>
 				answer: answer
 			}
 			// send the ajax
+			submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
-				url: '/response/submitQuestion',
+				url: submit_url,
 				data: data
 			});
 		}
@@ -176,9 +179,10 @@ tolerance=>
 				answer: answer
 			}
 			// send the ajax
+			submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
-				url: '/response/submitQuestion',
+				url: submit_url,
 				data: data
 			});
 		}
@@ -199,9 +203,10 @@ tolerance=>
 				answers: answers
 			}
 			// send the ajax
+			submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
-				url: '/response/submitQuestion',
+				url: submit_url,
 				data: data
 			});
 		}
