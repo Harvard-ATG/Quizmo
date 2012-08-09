@@ -91,7 +91,7 @@ class QuizController extends Controller
 				$quiz->ID = $quiz_id;
 				// perform create/edit with the request params
 				$quiz_id = $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback);
-				$this->redirect($this->url('/quiz/index/'.$collection_id));
+				$this->jsredirect($this->url('/quiz/index/'.$collection_id));
 				
 			} else {
 				// get all elements to send back
@@ -114,7 +114,7 @@ class QuizController extends Controller
 				if($quiz_id != ''){
 					// now go to list
 					//$this->forward('/quiz/index/'.$collection_id, true);
-					$this->redirect($this->url('/quiz/index/'.$collection_id));
+					$this->jsredirect($this->url('/quiz/index/'.$collection_id));
 				}
 			}						
 			
