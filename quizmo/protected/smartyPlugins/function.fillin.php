@@ -31,12 +31,12 @@ function smarty_function_fillin($params, &$smarty){
 			//error_log($match);
 			//if($responses == null){
 			if(!isset($responses[$responses_index])){
-				$new_input = "<input class='input-small fillin-text' type='text'/>";				
+				$new_input = "<input class='input-small fillin-text' type='text' $disabled/>";				
 			} else {
 				//error_log("$response...");
 				$response = $responses[$responses_index]['response'];
 				$responses_index++;
-				$new_input = "<input class='input-small fillin-text $disabled' type='text' value='$response' $disabled/>";
+				$new_input = "<input class='input-small fillin-text' type='text' value='$response' $disabled/>";
 			}
 			$question = preg_replace("/".addslashes($match)."/", $new_input, $question);
 		}
