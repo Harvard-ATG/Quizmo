@@ -22,6 +22,7 @@
 			end_date = $end_date
 			visibility = $visibility
 			show_feedback = $show_feedback
+			quiz_id = $quiz_id
 		}
 	</fieldset>
 </form>
