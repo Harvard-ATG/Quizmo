@@ -106,8 +106,9 @@ $(document).ready(function(){
 		
 		next_item = current_item.next("button");
 		// if next_item is 0, send us to the quiz page
+		index_url = '{url url="/quiz/index/$quiz_id"}';
 		if(next_item.length == 0){
-			window.location.href = "/quiz/index/{$quiz_id}";
+			window.location.href = index_url;
 		}
 		next_item_question_id = next_item.attr("name");
 		loadQuestion(next_item_question_id);
