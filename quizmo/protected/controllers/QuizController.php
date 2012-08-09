@@ -169,7 +169,7 @@ class QuizController extends Controller
 			if($quiz_id != ''){
 				// now go to list
 				//$this->forward('/quiz/index/'.$collection_id, true);
-				$this->redirect($this->url('/quiz/index/'.$collection_id));
+				$this->jsredirect($this->url('/quiz/index/'.$collection_id));
 
 			}
 		}
@@ -300,7 +300,7 @@ class QuizController extends Controller
 			'collection_id'=>$collection_id,
 		));
 */
-		$this->redirect($this->url('/quiz/individualResults/'.$quiz_id."/".$user_id));
+		$this->jsredirect($this->url('/quiz/individualResults/'.$quiz_id."/".$user_id));
 	
 	 }
 	
