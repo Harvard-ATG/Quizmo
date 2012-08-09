@@ -14,7 +14,7 @@
 		<tr class="quiz-row-{$quiz['ID']}">
 			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>
 			<td>
-				{if $quiz.status != 'S'}
+				{if $quiz.status != 'S' && $quiz.question_count > 0}
 					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				{/if}
 				<a href="{url url='/question/index/'|cat:$quiz['ID']}">Edit Questions</a><br/>
