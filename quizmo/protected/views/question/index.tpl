@@ -22,7 +22,7 @@
 {foreach from=$questions item=question}
 
 		<tr class="question-row-{$question['ID']}">
-			<td><a href="{$question['link']}">{$question['TITLE']}</a></td>
+			<td><a href="{url url='/question/view/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
 			<td>
 				<a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">Edit</a><br/>
 
