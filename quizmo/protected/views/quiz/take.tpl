@@ -22,6 +22,20 @@
 	</div>
 </div>
 
+<div>
+	<button type="button" class="btn btn-danger" id="quiz-submit-btn">Submit</button>
+</div>
+<div class="modal hide" id="quiz-submit" style="text-align: center">
+	<div class="modal-body">
+		<p class="lead">Are you sure you want to submit this quiz now?  You will not be able to come back to it.</p>
+	</div>
+	<div class="modal-footer" style="text-align: center">
+		<a id="quiz-submit-confirm-btn" href="#" class="btn btn-danger" data-dismiss="modal">Submit</a>
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+	</div>
+</div>
+
+
 <input type="hidden" id="question_ids" value='{$question_ids_json}'/>
 
 <script>
@@ -40,6 +54,18 @@ loadQuestion = function(question_id){
 	{literal}
 	$('#questions-container').load(url, data, function(){$(this).fadeIn('slow')}).hide();
 	{/literal}	
+}
+
+openSubmitModal = function(){
+	$("#quiz-submit").modal();
+}
+
+submitQuiz = function(){
+	submitQuestion();
+	
+	index_url = '{url url="/quiz/submit/$quiz_id"}';
+	window.location.href = index_url;
+	
 }
 
 $(document).ready(function(){
@@ -126,6 +152,9 @@ $(document).ready(function(){
 		}
 		
 	});
+	
+	$("#quiz-submit-btn").click(openSubmitModal);
+	$("#quiz-submit-confirm-btn").click(submitQuiz);
 
 });
 </script>
