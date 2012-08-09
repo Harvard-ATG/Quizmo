@@ -9,6 +9,9 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<style>
 	<?php include("css/bootstrap-isites.css"); ?>
 	</style>
+	<style>
+	<?php include("css/bootstrap-responsive.css"); ?>
+	</style>
 
 <!--
 	<link href="<?php echo $host; ?>/css/bootstrap.css" rel="stylesheet" type="text/css"/>
