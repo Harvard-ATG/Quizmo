@@ -47,12 +47,13 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id='')
 	{
-		$this->layout = false;
 		$question_id = $id;
 		if(isset($_REQUEST['question_id']))
 			$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$user_id = Yii::app()->user->getId();
 		$isajax = Yii::app()->getRequest()->getParam('ajax');
+		if($isajax)
+			$this->layout = false;
 		
 		//$question = new Question;
 		//$question = $question->model()->findByPk($id);
