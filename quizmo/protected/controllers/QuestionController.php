@@ -47,7 +47,7 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id='')
 	{
-		//$this->layout = false;
+		$this->layout = false;
 		$question_id = $id;
 		if(isset($_REQUEST['question_id']))
 			$question_id = Yii::app()->getRequest()->getParam('question_id');
