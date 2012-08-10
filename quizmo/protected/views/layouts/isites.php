@@ -10,7 +10,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<?php include("css/bootstrap-isites.css"); ?>
 	</style>
 	<style>
-	<?php include("css/bootstrap-responsive.css"); ?>
+	<?php include("css/bootstrap-responsive-isites.css"); ?>
 	</style>
 
 <!--
