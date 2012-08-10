@@ -33,7 +33,9 @@
 {/foreach}
 	</table>
 {else}
-No Quizzes.
+<div class="lead">
+	No Quizzes.
+</div>
 {/if}
 
 

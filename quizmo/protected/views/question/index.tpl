@@ -5,11 +5,11 @@
   <li class="active">Questions</li>
 </ul>
 
-<div class="row-fluid">
-	<h1 class="span12">Questions</h1>
+<div>
+	<h1>Questions</h1>
 </div>
 
-<div id="questions-container" class="span12 row-fluid">
+<div id="questions-container">
 	<a class="btn" href='{url url="/question/create/$quiz_id"}'>New Question</a>
 {if $sizeofquestions > 0}
 	<table class="table table-condensed">
@@ -49,6 +49,10 @@
 {/foreach}
 		</tbody>
 	</table>
+{else}
+<div class="lead">
+	No Questions.
+</div>
 {/if}
 
 </div>
