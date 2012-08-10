@@ -26,7 +26,7 @@
 			<td>
 				<a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">Edit</a><br/>
 
-				<a data-toggle="modal" href="#question-delete-modal-{$question['ID']}" >Delete</a>
+				<a class="question-delete-btn" name="#question-delete-modal-{$question['ID']}" >Delete</a>
 				<div class="modal hide" id="question-delete-modal-{$question['ID']}">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal">×</button>
@@ -58,6 +58,28 @@
 </div>
 
 <script>
+	openQuestionDeleteModal = function(e){
+		// get the id
+		$(e.currentTarget.name).modal();
+	}
+	questionDeleteAction = function(e){
+		question_delete_url = "{url url='/question/delete' ajax=1}";
+		// get the question_id from eventObject
+		question_id = e.currentTarget.name;
+		// form data
+		data = {
+			question_id: question_id
+		};
+		// now send the delete query
+		$.ajax({
+			type: 'POST',
+			url: question_delete_url,
+			data: data,
+			dataType: 'json',
+			error: failure,
+			success: removeDiv
+		});
+	}
 	removeDiv = function(data){
 		question_id = data.question_id;
 		//$('.question-delete-action[name="'+question_id+'"]').hide();
@@ -70,24 +92,8 @@
 		alert("failure saving");
 	}
 	$(document).ready(function(){
-		$('.question-delete-action').click(function(e){
-			// get the question_id from eventObject
-			question_id = e.currentTarget.name;
-			// form data
-			data = {
-				question_id: question_id
-			};
-			console.log(data);
-			// now send the delete query
-			$.ajax({
-				type: 'POST',
-				url: '/question/delete',
-				data: data,
-				dataType: 'json',
-				error: failure,
-				success: removeDiv
-			});
-		});
+		$('.question-delete-btn').click(openQuestionDeleteModal);
+		$('.question-delete-action').click(questionDeleteAction);
 		
 	});
 </script>
