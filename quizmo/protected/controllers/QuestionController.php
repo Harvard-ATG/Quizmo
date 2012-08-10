@@ -167,7 +167,8 @@ class QuestionController extends Controller
 
 				case 'numerical':
 					$tolerance = Yii::app()->getRequest()->getParam('tolerance');
-					$question_id = $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance);
+					$numerical_answer = Yii::app()->getRequest()->getParam('numerical_answer');
+					$question_id = $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $numerical_answer, $tolerance);
 					break;
 				// **********************************************************************
 

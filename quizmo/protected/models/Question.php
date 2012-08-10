@@ -355,11 +355,12 @@ class Question extends QActiveRecord
 	* @param string $body 
 	* @param integer $score 
 	* @param string $feedback 
+	* @param float $numerical_answer 
 	* @param float $tolerance 
 	*
 	* @return integer $question_id 
 	*/
-	public function createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance){
+	public function createNumerical($quiz_id, $title, $body, $score, $feedback, $numerical_answer, $tolerance){
 		
 		$question_id = $this->create($quiz_id, Question::NUMERICAL, $title, $body, $score, $feedback);
 				
@@ -373,7 +374,7 @@ class Question extends QActiveRecord
 		}
 
 		$answer = new Answer;
-		$answer->create($question_id, Question::NUMERICAL, '', 0, 10, 0, $tolerance);
+		$answer->create($question_id, Question::NUMERICAL, $numerical_answer, 0, 10, 0, $tolerance);
 		
 		return $question_id;
 		

@@ -126,13 +126,15 @@ class QuestionTest extends CDbTestCase {
 		$body = "a number!";
 		$score = "10";
 		$feedback = "this is feedback";
+		$numerical_answer = 2;
 		$tolerance = 20;
 		
 		$question = new Question;		
-		$this->assertGreaterThan(0, $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $tolerance), "Failed asserting that createNumerical works with all items");
+		$this->assertGreaterThan(0, $question->createNumerical($quiz_id, $title, $body, $score, $feedback, $numerical_answer, $tolerance), "Failed asserting that createNumerical works with all items");
 		
 		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
-		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the numerical question.");		
+		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the numerical question.");	
+		$this->assertEquals($numerical_answer, $answers[0]->ANSWER);	
 
 	}
 
