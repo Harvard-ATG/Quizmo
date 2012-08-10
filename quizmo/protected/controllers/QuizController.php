@@ -73,7 +73,7 @@ class QuizController extends Controller
 		
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
-		$state = Yii::app()->getRequest()->getParam('state');
+		$state = Yii::app()->getRequest()->getParam('quiz_state');
 		$start_date = Yii::app()->getRequest()->getParam('start_date');
 		$end_date = Yii::app()->getRequest()->getParam('end_date');
 		$visibility = Yii::app()->getRequest()->getParam('visibility');

@@ -16,13 +16,13 @@
 	<label class="control-label" for="state">Quiz Availability</label>
 	<div class="controls">
 		<label class="radio">
-			<input type="radio" name="state" id="state1" value="O" {if $state == 'O'}checked="checked"{/if} {if $quiz_id == ''}disabled="disabled"{/if}/> Open
+			<input type="radio" name="quiz_state" id="state1" value="O" {if $state == 'O'}checked="checked"{/if} {if $quiz_id == ''}disabled="disabled"{/if}/> Open
 		</label>		
 		<label class="radio">
-			<input type="radio" name="state" id="state2" value="C" {if $state == 'C' || $quiz_id == ''}checked="checked"{/if}/> Closed
+			<input type="radio" name="quiz_state" id="state2" value="C" {if $state == 'C' || $quiz_id == ''}checked="checked"{/if}/> Closed
 		</label>		
 		<label class="radio">
-			<input type="radio" name="state" id="state3" value="S" {if $state == 'S'}checked="checked"{/if} {if $quiz_id == ''}disabled="disabled"{/if}/> Scheduled
+			<input type="radio" name="quiz_state" id="state3" value="S" {if $state == 'S'}checked="checked"{/if} {if $quiz_id == ''}disabled="disabled"{/if}/> Scheduled
 		</label>		
 		<p class="help-block">You will be able to open or schedule a quiz after you have added questions.</p>
 
