@@ -138,7 +138,7 @@ tolerance=>
 	<div class="control-group">
 		<label class="control-label"></label>
 		<div class="controls">
-			<textarea id="essay-text" class="span10 input-xlarge" rows="9">{if isset($question.responses[0])}{$question.responses[0].response}{/if}</textarea>
+			<textarea id="essay-text" style="width:100%" class="input-xlarge" rows="9">{if isset($question.responses[0])}{$question.responses[0].response}{/if}</textarea>
 		</div>
 	</div>
 	<script>
