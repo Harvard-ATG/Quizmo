@@ -329,11 +329,29 @@ class QuizController extends Controller
 		$quiz_id = $id;
 		$user_id = $id2;
 		
+		switch(Submission::getStatusByUser($user_id, $quiz_id)){
+			case Submission::NOT_STARTED:
+				$status = "Not Started";
+			break;
+			case Submission::STARTED:
+				$status = "Started / Unfinished";
+			break;
+			case Submission::SUBMITTED:
+				$status = "Submitted";
+			break;
+			case Submission::GRADED:
+				$status = "Finished / Graded";
+			break;
+			default:
+				$status = "Error: unknown submission status: ".Submission::getStatusByUser($user_id, $quiz_id);
+			break;
+		}
 		
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'name'=>User::getName($user_id),
+			'status'=>$status,
 			'score'=>Response::getTotalScoreByUser($user_id, $quiz_id),
 			'total_score'=>Question::getTotalScore($quiz_id),
 			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID,

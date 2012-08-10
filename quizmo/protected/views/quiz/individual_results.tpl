@@ -9,14 +9,15 @@
 </ul>
 
 <div class="row-fluid">
-	<h1 class="span12">Question Results for {$name}</h1>
+	<h1>Question Results for {$name}</h1>
 </div>
 
 <div class="row-fluid">
 	<div class="span2">
 		<img src="/img/user-icon.png"/>
 	</div>
-	<div id="total_score" class="span2 well">
+	<div id="total_score" class="span4 well">
+		Status: {$status}<br/>
 		Score: {$score} / {$total_score}
 	</div>
 </div>
