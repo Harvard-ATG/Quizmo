@@ -356,7 +356,8 @@ class QuizController extends Controller
 			'total_score'=>Question::getTotalScore($quiz_id),
 			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID,
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
-			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id)
+			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
+			'host'=>"http://".$_SERVER['HTTP_HOST'],
 		));
 	}
 	

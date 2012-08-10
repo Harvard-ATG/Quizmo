@@ -15,7 +15,7 @@
 			<label class="radio">
 				<input type="radio" name="answer{$question.id}" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled="disabled" />
 
-				{if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{else}<i class="icon-empty"></i>{/if} {$question.answers[$key].answer}  
+				{if $question.answers[$key].is_correct == 1}<i class="icon-ok"> </i>{else}<i class="icon-empty"> </i>{/if} {$question.answers[$key].answer}  
 
 			</label>
 			{/foreach}
@@ -30,7 +30,7 @@
 			<label class="checkbox">
 				<input type="checkbox" name="answer1" value="{$question.answers[$key].id}" {if $question.answers[$key].response}checked="checked"{/if} disabled="disabled">
 				
-				{if $question.answers[$key].is_correct == 1}<i class="icon-ok"></i>{else}<i class="icon-empty"></i>{/if} {$question.answers[$key].answer}  
+				{if $question.answers[$key].is_correct == 1}<i class="icon-ok"> </i>{else}<i class="icon-empty"> </i>{/if} {$question.answers[$key].answer}  
 
 				</input>
 			</label>

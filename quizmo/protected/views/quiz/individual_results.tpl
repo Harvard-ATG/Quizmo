@@ -14,7 +14,7 @@
 
 <div class="row-fluid">
 	<div class="span2">
-		<img src="/img/user-icon.png"/>
+		<img src="{$host}/img/user-icon.png"/>
 	</div>
 	<div id="total_score" class="span4 well">
 		Status: {$status}<br/>
@@ -56,6 +56,7 @@
 <script>
 
 	updateTotalScore = function(){
+		totalScoreUrl = "{url url='/quiz/totalScore' ajax=1}";
 		// compose data
 		data = {
 			user_id: '{$user_id}',
@@ -63,12 +64,13 @@
 		};
 		// load ajax
 		$('#total_score').load(
-			'/quiz/totalScore', 
+			totalScoreUrl, 
 			data
 		);
 	}
 
 	updateScore = function(response_id, user_id, score){
+		scoreUrl = "{url url='/response/grade' ajax=1}";
 		// compose data
 		data = {
 			response_id: response_id,
@@ -78,7 +80,7 @@
 		// send the ajax
 		$.ajax({
 			type: 'POST',
-			url: '/response/grade',
+			url: scoreUrl,
 			data: data,
 			success: updateTotalScore
 		});
