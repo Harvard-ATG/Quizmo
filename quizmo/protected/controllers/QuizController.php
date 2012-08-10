@@ -35,7 +35,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit'),
+				'actions'=>array('create','update','edit','results','submit','delete'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users

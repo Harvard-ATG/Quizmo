@@ -30,7 +30,7 @@
 				{/if}
 				<a href="{url url='/quiz/results/'|cat:$quiz['ID']}">Results</a><br/>
 
-				<a data-toggle="modal" href="#quiz-delete-modal-{$quiz['ID']}" >Delete</a>
+				<a class="quiz-delete-btn" name="#quiz-delete-modal-{$quiz['ID']}" >Delete</a>
 				<div class="modal hide" id="quiz-delete-modal-{$quiz['ID']}">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal">×</button>
@@ -58,6 +58,30 @@ No Quizzes.
 </div>
 
 <script>
+	openQuizDeleteModal = function(e){
+		// get the id
+		$(e.currentTarget.name).modal();
+	}
+
+	quizDeleteAction = function(e){
+		quiz_delete_url = "{url url='/quiz/delete' ajax=1}";
+		// get the quiz_id from eventObject
+		quiz_id = e.currentTarget.name;
+		// form data
+		data = {
+			quiz_id: quiz_id
+		};
+		// now send the delete query
+		$.ajax({
+			type: 'POST',
+			url: quiz_delete_url,
+			data: data,
+			dataType: 'json',
+			error: failure,
+			success: removeDiv
+		});
+	}
+	
 	removeDiv = function(data){
 		quiz_id = data.quiz_id;
 		$('tr.quiz-row-'+quiz_id).hide(400);
@@ -67,24 +91,12 @@ No Quizzes.
 	failure = function(){
 		alert("failure saving");
 	}
+	
+	
 	$(document).ready(function(){
-		$('.quiz-delete-action').click(function(e){
-			// get the quiz_id from eventObject
-			quiz_id = e.currentTarget.name;
-			// form data
-			data = {
-				quiz_id: quiz_id
-			};
-			// now send the delete query
-			$.ajax({
-				type: 'POST',
-				url: '/quiz/delete',
-				data: data,
-				dataType: 'json',
-				error: failure,
-				success: removeDiv
-			});
-		});
+		
+		$('.quiz-delete-btn').click(openQuizDeleteModal);
+		$('.quiz-delete-action').click(quizDeleteAction);
 		
 	});
 </script>
