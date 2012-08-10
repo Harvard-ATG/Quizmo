@@ -24,7 +24,7 @@
 		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
 
 		<div class="form-actions">
-			<button id="question-submit" type="submit" class="btn btn-primary">Submit</button>
+			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
 			<a class="btn" href='{url url="/question/index/$quiz_id"}'>Cancel</a>
 		</div>
 		
