@@ -80,7 +80,8 @@ class Question extends QActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'quiz' => array(self::BELONGS_TO, 'Quiz', 'QUIZ_ID'),
-			'answer' => array(self::HAS_MANY, 'Answer', 'QUESTION_ID'),
+			'answers' => array(self::HAS_MANY, 'Answer', 'QUESTION_ID'),
+			'responses' => array(self::HAS_MANY, 'Response', 'QUESTION_ID'),
 		);
 	}
 
