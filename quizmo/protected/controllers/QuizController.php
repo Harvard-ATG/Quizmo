@@ -288,18 +288,8 @@ class QuizController extends Controller
 		$user_id = Yii::app()->user->id;
 		
 		Submission::submitQuiz($user_id, $quiz_id);
+		Response::gradeQuiz($user_id, $quiz_id);
 		
-/*
-		$collection_id = Quiz::getCollectionId($quiz_id);
-		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
-		$this->render('index',array(
-			//'dataProvider'=>$dataProvider,
-			'quizzes'=>$quizzes,
-			'sizeofquizzes'=>sizeof($quizzes),
-			'user_id'=>$user_id,
-			'collection_id'=>$collection_id,
-		));
-*/
 		$this->jsredirect($this->url('/quiz/individualResults/'.$quiz_id."/".$user_id));
 	
 	 }
