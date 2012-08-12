@@ -306,5 +306,33 @@ class ResponseTest extends CDbTestCase {
 		$this->assertEquals(Response::MANUAL_SCORED, $response->SCORE_STATE);
 		
 	}
+	
+	public function testGradeQuiz(){
+		$user_id = 3;
+		$quiz_id = 1;
+		
+		Response::gradeQuiz($user_id, $quiz_id);
+		// now get all responses from the quiz and user
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids, 'USER_ID'=>$user_id));
+		// get all question->points
+		$question_points = Quiz::getQuestionPoints($quiz_id);
+		
+		$question_score_hash = array();
+		foreach($responses as $response){
+			if(isset($question_score_hash[$response->QUESTION_ID]))
+				$question_score_hash[$response->QUESTION_ID] += $response->SCORE;
+			else
+				$question_score_hash[$response->QUESTION_ID] = $response->SCORE;				
+		}
+		
+		echo(var_export($question_points, 1)."\n");
+		echo(var_export($question_score_hash, 1)."\n");
+		foreach($question_points as $question_id => $points){
+			$this->assertEquals($points, $question_score_hash[$question_id], "Failing on question_id: $question_id");
+		}
+		$this->assertNotNull($responses);
+		
+	}
 
 }

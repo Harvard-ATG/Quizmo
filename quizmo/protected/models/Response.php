@@ -62,7 +62,7 @@ class Response extends QActiveRecord
 		//	array('DATE_MODIFIED', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ID, QUESTION_ID, QUESTION_TYPE, USER_ID, RESPONSE, SCORE_STATE, SCORE, DATE_MODIFIED, MODIFIED_BY', 'safe', 'on'=>'search'),
+			//array('ID, QUESTION_ID, QUESTION_TYPE, USER_ID, RESPONSE, SCORE_STATE, SCORE, DATE_MODIFIED, MODIFIED_BY', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,6 +74,7 @@ class Response extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'question' => array(self::BELONGS_TO, 'Question', 'QUESTION_ID'),
 		);
 	}
 
@@ -577,6 +578,59 @@ class Response extends QActiveRecord
 		$response->SCORE_STATE = Response::MANUAL_SCORED;
 		// save
 		return $response->save(false);
+	}
+	
+	/**
+	 * grades an entire quiz based on answers
+	 * this needs to run through every question, every answer, every response and match based on Answer - Response
+	 * @param number $user_id
+	 * @param number $quiz_id
+	 * @return boolean
+	 */
+	public function gradeQuiz($user_id, $quiz_id){
+		//$questions = Question::model()->with('responses', 'answers')->findAllByAttributes(array('QUIZ_ID'=>$quiz_id);
+		// a huge query is very inefficient, and will not scale appropriately
+		
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		// this is a hash that has question_id as the key and question->points as the value
+		$question_points = Quiz::getQuestionPoints($quiz_id);
+		$question_ids_string = join(",", $question_ids);
+		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids, 'USER_ID'=>$user_id));
+		$answers = Answer::model()->findAll("QUESTION_ID IN ($question_ids_string)");
+		
+		foreach($responses as $response){
+			foreach($answers as $answer){
+				if($answer->QUESTION_ID == $response->QUESTION_ID){
+					// now we have a matching response and answer
+					
+					switch($response->QUESTION_TYPE){
+						case Question::MULTIPLE_CHOICE:
+						case Question::TRUE_FALSE:
+							// we have to check if the response->RESPONSE matches the answer->ID
+							if($response->RESPONSE == $answer->ID && $answer->IS_CORRECT == 1){
+								// then we have a correct response
+								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+							}
+						break;
+						
+						
+						
+					}
+					
+					// do not break;
+					// MS and fillin can have multiple responses with the same question_id
+					continue;
+				}
+				
+			}
+			
+		}
+		
+		
+		if($responses == null)
+			return false;
+		else
+			return true;
 	}
 	
 }
