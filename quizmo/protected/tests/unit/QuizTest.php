@@ -90,5 +90,19 @@ class QuizTest extends CDbTestCase {
 		
 	}
 	
+	public function testGetQuestionPoints(){
+		$quiz_id = 1;
+		$test_hash = Quiz::getQuestionPoints($quiz_id);
+		foreach($this->questions as $question){
+			if($question['QUIZ_ID'] == $quiz_id){
+				$this->assertEquals($question['POINTS'], $test_hash[$question['ID']]);
+				unset($test_hash[$question['ID']]);
+			}
+		}
+		
+		$this->assertEquals(0, count($test_hash));
+		
+	}
+	
    
 }

@@ -245,7 +245,7 @@ class Quiz extends QActiveRecord
 	
 	/**
 	 * sets the deleted flag
-	 * @param number $question_id
+	 * @param number $quiz_id
 	 * @return boolean
 	 */
 	public function setDeleted($quiz_id){
@@ -253,6 +253,23 @@ class Quiz extends QActiveRecord
 		$quiz->DELETED = 1;
 		
 		return($quiz->save());
+		
+	}
+	
+	/**
+	 * gets a hash of question ids and points
+	 * @param number $quiz_id
+	 * @return hash $question->ID => $question->POINTS
+	 */
+	public function getQuestionPoints($quiz_id){
+		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+		$hash = array();
+		
+		foreach($questions as $question){
+			$hash[$question->ID] = $question->POINTS;
+		}
+		
+		return $hash;
 		
 	}
 	
