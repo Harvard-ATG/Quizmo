@@ -612,6 +612,14 @@ class Response extends QActiveRecord
 								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
 							}
 						break;
+						case Question::NUMERICAL:
+							// have to take into account tolerance
+							$upper = $answer->ANSWER + $answer->TOLERANCE;
+							$lower = $answer->ANSWER - $answer->TOLERANCE;
+							if($response->RESPONSE <= $upper && $response->RESPONSE >= $lower){
+								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+							}
+						break;
 						
 						
 						

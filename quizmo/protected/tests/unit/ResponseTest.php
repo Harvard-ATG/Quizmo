@@ -326,8 +326,8 @@ class ResponseTest extends CDbTestCase {
 				$question_score_hash[$response->QUESTION_ID] = $response->SCORE;				
 		}
 		
-		echo(var_export($question_points, 1)."\n");
-		echo(var_export($question_score_hash, 1)."\n");
+		//echo(var_export($question_points, 1)."\n");
+		//echo(var_export($question_score_hash, 1)."\n");
 		foreach($question_points as $question_id => $points){
 			$this->assertEquals($points, $question_score_hash[$question_id], "Failing on question_id: $question_id");
 		}
