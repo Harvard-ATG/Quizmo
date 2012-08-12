@@ -604,8 +604,7 @@ class Response extends QActiveRecord
 			$is_new_question = false;
 			if($last_question_id != $response->QUESTION_ID){
 				$response_array = array();
-				$correct_answer_array = array();
-				$incorrect_answer_array = array();
+				$answer_array = array();
 				$is_new_question = true;
 				$done = false;
 				$correct = false;
@@ -645,42 +644,51 @@ class Response extends QActiveRecord
 							}
 						break;
 						case Question::MULTIPLE_SELECTION:
-						
-							if($done)
-								break;
 								
 							if($is_new_question){
 								if($answer->IS_CORRECT)
-									array_push($correct_answer_array, $answer->ID);
-								else
-									array_push($incorrect_answer_array, $answer->ID);
+									array_push($answer_array, $answer->ID);
 							}
 							
 							if($is_new_response){
 								array_push($response_array, $response->RESPONSE);
 							}
-							
-							//echo("\n");
-							//echo(implode("", $response_array)."\n");
-							//echo(implode("", $correct_answer_array)."\n");
-							
-							if(implode("", $response_array) == implode("", $correct_answer_array)){
+														
+							if(implode("", $response_array) == implode("", $answer_array)){
 								if(!$correct)
 									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
 								$correct = true;
 							} else {
 								Response::setScore($response->ID, 0);
 								$correct = false;
-							}
-
-							
-
-							
+							}							
 							
 						break;	
 						case Question::FILLIN:
+							if($is_new_question){
+								array_push($answer_array, $answer->ANSWER);
+							}
 							
-				
+							if($is_new_response){
+								array_push($response_array, $response->RESPONSE);
+							}
+														
+							$response_string = implode("", $response_array);
+							$answer_string = implode("", $answer_array);
+							
+							if($answer->IS_CASE_SENSITIVE != 1){
+								$response_string = strtolower($response_string);
+								$answer_string = strtolower($answer_string);
+							}
+							
+							if($response_string == $answer_string){								
+								if(!$correct)
+									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+								$correct = true;
+							} else {								
+								Response::setScore($response->ID, 0);
+								$correct = false;
+							}
 							
 						break;
 						
