@@ -51,6 +51,9 @@ class QActiveRecord extends CActiveRecord {
 	public function defaultScope()
 	{
 	    return array(
+			//'alias'=>$this->tableName(),
+			// NOTE: ORACLE ONLY: to specify a table in a scope as t (which is the default primary alias)
+			//  you need to add extra "s around the t, like so: 'order'=>'"t".ID ASC'
 	    	'order'=>'ID ASC'
 	    );
 	}
