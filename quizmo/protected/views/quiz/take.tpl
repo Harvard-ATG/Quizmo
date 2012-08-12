@@ -44,6 +44,32 @@ submitQuestion = function(){
 	console.log("ERROR: submitting blank!");
 }
 
+continueNext = function(){
+	next_item = current_item.next("button");
+	// if next_item is 0, send us to the quiz page
+	index_url = '{url url="/quiz/index/$quiz_id"}';
+	if(next_item.length == 0){
+		window.location.href = index_url;
+		$("#questions-container").hide(400);
+		return;
+	}
+	next_item_question_id = next_item.attr("name");
+	loadQuestion(next_item_question_id);
+	
+	current_item.removeClass("active");
+	current_item = next_item;
+	current_item.addClass("active");
+	if(current_item.attr("id") == "question_1"){
+		prev_button.addClass("disabled");
+		prev_button.unbind("click");
+	} else {
+		prev_button.removeClass("disabled");
+		prev_button.unbind("click");
+		prev_button.click(prevclickfun);
+	}
+	
+}
+
 loadQuestion = function(question_id){
 	
 	data = {
@@ -128,31 +154,9 @@ $(document).ready(function(){
 	
 
 	next_button.click(function(e){
-		submitQuestion();
+		submitQuestion(continueNext);
 		
-		next_item = current_item.next("button");
-		// if next_item is 0, send us to the quiz page
-		index_url = '{url url="/quiz/index/$quiz_id"}';
-		if(next_item.length == 0){
-			window.location.href = index_url;
-			$("#questions-container").hide(400);
-			return;
-		}
-		next_item_question_id = next_item.attr("name");
-		loadQuestion(next_item_question_id);
-		
-		current_item.removeClass("active");
-		current_item = next_item;
-		current_item.addClass("active");
-		if(current_item.attr("id") == "question_1"){
-			prev_button.addClass("disabled");
-			prev_button.unbind("click");
-		} else {
-			prev_button.removeClass("disabled");
-			prev_button.unbind("click");
-			prev_button.click(prevclickfun);
-		}
-		
+
 	});
 	
 	$("#quiz-submit-btn").click(openSubmitModal);

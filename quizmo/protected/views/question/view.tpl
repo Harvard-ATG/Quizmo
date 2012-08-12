@@ -74,7 +74,7 @@ tolerance=>
 		</div>
 	</div>
 	<script>
-		submitQuestion = function(){
+		submitQuestion = function(callback){
 			// get value of radio
 			answer_id = $('input:radio[name=answer1]:checked').val();
 			// set data
@@ -88,7 +88,8 @@ tolerance=>
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
-				data: data
+				data: data,
+				complete: callback
 				//success: success,
 				//dataType: dataType
 			});
@@ -109,7 +110,7 @@ tolerance=>
 		</div>
 	</div>
 	<script>
-		submitQuestion = function(){
+		submitQuestion = function(callback){
 			// get the answers
 			answers = [];
 			$('input[type=checkbox]').each(function () {
@@ -129,7 +130,8 @@ tolerance=>
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
-				data: data
+				data: data,
+				complete: callback
 			});
 		}
 	</script>
@@ -142,7 +144,7 @@ tolerance=>
 		</div>
 	</div>
 	<script>
-		submitQuestion = function(){
+		submitQuestion = function(callback){
 			// get the answer
 			answer = $('#essay-text').val();
 			// set the data
@@ -156,7 +158,8 @@ tolerance=>
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
-				data: data
+				data: data,
+				complete: callback
 			});
 		}
 	</script>
@@ -169,7 +172,7 @@ tolerance=>
 		</div>
 	</div>
 	<script>
-		submitQuestion = function(){
+		submitQuestion = function(callback){
 			// get the answer
 			answer = $('#numerical-text').val();
 			// set the data
@@ -183,14 +186,15 @@ tolerance=>
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
-				data: data
+				data: data,
+				complete: callback
 			});
 		}
 	</script>
 
 	{elseif $question.question_type == 'F'}
 	<script>
-		submitQuestion = function(){
+		submitQuestion = function(callback){
 			// get the answer
 			answers = [];
 			$('.fillin-text').each(function () {
@@ -207,7 +211,8 @@ tolerance=>
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
-				data: data
+				data: data,
+				complete: callback
 			});
 		}
 	</script>
