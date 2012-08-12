@@ -598,10 +598,34 @@ class Response extends QActiveRecord
 		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids, 'USER_ID'=>$user_id));
 		$answers = Answer::model()->findAll("QUESTION_ID IN ($question_ids_string)");
 		
+		$last_question_id = '';
 		foreach($responses as $response){
+
+			$is_new_question = false;
+			if($last_question_id != $response->QUESTION_ID){
+				$response_array = array();
+				$correct_answer_array = array();
+				$incorrect_answer_array = array();
+				$is_new_question = true;
+				$done = false;
+				$correct = false;
+			}
+
+			$last_question_id = $response->QUESTION_ID;
+			$last_response_id = '';
+			$is_new_response = true;
+			
+			
 			foreach($answers as $answer){
 				if($answer->QUESTION_ID == $response->QUESTION_ID){
 					// now we have a matching response and answer
+					
+					$is_new_response = false;
+					if($last_response_id != $response->ID){
+						$is_new_response = true;
+					}
+					$last_response_id = $response->ID;
+					
 					
 					switch($response->QUESTION_TYPE){
 						case Question::MULTIPLE_CHOICE:
@@ -620,11 +644,49 @@ class Response extends QActiveRecord
 								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
 							}
 						break;
+						case Question::MULTIPLE_SELECTION:
 						
-						
+							if($done)
+								break;
+								
+							if($is_new_question){
+								if($answer->IS_CORRECT)
+									array_push($correct_answer_array, $answer->ID);
+								else
+									array_push($incorrect_answer_array, $answer->ID);
+							}
+							
+							if($is_new_response){
+								array_push($response_array, $response->RESPONSE);
+							}
+							
+							//echo("\n");
+							//echo(implode("", $response_array)."\n");
+							//echo(implode("", $correct_answer_array)."\n");
+							
+							if(implode("", $response_array) == implode("", $correct_answer_array)){
+								if(!$correct)
+									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+								$correct = true;
+							} else {
+								Response::setScore($response->ID, 0);
+								$correct = false;
+							}
+
+							
+
+							
+							
+						break;	
+						case Question::FILLIN:
+							
+				
+							
+						break;
 						
 					}
 					
+
 					// do not break;
 					// MS and fillin can have multiple responses with the same question_id
 					continue;

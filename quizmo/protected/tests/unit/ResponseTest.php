@@ -319,17 +319,23 @@ class ResponseTest extends CDbTestCase {
 		$question_points = Quiz::getQuestionPoints($quiz_id);
 		
 		$question_score_hash = array();
+		// need the essay ids so we know what to ignore later
+		$essay_ids = array();
 		foreach($responses as $response){
 			if(isset($question_score_hash[$response->QUESTION_ID]))
 				$question_score_hash[$response->QUESTION_ID] += $response->SCORE;
 			else
-				$question_score_hash[$response->QUESTION_ID] = $response->SCORE;				
+				$question_score_hash[$response->QUESTION_ID] = $response->SCORE;
+			
+			if($response->QUESTION_TYPE == Question::ESSAY)
+				array_push($essay_ids, $response->QUESTION_ID);
 		}
 		
 		//echo(var_export($question_points, 1)."\n");
 		//echo(var_export($question_score_hash, 1)."\n");
 		foreach($question_points as $question_id => $points){
-			$this->assertEquals($points, $question_score_hash[$question_id], "Failing on question_id: $question_id");
+			if(!in_array($question_id, $essay_ids))
+				$this->assertEquals($points, $question_score_hash[$question_id], "Failing on question_id: $question_id");
 		}
 		$this->assertNotNull($responses);
 		
