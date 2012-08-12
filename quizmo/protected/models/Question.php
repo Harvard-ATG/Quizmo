@@ -417,7 +417,7 @@ class Question extends QActiveRecord
 		if($question == null){
 			return null;
 		}
-		$answers = $question->answer;
+		$answers = $question->answers;
 		if($user_id)
 			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_id));
 
@@ -476,7 +476,7 @@ class Question extends QActiveRecord
 		$output = array();
 		foreach($questions as $question){
 			$score = 0;
-			$answers = $question->answer;
+			$answers = $question->answers;
 			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question->ID));
 
 			// questions
