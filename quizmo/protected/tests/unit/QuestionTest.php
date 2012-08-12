@@ -182,7 +182,7 @@ class QuestionTest extends CDbTestCase {
 		$question_id = 2;
 		$question_type = Question::TRUE_FALSE;
 		$score = 1;
-		$points = 0;
+		$points = 1;
 		
 		$questions = Question::getQuestionViewsByQuizId($quiz_id, $user_id);
 		// check the number is right
@@ -207,7 +207,7 @@ class QuestionTest extends CDbTestCase {
 	}
 	
 	public function testGetTotalScore(){
-		$total_score = 35;
+		$total_score = 36;
 		$quiz_id = 1;
 		
 		$this->assertEquals($total_score, Question::getTotalScore($quiz_id));

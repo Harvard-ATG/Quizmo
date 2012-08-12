@@ -167,7 +167,7 @@ return array(
 		'SCORE' => 0,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => '',
-		'RESPONSE' => 1,
+		'RESPONSE' => 10,
 	),
 	'responses-3-4' => array(
 		'QUESTION_ID' => '4',
@@ -177,7 +177,7 @@ return array(
 		'SCORE' => 0,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => '',
-		'RESPONSE' => 2,
+		'RESPONSE' => '1.5',
 	),
 	'responses-3-5' => array(
 		'QUESTION_ID' => '5',
@@ -237,7 +237,7 @@ return array(
 		'SCORE' => 0,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => '',
-		'RESPONSE' => 'coconut',
+		'RESPONSE' => 'coConut',
 	),
 	'responses-3-8c' => array(
 		'QUESTION_ID' => '8',
