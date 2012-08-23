@@ -47,7 +47,7 @@ submitQuestion = function(){
 continueNext = function(){
 	next_item = current_item.next("button");
 	// if next_item is 0, send us to the quiz page
-	index_url = '{url url="/quiz/index/$quiz_id"}';
+	index_url = '{url url="/quiz/index/$collection_id"}';
 	if(next_item.length == 0){
 		window.location.href = index_url;
 		$("#questions-container").hide(400);
