@@ -45,7 +45,8 @@ class SiteController extends Controller
 			// forward doesn't seem to send along the parameter...
 			//$this->forward('/quiz/index/'.$collection->ID);
 			
-			$this->forward('/quiz/index/');
+			$this->forward('/quiz/index/'.$collection->ID);
+			//$this->jsredirect($this->url('/quiz/index/'.$collection->ID));
 		} else {
 			// forward is cleaner in this case
 			$this->forward('/collection/index');
