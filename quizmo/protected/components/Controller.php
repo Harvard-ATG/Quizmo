@@ -62,16 +62,8 @@ class Controller extends CController
 		if(isset($routeArr[4]))
 			$_GET['id2'] = $routeArr[4];
 		
-		if(strpos($route,'/')===false) 
-			$this->run($route); 
-		else { 
-			if($route[0]!=='/' && ($module=$this->getModule())!==null) 
-				$route=$module->getId().'/'.$route; 
-			Yii::app()->runController($route); 
-		}
-		if($exit) 
-			Yii::app()->end();
-		
+		parent::forward($route, $exit);
+				
 	}
 	
 }
