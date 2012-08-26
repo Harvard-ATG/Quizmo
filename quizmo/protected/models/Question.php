@@ -396,9 +396,20 @@ class Question extends QActiveRecord
 	public function createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive){
 		
 		$question_id = $this->create($quiz_id, Question::FILLIN, $title, $body, $score, $feedback);
+		
+		// need to get the answers from the body:
+		preg_match_all("/\{[^}]*\}/", $body, $matches);
+		foreach($matches as $val){
+			foreach($val as $key => $match){
+				$match = preg_replace("/[\{\}]/", "", $match);
+
+				$answer = new Answer;
+				$answer->create($question_id, Question::FILLIN, $match, 0, 0, $is_case_sensitive, 0);			
+			
+			}
+			
+		}
 				
-		$answer = new Answer;
-		$answer->create($question_id, Question::FILLIN, '', 0, 0, $is_case_sensitive, 0);
 		
 		return $question_id;
 		

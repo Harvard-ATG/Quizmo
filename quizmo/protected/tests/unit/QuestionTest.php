@@ -150,8 +150,11 @@ class QuestionTest extends CDbTestCase {
 		$this->assertGreaterThan(0, $question->createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive), "Failed asserting that createFillin works with all items");
 		
 		$answers = Answer::model()->findAll('question_id=:question_id', array(':question_id' => $question->ID));
-		$this->assertEquals(1, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the Fill in the Blank question.");		
-
+		$this->assertEquals(2, sizeof($answers), "Failed asserting that the appropriate number of answers were added for the Fill in the Blank question.");
+		
+		$this->assertEquals("red", $answers[0]->ANSWER);
+		$this->assertEquals("blue", $answers[1]->ANSWER);
+		
 	}
 
 	public function testGetQuestionViewById(){
