@@ -48,9 +48,23 @@ class QuizTest extends CDbTestCase {
 		$quiz = new Quiz;
 		
 		$this->assertGreaterThan(0, $quiz->create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback), "Failed asserting that create works with all items");
+		// save this quiz_id for later
+		$quiz_id = $quiz->ID;
+		
 		$this->assertFalse($quiz->create($collection_id, '', $description, $state, $start_date, $end_date, $visibility, $show_feedback), "Failed asserting that create fails without a title");
 		// this fails really hard because of the integrity constraint...
 		//$this->assertFalse($quiz->create('', $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback), "Failed asserting that create fails without a collection_id");
+		
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		// check state
+		$this->assertEquals($title, $quiz->TITLE);
+		$this->assertEquals($description, $quiz->DESCRIPTION);
+		$this->assertEquals($state, $quiz->STATE);
+		$this->assertEquals($start_date, $quiz->START_DATE);
+		$this->assertEquals($end_date, $quiz->END_DATE);
+		$this->assertEquals($visibility, $quiz->VISIBILITY);
+		$this->assertEquals($show_feedback, $quiz->SHOW_FEEDBACK);
+		
 		
 		$this->markTestIncomplete(
           "This test still needs a correct date format.  It's a timestamp, not sure how to deal with..."
