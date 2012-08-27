@@ -219,7 +219,7 @@ class QuizController extends Controller
 	 */
 	public function actionIndex($id='')
 	{
-		//error_log("quiz/index");
+		//error_log("quiz/index/".$id);
 		$collection_id = $id;
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
@@ -273,8 +273,8 @@ class QuizController extends Controller
 			'question_ids_json'=>json_encode($question_ids),
 			'question_ids'=>$question_ids,
 			'user_id'=>$user_id,
-			'quiz_id'=>$quiz_id
-			
+			'quiz_id'=>$quiz_id,
+			'collection_id'=>Quiz::getCollectionId($quiz_id)
 		));
 		
 	}
