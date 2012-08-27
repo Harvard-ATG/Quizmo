@@ -41,8 +41,11 @@ class QuizTest extends CDbTestCase {
 		$description = "Unit test description...";
 		$state = "S";
 		// dates need to be implemented
-		$start_date = "";
-		$end_date = "";
+		// this with the default nls_date_format
+		//$start_date = "19-Jan-12";
+		//$end_date = "21-Dec-12";
+		$start_date = "2012-01-19";
+		$end_date = "2012-12-21";
 		$visibility = 1;
 		$show_feedback = 1;
 		$quiz = new Quiz;
@@ -60,15 +63,15 @@ class QuizTest extends CDbTestCase {
 		$this->assertEquals($title, $quiz->TITLE);
 		$this->assertEquals($description, $quiz->DESCRIPTION);
 		$this->assertEquals($state, $quiz->STATE);
-		$this->assertEquals($start_date, $quiz->START_DATE);
-		$this->assertEquals($end_date, $quiz->END_DATE);
+		$this->assertEquals($start_date, substr($quiz->START_DATE, 0, 10));
+		$this->assertEquals($end_date, substr($quiz->END_DATE, 0, 10));
 		$this->assertEquals($visibility, $quiz->VISIBILITY);
 		$this->assertEquals($show_feedback, $quiz->SHOW_FEEDBACK);
 		
 		
-		$this->markTestIncomplete(
-          "This test still needs a correct date format.  It's a timestamp, not sure how to deal with..."
-        );
+		//$this->markTestIncomplete(
+        //  "This test still needs a correct date format.  It's a timestamp, not sure how to deal with..."
+        //);
 	}
 	
 	public function testGetQuestionIds(){
