@@ -308,9 +308,9 @@ class Question extends QActiveRecord
 			$false = 1;			
 		}
 		$answer = new Answer;
-		$answer->create($question_id, Question::TRUE_FALSE, 'true', $true);
+		$answer->create($question_id, Question::TRUE_FALSE, 'True', $true);
 		$answer = new Answer;
-		$answer->create($question_id, Question::TRUE_FALSE, 'false', $false);
+		$answer->create($question_id, Question::TRUE_FALSE, 'False', $false);
 		
 		return $question_id;
 		
