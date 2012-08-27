@@ -47,6 +47,8 @@
 			Show quiz availability on student's list of quizzes
 			<p class="help-inline"></p>
 		</label>
+	</div>
+	<div class="controls">
 		<label class="checkbox">
 			<input type="checkbox" id="show_feedback" name="show_feedback" value="1" {if $show_feedback == 1}checked="checked"{/if}/>
 			Show correct answers to student after student submits quiz
