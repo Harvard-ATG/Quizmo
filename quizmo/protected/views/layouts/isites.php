@@ -33,7 +33,9 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
 	</script>
-    <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script>
+    <!-- <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script> -->
+    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
+    <!-- <script src="<?php echo $host; ?>/js/jquery-ui-datepicker.js"></script> -->
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
 	
