@@ -24,12 +24,12 @@ class COciConnection extends CDbConnection
                 
                 Yii::trace('Setting NLS_DATE_FORMAT','system.db.schema.oci.CDbConnection');
                 //$stmt=$pdo->prepare("alter session set NLS_DATE_FORMAT='dd/MM/yyyy HH24:MI:SS'");
-				$stmt=$pdo->prepare("alter session set NLS_DATE_FORMAT='yyyy-MM-dd HH24:MI:SS'");
+				$stmt=$pdo->prepare("alter session set NLS_DATE_FORMAT='MM/dd/yyyy HH24:MI:SS'");
 				$stmt->execute();       
 
                 Yii::trace('Setting NLS_TIMESTAMP_FORMAT','system.db.schema.oci.CDbConnection');                
                 //$stmt=$pdo->prepare("alter session set NLS_TIMESTAMP_FORMAT='dd/MM/yyyy HH24:MI:SS'");
-                $stmt=$pdo->prepare("alter session set NLS_TIMESTAMP_FORMAT='yyyy-MM-dd HH24:MI:SS'");
+                $stmt=$pdo->prepare("alter session set NLS_TIMESTAMP_FORMAT='MM/dd/yyyy HH24:MI:SS'");
 				$stmt->execute();               
         }
 }

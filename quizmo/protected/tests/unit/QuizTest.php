@@ -44,8 +44,8 @@ class QuizTest extends CDbTestCase {
 		// this with the default nls_date_format
 		//$start_date = "19-Jan-12";
 		//$end_date = "21-Dec-12";
-		$start_date = "2012-01-19";
-		$end_date = "2012-12-21";
+		$start_date = "01/19/2012";
+		$end_date = "12/21/2012";
 		$visibility = 1;
 		$show_feedback = 1;
 		$quiz = new Quiz;
