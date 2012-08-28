@@ -13,6 +13,7 @@
 	</div>
 </div>
 <div id="state-control-group" class="control-group">
+
 	<label class="control-label" for="state">Quiz Availability</label>
 	<div class="controls">
 		<label class="radio">
@@ -23,23 +24,28 @@
 		</label>		
 		<label class="radio">
 			<input type="radio" name="quiz_state" id="state3" value="S" {if $state == 'S'}checked="checked"{/if} {if $quiz_id == ''}disabled="disabled"{/if}/> Scheduled
-		</label>		
+		</label>
+		{if $quiz_id == ''}		
 		<p class="help-block">You will be able to open or schedule a quiz after you have added questions.</p>
-
-<!--
+		{/if}
+		
+	</div>
+	
+	<div id="scheduling" class="hide">
 		<label class="control-label" for="start_date">Display start</label>
 		<div class="controls">
-			<input type="text" class="input-xlarge span2" id="start_date" name="start_date" value="{$start_date}"/>
+			<input type="text" class="input-small" id="start_date" name="start_date" value="{$start_date}"/>
 			<p class="help-inline"></p>
 		</div>
 		<label class="control-label" for="end_date">Display end</label>
 		<div class="controls">
-			<input type="text" class="input-xlarge span2" id="end_date" name="end_date" value="{$end_date}"/>
+			<input type="text" class="input-small" id="end_date" name="end_date" value="{$end_date}"/>
 			<p class="help-inline"></p>
 		</div>
--->
-
 	</div>
+	
+</div>	
+<div id="visibility-control-group" class="control-group">
 	
 	<div class="controls">
 		<label class="checkbox">

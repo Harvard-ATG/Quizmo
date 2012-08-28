@@ -27,8 +27,8 @@
 	</fieldset>
 </form>
 
-
 <script>
+{literal}
 $(document).ready(function(){
 		
 	$('#quiz-form_default').submit(function() {
@@ -44,6 +44,23 @@ $(document).ready(function(){
 
 	  return true;
 	});
+	
+
+	$("input:radio[name='quiz_stateValue']").change(function(){
+		selected_state = $("input[name='quiz_stateValue']:checked").val();
+		if(selected_state == 'S'){
+			//console.log("SCHEDULED");
+			// show the dates
+			$("#scheduling").fadeIn(500);
+		} else {
+			$("#scheduling").fadeOut(500);			
+		}
+	});
+	
+	$("#start_date").datepicker();
+	$("#end_date").datepicker();
+		
 
 });
+{/literal}
 </script>
