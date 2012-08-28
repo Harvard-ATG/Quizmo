@@ -21,6 +21,10 @@
 class Quiz extends QActiveRecord
 {
 	
+	const CLOSED = 'C';
+	const OPEN = 'O';
+	const SCHEDULED = 'S';
+	
 	/**
 	 * this is needed by QActiveRecord for Oracle
 	 * @var string
@@ -272,5 +276,28 @@ class Quiz extends QActiveRecord
 		return $hash;
 		
 	}
+	
+	/**
+	 * determine state
+	 * @param string $state
+	 * @param string $start_date
+	 * @param string $end_date
+	 * @return boolean true is hidden, false is not
+	 */
+	public function isHiddenByState($state, $start_date='', $end_date=''){
+		switch($state){
+			case Quiz::CLOSED:
+				return true;
+			break;
+			case Quiz::OPEN:
+				return false;
+			break;
+			case Quiz::SCHEDULED:
+				
+			break;
+		}
+		return null;
+	}
+	
 	
 }

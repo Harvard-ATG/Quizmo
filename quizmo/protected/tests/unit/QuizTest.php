@@ -121,5 +121,12 @@ class QuizTest extends CDbTestCase {
 		
 	}
 	
+	public function testIsHiddenByState(){
+		
+		// create some quizzes based on now()
+		// predetermine the hidden status
+
+
+	}
    
 }
