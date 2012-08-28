@@ -217,15 +217,19 @@ class QuizController extends Controller
 	* Lists all models.
 	* @param $id => in this case, $id refers to collection_id
 	 */
-	public function actionIndex($id='')
+	public function actionIndex($id='',$id2='')
 	{
 		//error_log("quiz/index/".$id);
 		$collection_id = $id;
+		$force_index = $id2;
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$perm_id = Yii::app()->user->perm_id;
-		
 		if($perm_id >= UserIdentity::ADMIN){
+			$admin = true;
+		}
+		
+		if($admin && $force_index == ''){
 			$this->render('admindex',array(
 				//'dataProvider'=>$dataProvider,
 				'quizzes'=>$quizzes,
@@ -236,6 +240,7 @@ class QuizController extends Controller
 		} else {
 			$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
+				'admin'=>$admin,
 				'quizzes'=>$quizzes,
 				'sizeofquizzes'=>sizeof($quizzes),
 				'user_id'=>$user_id,

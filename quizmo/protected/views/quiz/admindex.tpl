@@ -1,18 +1,34 @@
 	<h1>Quizzes</h1>
 
 
-<div id="quizzes-container">
-	<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
+<div id="quizzes-container" class="row-fluid">
+	<div class="span8">
+		<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
+	</div>
+	<div class="span4">
+		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/1"}'>View</a>
+	</div>
 
 {if $sizeofquizzes > 0}
 	<table class="table table-condensed">
 		<tr>
-			<th>Quiz</th><th>Actions</th>
+			<th>Quiz</th>
+			<th>Status</th>
+			<th>Actions</th>
 		</tr>
 {foreach from=$quizzes item=quiz}
 
 		<tr class="quiz-row-{$quiz['ID']}">
 			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>
+			<td>
+				{if $quiz['STATE'] == 'C'}
+					Closed
+				{elseif $quiz['STATE'] == 'O'}
+					Open
+				{elseif $quiz['STATE'] == 'S'}
+					Scheduled
+				{/if}
+			</td>
 			<td>
 				{if $quiz.status != 'S' && $quiz.question_count > 0}
 					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>

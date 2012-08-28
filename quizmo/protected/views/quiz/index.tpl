@@ -1,7 +1,13 @@
 <h1>Quizzes</h1>
 
 
-<div id="quizzes-container">
+<div id="quizzes-container" class="row-fluid">
+	<div class="span8">
+
+	</div>
+	<div class="span4">
+		<a class="btn" href='{url url="/quiz/index/$collection_id"}'>Manage</a>
+	</div>
 
 {if $sizeofquizzes > 0}
 	<table class="table table-condensed">
