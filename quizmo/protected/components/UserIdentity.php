@@ -61,7 +61,7 @@ class UserIdentity extends CUserIdentity
 	*/
 	protected function setup(){
 		
-		error_log("UserIdentity::setup");
+		//error_log("UserIdentity::setup");
 		
 		// if username is set, then we are logged in
 		if($this->external_id){
