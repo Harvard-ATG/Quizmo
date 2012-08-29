@@ -294,12 +294,15 @@ class Quiz extends QActiveRecord
 				return false;
 			break;
 			case Quiz::SCHEDULED:
-				echo("SCHEDULED\n");
-				$start_datetime = DateTime::createFromFormat("m/d/Y", $start_date);
-				$end_datetime = DateTime::createFromFormat("m/d/Y", $end_date);
+				//echo("\nSCHEDULED\n");
+				//$start_datetime = DateTime::createFromFormat("Y-m-d", $start_date);
+				//$end_datetime = DateTime::createFromFormat("Y-m-d", $end_date);
+				$start_datetime = new DateTime($start_date);
+				$end_datetime = new DateTime($end_date);
+				
 				$now_datetime = new DateTime;
 				
-				if($start_datetime <= $now_datetime && $now_datetime <= $end_datetime){
+				if($start_datetime < $now_datetime && $now_datetime < $end_datetime){
 					return false;
 				} else {
 					return true;

@@ -44,8 +44,10 @@ class QuizTest extends CDbTestCase {
 		// this with the default nls_date_format
 		//$start_date = "19-Jan-12";
 		//$end_date = "21-Dec-12";
-		$start_date = "01/19/2012";
-		$end_date = "12/21/2012";
+		//$start_date = "01/19/2012";
+		//$end_date = "12/21/2012";
+		$start_date = "2012-01-19";
+		$end_date = "2012-12-21";
 		$visibility = 1;
 		$show_feedback = 1;
 		$quiz = new Quiz;
@@ -122,31 +124,32 @@ class QuizTest extends CDbTestCase {
 	}
 	
 	public function testIsHiddenByState(){
+		date_default_timezone_set('America/New_York');
 		$collection_id = 1;
 		$title = "something";
 		$state = Quiz::SCHEDULED;
-		$nextWeek = date("m/d/Y", time() + (7 * 24 * 60 * 60));
-		$nextWeek2 = date("m/d/Y", time() + 2 * (7 * 24 * 60 * 60));
+		$nextWeek = date("Y-m-d", time() + (7 * 24 * 60 * 60));
+		$nextWeek2 = date("Y-m-d", time() + 2 * (7 * 24 * 60 * 60));
 		
-		$lastWeek = date("m/d/Y", time() - (7 * 24 * 60 * 60));
-		$lastWeek2 = date("m/d/Y", time() - 2 * (7 * 24 * 60 * 60));
-		$now = date("m/d/Y");
+		$lastWeek = date("Y-m-d", time() - (7 * 24 * 60 * 60));
+		$lastWeek2 = date("Y-m-d", time() - 2 * (7 * 24 * 60 * 60));
+		$now = date("Y-m-d");
 		
 		// create some quizzes based on now()
-		// in between 2 weeks should be true
+		// in between 2 weeks should be false
 		$quizMiddle = new Quiz;
 		$this->assertGreaterThan(0, $quizMiddle->create($collection_id, $title, '', $state, $lastWeek, $nextWeek));
-		$this->assertTrue(Quiz::isHiddenByState($quizMiddle->STATE, $quizMiddle->START_DATE, $quizMiddle->END_DATE));
+		$this->assertFalse(Quiz::isHiddenByState($quizMiddle->STATE, $quizMiddle->START_DATE, $quizMiddle->END_DATE));
 
-		// 2 weeks ago should be false
+		// 2 weeks ago should be true
 		$quizPast = new Quiz;
 		$this->assertGreaterThan(0, $quizPast->create($collection_id, $title, '', $state, $lastWeek, $lastWeek2));
-		$this->assertFalse(Quiz::isHiddenByState($quizPast->STATE, $quizPast->START_DATE, $quizPast->END_DATE));
+		$this->assertTrue(Quiz::isHiddenByState($quizPast->STATE, $quizPast->START_DATE, $quizPast->END_DATE));
 		
-		// 2 weeks in the future should be false
+		// 2 weeks in the future should be true
 		$quizFuture = new Quiz;
 		$this->assertGreaterThan(0, $quizFuture->create($collection_id, $title, '', $state, $nextWeek, $nextWeek2));
-		$this->assertFalse(Quiz::isHiddenByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));
+		$this->assertTrue(Quiz::isHiddenByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));
 		
 
 	}
