@@ -122,10 +122,32 @@ class QuizTest extends CDbTestCase {
 	}
 	
 	public function testIsHiddenByState(){
+		$collection_id = 1;
+		$title = "something";
+		$state = Quiz::SCHEDULED;
+		$nextWeek = date("m/d/Y", time() + (7 * 24 * 60 * 60));
+		$nextWeek2 = date("m/d/Y", time() + 2 * (7 * 24 * 60 * 60));
+		
+		$lastWeek = date("m/d/Y", time() - (7 * 24 * 60 * 60));
+		$lastWeek2 = date("m/d/Y", time() - 2 * (7 * 24 * 60 * 60));
+		$now = date("m/d/Y");
 		
 		// create some quizzes based on now()
-		// predetermine the hidden status
+		// in between 2 weeks should be true
+		$quizMiddle = new Quiz;
+		$this->assertGreaterThan(0, $quizMiddle->create($collection_id, $title, '', $state, $lastWeek, $nextWeek));
+		$this->assertTrue(Quiz::isHiddenByState($quizMiddle->STATE, $quizMiddle->START_DATE, $quizMiddle->END_DATE));
 
+		// 2 weeks ago should be false
+		$quizPast = new Quiz;
+		$this->assertGreaterThan(0, $quizPast->create($collection_id, $title, '', $state, $lastWeek, $lastWeek2));
+		$this->assertFalse(Quiz::isHiddenByState($quizPast->STATE, $quizPast->START_DATE, $quizPast->END_DATE));
+		
+		// 2 weeks in the future should be false
+		$quizFuture = new Quiz;
+		$this->assertGreaterThan(0, $quizFuture->create($collection_id, $title, '', $state, $nextWeek, $nextWeek2));
+		$this->assertFalse(Quiz::isHiddenByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));
+		
 
 	}
    

@@ -185,7 +185,7 @@ class Quiz extends QActiveRecord
 	* @param boolean $show_feedback
 	* @return integer $this->ID
 	*/
-	public function create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility, $show_feedback){
+	public function create($collection_id, $title, $description, $state, $start_date, $end_date, $visibility=0, $show_feedback=0){
 		
 		if($title == ''){
 			return false;
@@ -285,6 +285,7 @@ class Quiz extends QActiveRecord
 	 * @return boolean true is hidden, false is not
 	 */
 	public function isHiddenByState($state, $start_date='', $end_date=''){
+		
 		switch($state){
 			case Quiz::CLOSED:
 				return true;
@@ -293,6 +294,16 @@ class Quiz extends QActiveRecord
 				return false;
 			break;
 			case Quiz::SCHEDULED:
+				echo("SCHEDULED\n");
+				$start_datetime = DateTime::createFromFormat("m/d/Y", $start_date);
+				$end_datetime = DateTime::createFromFormat("m/d/Y", $end_date);
+				$now_datetime = new DateTime;
+				
+				if($start_datetime <= $now_datetime && $now_datetime <= $end_datetime){
+					return false;
+				} else {
+					return true;
+				}
 				
 			break;
 		}
