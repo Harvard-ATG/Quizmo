@@ -163,10 +163,11 @@ class Quiz extends QActiveRecord
 			$qa['status'] = $status;
 			$question_count = count(Quiz::getQuestionIds($quiz->ID));
 			$qa['question_count'] = $question_count;
+			$qa['isClosed'] = Quiz::isClosedByState($quiz->STATE, $quiz->START_DATE, $quiz->END_DATE);
 			
 			foreach($quiz as $key=>$value){
 				$qa[$key] = $value;
-			}
+			}				
 			array_push($quizArray, $qa);
 		}
 		return $quizArray;

@@ -27,15 +27,18 @@
 					Open
 				{elseif $quiz['STATE'] == 'S'}
 					Scheduled
+					{if $quiz['isClosed']}
+						(Closed)
+					{/if}
 				{/if}
 			</td>
 			<td>
-				{if $quiz.status != 'S' && $quiz['STATE'] != 'C'}
+				{if $quiz.status != 'S' && $quiz['STATE'] != 'C' && !$quiz['isClosed']}
 					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				{/if}
-				{if $quiz.status == 'N' && $quiz['STATE'] != 'C'}
+				{if $quiz.status == 'N' && $quiz['STATE'] != 'C' && $quiz['STATE'] != 'S'}
 					<!-- not started -->
-				{elseif $quiz.status == 'S' || $quiz['STATE'] == 'C'}
+				{elseif $quiz.status == 'S' || $quiz['STATE'] == 'C' || $quiz['isClosed']}
 					<!-- submitted -->
 					<a href='{url url="/quiz/individualResults/"|cat:$quiz['ID']|cat:"/"|cat:$user_id}'>My Results</a><br/>
 				{else}
