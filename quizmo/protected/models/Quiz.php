@@ -25,6 +25,10 @@ class Quiz extends QActiveRecord
 	const OPEN = 'O';
 	const SCHEDULED = 'S';
 	
+	const SCHEDULED_NOT_STARTED = 'N';
+	const SCHEDULED_STARTED = 'S';
+	const SCHEDULED_ENDED = 'E';
+	
 	/**
 	 * this is needed by QActiveRecord for Oracle
 	 * @var string
@@ -314,5 +318,25 @@ class Quiz extends QActiveRecord
 		return null;
 	}
 	
+	public function scheduleState($start_date='', $end_date=''){
+		$start_datetime = new DateTime($start_date);
+		$end_datetime = new DateTime($end_date);
+		$now_datetime = new DateTime;
+		
+		if($start_datetime < $now_datetime && $now_datetime < $end_datetime){
+			return Quiz::SCHEDULED_STARTED;
+		} elseif($now_datetime < $start_datetime){
+			return Quiz::SCHEDULED_NOT_STARTED;			
+		} elseif($now_datetime > $end_datetime){
+			return Quiz::SCHEDULED_ENDED;			
+		}
+		
+		return false;
+		
+	}
+	
+	public function scheduleTimeTill($start_date='', $end_date=''){
+		
+	}
 	
 }

@@ -149,9 +149,38 @@ class QuizTest extends CDbTestCase {
 		// 2 weeks in the future should be true
 		$quizFuture = new Quiz;
 		$this->assertGreaterThan(0, $quizFuture->create($collection_id, $title, '', $state, $nextWeek, $nextWeek2));
-		$this->assertTrue(Quiz::isClosedByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));
-		
+		$this->assertTrue(Quiz::isClosedByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));		
 
+	}
+	
+	public function testScheduleState(){
+		date_default_timezone_set('America/New_York');
+		$collection_id = 1;
+		$title = "something";
+		$state = Quiz::SCHEDULED;
+		$nextWeek = date("Y-m-d", time() + (7 * 24 * 60 * 60));
+		$nextWeek2 = date("Y-m-d", time() + 2 * (7 * 24 * 60 * 60));
+		
+		$lastWeek = date("Y-m-d", time() - (7 * 24 * 60 * 60));
+		$lastWeek2 = date("Y-m-d", time() - 2 * (7 * 24 * 60 * 60));
+		$now = date("Y-m-d");
+		
+		// create some quizzes based on now()
+		// in between 2 weeks should be false
+		$quizMiddle = new Quiz;
+		$this->assertGreaterThan(0, $quizMiddle->create($collection_id, $title, '', $state, $lastWeek, $nextWeek));
+		$this->assertEquals(Quiz::SCHEDULED_STARTED, Quiz::scheduleState($quizMiddle->START_DATE, $quizMiddle->END_DATE));
+
+		// 2 weeks ago should be true
+		$quizPast = new Quiz;
+		$this->assertGreaterThan(0, $quizPast->create($collection_id, $title, '', $state, $lastWeek, $lastWeek2));
+		$this->assertEquals(Quiz::SCHEDULED_ENDED, Quiz::scheduleState($quizPast->START_DATE, $quizPast->END_DATE));
+		
+		// 2 weeks in the future should be true
+		$quizFuture = new Quiz;
+		$this->assertGreaterThan(0, $quizFuture->create($collection_id, $title, '', $state, $nextWeek, $nextWeek2));
+		$this->assertEquals(Quiz::SCHEDULED_NOT_STARTED, Quiz::scheduleState($quizFuture->START_DATE, $quizFuture->END_DATE));
+		
 	}
    
 }
