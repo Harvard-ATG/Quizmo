@@ -12,19 +12,30 @@
 {if $sizeofquizzes > 0}
 	<table class="table table-condensed">
 		<tr>
-			<th>Quiz</th><th>Actions</th>
+			<th>Quiz</th>
+			<th>Status</th>
+			<th>Actions</th>
 		</tr>
 {foreach from=$quizzes item=quiz}
-
+	{if $quiz['VISIBILITY'] != 0}
 		<tr class="quiz-row-{$quiz['ID']}">
 			<td>{$quiz['TITLE']}</td>
 			<td>
-				{if $quiz.status != 'S'}
+				{if $quiz['STATE'] == 'C'}
+					Closed
+				{elseif $quiz['STATE'] == 'O'}
+					Open
+				{elseif $quiz['STATE'] == 'S'}
+					Scheduled
+				{/if}
+			</td>
+			<td>
+				{if $quiz.status != 'S' && $quiz['STATE'] != 'C'}
 					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				{/if}
-				{if $quiz.status == 'N'}
+				{if $quiz.status == 'N' && $quiz['STATE'] != 'C'}
 					<!-- not started -->
-				{elseif $quiz.status == 'S'}
+				{elseif $quiz.status == 'S' || $quiz['STATE'] == 'C'}
 					<!-- submitted -->
 					<a href='{url url="/quiz/individualResults/"|cat:$quiz['ID']|cat:"/"|cat:$user_id}'>My Results</a><br/>
 				{else}
@@ -34,7 +45,7 @@
 				
 			</td>
 		</tr>
-
+	{/if}
 
 {/foreach}
 	</table>
