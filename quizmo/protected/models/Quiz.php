@@ -168,6 +168,9 @@ class Quiz extends QActiveRecord
 			$question_count = count(Quiz::getQuestionIds($quiz->ID));
 			$qa['question_count'] = $question_count;
 			$qa['isClosed'] = Quiz::isClosedByState($quiz->STATE, $quiz->START_DATE, $quiz->END_DATE);
+			$qa['scheduleState'] = Quiz::scheduleState($quiz->START_DATE, $quiz->END_DATE);
+			$qa['scheduleTimeTill'] = Quiz::scheduleTimeTill($quiz->START_DATE, $quiz->END_DATE);
+			
 			
 			foreach($quiz as $key=>$value){
 				$qa[$key] = $value;
@@ -318,6 +321,7 @@ class Quiz extends QActiveRecord
 		return null;
 	}
 	
+
 	public function scheduleState($start_date='', $end_date=''){
 		$start_datetime = new DateTime($start_date);
 		$end_datetime = new DateTime($end_date);
@@ -336,7 +340,24 @@ class Quiz extends QActiveRecord
 	}
 	
 	public function scheduleTimeTill($start_date='', $end_date=''){
+		$start_datetime = new DateTime($start_date);
+		$end_datetime = new DateTime($end_date);
+		$now_datetime = new DateTime;
 		
+		$timeToStart = $now_datetime->diff($start_datetime);
+		$timeToEnd = $now_datetime->diff($end_datetime);
+		
+		if($start_datetime < $now_datetime && $now_datetime < $end_datetime){
+			// we have started so we need the time to end
+			return $timeToEnd->d;
+		} elseif($now_datetime < $start_datetime){
+			// we haven't started so we need the time till start
+			return $timeToStart->d;
+		} elseif($now_datetime > $end_datetime){
+			// we have ended so we need the time from end
+			return $timeToEnd->d;
+		}
+				
 	}
 	
 }
