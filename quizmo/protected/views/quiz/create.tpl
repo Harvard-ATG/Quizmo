@@ -56,9 +56,12 @@ $(document).ready(function(){
 			$("#scheduling").fadeOut(500);			
 		}
 	});
+	if($("input:radio[name='quiz_stateValue']:checked").val() == 'S'){
+		$("#scheduling").fadeIn(500);
+	}
 	
-	$("#start_date").datepicker();
-	$("#end_date").datepicker();
+	$("#start_date").datepicker({ dateFormat: "yy-mm-dd" });
+	$("#end_date").datepicker({ dateFormat: "yy-mm-dd" });
 		
 
 });
