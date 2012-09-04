@@ -8,8 +8,8 @@
 return CMap::mergeArray(
 	require(dirname(__FILE__).'/database.php'),
 	require(dirname(__FILE__).'/facebook.php'),
-	//require(dirname(__FILE__).'/ldap.php'),
-	//require(dirname(__FILE__).'/isites.php'),
+	require(dirname(__FILE__).'/ldap.php'),
+	require(dirname(__FILE__).'/isites.php'),
 	array(
 		'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 		'name'=>'Quizmo',
@@ -26,7 +26,7 @@ return CMap::mergeArray(
 		),
 
 		// need to change this for isites
-		'layout'=>"main",
+		'layout'=>"isites",
 
 		'modules'=>array(
 			// uncomment the following to enable the Gii tool
@@ -41,6 +41,7 @@ return CMap::mergeArray(
 		// application components
 		'components'=>array(
 			'user'=>array(
+				'class'=>'WebUser',
 				// enable cookie-based authentication
 				'allowAutoLogin'=>true,
 			),
@@ -71,6 +72,12 @@ return CMap::mergeArray(
 					array(
 						'class'=>'CFileLogRoute',
 						'levels'=>'trace, info, error, warning',
+					),
+					array(
+						'class'=>'CFileLogRoute',
+						'levels'=>'trace',
+						'categories'=>'system.db.*',
+						'logFile'=>'sql.log',
 					),
 					// uncomment the following to show log messages on web pages
 					/*
@@ -111,21 +118,20 @@ return CMap::mergeArray(
 		'params'=>array(
 			// this is used in contact page
 			'adminEmail'=>'jcleveng@fas.harvard.edu',
-			'authMethod'=>'facebook',
-			//'authMethod'=>'isites',
+			//'authMethod'=>'facebook',
+			'authMethod'=>'isites',
 		),
 
 		// comment this if you don't want the login to be forced (if you want to allow viewer level guests)
 		// NOTE: gii will not work with this on
 		// NOTE: isites needs this...
-		/*
 		'behaviors' => array(
 		    'onBeginRequest' => array(
 		        'class' => 'application.components.RequireLogin',
 		    )
 		),
-		*/
 
 
 	)
 );
+?>
