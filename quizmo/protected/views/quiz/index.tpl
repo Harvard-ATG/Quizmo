@@ -28,9 +28,27 @@
 				{elseif $quiz['STATE'] == 'S'}
 					Scheduled
 					{if $quiz['isClosed']}
-						(Closed)
+						( Closed
+						{if $quiz['scheduleState'] == 'N'}
+							{if $quiz['scheduleTimeTill'] > 0}
+								- opens in {$quiz['scheduleTimeTill']} day(s)
+							{/if}
+						{elseif $quiz['scheduleState'] == 'E'}
+							{if $quiz['scheduleTimeTill'] > 0}
+								- {$quiz['scheduleTimeTill']} day(s) ago
+							{/if}
+						{/if}
+						)
+					{else}
+						( Open 
+						{if $quiz['scheduleState'] == 'S'}
+							{if $quiz['scheduleTimeTill'] > 0}
+								- for {$quiz['scheduleTimeTill']} more day(s)
+							{/if}
+						{/if}						
+						)
 					{/if}
-				{/if}
+				{/if}	
 			</td>
 			<td>
 				{if $quiz.status != 'S' && $quiz['STATE'] != 'C' && !$quiz['isClosed']}
