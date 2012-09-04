@@ -284,7 +284,7 @@ class Quiz extends QActiveRecord
 	 * @param string $end_date
 	 * @return boolean true is hidden, false is not
 	 */
-	public function isHiddenByState($state, $start_date='', $end_date=''){
+	public function isClosedByState($state, $start_date='', $end_date=''){
 		
 		switch($state){
 			case Quiz::CLOSED:

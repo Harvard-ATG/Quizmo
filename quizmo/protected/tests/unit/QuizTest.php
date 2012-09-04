@@ -123,7 +123,7 @@ class QuizTest extends CDbTestCase {
 		
 	}
 	
-	public function testIsHiddenByState(){
+	public function testIsClosedByState(){
 		date_default_timezone_set('America/New_York');
 		$collection_id = 1;
 		$title = "something";
@@ -139,17 +139,17 @@ class QuizTest extends CDbTestCase {
 		// in between 2 weeks should be false
 		$quizMiddle = new Quiz;
 		$this->assertGreaterThan(0, $quizMiddle->create($collection_id, $title, '', $state, $lastWeek, $nextWeek));
-		$this->assertFalse(Quiz::isHiddenByState($quizMiddle->STATE, $quizMiddle->START_DATE, $quizMiddle->END_DATE));
+		$this->assertFalse(Quiz::isClosedByState($quizMiddle->STATE, $quizMiddle->START_DATE, $quizMiddle->END_DATE));
 
 		// 2 weeks ago should be true
 		$quizPast = new Quiz;
 		$this->assertGreaterThan(0, $quizPast->create($collection_id, $title, '', $state, $lastWeek, $lastWeek2));
-		$this->assertTrue(Quiz::isHiddenByState($quizPast->STATE, $quizPast->START_DATE, $quizPast->END_DATE));
+		$this->assertTrue(Quiz::isClosedByState($quizPast->STATE, $quizPast->START_DATE, $quizPast->END_DATE));
 		
 		// 2 weeks in the future should be true
 		$quizFuture = new Quiz;
 		$this->assertGreaterThan(0, $quizFuture->create($collection_id, $title, '', $state, $nextWeek, $nextWeek2));
-		$this->assertTrue(Quiz::isHiddenByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));
+		$this->assertTrue(Quiz::isClosedByState($quizFuture->STATE, $quizFuture->START_DATE, $quizFuture->END_DATE));
 		
 
 	}
