@@ -35,7 +35,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit','delete'),
+				'actions'=>array('create','update','edit','results','submit','delete','reset'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users
@@ -206,6 +206,21 @@ class QuizController extends Controller
 		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
 		
 		if(!Quiz::setDeleted($quiz_id))
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+
+		echo json_encode(array('quiz_id'=>$quiz_id));
+		Yii::app()->end();
+		
+	}
+	
+	/**
+	 * resets a quiz, removes all responses
+	 */
+	public function actionReset(){
+		$this->layout = false;
+		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
+		
+		if(!Quiz::reset($quiz_id))
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 
 		echo json_encode(array('quiz_id'=>$quiz_id));
