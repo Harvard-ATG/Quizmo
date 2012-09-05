@@ -35,7 +35,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit','delete','reset'),
+				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users
@@ -357,6 +357,7 @@ class QuizController extends Controller
 			break;
 		}
 		
+		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
@@ -364,9 +365,55 @@ class QuizController extends Controller
 			'status'=>$status,
 			'score'=>Response::getTotalScoreByUser($user_id, $quiz_id),
 			'total_score'=>Question::getTotalScore($quiz_id),
-			'collection_id'=>Quiz::getQuiz($quiz_id)->COLLECTION_ID,
+			'collection_id'=>$quiz->COLLECTION_ID,
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
 			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
+			'show_feedback'=>$quiz->SHOW_FEEDBACK,
+			'host'=>"http://".$_SERVER['HTTP_HOST'],
+		));
+	}
+	
+	/**
+	 * total results for an individual
+	 * only difference is feedback is always visible
+	 * @param number $id quiz_id
+	 * @param number $id2 user_id
+	 */
+	public function actionIndividualResultsAdmin($id, $id2){	
+		
+		$quiz_id = $id;
+		$user_id = $id2;
+		
+		switch(Submission::getStatusByUser($user_id, $quiz_id)){
+			case Submission::NOT_STARTED:
+				$status = "Not Started";
+			break;
+			case Submission::STARTED:
+				$status = "Started / Unfinished";
+			break;
+			case Submission::SUBMITTED:
+				$status = "Submitted";
+			break;
+			case Submission::GRADED:
+				$status = "Finished / Graded";
+			break;
+			default:
+				$status = "Error: unknown submission status: ".Submission::getStatusByUser($user_id, $quiz_id);
+			break;
+		}
+		
+		$quiz = Quiz::getQuiz($quiz_id);
+		$this->render('individual_results', array(
+			'user_id'=>$user_id,
+			'quiz_id'=>$quiz_id,
+			'name'=>User::getName($user_id),
+			'status'=>$status,
+			'score'=>Response::getTotalScoreByUser($user_id, $quiz_id),
+			'total_score'=>Question::getTotalScore($quiz_id),
+			'collection_id'=>$quiz->COLLECTION_ID,
+			'question_ids'=>Quiz::getQuestionIds($quiz_id),
+			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
+			'show_feedback'=>1,
 			'host'=>"http://".$_SERVER['HTTP_HOST'],
 		));
 	}

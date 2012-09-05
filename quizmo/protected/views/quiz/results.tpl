@@ -32,7 +32,7 @@
 		{foreach from=$results key=user_id item=value}
 		<tr>
 			<td>
-				<a href='{url url="/quiz/individualResults/$quiz_id/$user_id"}'>{$results[$user_id].name}</a> 
+				<a href='{url url="/quiz/individualResultsAdmin/$quiz_id/$user_id"}'>{$results[$user_id].name}</a> 
 			</td>
 			<td>
 				{$results[$user_id].status} 

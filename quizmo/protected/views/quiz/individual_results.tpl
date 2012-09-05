@@ -30,7 +30,9 @@
 			<td>
 			{include file = 'protected/views/question/_view.tpl'
 				question = $question
+				show_feedback = $show_feedback
 			}
+			
 			</td>
 			<td nowrap="nowrap">
 			{if true}

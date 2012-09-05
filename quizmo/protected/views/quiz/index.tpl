@@ -56,7 +56,7 @@
 				{/if}
 				{if $quiz.status == 'N' && $quiz['STATE'] != 'C' && $quiz['STATE'] != 'S'}
 					<!-- not started -->
-				{elseif $quiz.status == 'S' || $quiz['STATE'] == 'C' || $quiz['isClosed']}
+				{elseif $quiz.status != 'N' || $quiz['STATE'] == 'C' || $quiz['isClosed']}
 					<!-- submitted -->
 					<a href='{url url="/quiz/individualResults/"|cat:$quiz['ID']|cat:"/"|cat:$user_id}'>My Results</a><br/>
 				{else}
