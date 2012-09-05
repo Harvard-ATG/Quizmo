@@ -377,7 +377,13 @@ class Quiz extends QActiveRecord
 	 * @return boolean
 	 */
 	public function reset($quiz_id){
-		
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids));
+		foreach($responses as $response){
+			if(!$response->delete())
+				return false;
+		}
+		return true;
 	}
 	
 }
