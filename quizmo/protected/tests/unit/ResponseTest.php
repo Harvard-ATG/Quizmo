@@ -250,6 +250,20 @@ class ResponseTest extends CDbTestCase {
 			$this->assertNotNull($result['score']);
 			$this->assertNotNull($result['status']);
 		}
+		
+		$quiz_id = 2;
+		$count = 0;
+		// get the results
+		$results = Response::getResults($quiz_id);
+		// assert that there are 3 people in the results 
+		$this->assertEquals($count, sizeof($results));
+		// assert that results have a name, score and status
+		foreach($results as $result){
+			$this->assertNotNull($result['name']);
+			$this->assertNotNull($result['score']);
+			$this->assertNotNull($result['status']);
+		}
+
 	}
 	
 	public function testGetTotalScoreByUser(){

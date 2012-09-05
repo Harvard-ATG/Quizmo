@@ -459,6 +459,8 @@ class Response extends QActiveRecord
 		$question_id_string = implode(", ", $question_ids);
 		
 		// then responses for all the questions
+		if($question_id_string == '')
+			return array();
 		$responses = Response::model()->findAll(
 			"question_id in ($question_id_string)"
 		);
