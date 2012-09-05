@@ -288,13 +288,14 @@ class QuizController extends Controller
 		
 		// mark the quiz as started for the user
 		Submission::startQuiz($user_id, $quiz_id);
-		
+		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('take', array(
 			'question_ids_json'=>json_encode($question_ids),
 			'question_ids'=>$question_ids,
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
-			'collection_id'=>Quiz::getCollectionId($quiz_id)
+			'collection_id'=>$quiz->COLLECTION_ID,
+			'title'=>$quiz->TITLE
 		));
 		
 	}

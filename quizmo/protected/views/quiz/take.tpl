@@ -1,6 +1,9 @@
-<div>
-	<h1>Taking the quiz</h1>
-</div>
+<ul class="breadcrumb">
+  <li>
+    <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
+  </li>
+  <li class="active">{$title}</li>
+</ul>
 
 <div class="well"  style="height: 250px">
 <div id="questions-container">
