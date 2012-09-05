@@ -321,7 +321,12 @@ class Quiz extends QActiveRecord
 		return null;
 	}
 	
-
+	/**
+	 * gets the schedule state given the start and end date
+	 * @param date $start_date
+	 * @param date $end_date
+	 * @return char Quiz::SCHEDULED_STARTED or Quiz::SCHEDULED_NOT_STARTED or SCHEDULED_ENDED
+	 */
 	public function scheduleState($start_date='', $end_date=''){
 		$start_datetime = new DateTime($start_date);
 		$end_datetime = new DateTime($end_date);
@@ -339,6 +344,12 @@ class Quiz extends QActiveRecord
 		
 	}
 	
+	/**
+	 * gets the time till next event or days after the end
+	 * @param date $start_date
+	 * @param date $end_date
+	 * @return number days till next event
+	 */
 	public function scheduleTimeTill($start_date='', $end_date=''){
 		$start_datetime = new DateTime($start_date);
 		$end_datetime = new DateTime($end_date);
@@ -358,6 +369,15 @@ class Quiz extends QActiveRecord
 			return $timeToEnd->d;
 		}
 				
+	}
+	
+	/**
+	 * resets the quiz my removing all results associated with the quiz
+	 * @param number $quiz_id
+	 * @return boolean
+	 */
+	public function reset($quiz_id){
+		
 	}
 	
 }
