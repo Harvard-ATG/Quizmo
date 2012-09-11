@@ -8,7 +8,28 @@ class IsitesIdentity extends UserIdentity {
 	private $permissions;
 	
 	public function __construct(){
+		$this->sessionSetup();
 		$this->authenticate();
+		
+	}
+	
+	/**
+	 * note: this is linked to the layout
+	 * the layout needs the following code in it:
+	 * <session>
+	 *  <attribute>
+	 *   <name>QUIZMO_SESSION</name>
+	 *   <value><?php echo session_id(); ?></value>
+	 *  </attribute>
+	 * </session>
+	 * and that has to be in the body tag
+	*/
+	public function sessionSetup(){
+		error_log("sessionSetup");
+		// start a session with a given session_id...
+		if(isset($_REQUEST['QUIZMO_SESSION']))
+			@session_id($_REQUEST['QUIZMO_SESSION']);
+		@session_start();
 		
 	}
 	

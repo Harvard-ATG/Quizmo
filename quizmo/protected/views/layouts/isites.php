@@ -5,6 +5,12 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 <head>    
 </head>
 <body>
+	<session>
+	  <attribute>
+	    <name>QUIZMO_SESSION</name>
+	    <value><?php echo session_id(); ?></value>
+	  </attribute>
+	</session>
 	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"> </a>
 	<style>
 	<?php include("css/bootstrap-isites.css"); ?>
