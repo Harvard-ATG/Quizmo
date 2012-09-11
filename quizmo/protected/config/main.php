@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return CMap::mergeArray(
 	require(dirname(__FILE__).'/database.php'),
-	require(dirname(__FILE__).'/facebook.php'),
+	//require(dirname(__FILE__).'/facebook.php'),
 	require(dirname(__FILE__).'/ldap.php'),
 	require(dirname(__FILE__).'/isites.php'),
 	array(
@@ -102,12 +102,20 @@ return CMap::mergeArray(
 		    	//)
 			),
 
+			
 			'session' => array (
-	    		'autoStart' => true,
-				'sessionName' => 'QUIZMO',
-	    		//'cookieMode' => 'only',
-	    		//'savePath' => '/web/quizmo/var/tmp/',
+	    		//'autoStart' => true,
+				'sessionName' => 'QUIZMO_SESSION',
+	    		//'cookieMode' => 'allow',
+	    		'savePath' => '/web/quizmo/var/php/session',
 			),
+			/*
+			'session' => array (
+			    'class' => 'system.web.CDbHttpSession',
+			    'connectionID' => 'db',
+			    'sessionTableName' => 'actual_table_name',
+			),
+			*/
 
 		),
 
