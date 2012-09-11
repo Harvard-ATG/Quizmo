@@ -62,6 +62,21 @@ class WebUser extends CWebUser {
 
 	}
 	
+	/**
+	 * overriding this method so we don't regenerate an id every time we log in
+	 * because currently we have to auto log in every time we come here
+	 * @todo: should remove this and add a conditional in the RequireLogin behavior... and make sure all user data is in the session
+	 */
+	protected function changeIdentity($id,$name,$states)
+	{
+		//error_log("changeIdentity");
+		//Yii::app()->getSession()->regenerateID(true);
+		$this->setId($id);
+		$this->setName($name);
+		$this->loadIdentityStates($states);
+	}
+	
+	
 	
 	
 }
