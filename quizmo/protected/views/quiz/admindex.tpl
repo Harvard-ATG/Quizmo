@@ -6,7 +6,7 @@
 		<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
 	</div>
 	<div class="span4">
-		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/1"}'>Student View</a>
+		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/0"}'>Student View</a>
 	</div>
 
 {if $sizeofquizzes > 0}

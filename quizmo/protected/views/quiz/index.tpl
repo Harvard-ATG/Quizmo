@@ -5,9 +5,11 @@
 	<div class="span8">
 
 	</div>
+	{if $admin}
 	<div class="span4">
-		<a class="btn" href='{url url="/quiz/index/$collection_id"}'>Manage</a>
+		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/1"}'>Manage</a>
 	</div>
+	{/if}
 
 {if $sizeofquizzes > 0}
 	<table class="table table-condensed">

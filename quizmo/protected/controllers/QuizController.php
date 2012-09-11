@@ -236,15 +236,30 @@ class QuizController extends Controller
 	{
 		//error_log("quiz/index/".$id);
 		$collection_id = $id;
-		$force_index = $id2;
+		$admin_view = $id2;
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$perm_id = Yii::app()->user->perm_id;
 		if($perm_id >= UserIdentity::ADMIN){
 			$admin = true;
 		}
-		
-		if($admin && $force_index == ''){
+
+		if($admin_view == 1){
+			$admin_view = true;
+			Yii::app()->session['admin_view'] = true;
+			//$_SESSION['admin_view'] = true;
+		} elseif($admin_view === '0') {
+			$admin_view = false;
+			Yii::app()->session['admin_view'] = false;
+			//$_SESSION['admin_view'] = false;
+		} elseif(isset(Yii::app()->session['admin_view'])) {
+			//$admin_view = $_SESSION['admin_view'];
+			$admin_view = Yii::app()->session['admin_view'];
+		} else {
+			$admin_view = false;
+		}
+					
+		if($admin && $admin_view){
 			$this->render('admindex',array(
 				//'dataProvider'=>$dataProvider,
 				'quizzes'=>$quizzes,
@@ -321,7 +336,8 @@ class QuizController extends Controller
 	 */
 	public function actionResults($id){	
 		
-		$results = Response::getResults($id);	
+		$results = Response::getResults($id);
+			
 		
 		$this->render('results', array(
 			'quiz_id'=>$id,
