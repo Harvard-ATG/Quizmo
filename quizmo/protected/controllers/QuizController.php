@@ -235,8 +235,11 @@ class QuizController extends Controller
 	public function actionIndex($id='',$id2='')
 	{
 		//error_log("quiz/index/".$id);
+		$state = Yii::app()->getRequest()->getParam('state');
 		$collection_id = $id;
 		$admin_view = $id2;
+		if($state == 'edit')
+			$admin_view = 1;
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$perm_id = Yii::app()->user->perm_id;
