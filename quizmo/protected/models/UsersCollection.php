@@ -143,4 +143,31 @@ class UsersCollection extends QActiveRecord
 		return $this->ID;
 		
 	}
+	
+	/**
+	 * gets all users associated with the collection
+	 * @param number $collection_id
+	 * @return array of user_ids
+	 */
+	public function getUsers($collection_id){
+		
+		// setupUsersFromIdentity()
+		
+		// get all users who have logged into this table
+		$userscollections = UsersCollection::model()->findAllByAttributes(array("COLLECTION_ID" => $collection_id));
+		
+		$users = array();
+		foreach($userscollections as $userscollection){
+			array_push($users, $userscollection->ID);
+		}
+		
+		return $users;
+		
+	}
+	
+	public function setupUsersFromIdentity(){
+		
+		
+	}
+
 }

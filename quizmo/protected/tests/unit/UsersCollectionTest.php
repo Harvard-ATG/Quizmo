@@ -44,9 +44,21 @@ class UsersCollectionTest extends CDbTestCase {
 		$collectionArray = UsersCollection::getCollectionArrayByUserId($user_id);
 		$this->assertContains($collectionArray[0]['ID'], $collection_idArr);
 		$this->assertContains($collectionArray[1]['ID'], $collection_idArr);
-
-		
+	
 	}
 
+	public function testGetUsers(){
+		$count = 4;
+		$collection_id = 1;
+		
+		$this->assertEquals($count, count(UsersCollection::getUsers($collection_id)));
+		
+		
+	}
+	
+	public function testSetupUsersFromIdentity(){
+		
+		
+	}
    
 }
