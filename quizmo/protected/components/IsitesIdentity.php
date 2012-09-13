@@ -1,5 +1,4 @@
 <?php
-
 class IsitesIdentity extends UserIdentity {
 	
 	protected $userid;
@@ -93,6 +92,16 @@ class IsitesIdentity extends UserIdentity {
 		$this->redirect($logoutUrl);
 		
 	}
+	
+	/**
+	 * gets all users for a given class
+	 */
+	 public function getAllUsers(){
+ 		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
+	 	
+		return true;
+		
+	 }
 	
 	
 }

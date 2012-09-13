@@ -164,5 +164,13 @@ class UserIdentity extends CUserIdentity
 		
 	}
 	
+	/**
+	 * placeholder class -- this should be overridden by the XIdentity if it has a way
+	 * @return boolean always returns true
+	 */
+	public function getAllUsers(){
+		return true;
+	}
+	
 	
 }

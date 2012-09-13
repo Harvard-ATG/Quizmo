@@ -126,6 +126,13 @@ class UsersCollection extends QActiveRecord
 		return $collectionArray;
 	}
 	
+	/**
+	 * adds a user to a collection with a given permission
+	 * @param number $user_id
+	 * @param number $collection_id
+	 * @param string $permission
+	 * @return number ID
+	 */
 	public function addUserToCollection($user_id, $collection_id, $permission='enrollee'){
 		
 		$conditions = 'collection_id=:collection_id AND user_id=:user_id';
@@ -152,6 +159,7 @@ class UsersCollection extends QActiveRecord
 	public function getUsers($collection_id){
 		
 		// setupUsersFromIdentity()
+		UsersCollection::setupUsersFromIdentity();
 		
 		// get all users who have logged into this table
 		$userscollections = UsersCollection::model()->findAllByAttributes(array("COLLECTION_ID" => $collection_id));
@@ -166,7 +174,12 @@ class UsersCollection extends QActiveRecord
 	}
 	
 	public function setupUsersFromIdentity(){
+		// get identity
+		$identity = IdentityFactory::getIdentity();
+		// call identity getAllUsers method
+		//$identity->getAllUsers();
 		
+
 		
 	}
 
