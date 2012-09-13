@@ -13,6 +13,13 @@ class UserIdentity extends CUserIdentity
 	const ADMIN = 5;
 	const ENROLLEE = 3;
 	const GUEST = 1;
+	
+	const SUPER_STRING = "super";
+	const OWNER_STRING = "owner";
+	const ADMIN_STRING = "admin";
+	const ENROLLEE_STRING = "enrollee";
+	const GUEST_STRING = "guest";
+	
 
 	public $id;
 	protected $external_id;
