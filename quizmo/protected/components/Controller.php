@@ -1,5 +1,9 @@
 <?php
 /**
+ * @copyright Copyright (c) 2012 The President and Fellows of Harvard College
+ * @license Use of this source code is governed by the LICENSE file found in the root of this project.
+ */
+/**
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
  */

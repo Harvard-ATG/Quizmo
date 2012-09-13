@@ -1,11 +1,7 @@
 <?php
 /**
- * COciConnection class file
- *
- * @author Ricardo Grana <rickgrana@yahoo.com.br>
- * @link http://www.yiiframework.com/
- * @copyright Copyright &copy; 2008-2009 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @copyright Copyright (c) 2012 The President and Fellows of Harvard College
+ * @license Use of this source code is governed by the LICENSE file found in the root of this project.
  */
 
 class COciConnection extends CDbConnection

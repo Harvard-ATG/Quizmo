@@ -1,4 +1,9 @@
 <?php
+/**
+ * @copyright Copyright (c) 2012 The President and Fellows of Harvard College
+ * @license Use of this source code is governed by the LICENSE file found in the root of this project.
+ */
+
 require_once("Autoincrement.php");
 
 class m120402_195410_Users extends CDbMigration

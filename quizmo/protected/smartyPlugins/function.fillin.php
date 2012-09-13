@@ -1,5 +1,10 @@
 <?php
 /**
+ * @copyright Copyright (c) 2012 The President and Fellows of Harvard College
+ * @license Use of this source code is governed by the LICENSE file found in the root of this project.
+ */
+
+/**
  * creates the view string for fillin questions.  includes the input text fields
  *
  * Syntax:
