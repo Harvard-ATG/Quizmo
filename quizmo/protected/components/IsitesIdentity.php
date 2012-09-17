@@ -101,19 +101,44 @@ class IsitesIdentity extends UserIdentity {
 	 * gets all users for a given class
 	 */
 	public function getAllUsers(){
-		error_log("getAllUsers");
  		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
 	 	
 		// let's try to use the group service
 		$course_groups = $this->courseGroups();
 		//error_log(var_export($course_groups, 1));
+		$users = array();
 		foreach($course_groups->groups as $group_object){
 			$group_id = $group_object->idType;
-			//error_log($group_id);
 			$these_users = $this->courseMembers($group_id);
 			//error_log(var_export($these_users, 1));
+			$this_user = array();
+			
+			// run through all the members
+			foreach($these_users->members as $member){
+				
+				// turn the object into an array we can add to
+				foreach($member as $key => $value){
+					$this_user[$key] = $value;
+				}
+				
+				// set the appropriate permission level for them
+				switch($group_id){
+					case 'ScaleCourseSiteStaff':
+						$this_user['group'] = UserIdentity::ADMIN;
+					break;
+					case 'ScaleCourseSiteEnroll':
+						$this_user['group'] = UserIdentity::ENROLLEE;
+					break;
+					case 'ScaleCourseSiteGuest':
+						$this_user['group'] = UserIdentity::GUEST;
+					break;
+				}
+				
+			}
+			$users = array_merge($users, $these_users->members);
 		}
 		
+		error_log(var_export($users, 1));
 		
 		return true;
 		
@@ -131,14 +156,12 @@ class IsitesIdentity extends UserIdentity {
 	 *
 	 */
 	public function courseGroups(){
-		error_log("courseGroups");
 		
 		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
 		
 		$url = "https://isites.harvard.edu/services/groups/course_groups/k28781/80719647.json";
 
 		return IsitesIdentity::curl($userpwd, $url);
-
 		
 	}
 	 
@@ -160,7 +183,6 @@ class IsitesIdentity extends UserIdentity {
 	 *
 	 */
 	public function courseMembers($idType){
-		error_log("courseMembers");
 		
 		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
 
@@ -197,9 +219,7 @@ class IsitesIdentity extends UserIdentity {
 		
 		return json_decode($data);
 		
-		
 	}
-	
 	
 }
 
