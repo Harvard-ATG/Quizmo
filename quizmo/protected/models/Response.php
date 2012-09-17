@@ -478,6 +478,14 @@ class Response extends QActiveRecord
 			array_push($results[$response->USER_ID], $response);
 
 		}
+
+		// get all users here
+		$users = UsersCollection::getUsers(Quiz::getCollectionId($quiz_id));
+		//error_log($users);
+		
+		// then add them to the results array
+
+				
 		
 		// process results adding in people data
 		foreach($results as $key => $value){
@@ -489,6 +497,8 @@ class Response extends QActiveRecord
 			$results[$key]['status'] = $status;
 			$results[$key]['score'] = $score;
 		}
+
+
 
 		return $results;
 	}

@@ -100,12 +100,105 @@ class IsitesIdentity extends UserIdentity {
 	/**
 	 * gets all users for a given class
 	 */
-	 public function getAllUsers(){
+	public function getAllUsers(){
+		error_log("getAllUsers");
  		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
 	 	
+		// let's try to use the group service
+		$course_groups = $this->courseGroups();
+		//error_log(var_export($course_groups, 1));
+		foreach($course_groups->groups as $group_object){
+			$group_id = $group_object->idType;
+			//error_log($group_id);
+			$these_users = $this->courseMembers($group_id);
+			//error_log(var_export($these_users, 1));
+		}
+		
+		
 		return true;
 		
-	 }
+	}
+	 
+	/**
+	 * iSites course groups service
+	 * Getting course groups associated with at site:
+	 *
+	 * https://isites.harvard.edu/services/groups/course_groups/{keyword}/{userid}.[html|json|xml]
+	 *
+	 * The userid is for the PIN-authenticated user on whose behalf you are making this request.  
+	 *
+	 * This call returns a list of the course groups that are associated with this site.  This includes any "section" style groups that may exist, and will always include the staff, enrollee and guest groups.
+	 *
+	 */
+	public function courseGroups(){
+		error_log("courseGroups");
+		
+		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
+		
+		$url = "https://isites.harvard.edu/services/groups/course_groups/k28781/80719647.json";
+
+		return IsitesIdentity::curl($userpwd, $url);
+
+		
+	}
+	 
+	/**
+	 * iSites course members service
+	 * Getting members of course groups:
+	 *
+	 * https://isites.harvard.edu/services/groups/course_group_members/{keyword}/{group type}:{groupid}/{userid}.[html|json|xml]
+	 *
+	 * The userid is for the PIN-authenticated user on whose behalf you are making this request.  
+	 *
+	 * This call returns the members of the specified group: userid, first name, last name, email address.  
+	 *
+	 * For the three standard staff/enrollee/guest groups, the URLs will look like:
+	 *
+	 * https://isites.harvard.edu/services/groups/course_group_members/{keyword}/ScaleCourseSiteStaff:{keyword}/{userid}.[html|json|xml]
+	 * https://isites.harvard.edu/services/groups/course_group_members/{keyword}/ScaleCourseSiteEnroll:{keyword}/{userid}.[html|json|xml]
+	 * https://isites.harvard.edu/services/groups/course_group_members/{keyword}/ScaleCourseSiteGuest:{keyword}/{userid}.[html|json|xml]
+	 *
+	 */
+	public function courseMembers($idType){
+		error_log("courseMembers");
+		
+		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
+
+		$url = "https://isites.harvard.edu/services/groups/course_group_members/k28781/$idType:k28781/80719647.json";
+
+		return IsitesIdentity::curl($userpwd, $url);
+		
+	}
+	
+	public function curl($userpwd, $url){
+		$proxy = Yii::app()->params->proxy;
+
+		$ch = curl_init();
+		if(!$ch) {
+			return false;
+		}
+
+		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		curl_setopt($ch, CURLOPT_USERPWD, $userpwd);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_PROXY, $proxy);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_HEADER, 0); 
+		curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+
+		$data = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		$error = curl_error($ch);
+		//$result = array('data' => $data, 'info' => $info, 'error' => $error);
+
+		curl_close($ch);
+		if($error != '')
+			error_log($error);
+		
+		return json_decode($data);
+		
+		
+	}
 	
 	
 }

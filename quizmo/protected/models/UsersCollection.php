@@ -162,6 +162,7 @@ class UsersCollection extends QActiveRecord
 	 * @return array of user_ids
 	 */
 	public function getUsers($collection_id){
+		error_log("getUsers");
 		
 		// setupUsersFromIdentity()
 		UsersCollection::setupUsersFromIdentity();
@@ -179,10 +180,12 @@ class UsersCollection extends QActiveRecord
 	}
 	
 	public function setupUsersFromIdentity(){
+		error_log("setupUsersFromIdentity");
+		
 		// get identity
 		$identity = IdentityFactory::getIdentity();
 		// call identity getAllUsers method
-		//$identity->getAllUsers();
+		$identity->getAllUsers();
 		
 
 		
