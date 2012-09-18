@@ -456,6 +456,7 @@ class Response extends QActiveRecord
 	 * @return array
 	 */
 	public function getResults($quiz_id){
+		error_log("getResults");
 
 		// first get all the questions for the quiz
 		$question_ids = Quiz::getQuestionIds($quiz_id);
@@ -472,20 +473,31 @@ class Response extends QActiveRecord
 		
 		$results = array();
 		// run through them, add to the results array
+		// turn the response into an array so I can manipulate it
 		foreach($responses as $response){
-			
+			$responseArr = array();
 			$results[$response->USER_ID] = array();
-			array_push($results[$response->USER_ID], $response);
+			foreach($response as $key => $value){
+				$responseArr[$key] = $value;
+			}
+			
+			array_push($results[$response->USER_ID], $responseArr);
 
 		}
+		
+		error_log(var_export($results, 1));
 
 		// get all users here
 		$users = UsersCollection::getUsers(Quiz::getCollectionId($quiz_id));
-		//error_log($users);
+		error_log(var_export($users, 1));
 		
 		// then add them to the results array
-
+		foreach($users as $user_id){
+			if(!isset($results[$user_id])){
+				$results[$user_id] = array('USER_ID'=>$user_id);
 				
+			}
+		}
 		
 		// process results adding in people data
 		foreach($results as $key => $value){
