@@ -165,7 +165,7 @@ class UsersCollection extends QActiveRecord
 		error_log("getUsers");
 		
 		// setupUsersFromIdentity()
-		UsersCollection::setupUsersFromIdentity();
+		UsersCollection::setupUsersFromIdentity($collection_id);
 		
 		// get all users who have logged into this table
 		$userscollections = UsersCollection::model()->findAllByAttributes(array("COLLECTION_ID" => $collection_id));
@@ -179,15 +179,53 @@ class UsersCollection extends QActiveRecord
 		
 	}
 	
-	public function setupUsersFromIdentity(){
+	public function setupUsersFromIdentity($collection_id){
 		error_log("setupUsersFromIdentity");
 		
 		// get identity
 		$identity = IdentityFactory::getIdentity();
 		// call identity getAllUsers method
-		$identity->getAllUsers();
-		
-
+		$users = $identity->getAllUsers();
+		// run through them and add them to the db if they don't already exist, update permission level if they do
+		foreach($users as $user){
+			// get user with external_id
+			$userObj = User::model()->findByAttributes(array('EXTERNAL_ID'=>$user['id']));
+			if($userObj == null){
+				// create the user
+				$userObj = new User;
+				$userObj->EXTERNAL_ID = $user['id'];
+				$userObj->NAME = $user['firstName']." ".$user['lastName'];
+				$userObj->FNAME = $user['firstName'];
+				$userObj->LNAME = $user['lastName'];
+				$userObj->save();
+				
+				// create the userscollection
+				$usersCollection = new UsersCollection;
+				$usersCollection->USER_ID = $userObj->ID;
+				$usersCollection->COLLECTION_ID = $collection_id;
+				$usersCollection->PERMISSION = $user['group_string'];
+				$usersCollection->save();
+				
+			} else {
+				// check the userscollection entry for this collection
+				$usersCollection = UsersCollection::model()->findByAttributes(array('USER_ID'=>$userObj->ID, 'COLLECTION_ID'=>$collection_id));
+				if($usersCollection != null){
+					// update uC if permission is different
+					if($usersCollection->PERMISSION != $user['group_string']){
+						$usersCollection->PERMISSION = $user['group_string'];
+						$usersCollection->save();
+					}
+				} else {
+					// create uC
+					$usersCollection = new UsersCollection;
+					$usersCollection->USER_ID = $userObj->ID;
+					$usersCollection->COLLECTION_ID = $collection_id;
+					$usersCollection->PERMISSION = $user['group_string'];
+					$usersCollection->save();
+				}
+			}
+			
+		}
 		
 	}
 
