@@ -142,7 +142,7 @@ class IsitesIdentity extends UserIdentity {
 			//$users = array_merge($users, $these_users->members);
 		}
 		
-		error_log(var_export($users, 1));
+		//error_log(var_export($users, 1));
 		
 		return $users;
 		
