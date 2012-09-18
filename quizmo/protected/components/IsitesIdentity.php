@@ -125,22 +125,26 @@ class IsitesIdentity extends UserIdentity {
 				switch($group_id){
 					case 'ScaleCourseSiteStaff':
 						$this_user['group'] = UserIdentity::ADMIN;
+						$this_user['group_string'] = UserIdentity::ADMIN_STRING;
 					break;
 					case 'ScaleCourseSiteEnroll':
 						$this_user['group'] = UserIdentity::ENROLLEE;
+						$this_user['group_string'] = UserIdentity::ENROLLEE_STRING;
 					break;
 					case 'ScaleCourseSiteGuest':
 						$this_user['group'] = UserIdentity::GUEST;
+						$this_user['group_string'] = UserIdentity::GUEST_STRING;
 					break;
 				}
 				
 			}
-			$users = array_merge($users, $these_users->members);
+			array_push($users, $this_user);
+			//$users = array_merge($users, $these_users->members);
 		}
 		
 		error_log(var_export($users, 1));
 		
-		return true;
+		return $users;
 		
 	}
 	 
