@@ -184,7 +184,10 @@ No Quizzes.
 			 "bFilter": false,
 			 "bInfo": false,
 			 "bSortClasses": false,
-		}).rowReordering();
+		}).rowReordering({ 
+			sURL:"{url url='/quiz/reorder' ajax=1}",
+			sRequestType: "GET"
+		});
 
 	});
 </script>
