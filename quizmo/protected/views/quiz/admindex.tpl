@@ -10,12 +10,15 @@
 	</div>
 
 {if $sizeofquizzes > 0}
-	<table class="table table-condensed">
+	<table id="quizzes-table" class="table table-condensed">
+		<thead>
 		<tr>
 			<th>Quiz</th>
 			<th>Status</th>
 			<th>Actions</th>
 		</tr>
+		</thead>
+		<tbody>
 {foreach from=$quizzes item=quiz}
 
 		<tr class="quiz-row-{$quiz['ID']}">
@@ -106,6 +109,7 @@
 
 
 {/foreach}
+		</tbody>
 	</table>
 {else}
 No Quizzes.
@@ -167,13 +171,20 @@ No Quizzes.
 		alert("failure saving");
 	}
 	
-	
 	$(document).ready(function(){
 		
 		$('.quiz-delete-btn').click(openModal);
 		$('.quiz-delete-action').click(quizDeleteAction);
 		$('.quiz-reset-btn').click(openModal);
 		$('.quiz-reset-action').click(quizResetAction);
+
+		$('#quizzes-table').dataTable({
+			 "bPaginate": false,
+			 "bFilter": false,
+			 "bInfo": false,
+			 "bSortClasses": false,
+		}).rowReordering();
+
 		
 	});
 </script>
