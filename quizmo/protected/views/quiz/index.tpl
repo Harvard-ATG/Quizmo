@@ -1,6 +1,5 @@
 <h1>Quizzes</h1>
 
-
 <div id="quizzes-container" class="row-fluid">
 	<div class="span8">
 
@@ -12,15 +11,18 @@
 	{/if}
 
 {if $sizeofquizzes > 0}
-	<table class="table table-condensed">
-		<tr>
-			<th>Quiz</th>
-			<th>Status</th>
-			<th>Actions</th>
-		</tr>
-{foreach from=$quizzes item=quiz}
+	<table id="quizzes-table" class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Quiz</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+{foreach from=$quizzes item=quiz name=qounter}
 	{if $quiz['VISIBILITY'] != 0}
-		<tr class="quiz-row-{$quiz['ID']}">
+		<tr data-position="{$smarty.foreach.qounter.index}" class="quiz-row-{$quiz['ID']}" id="{$quiz['ID']}">
 			<td>{$quiz['TITLE']}</td>
 			<td>
 				{if $quiz['STATE'] == 'C'}
@@ -71,6 +73,7 @@
 	{/if}
 
 {/foreach}
+		</tbody>
 	</table>
 {else}
 <div class="lead">
@@ -80,3 +83,17 @@
 
 
 </div>
+
+<script>
+$(document).ready(function () {
+
+	$('#quizzes-table').dataTable({
+		 "bPaginate": false,
+		 "bFilter": false,
+		 "bInfo": false,
+		 "bSortClasses": false,
+	});
+
+});
+
+</script>
