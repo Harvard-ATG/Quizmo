@@ -28,7 +28,7 @@ class IsitesIdentity extends UserIdentity {
 	 * and that has to be in the body tag
 	*/
 	public function sessionSetup(){
-		error_log("sessionSetup");
+		//error_log("sessionSetup");
 		// start a session with a given session_id...
 		if(isset($_REQUEST['QUIZMO_SESSION']))
 			@session_id($_REQUEST['QUIZMO_SESSION']);
