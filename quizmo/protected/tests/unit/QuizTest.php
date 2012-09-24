@@ -235,7 +235,35 @@ class QuizTest extends CDbTestCase {
 		// reset
 		$this->assertTrue(Quiz::reset($quiz_id));
 		// check that it has no responses
-		$this->assertEquals(4, sizeof(Response::getResults($quiz_id)), "note that 4 should be 0 if the Identity::getUsers is implemented");
+		$this->assertEquals(6, sizeof(Response::getResults($quiz_id)), "note that 6 should be 0 if the Identity::getUsers is implemented");
+		
+	}
+	
+	public function testReorder(){
+		$quiz_id = 2;
+		$from = 2;
+		$to = 3;
+		
+		$expected_order = array(1, 3, 2, 4);
+		$collection_id = Quiz::getCollectionId($quiz_id);
+		
+		
+		// reorder them
+		Quiz::reorder(2, 2, 3);
+		// get all quizzes from this collection
+		$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
+		
+		// check each sort order
+		$count = 0;
+		foreach($quizzes as $quiz){
+			// check that the ids are correct
+			$this->assertEquals($expected_order[$count], $quiz->ID);
+			$count++;
+			// check that the sort order is correct
+			$this->assertEquals($count, $quiz->SORT_ORDER);
+			
+		}
+		
 		
 	}
 

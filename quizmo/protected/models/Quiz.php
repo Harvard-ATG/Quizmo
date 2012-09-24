@@ -188,7 +188,7 @@ class Quiz extends QActiveRecord
 	* @return array
 	*/
 	public function getQuizArrayByCollectionId($collection_id, $user_id){
-		
+		//error_log("getQuizArrayByCollectionId");
 		$quizzes = Quiz::model()->findAll('collection_id=:collection_id', array(':collection_id' => $collection_id));
 		
 		$quizArray = array();
@@ -427,17 +427,36 @@ class Quiz extends QActiveRecord
 	 * @return boolean success
 	 */
 	public function reorder($quiz_id, $fromPosition, $toPosition){
-		// get collection_id
-		$collection_id = Quiz::getCollectionId($quiz_id);
+		//echo("reorder($quiz_id, $fromPosition, $toPosition)\n");
 		
-		// get all quizzes
-		$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
-		
-		// run through them
-		foreach($quizzes as $quiz){
-			//error_log($quiz->ID.": ".$quiz->SORT_ORDER);
-			
+		// get the quiz
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		// get it's current position
+		$current_position = $quiz->SORT_ORDER;
+		// set it's position if current != to
+		if($toPosition != $current_position){
+			// the get id of what was at it's position
+			$next_quiz = Quiz::model()->findByAttributes(array('COLLECTION_ID'=>Quiz::getCollectionId($quiz_id), 'SORT_ORDER'=>$toPosition));
+			$quiz->SORT_ORDER = $toPosition;
+			$quiz->save();
+		} else {
+			return true;
 		}
+		
+		// if the id is the same, you're finished, else
+		if($next_quiz != null && @$next_quiz->ID != $quiz_id){
+			// go to the position it was at with the new id
+			if($fromPosition < $toPosition){
+				$toPosition -= 1;
+			} elseif($fromPosition > $toPosition){
+				$toPosition += 1;
+			}
+			
+			Quiz::reorder($next_quiz->ID, $next_quiz->SORT_ORDER, $toPosition);
+		} else {
+			return true;
+		}
+		
 	
 	}
 	
