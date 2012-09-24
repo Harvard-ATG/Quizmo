@@ -157,6 +157,32 @@ class Quiz extends QActiveRecord
 	}
 	
 	/**
+	 * getNextQuizOrder
+	 *
+	 * originally thinking of this just to be used internally
+	 * when adding new questions -- to get the appropriate sort_order
+	 *
+	 * @param integer $collection_id
+	 * @return integer $sort_order
+	 */
+	public function getNextQuizOrder($collection_id){
+		//error_log("getNextQuizOrder");
+		$criteria=new CDbCriteria;
+		//$criteria->select = 'max(SORT_ORDER) AS max_sort_order';
+		$criteria->condition = 'collection_id='.$collection_id;
+		$criteria->order = "sort_order DESC";
+		
+		$quiz = Quiz::model()->find($criteria);
+
+		if(isset($quiz->SORT_ORDER))
+			return $quiz->SORT_ORDER+1;
+		else
+			return 1;
+
+	}
+
+
+	/**
 	* This is meant to make printing a list easy...  json probably better, but this works for now...
 	* @param integer $collection_id
 	* @return array
@@ -211,6 +237,7 @@ class Quiz extends QActiveRecord
 				'START_DATE'=>$start_date,
 				'END_DATE'=>$end_date,
 				'VISIBILITY'=>$visibility,
+				'SORT_ORDER'=>$this->getNextQuizOrder($collection_id),
 				'SHOW_FEEDBACK'=>$show_feedback,
 				'DELETED'=>0,
 		        'DESCRIPTION'=>$description,

@@ -24,6 +24,15 @@ class QuizTest extends CDbTestCase {
 		
 	);
 	
+	public function testGetNextQuizOrder(){
+		$collection_id = 1;
+		$number = 5;
+		
+		$quiz_order = Quiz::getNextQuizOrder($collection_id);
+		// this is based on the fixtures..
+		$this->assertEquals($quiz_order, $number);
+		
+	}
 
 	public function testGetQuizArrayByCollectionId(){
 		date_default_timezone_set('America/New_York');
