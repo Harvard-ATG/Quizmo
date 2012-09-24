@@ -36,7 +36,7 @@ class QuestionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete'),
+				'actions'=>array('create','update','delete','reorder'),
 				'roles'=>array('admin','super'),
 			),
 			array('deny',  // deny all users
@@ -252,6 +252,22 @@ class QuestionController extends Controller
 		));
 
 	}
+	
+	/**
+	 * for reordering a question
+	 * called from the datatable reordering function
+	 */
+	public function actionReorder(){
+		error_log("question reorder");
+		$question_id = Yii::app()->getRequest()->getParam('id');
+		$fromPosition = Yii::app()->getRequest()->getParam('fromPosition');
+		$toPosition = Yii::app()->getRequest()->getParam('toPosition');
+
+		// set the reorder for this quiz_id
+		//Quiz::reorder($quiz_id, $fromPosition, $toPosition);
+	
+	}
+	
 
 
 }

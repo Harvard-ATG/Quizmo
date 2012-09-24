@@ -12,16 +12,18 @@
 <div id="questions-container">
 	<a class="btn" href='{url url="/question/create/$quiz_id"}'>New Question</a>
 {if $sizeofquestions > 0}
-	<table class="table table-condensed">
+	<table id="questions-table" class="table table-condensed">
 		<thead>
 			<tr>
+				<th></th>
 				<th>Question</th><th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-{foreach from=$questions item=question}
+{foreach from=$questions item=question name=qounter}
 
-		<tr class="question-row-{$question['ID']}">
+		<tr data-position="{$smarty.foreach.qounter.index + 1}" id="{$question['ID']}" class="question-row-{$question['ID']}">
+			<td>{$smarty.foreach.qounter.index + 1}</td>
 			<td><a href="{url url='/question/view/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
 			<td>
 				<a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">Edit</a><br/>
@@ -94,6 +96,17 @@
 	$(document).ready(function(){
 		$('.question-delete-btn').click(openQuestionDeleteModal);
 		$('.question-delete-action').click(questionDeleteAction);
+		
+		$('#questions-table').dataTable({
+			 //"bPaginate": false,
+			 //"bFilter": false,
+			 //"bInfo": false,
+			 //"bSortClasses": false,
+		}).rowReordering();
+		//}).rowReordering({ 
+		//	sURL:"{url url='/question/reorder' ajax=1}",
+		//	sRequestType: "GET"
+		//});
 		
 	});
 </script>
