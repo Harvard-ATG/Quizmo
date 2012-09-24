@@ -63,6 +63,14 @@ class QActiveRecord extends CActiveRecord {
 	    );
 	}
 	
+	public function toString(){
+		$output = '';
+		foreach($this as $key => $value){
+			$output .= "$key => $value\n";
+		}
+		return $output;
+	}
+	
 }
 
 ?>
