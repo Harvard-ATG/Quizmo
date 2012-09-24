@@ -456,7 +456,7 @@ class Response extends QActiveRecord
 	 * @return array
 	 */
 	public function getResults($quiz_id){
-		error_log("getResults");
+		//error_log("getResults");
 
 		// first get all the questions for the quiz
 		$question_ids = Quiz::getQuestionIds($quiz_id);
@@ -485,11 +485,11 @@ class Response extends QActiveRecord
 
 		}
 		
-		error_log(var_export($results, 1));
+		//error_log(var_export($results, 1));
 
 		// get all users here
 		$users = UsersCollection::getUsers(Quiz::getCollectionId($quiz_id));
-		error_log(var_export($users, 1));
+		//error_log(var_export($users, 1));
 		
 		// then add them to the results array
 		foreach($users as $user_id){

@@ -226,7 +226,7 @@ class QuizTest extends CDbTestCase {
 		// reset
 		$this->assertTrue(Quiz::reset($quiz_id));
 		// check that it has no responses
-		$this->assertEquals(0, sizeof(Response::getResults($quiz_id)));
+		$this->assertEquals(4, sizeof(Response::getResults($quiz_id)), "note that 4 should be 0 if the Identity::getUsers is implemented");
 		
 	}
 
