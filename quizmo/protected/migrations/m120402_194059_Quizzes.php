@@ -36,6 +36,7 @@ class m120402_194059_Quizzes extends CDbMigration
 			'VISIBILITY' => "integer NOT NULL",
 			'STATE' => 'string',
 			'SHOW_FEEDBACK' => 'integer',
+			'SORT_ORDER' => "integer",
 			'START_DATE' => 'datetime',
 			'END_DATE' => 'datetime',
 			'DATE_MODIFIED' => 'datetime',

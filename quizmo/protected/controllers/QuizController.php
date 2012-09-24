@@ -40,7 +40,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin'),
+				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users
@@ -457,5 +457,19 @@ class QuizController extends Controller
 		));
 	}
 
+	/**
+	 * for reordering a quiz
+	 * called from the datatable reordering function
+	 */
+	public function actionReorder(){
+		error_log("reorder");
+		$quiz_id = Yii::app()->getRequest()->getParam('id');
+		$fromPosition = Yii::app()->getRequest()->getParam('fromPosition');
+		$toPosition = Yii::app()->getRequest()->getParam('toPosition');
+
+		// set the reorder for this quiz_id
+		Quiz::reorder($quiz_id, $fromPosition, $toPosition);
+	
+	}
 
 }

@@ -108,6 +108,7 @@ class Quiz extends QActiveRecord
 			'VISIBILITY' => 'Visibility',
 			'STATE' => 'State',
 			'SHOW_FEEDBACK' => 'Show Feedback',
+			'SORT_ORDER' => 'Sort Order',
 			'START_DATE' => 'Start Date',
 			'END_DATE' => 'End Date',
 			'DATE_MODIFIED' => 'Date Modified',
@@ -151,7 +152,7 @@ class Quiz extends QActiveRecord
 	{
 	    return array(
 		    'condition'=>'DELETED!=1',
-	    	'order'=>'ID ASC'
+	    	'order'=>'SORT_ORDER ASC, ID ASC'
 	    );
 	}
 	
@@ -391,4 +392,28 @@ class Quiz extends QActiveRecord
 		return true;
 	}
 	
+	/**
+	 * reorders the quiz item
+	 * @param number $quiz_id
+	 * @param number $fromPosition
+	 * @param number $toPosition
+	 * @return boolean success
+	 */
+	public function reorder($quiz_id, $fromPosition, $toPosition){
+		// get collection_id
+		$collection_id = Quiz::getCollectionId($quiz_id);
+		
+		// get all quizzes
+		$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
+		
+		// run through them
+		foreach($quizzes as $quiz){
+			//error_log($quiz->ID.": ".$quiz->SORT_ORDER);
+			
+		}
+	
+	}
+	
 }
+
+?>
