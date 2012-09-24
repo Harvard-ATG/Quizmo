@@ -88,10 +88,11 @@
 $(document).ready(function () {
 
 	$('#quizzes-table').dataTable({
-		 "bPaginate": false,
-		 "bFilter": false,
-		 "bInfo": false,
-		 "bSortClasses": false,
+		"bPaginate": false,
+		"bFilter": false,
+		"bInfo": false,
+		"bSortClasses": false,
+		"aaSorting": [],
 	});
 
 });
