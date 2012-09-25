@@ -98,15 +98,14 @@
 		$('.question-delete-action').click(questionDeleteAction);
 		
 		$('#questions-table').dataTable({
-			 //"bPaginate": false,
-			 //"bFilter": false,
-			 //"bInfo": false,
-			 //"bSortClasses": false,
-		}).rowReordering();
-		//}).rowReordering({ 
-		//	sURL:"{url url='/question/reorder' ajax=1}",
-		//	sRequestType: "GET"
-		//});
+			 "bPaginate": false,
+			 "bFilter": false,
+			 "bInfo": false,
+			 "bSortClasses": false,
+		}).rowReordering({ 
+			sURL:"{url url='/question/reorder' ajax=1}",
+			sRequestType: "GET"
+		});
 		
 	});
 </script>
