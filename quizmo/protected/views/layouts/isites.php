@@ -11,6 +11,15 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	    <value><?php echo session_id(); ?></value>
 	  </attribute>
 	</session>
+	<titlebar>
+        <icon state="edit">
+            <title>Edit</title>
+            <request>quiz/index</request>
+            <image>edit_icon.jpg</image>
+            <permission>15</permission>
+        </icon>
+    </titlebar>
+    
 	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"> </a>
 	<style>
 	<?php include("css/bootstrap-isites.css"); ?>

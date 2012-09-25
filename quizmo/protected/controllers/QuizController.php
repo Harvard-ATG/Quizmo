@@ -243,8 +243,11 @@ class QuizController extends Controller
 		$state = Yii::app()->getRequest()->getParam('state');
 		$collection_id = $id;
 		$admin_view = $id2;
-		if($state == 'edit')
+		if($state == 'edit'){
 			$admin_view = 1;
+			// this is isites specific
+			$collection_id = Collection::getByOtherId(Yii::app()->getRequest()->getParam('topicId'))->ID;
+		}
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$perm_id = Yii::app()->user->perm_id;
