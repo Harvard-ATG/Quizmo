@@ -429,34 +429,39 @@ class Quiz extends QActiveRecord
 	public function reorder($quiz_id, $fromPosition, $toPosition){
 		//echo("reorder($quiz_id, $fromPosition, $toPosition)\n");
 		
-		// get the quiz
-		$quiz = Quiz::model()->findByPk($quiz_id);
-		// get it's current position
-		$current_position = $quiz->SORT_ORDER;
-		// set it's position if current != to
-		if($toPosition != $current_position){
-			// the get id of what was at it's position
-			$next_quiz = Quiz::model()->findByAttributes(array('COLLECTION_ID'=>Quiz::getCollectionId($quiz_id), 'SORT_ORDER'=>$toPosition));
-			$quiz->SORT_ORDER = $toPosition;
-			$quiz->save();
-		} else {
-			return true;
+		// redo this
+		// get the list of quiz_ids
+		$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>Quiz::getCollectionId($quiz_id)));
+		$quiz_id_array = array();
+		foreach($quizzes as $quiz){
+			if($quiz->ID == $quiz_id)
+				array_push($quiz_id_array, "XXX");
+			else
+				array_push($quiz_id_array, $quiz->ID);
 		}
+		$count = sizeof($quiz_id_array);
 		
-		// if the id is the same, you're finished, else
-		if($next_quiz != null && @$next_quiz->ID != $quiz_id){
-			// go to the position it was at with the new id
-			if($fromPosition < $toPosition){
-				$toPosition -= 1;
-			} elseif($fromPosition > $toPosition){
-				$toPosition += 1;
-			}
+		// put the quiz_id in the right spot array_splice
+		if($toPosition < $fromPosition)
+			$toPosition -= 1;
+		array_splice($quiz_id_array, $toPosition, 0, $quiz_id);
 			
-			Quiz::reorder($next_quiz->ID, $next_quiz->SORT_ORDER, $toPosition);
-		} else {
-			return true;
+		// remove the old one
+		$sort_order = 1;
+		// run through the list, updating sort_orders
+		foreach($quiz_id_array as $q_id){
+			if($q_id != "XXX"){
+				$quiz = Quiz::model()->findByPk($q_id);
+				if($quiz != null){
+					$quiz->SORT_ORDER = $sort_order;
+					$quiz->save();
+					$sort_order++;
+				} else {
+					error_log("Quiz::reorder failure");
+					return false;
+				}
+			}
 		}
-		
 	
 	}
 	

@@ -240,30 +240,61 @@ class QuizTest extends CDbTestCase {
 	}
 	
 	public function testReorder(){
-		$quiz_id = 2;
-		$from = 2;
-		$to = 3;
+		$tests = array(
+			array(
+				'quiz_id' => 1,
+				'from' => 1,
+				'to' => 2,
+				'expected_order' => array(2, 1, 3, 4),
+			),
+			array(
+				'quiz_id' => 1,
+				'from' => 2,
+				'to' => 1,
+				'expected_order' => array(1, 2, 3, 4),
+			),
+			array(
+				'quiz_id' => 2,
+				'from' => 2,
+				'to' => 4,
+				'expected_order' => array(1, 3, 4, 2),
+			),
+			array(
+				'quiz_id' => 2,
+				'from' => 4,
+				'to' => 2,
+				'expected_order' => array(1, 2, 3, 4),
+			),
+			array(
+				'quiz_id' => 4,
+				'from' => 4,
+				'to' => 2,
+				'expected_order' => array(1, 4, 2, 3),
+			),
+		);
 		
-		$expected_order = array(1, 3, 2, 4);
-		$collection_id = Quiz::getCollectionId($quiz_id);
+		foreach($tests as $key => $test){
+			$collection_id = Quiz::getCollectionId($test['quiz_id']);
 		
 		
-		// reorder them
-		Quiz::reorder(2, 2, 3);
-		// get all quizzes from this collection
-		$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
+			// reorder them
+			Quiz::reorder($test['quiz_id'], $test['from'], $test['to']);
+			// get all quizzes from this collection
+			$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
 		
-		// check each sort order
-		$count = 0;
-		foreach($quizzes as $quiz){
-			// check that the ids are correct
-			$this->assertEquals($expected_order[$count], $quiz->ID);
-			$count++;
-			// check that the sort order is correct
-			$this->assertEquals($count, $quiz->SORT_ORDER);
+			// check each sort order
+			$count = 0;
+			foreach($quizzes as $quiz){
+				//echo("test foreach: ".$expected_order[$count].", ".$quiz->ID."\n");
+				// check that the ids are correct
+				$this->assertEquals($test['expected_order'][$count], $quiz->ID, "failed checking ids on test[$key]");
+				$count++;
+				// check that the sort order is correct
+				$this->assertEquals($count, $quiz->SORT_ORDER, "failed checking sort_orders on test[$key]");
 			
-		}
+			}
 		
+		}
 		
 	}
 
