@@ -236,5 +236,63 @@ class QuestionTest extends CDbTestCase {
 		$this->assertEquals(1, Question::model()->resetScope()->findByPk($question_id)->DELETED);
 		
 	}
+	
+	public function testReorder(){
+		$tests = array(
+			array(
+				'question_id' => 1,
+				'from' => 1,
+				'to' => 2,
+				'expected_order' => array(2, 1, 3, 4, 5, 6, 7, 8),
+			),
+			array(
+				'question_id' => 1,
+				'from' => 2,
+				'to' => 1,
+				'expected_order' => array(1, 2, 3, 4, 5, 6, 7, 8),
+			),
+			array(
+				'question_id' => 2,
+				'from' => 2,
+				'to' => 4,
+				'expected_order' => array(1, 3, 4, 2, 5, 6, 7, 8),
+			),
+			array(
+				'question_id' => 2,
+				'from' => 4,
+				'to' => 2,
+				'expected_order' => array(1, 2, 3, 4, 5, 6, 7, 8),
+			),
+			array(
+				'question_id' => 4,
+				'from' => 4,
+				'to' => 2,
+				'expected_order' => array(1, 4, 2, 3, 5, 6, 7, 8),
+			),
+		);
+		
+		foreach($tests as $key => $test){
+			$quiz_id = Question::getQuizId($test['question_id']);
+
+			// reorder them
+			Question::reorder($test['question_id'], $test['from'], $test['to']);
+			// get all questions from this quiz
+			$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+		
+			// check each sort order
+			$count = 0;
+			foreach($questions as $question){
+				//echo("test foreach: ".$expected_order[$count].", ".$question->ID."\n");
+				// check that the ids are correct
+				$this->assertEquals($test['expected_order'][$count], $question->ID, "failed checking ids on test[$key]");
+				$count++;
+				// check that the sort order is correct
+				$this->assertEquals($count, $question->SORT_ORDER, "failed checking sort_orders on test[$key]");
+			
+			}
+		
+		}
+				
+	}
    
 }

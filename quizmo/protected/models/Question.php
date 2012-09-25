@@ -143,7 +143,7 @@ class Question extends QActiveRecord
 	{
 	    return array(
 		    'condition'=>'DELETED!=1',
-	    	'order'=>'ID ASC'
+	    	'order'=>'SORT_ORDER ASC, ID ASC'
 	    );
 	}
 	
@@ -590,5 +590,52 @@ class Question extends QActiveRecord
 		return($question->save());
 		
 	}
+	
+	/**
+	 * reorders the question item
+	 * @param number $question_id
+	 * @param number $fromPosition
+	 * @param number $toPosition
+	 * @return boolean success
+	 */
+	public function reorder($question_id, $fromPosition, $toPosition){
+		//error_log("reorder($question_id, $fromPosition, $toPosition)\n");
+		
+		// redo this
+		// get the list of quiz_ids
+		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>Question::getQuizId($question_id)));
+		$question_id_array = array();
+		foreach($questions as $question){
+			if($question->ID == $question_id)
+				array_push($question_id_array, "XXX");
+			else
+				array_push($question_id_array, $question->ID);
+		}
+		
+		
+		// put the quiz_id in the right spot array_splice
+		if($toPosition < $fromPosition)
+			$toPosition -= 1;
+		array_splice($question_id_array, $toPosition, 0, $question_id);
+			
+		// remove the old one
+		$sort_order = 1;
+		// run through the list, updating sort_orders
+		foreach($question_id_array as $q_id){
+			if($q_id != "XXX"){
+				$question = Question::model()->findByPk($q_id);
+				if($question != null){
+					$question->SORT_ORDER = $sort_order;
+					$question->save();
+					$sort_order++;
+				} else {
+					error_log("Question::reorder failure\n");
+					return false;
+				}
+			}
+		}
+
+	}	
+
 	
 }
