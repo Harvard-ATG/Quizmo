@@ -219,7 +219,11 @@ class Question extends QActiveRecord
 			return false;
 		}
 		
-		$sort_order = $this->getNextQuestionOrder($quiz_id);
+		if($this->ID != null){
+			$sort_order = $this->SORT_ORDER;
+		} else {
+			$sort_order = $this->getNextQuestionOrder($quiz_id);			
+		}
 		$this->setAttributes(array(
 	        	'QUIZ_ID'=>$quiz_id,
 				'QUESTION_TYPE'=>$question_type,
