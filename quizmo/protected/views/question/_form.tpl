@@ -38,7 +38,7 @@
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
 			<label class="radio inline">
-				<input type="radio" id="multiple_radio_answer{$iteration}" name="multiple_radio_answer" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
+				<input type="radio" id="multiple_radio_answer{$iteration}" name="multiple_radio_answer" value="{$iteration - 1}" {if $answer.is_correct == 1}checked="checked"{/if}/>
 			</label>
 				<input type="text" id="multiple_answer{$iteration - 1}" name="multiple_answer{$iteration - 1}" value="{$answer.answer}"/>
 				<p class="help-inline"></p>
