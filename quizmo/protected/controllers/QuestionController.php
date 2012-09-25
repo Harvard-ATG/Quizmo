@@ -264,7 +264,7 @@ class QuestionController extends Controller
 		$toPosition = Yii::app()->getRequest()->getParam('toPosition');
 
 		// set the reorder for this quiz_id
-		//Quiz::reorder($quiz_id, $fromPosition, $toPosition);
+		Question::reorder($question_id, $fromPosition, $toPosition);
 	
 	}
 	
