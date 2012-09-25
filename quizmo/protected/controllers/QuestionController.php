@@ -258,7 +258,7 @@ class QuestionController extends Controller
 	 * called from the datatable reordering function
 	 */
 	public function actionReorder(){
-		error_log("question reorder");
+		//error_log("question reorder");
 		$question_id = Yii::app()->getRequest()->getParam('id');
 		$fromPosition = Yii::app()->getRequest()->getParam('fromPosition');
 		$toPosition = Yii::app()->getRequest()->getParam('toPosition');
