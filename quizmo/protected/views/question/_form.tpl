@@ -193,7 +193,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('#add-check-all-answer').click(function(){
 		// get the number of radios in there...
-		current_index = $('#check-all-control-group input[type=checkbox]').length;
+		current_index = $('#check-all-control-group input[type=checkbox]').length + 1;
 		// add a new item
 		// this needs to be conditional based on if it's isites
 		{if true}
