@@ -32,6 +32,7 @@
 
 <div id="multiple-choice-control-group" class="control-group hidden">
 	<label class="control-label" for="state">Multiple Choice Answers</label>
+	<div id="multiple-choice-control-group-inner">
 	{if $question}
 		{foreach from=$question.answers item=answer name=answers}
 		{assign iteration $smarty.foreach.answers.iteration}
@@ -41,7 +42,7 @@
 			</label>
 				<input type="text" id="multiple_answer{$iteration - 1}" name="multiple_answer{$iteration - 1}" value="{$answer.answer}"/>
 				<p class="help-inline"></p>
-		</div>			
+		</div>		
 		{/foreach}
 	{else}
 	<div class="controls">
@@ -53,21 +54,65 @@
 	</div>
 	<div class="controls">
 		<label class="radio inline">
-			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="1"/>
+			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="1"/>
 		</label>
 			<input type="text" id="multiple_answer1" name="multiple_answer1"/>
 			<p class="help-inline"></p>
 	</div>
 	<div class="controls">
 		<label class="radio inline">
-			<input type="radio" id="multiple_radio_answer2" name="multiple_radio_answer" value="2"/>
+			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="2"/>
 		</label>
 			<input type="text" id="multiple_answer2" name="multiple_answer2"/>
 			<p class="help-inline"></p>
-		<p class="help-block"></p>
 	</div>
 	{/if}
+	</div>
+	<div class="controls">
+		<button type="button" id="add-multiple-answer" class="btn">Add an answer</button>
+		<button type="button" id="remove-multiple-answer" class="btn">Remove an answer</button>
+	</div>	
 </div>
+
+<script>
+//<![CDATA[
+$(document).ready(function(){
+	$('#add-multiple-answer').click(function(){
+		// get the number of radios in there...
+		current_index = $('#multiple-choice-control-group input[type=radio]').length;
+		// add a new item
+		// this needs to be conditional based on if it's isites
+		{if true}
+		$('#multiple-choice-control-group-inner').append('<div class="controls">'+
+		'<label class="radio inline">'+
+		'<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answerValue" value="'+current_index+'" />'+
+		'<input value="multiple_radio_answer" name="inputField" type="hidden">'+
+		'</label>'+
+		'<input type="text" id="multiple_answer'+current_index+'" name="multiple_answer'+current_index+'Value"/>'+
+		'<input value="multiple_answer'+current_index+'" name="inputField" type="hidden">'+
+		'<p class="help-inline"></p>'+
+		'</div>');
+		{else}
+		$('#multiple-choice-control-group-inner').append('<div class="controls">'+
+		'<label class="radio inline">'+
+		'<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="iteration" />'+
+		'</label>'+
+		'<input type="text" id="multiple_answer'+current_index+'" name="multiple_answer'+current_index+'"/>'+
+		'</div>');		
+		{/if}
+	});
+	
+	$('#remove-multiple-answer').click(function(){
+		// get the number of radios in there...
+		current_index = $('#multiple-choice-control-group input[type=radio]').length;
+		// remove the last added
+		$('#multiple-choice-control-group-inner div.controls:last').remove();
+	
+	});
+	
+});
+//]]>
+</script>
 
 <div id="true-false-control-group" class="control-group hidden">
 	<label class="control-label" for="state">True/False Answers</label>
@@ -100,12 +145,13 @@
 
 <div id="check-all-control-group" class="control-group hidden">
 	<label class="control-label" for="check-all">Check All Answers</label>
+	<div id="check-all-control-group-inner">
 	{if $question}
 		{foreach from=$question.answers item=answer name=answers}
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
-			<label class="radio inline">
-				<input type="radio" id="check_all_check_answer{$iteration}" name="check_all_check_answer{$iteration}" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
+			<label class="checkbox inline">
+				<input type="checkbox" id="check_all_check_answer{$iteration}" name="check_all_check_answer{$iteration}" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
 			</label>
 				<input type="text" id="check_all_answer{$iteration}" name="check_all_answer{$iteration}" value="{$answer.answer}"/>
 				<p class="help-inline"></p>
@@ -136,7 +182,51 @@
 			<p class="help-inline"></p>
 	</div>
 	{/if}
+	</div>
+	<div class="controls">
+		<button type="button" id="add-check-all-answer" class="btn">Add an answer</button>
+		<button type="button" id="remove-check-all-answer" class="btn">Remove an answer</button>
+	</div>
 </div>
+<script>
+//<![CDATA[
+$(document).ready(function(){
+	$('#add-check-all-answer').click(function(){
+		// get the number of radios in there...
+		current_index = $('#check-all-control-group input[type=checkbox]').length;
+		// add a new item
+		// this needs to be conditional based on if it's isites
+		{if true}
+		$('#check-all-control-group-inner').append('<div class="controls">'+
+		'<label class="checkbox inline">'+
+		'<input type="checkbox" id="check_all_check_answer'+current_index+'" name="check_all_check_answer'+current_index+'Value" value="'+current_index+'" />'+
+		'<input value="check_all_check_answer'+current_index+'" name="inputField" type="hidden">'+
+		'</label>'+
+		'<input type="text" id="check_all_answer'+current_index+'" name="check_all_answer'+current_index+'Value"/>'+
+		'<input value="check_all_answer'+current_index+'" name="inputField" type="hidden">'+
+		'<p class="help-inline"></p>'+
+		'</div>');
+		{else}
+		$('#check-all-control-group-inner').append('<div class="controls">'+
+		'<label class="checkbox inline">'+
+		'<input type="checkbox" id="check_all_check_answer'+current_index+'" name="check_all_check_answer'+current_index+'" value="'+current_index+'" />'+
+		'</label>'+
+		'<input type="text" id="check_all_answer'+current_index+'" name="check_all_answer'+current_index+'"/>'+
+		'</div>');		
+		{/if}
+	});
+	
+	$('#remove-check-all-answer').click(function(){
+		// get the number of radios in there...
+		current_index = $('#check-all-control-group input[type=checkbox]').length;
+		// remove the last added
+		$('#check-all-control-group-inner div.controls:last').remove();
+	
+	});
+	
+});
+//]]>
+</script>
 
 <div id="essay-control-group" class="control-group hidden">
 	<label class="control-label" for="essay">Text Field Size For Essay (Area where student will enter their essay text)</label>
