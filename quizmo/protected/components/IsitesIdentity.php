@@ -232,9 +232,9 @@ class IsitesIdentity extends UserIdentity {
 	 * 	
 	 * @return string url
 	 */
-	public function getPhotoUrl($user_id){
+	public function getPhotoUrl($user_id, $size=128){
 		$huid = User::getExternalId($user_id);
-		return Yii::app()->isitestool->getPhotoUrl($huid);
+		return Yii::app()->isitestool->getPhotoUrl($huid, $size);
 
 	}
 	

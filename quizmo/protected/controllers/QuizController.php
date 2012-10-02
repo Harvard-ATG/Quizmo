@@ -434,6 +434,11 @@ class QuizController extends Controller
 				$status = "Error: unknown submission status: ".Submission::getStatusByUser($user_id, $quiz_id);
 			break;
 		}
+
+		// get identity
+		$identity = IdentityFactory::getIdentity();
+		// call identity getAllUsers method
+		$photo_url = $identity->getPhotoUrl($user_id);
 		
 		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('individual_results', array(
@@ -447,7 +452,7 @@ class QuizController extends Controller
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
 			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
 			'show_feedback'=>1,
-			'host'=>"http://".$_SERVER['HTTP_HOST'],
+			'photo_id'=>$photo_id,
 		));
 	}
 	
