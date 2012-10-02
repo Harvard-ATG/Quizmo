@@ -176,5 +176,12 @@ class UserIdentity extends CUserIdentity
 		return true;
 	}
 	
+	/**
+	 * placeholder class -- this should be overridden by the XIdentity if it has a way
+	 * @return string if there is no
+	 */
+	public function getPhotoUrl(){
+		return "http://".$_SERVER['HTTP_HOST']."/img/user-icon.png";
+	}
 	
 }

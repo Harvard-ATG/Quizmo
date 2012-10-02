@@ -14,7 +14,7 @@
 
 <div class="row-fluid">
 	<div class="span2">
-		<img src="{$host}/img/user-icon.png"/>
+		<img src="{$photo_url}"/>
 	</div>
 	<div id="total_score" class="span4 well">
 		Status: {$status}<br/>

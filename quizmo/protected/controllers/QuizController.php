@@ -385,6 +385,11 @@ class QuizController extends Controller
 			break;
 		}
 		
+		// get identity
+		$identity = IdentityFactory::getIdentity();
+		// call identity getAllUsers method
+		$photo_url = $identity->getPhotoUrl();
+
 		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
@@ -397,7 +402,7 @@ class QuizController extends Controller
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
 			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
 			'show_feedback'=>$quiz->SHOW_FEEDBACK,
-			'host'=>"http://".$_SERVER['HTTP_HOST'],
+			'photo_url'=>$photo_url,
 		));
 	}
 	
