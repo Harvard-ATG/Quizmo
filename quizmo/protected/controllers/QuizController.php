@@ -388,7 +388,7 @@ class QuizController extends Controller
 		// get identity
 		$identity = IdentityFactory::getIdentity();
 		// call identity getAllUsers method
-		$photo_url = $identity->getPhotoUrl();
+		$photo_url = $identity->getPhotoUrl($user_id);
 
 		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('individual_results', array(
