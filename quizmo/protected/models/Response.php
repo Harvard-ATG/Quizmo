@@ -458,6 +458,9 @@ class Response extends QActiveRecord
 	public function getResults($quiz_id){
 		//error_log("getResults");
 
+		// get identity
+		$identity = IdentityFactory::getIdentity();
+
 		// first get all the questions for the quiz
 		$question_ids = Quiz::getQuestionIds($quiz_id);
 		
@@ -508,6 +511,10 @@ class Response extends QActiveRecord
 			$results[$key]['name'] = $name;
 			$results[$key]['status'] = $status;
 			$results[$key]['score'] = $score;
+			// call identity getAllUsers method
+			$photo_url = $identity->getPhotoUrl($user_id, 50);
+			$results[$key]['photo_url'] = $photo_url;
+			
 		}
 
 
