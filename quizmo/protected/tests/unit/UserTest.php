@@ -61,6 +61,17 @@ class UserTest extends CDbTestCase {
 	}
 
 	/**
+	 * testing getExternalId
+	 */
+	public function testGetExternalId(){
+		
+		$id = 1;
+		$external_id = $this->users['user1']['EXTERNAL_ID'];
+
+		$this->assertEquals($external_id, User::getExternalId($id));		
+	}
+
+	/**
 	 * testing getNameByExternal
 	 */
 	public function testGetNameByExternal(){

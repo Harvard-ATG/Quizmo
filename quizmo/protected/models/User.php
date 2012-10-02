@@ -118,6 +118,19 @@ class User extends QActiveRecord
 		return $user->FNAME . " " . $user->LNAME;
 		
 	}
+
+	/**
+	 * gets external_id!
+	 * @param string $id user_id
+ 	 * @return string external_id
+	 */
+	public function getExternalId($id){
+		$user = User::model()->findByPk($id);
+		return $user->EXTERNAL_ID;
+		
+	}
+
+
 	
 	/**
 	 * gets name!  just catting the fname and lname
