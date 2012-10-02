@@ -53,6 +53,7 @@ class ResponseController extends Controller
 	public function actionSubmitQuestion()
 	{
 		//error_log("actionSubmitQuestion");
+		$this->layout = false;
 		$user_id = Yii::app()->user->getId();
 		$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$answer_id = Yii::app()->getRequest()->getParam('answer_id');
@@ -95,6 +96,7 @@ class ResponseController extends Controller
 	 */
 	public function actionGrade(){
 		//error_log("actionGrade");
+		$this->layout = false;
 		$response_id = Yii::app()->getRequest()->getParam('response_id');
 		$user_id = Yii::app()->getRequest()->getParam('user_id');
 		$score = Yii::app()->getRequest()->getParam('score');

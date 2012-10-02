@@ -456,6 +456,7 @@ class QuizController extends Controller
 	 */
 	public function actionTotalScore(){
 		
+		$this->layout = false;
 		$user_id = Yii::app()->getRequest()->getParam('user_id');
 		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
 		
@@ -470,7 +471,7 @@ class QuizController extends Controller
 	 * called from the datatable reordering function
 	 */
 	public function actionReorder(){
-		error_log("reorder");
+		//error_log("reorder");
 		$quiz_id = Yii::app()->getRequest()->getParam('id');
 		$fromPosition = Yii::app()->getRequest()->getParam('fromPosition');
 		$toPosition = Yii::app()->getRequest()->getParam('toPosition');
