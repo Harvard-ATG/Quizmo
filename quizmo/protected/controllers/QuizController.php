@@ -499,7 +499,7 @@ class QuizController extends Controller
 		// set the reorder for this quiz_id
 		$new_id = Quiz::copy($quiz_id);
 		
-		$this->forward('/quiz/index/'.Quiz::getCollectionId($quiz_id));
+		$this->jsredirect($this->url('/quiz/index/'.Quiz::getCollectionId($quiz_id)));
 		
 		//echo json_encode(array('quiz_id'=>$new_id));
 		//Yii::app()->end();
