@@ -73,7 +73,10 @@
 					<a href='{url url="/quiz/submit/"|cat:$quiz['ID']}'>Submit</a><br/>
 				{/if}
 
+				<a href='{url url="/quiz/copy/"|cat:$quiz['ID']}'>Copy Quiz</a><br/>
+				<!--
 				<a class="quiz-copy-btn" name="#quiz-copy-modal-{$quiz['ID']}" >Copy Quiz</a><br/>
+				-->
 				<div class="modal hide" id="quiz-copy-modal-{$quiz['ID']}">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal">×</button>
@@ -87,7 +90,7 @@
 				    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
 				  </div>
 				</div>
-
+				
 				<a href="{url url='/quiz/results/'|cat:$quiz['ID']}">Results</a><br/>
 
 				<a class="quiz-reset-btn" name="#quiz-reset-modal-{$quiz['ID']}" >Reset</a><br/>
@@ -179,6 +182,7 @@ No Quizzes.
 	}
 
 	quizCopyAction = function(e){
+		console.log("quizCopyAction");
 		quiz_copy_url = "{url url='/quiz/copy' ajax=1}";
 		// get the quiz_id from eventObject
 		quiz_id = e.currentTarget.name;
@@ -207,12 +211,11 @@ No Quizzes.
 		quiz_id = data.quiz_id;
 		$('#quizzes-table').dataTable().fnAddData([
 			1,
-			2,
+			'asdf',
 			3,
 			4 
 		]);
 
-		giCount++;
 	}
 	failure = function(){
 		alert("failure saving");
@@ -225,7 +228,7 @@ No Quizzes.
 		$('.quiz-reset-btn').click(openModal);
 		$('.quiz-reset-action').click(quizResetAction);
 		$('.quiz-copy-btn').click(openModal);
-		$('.quiz-copy-action').click(quizResetAction);
+		$('.quiz-copy-action').click(quizCopyAction);
 
 		$('#quizzes-table').dataTable({
 			 "bPaginate": false,
