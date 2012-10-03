@@ -72,6 +72,22 @@
 					<!-- started -->
 					<a href='{url url="/quiz/submit/"|cat:$quiz['ID']}'>Submit</a><br/>
 				{/if}
+
+				<a class="quiz-copy-btn" name="#quiz-copy-modal-{$quiz['ID']}" >Copy Quiz</a><br/>
+				<div class="modal hide" id="quiz-copy-modal-{$quiz['ID']}">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal">×</button>
+				    <h3>Reset Quiz</h3>
+				  </div>
+				  <div class="modal-body">
+				    <p>Are you sure you want to copy this Quiz?</p>
+				  </div>
+				  <div class="modal-footer">
+				    <a href="#" class="btn btn-primary quiz-copy-action" name="{$quiz['ID']}" data-dismiss="modal">Copy</a>
+				    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+				  </div>
+				</div>
+
 				<a href="{url url='/quiz/results/'|cat:$quiz['ID']}">Results</a><br/>
 
 				<a class="quiz-reset-btn" name="#quiz-reset-modal-{$quiz['ID']}" >Reset</a><br/>
@@ -161,12 +177,42 @@ No Quizzes.
 			//success: removeDiv
 		});
 	}
+
+	quizCopyAction = function(e){
+		quiz_copy_url = "{url url='/quiz/copy' ajax=1}";
+		// get the quiz_id from eventObject
+		quiz_id = e.currentTarget.name;
+		// form data
+		data = {
+			quiz_id: quiz_id
+		};
+		// now send the delete query
+		$.ajax({
+			type: 'POST',
+			url: quiz_copy_url,
+			data: data,
+			dataType: 'json',
+			error: failure,
+			success: addDiv
+		});
+	}
+
 	
 	removeDiv = function(data){
 		quiz_id = data.quiz_id;
 		$('tr.quiz-row-'+quiz_id).hide(400);
 		
-	
+	}
+	addDiv = function(data){
+		quiz_id = data.quiz_id;
+		$('#quizzes-table').dataTable().fnAddData([
+			1,
+			2,
+			3,
+			4 
+		]);
+
+		giCount++;
 	}
 	failure = function(){
 		alert("failure saving");
@@ -178,6 +224,8 @@ No Quizzes.
 		$('.quiz-delete-action').click(quizDeleteAction);
 		$('.quiz-reset-btn').click(openModal);
 		$('.quiz-reset-action').click(quizResetAction);
+		$('.quiz-copy-btn').click(openModal);
+		$('.quiz-copy-action').click(quizResetAction);
 
 		$('#quizzes-table').dataTable({
 			 "bPaginate": false,
