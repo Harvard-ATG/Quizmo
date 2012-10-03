@@ -40,7 +40,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder'),
+				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder','copy'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users
@@ -477,6 +477,7 @@ class QuizController extends Controller
 	 */
 	public function actionReorder(){
 		//error_log("reorder");
+		$this->layout = false;
 		$quiz_id = Yii::app()->getRequest()->getParam('id');
 		$fromPosition = Yii::app()->getRequest()->getParam('fromPosition');
 		$toPosition = Yii::app()->getRequest()->getParam('toPosition');
@@ -484,6 +485,24 @@ class QuizController extends Controller
 		// set the reorder for this quiz_id
 		Quiz::reorder($quiz_id, $fromPosition, $toPosition);
 	
+	}
+	
+	/**
+	 * for copying a quiz
+	 */
+	public function actionCopy($id){
+		//error_log("action copy");
+		//$this->layout = false;
+		//$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
+		$quiz_id = $id;
+
+		// set the reorder for this quiz_id
+		$new_id = Quiz::copy($quiz_id);
+		
+		$this->forward('/quiz/index/'.Quiz::getCollectionId($quiz_id));
+		
+		//echo json_encode(array('quiz_id'=>$new_id));
+		//Yii::app()->end();
 	}
 
 }
