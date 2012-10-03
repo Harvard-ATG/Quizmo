@@ -503,6 +503,8 @@ class Quiz extends QActiveRecord
 			}
 		}
 		
+		return $new_id;
+		
 	}
 	
 }
