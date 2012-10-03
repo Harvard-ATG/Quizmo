@@ -465,6 +465,46 @@ class Quiz extends QActiveRecord
 	
 	}
 	
+	/**
+	 * copies quiz, questions, answers (not responses)
+	 * @param number $quiz_id
+	 * @return boolean success
+	 */
+	public function copy($quiz_id){
+		// get quiz
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		// remove id, rename by appending (copy)
+		$quiz->ID = null;
+		$quiz->TITLE .= " (copy)";
+		// copy quiz
+		$quiz->setIsNewRecord(true);
+		$quiz->save();
+		$new_id = $quiz->ID;
+		
+		// get questions
+		$questions = Question::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+		// copy questions
+		foreach($questions as $question){
+			// get answers
+			$answers = Answer::model()->findAllByAttributes(array('QUESTION_ID'=>$question->ID));
+
+			// copy question
+			$question->ID = null;
+			$question->setIsNewRecord(true);
+			$question->QUIZ_ID = $new_id;
+			$question->save();
+			$new_question_id = $question->ID;
+			// copy answers
+			foreach($answers as $answer){
+				$answer->ID = null;
+				$answer->setIsNewRecord(true);
+				$answer->QUESTION_ID = $new_question_id;
+				$answer->save();
+			}
+		}
+		
+	}
+	
 }
 
 ?>

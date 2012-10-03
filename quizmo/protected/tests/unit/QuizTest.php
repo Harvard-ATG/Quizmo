@@ -297,5 +297,30 @@ class QuizTest extends CDbTestCase {
 		}
 		
 	}
+	
+	public function testCopy(){
+		$quiz_id = 1;
+		$expected_id = 7;
+		$expected_number_of_questions = 8;
+		$question_id = 9;
+		$expected_number_of_answers = 3;
+		
+		// copy it
+		Quiz::copy($quiz_id);
+		
+		// get expected quiz
+		$last_quiz = Quiz::model()->findByPk($expected_id);
+		$this->assertNotNull($last_quiz);
+		$this->assertContains(" (copy)", $last_quiz->TITLE);
+	
+		// check that it contains the right number of questions
+		$question_ids = Quiz::getQuestionIds($last_quiz->ID);
+		$this->assertEquals($expected_number_of_questions, sizeof($question_ids));
+		
+		// check that we have the right number of answers for the first question
+		$answers = Answer::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
+		$this->assertEquals($expected_number_of_answers, sizeof($answers));
+		
+	}
 
 }
