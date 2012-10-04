@@ -536,17 +536,30 @@ class Quiz extends QActiveRecord
 		array_push($output, $outputInner);
 		
 		// get the responses
-		$question_ids_string = "(".join(",", $question_ids).")";
-		$responses = Response::model()->findAll('QUESTION_ID IN '.$question_ids_string);
-		// put them into an array based on user_ids
+		//$question_ids_string = "(".join(",", $question_ids).")";
+		//$responses = Response::model()->findAll('QUESTION_ID IN '.$question_ids_string);
+		
+		// if I get all reponses by question_id by running through the question_ids, they'll be in the right order
 		$users = array();
 		$user_ids = array();
-		foreach($responses as $response){
-			$users[$response->USER_ID]['response'] = $response->RESPONSE;
-			$users[$response->USER_ID]['score'] = $response->SCORE;
-			array_push($user_ids, $response->USER_ID);
+		$count = 0;
+		foreach($question_ids as $question_id){
+			
+			$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
+			// put them into an array based on user_ids
+			foreach($responses as $response){
+				if(!isset($users[$response->USER_ID]['responses'][$count]['response']))
+					$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
+				else
+					$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$response->RESPONSE;
+				@$users[$response->USER_ID]['responses'][$count]['score'] += $response->SCORE;
+				array_push($user_ids, $response->USER_ID);
+			}
+			$count++;
+			
 			
 		}
+		
 		
 		// get all users
 		$usersO = User::model()->findAll('ID IN ('.join(",", $user_ids).')');
@@ -556,12 +569,18 @@ class Quiz extends QActiveRecord
 			$users[$user->ID]['email'] = 'blah';//$user->EMAIL;
 		}
 		
+		//echo(var_export($users, 1));
+		
 		// put them all into the output
 		foreach($users as $user){
 			$outputInner = array();
 			array_push($outputInner, $user['lname']);
 			array_push($outputInner, $user['fname']);
 			array_push($outputInner, $user['email']);
+			foreach($user['responses'] as $resp){
+				array_push($outputInner, $resp['response']);
+				array_push($outputInner, $resp['score']);
+			}
 			array_push($output, $outputInner);
 		}
 		
@@ -581,9 +600,11 @@ class Quiz extends QActiveRecord
 		foreach($exportArr as $lineArr){
 			if(is_array($lineArr)){
 				foreach($lineArr as $item){
-					$output .= $item.",";
+					$item = preg_replace('/\n/', "<br/>", $item);
+					$item = preg_replace('/\t/', "    ", $item);
+					$output .= $item."\t";
 				}
-				$output = preg_replace('/,$/', "\n", $output);			
+				$output = preg_replace('/\t$/', "\n", $output);			
 			} else {
 				$output .= $lineArr."\n";
 			}
