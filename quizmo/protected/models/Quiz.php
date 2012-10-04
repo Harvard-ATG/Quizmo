@@ -600,9 +600,9 @@ class Quiz extends QActiveRecord
 		foreach($exportArr as $lineArr){
 			if(is_array($lineArr)){
 				foreach($lineArr as $item){
-					$item = preg_replace('/\n/', "<br/>", $item);
-					$item = preg_replace('/\t/', "    ", $item);
-					$output .= $item."\t";
+					//$item = preg_replace('/\n/', "<br/>", $item);
+					//$item = preg_replace('/\t/', "    ", $item);
+					$output .= "\"".$item."\"\t";
 				}
 				$output = preg_replace('/\t$/', "\n", $output);			
 			} else {
@@ -611,6 +611,19 @@ class Quiz extends QActiveRecord
 		}
 		return $output;
 	
+	}
+	
+	public function exportXLS($quiz_id){
+		$data = Quiz::exportArray($quiz_id);
+		$data = array(
+		    1 => array ('Name', 'Surname'),
+		    array('Schwarz', 'Oliver'),
+		    array('Test', 'Peter')
+		);
+		Yii::import('application.extensions.phpexcel.JPhpExcel');
+		$xls = new JPhpExcel('UTF-8', false, 'My Test Sheet');
+		$xls->addArray($data);
+		$xls->generateXML('my-test');
 	}
 	
 }
