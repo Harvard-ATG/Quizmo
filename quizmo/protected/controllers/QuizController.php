@@ -40,7 +40,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder','copy'),
+				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder','copy','export'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users
@@ -503,6 +503,17 @@ class QuizController extends Controller
 		
 		//echo json_encode(array('quiz_id'=>$new_id));
 		//Yii::app()->end();
+	}
+	
+	/**
+	 * a view that has the exported results copy/pastable
+	 */
+	public function actionExport($id){
+		$quiz_id = $id;
+
+		$this->render('export',array(
+			'csv'=>Quiz::getExportCSV($quiz_id),
+		));
 	}
 
 }

@@ -9,7 +9,7 @@
 	<h1 class="span12">Results</h1>
 </div>
 <div class="row-fluid">
-	<h6 class="span12">Export</h6>
+	<h6 class="span12"><a href='{url url="/quiz/export/$quiz_id"}'>Export</a></h6>
 </div>
 <table class="table table-striped table-bordered">
 	<thead>
