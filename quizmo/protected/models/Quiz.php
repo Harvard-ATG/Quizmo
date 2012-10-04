@@ -507,6 +507,91 @@ class Quiz extends QActiveRecord
 		
 	}
 	
+	/**
+	 * returns an array
+	 * @param number $quiz_id
+	 * @return array results that would be in a spreadsheety thing
+	 */
+	public function exportArray($quiz_id){
+		// get the quiz
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		$output = array();
+		$output[0] = $quiz->TITLE;
+		$output[1] = "Responses and Scores";
+		$output[2] = date("D, M j, Y \a\\t g:i A");
+		
+		// now the column headers
+		// last name, first name, email
+		// we need to get all the basic question data: 
+		// nah, let's not do that, the old one just goes "Question 1 Response  Question 1 Score  Question 2 Response..."
+		// we'll do that
+		$outputInner = array("Last Name", "First Name", "Email");
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		$count = 1;
+		foreach($question_ids as $question_id){
+			array_push($outputInner, "Question $count Response");		
+			array_push($outputInner, "Question $count Score");
+			$count++;	
+		}
+		array_push($output, $outputInner);
+		
+		// get the responses
+		$question_ids_string = "(".join(",", $question_ids).")";
+		$responses = Response::model()->findAll('QUESTION_ID IN '.$question_ids_string);
+		// put them into an array based on user_ids
+		$users = array();
+		$user_ids = array();
+		foreach($responses as $response){
+			$users[$response->USER_ID]['response'] = $response->RESPONSE;
+			$users[$response->USER_ID]['score'] = $response->SCORE;
+			array_push($user_ids, $response->USER_ID);
+			
+		}
+		
+		// get all users
+		$usersO = User::model()->findAll('ID IN ('.join(",", $user_ids).')');
+		foreach($usersO as $user){
+			$users[$user->ID]['lname'] = $user->LNAME;
+			$users[$user->ID]['fname'] = $user->FNAME;
+			$users[$user->ID]['email'] = 'blah';//$user->EMAIL;
+		}
+		
+		// put them all into the output
+		foreach($users as $user){
+			$outputInner = array();
+			array_push($outputInner, $user['lname']);
+			array_push($outputInner, $user['fname']);
+			array_push($outputInner, $user['email']);
+			array_push($output, $outputInner);
+		}
+		
+		return $output;
+		
+	}
+	
+	/**
+	 * returns a csv of the results
+	 * @param number $quiz_id
+	 * @return string csv results 
+	 */
+	public function exportCSV($quiz_id){
+		$exportArr = Quiz::exportArray($quiz_id);
+		$output = '';
+		//echo(var_export($exportArr, 1));
+		foreach($exportArr as $lineArr){
+			if(is_array($lineArr)){
+				foreach($lineArr as $item){
+					$output .= $item.",";
+				}
+				$output = preg_replace('/,$/', "\n", $output);			
+			} else {
+				$output .= $lineArr."\n";
+			}
+		}
+		return $output;
+	
+	}
+	
 }
 
 ?>
