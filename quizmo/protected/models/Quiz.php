@@ -516,9 +516,9 @@ class Quiz extends QActiveRecord
 		// get the quiz
 		$quiz = Quiz::model()->findByPk($quiz_id);
 		$output = array();
-		$output[0] = $quiz->TITLE;
-		$output[1] = "Responses and Scores";
-		$output[2] = date("D, M j, Y \a\\t g:i A");
+		$output[0] = array($quiz->TITLE);
+		$output[1] = array("Responses and Scores");
+		$output[2] = array(date("D, M j, Y \a\\t g:i A"));
 		
 		// now the column headers
 		// last name, first name, email
@@ -615,11 +615,6 @@ class Quiz extends QActiveRecord
 	
 	public function exportXLS($quiz_id){
 		$data = Quiz::exportArray($quiz_id);
-		$data = array(
-		    1 => array ('Name', 'Surname'),
-		    array('Schwarz', 'Oliver'),
-		    array('Test', 'Peter')
-		);
 		Yii::import('application.extensions.phpexcel.JPhpExcel');
 		$xls = new JPhpExcel('UTF-8', false, 'My Test Sheet');
 		$xls->addArray($data);
