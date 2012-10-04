@@ -40,7 +40,7 @@ class QuizController extends Controller
 				'roles'=>array('enrollee','admin','super')
 			),
 			array('allow', // guests can't take
-				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder','copy','export'),
+				'actions'=>array('create','update','edit','results','submit','delete','reset','individualResultsAdmin','reorder','copy','export','exportXLS'),
 				'roles'=>array('admin','super')
 			),
 			array('deny',  // deny all users
@@ -512,8 +512,16 @@ class QuizController extends Controller
 		$quiz_id = $id;
 
 		$this->render('export',array(
-			'csv'=>Quiz::getExportCSV($quiz_id),
+			'csv'=>Quiz::exportCSV($quiz_id),
+			'quiz_id'=>$quiz_id,
 		));
+	}
+	
+	public function actionExportXLS($id){
+		$this->layout = false;
+		$quiz_id = $id;
+		Quiz::exportXLS($quiz_id);
+		
 	}
 
 }
