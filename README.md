@@ -70,6 +70,7 @@ phpunit unit
 ### The following third party libraries are bundled with the application:
 
 * rc4crypt. _RC4Crypt is a petite library that allows you to use RC4 encryption easily in PHP. GPLv2 license._
+* phpseclib
 * smarty templates
 * facebook sdk
 * yii
