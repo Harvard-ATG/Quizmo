@@ -14,6 +14,7 @@
  * @property string $name
  * @property string $fname
  * @property string $lname
+ * @property string $email
  */
 class User extends QActiveRecord
 {
@@ -79,6 +80,7 @@ class User extends QActiveRecord
 			'NAME' => 'Name',
 			'FNAME' => 'Fname',
 			'LNAME' => 'Lname',
+			'EMAIL' => 'Email',
 		);
 	}
 	
