@@ -589,7 +589,7 @@ class Quiz extends QActiveRecord
 		foreach($usersO as $user){
 			$users[$user->ID]['lname'] = $user->LNAME;
 			$users[$user->ID]['fname'] = $user->FNAME;
-			$users[$user->ID]['email'] = 'blah';//$user->EMAIL;
+			$users[$user->ID]['email'] = $user->EMAIL;
 		}
 		
 		//echo(var_export($users, 1));
