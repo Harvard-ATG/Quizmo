@@ -30,6 +30,7 @@ class UserIdentity extends CUserIdentity
 	public $name;
 	public $fname;
 	public $lname;
+	public $email;
 	// this is a hash of collections and permissions
 	protected $collections;
 	public $perm;
