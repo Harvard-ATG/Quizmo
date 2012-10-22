@@ -412,6 +412,8 @@ class Quiz extends QActiveRecord
 	public function reset($quiz_id){
 		$question_ids = Quiz::getQuestionIds($quiz_id);
 		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids));
+		// reset settings
+		Quiz::resetSettings($quiz_id);
 		foreach($responses as $response){
 			if(!$response->delete())
 				return false;
@@ -522,6 +524,8 @@ class Quiz extends QActiveRecord
 			}
 		}
 		
+		// reset settings of new quiz
+		Quiz::resetSettings($new_id);
 		return $new_id;
 		
 	}
