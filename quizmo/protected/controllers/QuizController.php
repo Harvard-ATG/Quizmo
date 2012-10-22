@@ -452,7 +452,7 @@ class QuizController extends Controller
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
 			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
 			'show_feedback'=>1,
-			'photo_id'=>$photo_id,
+			'photo_url'=>$photo_url,
 		));
 	}
 	
