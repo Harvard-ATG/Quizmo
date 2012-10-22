@@ -55,6 +55,7 @@ class IsitesIdentity extends UserIdentity {
 		$this->name = Yii::app()->HarvardPerson->full_name;
 		$this->fname = Yii::app()->HarvardPerson->fname;
 		$this->lname = Yii::app()->HarvardPerson->lname;
+		$this->email = Yii::app()->HarvardPerson->email;
 		
 		// determine the level of permission...
 		$perm = '';
