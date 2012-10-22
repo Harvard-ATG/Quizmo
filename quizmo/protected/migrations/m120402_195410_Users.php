@@ -16,6 +16,7 @@ class m120402_195410_Users extends CDbMigration
 			'NAME' => 'string',
 			'FNAME' => 'string',
 			'LNAME' => 'string',
+			'EMAIL' => 'string',
 		));	
 
 		Autoincrement::up('USERS', Yii::app()->db->driverName);
