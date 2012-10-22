@@ -420,6 +420,25 @@ class Quiz extends QActiveRecord
 	}
 	
 	/**
+	 * resets the quiz settings
+	 * just sets the quiz to invisible and closed
+	 */
+	 public function resetSettings($quiz_id){
+		 
+		 // get the quiz
+		 $quiz = Quiz::model()->findByPk($quiz_id);
+		 // set the quiz state
+		 $quiz->STATE = Quiz::CLOSED;
+		 // set the quiz visibility
+		 $quiz->VISIBILITY = 0;
+		 // save
+		 if($quiz->save()){
+			 return true;
+		 }
+		 return false;
+	 }
+	
+	/**
 	 * reorders the quiz item
 	 * @param number $quiz_id
 	 * @param number $fromPosition

@@ -239,6 +239,19 @@ class QuizTest extends CDbTestCase {
 		
 	}
 	
+	public function testResetSettings(){
+		$quiz_id = 1;
+		// reset settings
+		$this->assertTrue(Quiz::resetSettings($quiz_id));
+		// get the quiz
+		$quiz = Quiz::model()->findByPk($quiz_id);
+		//check that it's closed
+		$this->assertEquals(Quiz::CLOSED, $quiz->STATE);
+		//check that it's invisible
+		$this->assertNotEquals(1, $quiz->VISIBILITY);
+		
+	}
+	
 	public function testReorder(){
 		$tests = array(
 			array(
@@ -342,6 +355,7 @@ class QuizTest extends CDbTestCase {
 		$quiz_id = 1;
 		$resultCSV = Quiz::exportCSV($quiz_id);
 		$this->markTestIncomplete("I'm not sure how to test Quiz::exportCSV yet...");
+		// check that the result has the appropriate number of lines 7
 		
 		//echo($resultCSV);
 	}
