@@ -25,6 +25,7 @@
 			<td>{$smarty.foreach.qounter.index + 1}</td>
 			<td><a href="{url url=$quiz['link']}">{$quiz['TITLE']}</a></td>
 			<td>
+				<div class="quiz-status">
 				{if $quiz['STATE'] == 'C'}
 					Closed
 				{elseif $quiz['STATE'] == 'O'}
@@ -56,6 +57,7 @@
 				{if $quiz['VISIBILITY'] == 0}
 					(hidden)
 				{/if}
+				</div>
 			</td>
 			<td>
 				{if $quiz.status != 'S' && $quiz.question_count > 0}
@@ -177,9 +179,12 @@ No Quizzes.
 			data: data,
 			dataType: 'json',
 			error: failure,
-			//success: removeDiv
+			success: function(){
+				$('tr#'+quiz_id+' .quiz-status').html("Closed (hidden)");
+			}
 		});
 	}
+	
 
 	quizCopyAction = function(e){
 		console.log("quizCopyAction");
