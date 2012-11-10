@@ -2,7 +2,7 @@
 
 <div id="quizzes-container" class="row-fluid">
 	<div class="span8">
-		<a class="btn" href='{url url="/quiz/create/$collection_id"}'>New Quiz</a>
+		<a class="btn" href='{url url="/quiz/create/$collection_id"}'>Create Quiz</a>
 	</div>
 	<div class="span4">
 		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/0"}'>Student View</a>
