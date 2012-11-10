@@ -230,6 +230,13 @@ class Quiz extends QActiveRecord
 		if($title == ''){
 			return false;
 		}
+		// check if it already exists
+		if(isset($this->ID)){
+			$sort_order = $this->SORT_ORDER;
+		} else {
+			$sort_order = $this->getNextQuizOrder($collection_id);
+		}
+		
 		$this->setAttributes(array(
 	        	'COLLECTION_ID'=>$collection_id,
 	        	'TITLE'=>$title,
@@ -237,7 +244,7 @@ class Quiz extends QActiveRecord
 				'START_DATE'=>$start_date,
 				'END_DATE'=>$end_date,
 				'VISIBILITY'=>$visibility,
-				'SORT_ORDER'=>$this->getNextQuizOrder($collection_id),
+				'SORT_ORDER'=>$sort_order,
 				'SHOW_FEEDBACK'=>$show_feedback,
 				'DELETED'=>0,
 		        'DESCRIPTION'=>$description,
