@@ -77,7 +77,7 @@
 	</table>
 {else}
 <div class="lead">
-	No Quizzes.
+	There are no quizzes available right now.
 </div>
 {/if}
 
