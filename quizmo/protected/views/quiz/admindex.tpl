@@ -134,7 +134,7 @@
 		</tbody>
 	</table>
 {else}
-No Quizzes.
+There are no quizzes right now. Click the button to create a quiz.
 {/if}
 
 </div>
