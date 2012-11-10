@@ -1,4 +1,4 @@
-	<h1>Quizzes</h1>
+	<h1>Manage Quizzes</h1>
 
 <div id="quizzes-container" class="row-fluid">
 	<div class="span8">
@@ -187,7 +187,7 @@ No Quizzes.
 	
 
 	quizCopyAction = function(e){
-		console.log("quizCopyAction");
+		//console.log("quizCopyAction");
 		quiz_copy_url = "{url url='/quiz/copy' ajax=1}";
 		// get the quiz_id from eventObject
 		quiz_id = e.currentTarget.name;
