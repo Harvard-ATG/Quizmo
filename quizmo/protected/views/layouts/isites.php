@@ -27,6 +27,11 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<style>
 	<?php include("css/bootstrap-responsive-isites.css"); ?>
 	</style>
+	<style>
+#view-switch {
+	display: none;
+}
+	</style>
 
 <!--
 	<link href="<?php echo $host; ?>/css/bootstrap.css" rel="stylesheet" type="text/css"/>

@@ -4,7 +4,7 @@
 	<div class="span8">
 		<a class="btn" href='{url url="/quiz/create/$collection_id"}'>Create Quiz</a>
 	</div>
-	<div class="span4">
+	<div id="view-switch" class="span4">
 		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/0"}'>Student View</a>
 	</div>
 
