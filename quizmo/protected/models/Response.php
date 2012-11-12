@@ -509,7 +509,32 @@ class Response extends QActiveRecord
 			$status = Submission::getStatusByUser($user_id, $quiz_id);
 			$score = Response::getTotalScoreByUser($user_id, $quiz_id);
 			$results[$key]['name'] = $name;
-			$results[$key]['status'] = $status;
+			//$results[$key]['status'] = $status;
+			// submission
+			// const NOT_STARTED = 'N'; // this one may never be used
+			// const STARTED = 'U';
+			// const UNFINISHED = 'U';
+			// const SUBMITTED = 'S';
+			// const FINISHED = 'F';
+			// const GRADED = 'F';
+			switch($status){
+				case Submission::NOT_STARTED:
+					$results[$key]['status'] = "Not Started";
+					break;
+				case Submission::STARTED:
+					$results[$key]['status'] = "Started / Unfinished";
+					break;
+				case Submission::FINISHED:
+					$results[$key]['status'] = "Finished";
+					break;
+				case Submission::SUBMITTED:
+					$results[$key]['status'] = "Submitted";
+					break;
+				default:
+					$results[$key]['status'] = "Unknown";
+					break;
+				
+			}
 			$results[$key]['score'] = $score;
 			// call identity getAllUsers method
 			$photo_url = $identity->getPhotoUrl($user_id, 50);
