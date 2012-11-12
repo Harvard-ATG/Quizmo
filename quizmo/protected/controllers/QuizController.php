@@ -265,7 +265,10 @@ class QuizController extends Controller
 			//$_SESSION['admin_view'] = false;
 		} elseif(isset(Yii::app()->session['admin_view'])) {
 			//$admin_view = $_SESSION['admin_view'];
-			$admin_view = Yii::app()->session['admin_view'];
+			// we don't want to do this with isites, we want this to just be controlled by the state var...
+			// thank you mike and annie for forcing in isites specific code
+			if(!Yii::app()->params['authMethod'] == 'isites')
+				$admin_view = Yii::app()->session['admin_view'];
 		} else {
 			$admin_view = false;
 		}
