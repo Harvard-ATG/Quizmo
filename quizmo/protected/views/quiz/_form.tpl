@@ -69,7 +69,7 @@
 <input type="hidden" id="collection_id" name="collection_id" value="{$collection_id}"/>
 
 <div class="form-actions">
-	<input type="submit" class="btn btn-primary" value="Submit" />
+	<input type="submit" class="btn btn-primary" value="Save" />
 	<a class="btn" href='{url url="/quiz/index/$collection_id"}'>Cancel</a>
 </div>
 
