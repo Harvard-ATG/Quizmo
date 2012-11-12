@@ -111,7 +111,15 @@ $(document).ready(function(){
 		$('#numerical-control-group').addClass('hidden');
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("multiple");
-		$('#question-type-multiple').addClass('active');	
+		$('#question-type-multiple').addClass('active');
+
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+
+		unbindAllTypes();
 	}
 	showTrueFalse = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
@@ -123,6 +131,14 @@ $(document).ready(function(){
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("truefalse");		
 		$('#question-type-truefalse').addClass('active');	
+
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+
+		unbindAllTypes();
 	}
 	showCheckAll = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
@@ -134,6 +150,14 @@ $(document).ready(function(){
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("checkall");		
 		$('#question-type-checkall').addClass('active');	
+
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+
+		unbindAllTypes();
 	}
 	showEssay = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
@@ -145,6 +169,14 @@ $(document).ready(function(){
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("essay");		
 		$('#question-type-essay').addClass('active');	
+
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+
+		unbindAllTypes();
 	}
 	showNumerical = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
@@ -156,6 +188,14 @@ $(document).ready(function(){
 		$('#fill-in-control-group').addClass('hidden');
 		$('#question_type').val("numerical");		
 		$('#question-type-numerical').addClass('active');	
+
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+
+		unbindAllTypes();
 	}
 	showFillin = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
@@ -167,7 +207,40 @@ $(document).ready(function(){
 		$('#question-type-fillin').removeClass('disabled');
 		$('#question_type').val("fillin");		
 		$('#question-type-fillin').addClass('active');	
+		
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+
+		unbindAllTypes();
 	}
+	
+	unbindAllTypes = function(){
+		$('#question-type-multiple').unbind("click");
+		$('#question-type-truefalse').unbind("click");
+		$('#question-type-checkall').unbind("click");
+		$('#question-type-essay').unbind("click");
+		$('#question-type-numerical').unbind("click");
+		$('#question-type-fillin').unbind("click");	
+		
+		/*
+		$('#question-type-multiple').css('visibility', 'hidden');
+		$('#question-type-truefalse').css('visibility', 'hidden');
+		$('#question-type-checkall').css('visibility', 'hidden');
+		$('#question-type-essay').css('visibility', 'hidden');
+		$('#question-type-numerical').css('visibility', 'hidden');
+		$('#question-type-fillin').css('visibility', 'hidden');
+		*/
+	}
+
 
 	if(question_type == ''){
 		// if it's new
