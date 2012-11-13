@@ -5,6 +5,24 @@
 		<p class="help-inline"></p>
 	</div>
 </div>
+
+<div id="fill-in-control-group" class="control-group hidden">
+	<label class="control-label" for="numerical">Fill in the blank answer</label>
+	<div class="controls">
+		<label class="checkbox inline">
+			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if $question}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
+		</label>
+		<p class="help-inline">
+			{literal}
+			<p>To create blanks, place curly braces around words. For example:</p>
+			<p>Roses are {red} and violets are {blue}.</p>
+			<p>Separate multiple correct answers with a pipe (|) symbol:</p>
+			<p>Roses are {red|scarlet} and violets are {blue|azure}</p>
+			{/literal}
+		</p>
+	</div>
+</div>
+
 <div id="body-control-group" class="control-group">
 	<label class="control-label" for="body">Question</label>
 	<div class="controls">
@@ -250,22 +268,7 @@ $(document).ready(function(){
 
 </div>
 
-<div id="fill-in-control-group" class="control-group hidden">
-	<label class="control-label" for="numerical">Fill in the blank answer</label>
-	<div class="controls">
-		<label class="checkbox inline">
-			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if $question}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
-		</label>
-		<p class="help-inline">
-			{literal}
-			<p>To create blanks, place curly braces around words. For example:</p>
-			<p>Roses are {red} and violets are {blue}.</p>
-			<p>Separate multiple correct answers with a pipe (|) symbol:</p>
-			<p>Roses are {red|scarlet} and violets are {blue|azure}</p>
-			{/literal}
-		</p>
-	</div>
-</div>
+
 
 
 
