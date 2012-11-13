@@ -39,6 +39,7 @@
 </div>
 
 
+
 <input type="hidden" id="question_ids" value='{$question_ids_json}'/>
 
 <script>
@@ -131,6 +132,9 @@ $(document).ready(function(){
 	// add the click listener for the numbered buttons
 	$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
 		submitQuestion();
+		$('.bottom-right').notify({
+			message: { html: 'Saved' }
+		}).show();
 		
 		this_question_button = $(e.currentTarget);
 		this_question_id = this_question_button.attr("name");
@@ -158,7 +162,9 @@ $(document).ready(function(){
 
 	next_button.click(function(e){
 		submitQuestion(continueNext);
-		
+		$('.bottom-right').notify({
+			message: { html: 'Saved' }
+		}).show();
 
 	});
 	
