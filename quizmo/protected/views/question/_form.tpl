@@ -255,10 +255,10 @@ $(document).ready(function(){
 </div>
 
 <div id="numerical-control-group" class="control-group hidden">
+	<p class="help-inline">Set the answer and the tolerance in the fields below. Tolerance is expressed as a number, not a percentage. For example, setting the answer to '50' and the tolerance to '5' indicates that any answer in the range 45-55 will be considered correct.</p>
 	<label class="control-label" for="numerical">Numerical Answer</label>
 	<div class="controls">
 		<input type="text" class="span1" id="numerical_answer" name="numerical_answer" value="{if $question}{$question.answers[0].answer}{/if}"/>
-		<p class="help-inline"></p>
 	</div>
 	<label class="control-label" for="numerical">Tolerance</label>
 	<div class="controls">
