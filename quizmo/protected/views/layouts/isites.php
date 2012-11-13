@@ -28,6 +28,9 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<?php include("css/bootstrap-responsive-isites.css"); ?>
 	</style>
 	<style>
+	<?php include("css/bootstrap-notify.css"); ?>
+	</style>
+	<style>
 #view-switch {
 	display: none;
 }
@@ -48,14 +51,19 @@ $host = "http://".$_SERVER['HTTP_HOST'];
     <!-- <script src="<?php echo $host; ?>/js/jquery-ui-datepicker.js"></script> -->
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
+	<!-- <script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script> -->
+	<script src="http://nijikokun.github.com/bootstrap-notify/js/bootstrap-notify.js"></script>
+	
+	
+	
 	<script>
 	//<![CDATA[
 	<?php include("js/jquery.dataTables.js"); ?>
 	<?php include("js/jquery.dataTables.rowReordering.js"); ?>
 	//]]>
 	</script>
-
 		<div class="bootstrapped">
+			<div class='notifications bottom-right'> </div>
 		<?php echo $content; ?>
 		</div>
 
