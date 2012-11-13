@@ -213,13 +213,7 @@ $(document).ready(function(){
 		$('#question-type-checkall').css('visibility', 'hidden');
 		$('#question-type-essay').css('visibility', 'hidden');
 		$('#question-type-numerical').css('visibility', 'hidden');
-		$('#question-type-multiple').css('visibility', 'hidden');
-		$('#question-type-truefalse').css('visibility', 'hidden');
-		$('#question-type-checkall').css('visibility', 'hidden');
-		$('#question-type-essay').css('visibility', 'hidden');
-		$('#question-type-numerical').css('visibility', 'hidden');
-		$('#question-type-fillin').css('visibility', 'hidden');
-
+		
 		unbindAllTypes();
 	}
 	
@@ -251,6 +245,50 @@ $(document).ready(function(){
 		$('#question-type-essay').click(showEssay);
 		$('#question-type-numerical').click(showNumerical);
 		$('#question-type-fillin').click(showFillin);
+		
+		$('#question-type-multiple').tooltip({
+			//animation: true,
+			html: true,
+			placement: 'top',
+			trigger: 'hover'
+		});
+		//$('#question-type-multiple').tooltip('show');
+		$('#question-type-truefalse').tooltip({
+			//animation: true,
+			html: true,
+			placement: 'top',
+			trigger: 'hover'
+		});
+		//$('#question-type-truefalse').tooltip('show');
+		$('#question-type-checkall').tooltip({
+			//animation: true,
+			html: true,
+			placement: 'top',
+			trigger: 'hover'
+		});
+		//$('#question-type-checkall').tooltip('show');
+		$('#question-type-essay').tooltip({
+			//animation: true,
+			html: true,
+			placement: 'top',
+			trigger: 'hover'
+		});
+		//$('#question-type-essay').tooltip('show');
+		$('#question-type-numerical').tooltip({
+			//animation: true,
+			html: true,
+			placement: 'top',
+			trigger: 'hover'
+		});
+		//$('#question-type-numerical').tooltip('show');
+		$('#question-type-fillin').tooltip({
+			//animation: true,
+			html: true,
+			placement: 'top',
+			trigger: 'hover'
+		});
+		//$('#question-type-fillin').tooltip('show');
+		
 	} else {
 		// set the show if it's an edit
 		$(".question_type_btn").addClass("disabled");

@@ -16,12 +16,12 @@
 <div id="question_type-control-group" class="control-group">
 	<p class="help-block"></p>
 	<div class="btn-group" data-toggle="buttons-radio">
-		<button type="button" id="question-type-multiple" class="btn question_type_btn">Multiple Choice</button>
-		<button type="button" id="question-type-truefalse" class="btn question_type_btn">True False</button>
-		<button type="button" id="question-type-checkall" class="btn question_type_btn">Check all that apply</button>
-		<button type="button" id="question-type-essay" class="btn question_type_btn">Essay</button>
-		<button type="button" id="question-type-numerical" class="btn question_type_btn">Numerical</button>
-		<button type="button" id="question-type-fillin" class="btn question_type_btn">Fill in the blank</button>
+		<button type="button" id="question-type-multiple" class="btn question_type_btn" title="Students choose one of several answer choices. Only one choice is correct.">Multiple Choice</button>
+		<button type="button" id="question-type-truefalse" class="btn question_type_btn" title='Students choose either "True" or "False".'>True False</button>
+		<button type="button" id="question-type-checkall" class="btn question_type_btn" title="Students choose more than one of several answer choices.">Check all that apply</button>
+		<button type="button" id="question-type-essay" class="btn question_type_btn" title="Students compose their own answer to a question. These questions must be manually graded.">Essay</button>
+		<button type="button" id="question-type-numerical" class="btn question_type_btn" title="Students enter their answers in numeric form. A range of values may be accepted as correct.">Numerical</button>
+		<button type="button" id="question-type-fillin" class="btn question_type_btn" title="Students fill in answer blanks in a block of text. Each blank may have more than one correct answer.">Fill in the blank</button>
 		<input type="hidden" id="question_type" name="question_type" value=""/>
 	</div>
 </div>
