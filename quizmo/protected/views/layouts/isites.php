@@ -31,9 +31,13 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<?php include("css/bootstrap-notify.css"); ?>
 	</style>
 	<style>
+	<?php include("css/bootstrap-wysihtml5-0.0.2.css"); ?>
+	</style>
+	<style>
 #view-switch {
 	display: none;
 }
+textarea { resize:both; }
 	</style>
 
 <!--
@@ -46,25 +50,33 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
 	</script>
-    <!-- <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script> -->
+	<!-- <script src="<?php echo $host; ?>/js/wysihtml5-0.3.0.min.js"></script> -->
+	<!-- <script src="http://jhollingworth.github.com/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script> -->
+	<!-- <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script> -->
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/jquery-ui-datepicker.js"></script> -->
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
 	<!-- <script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script> -->
-	<script src="http://nijikokun.github.com/bootstrap-notify/js/bootstrap-notify.js"></script>
-	
-	
-	
-	<script>
-	//<![CDATA[
-	<?php include("js/jquery.dataTables.js"); ?>
-	<?php include("js/jquery.dataTables.rowReordering.js"); ?>
-	//]]>
-	</script>
+	<!-- <script src="http://nijikokun.github.com/bootstrap-notify/js/bootstrap-notify.js"></script> -->
+	<!-- <script src="<?php echo $host; ?>/js/bootstrap-wysihtml5-0.0.2.js"></script> -->
+	<!-- <script src="http://jhollingworth.github.com/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script> -->
+	<!-- <script src="<?php echo $host; ?>/js/prettify.js"></script> -->
+
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>
 		<?php echo $content; ?>
+
+		<script>
+		//<![CDATA[
+		<?php include("js/jquery.dataTables.js"); ?>
+		<?php include("js/jquery.dataTables.rowReordering.js"); ?>
+		<?php include("js/bootstrap-notify.js"); ?>
+		<?php include("js/wysihtml5-0.3.0.min.js"); ?>
+		<?php include("js/bootstrap-wysihtml5-0.0.2.js"); ?>
+		//]]>
+		</script>
+
 		</div>
 
   </body>
