@@ -2353,21 +2353,21 @@
   background-position: -456px -144px;
 }
 
-.bootstrapped .dropup,
-.bootstrapped .dropdown {
+.dropup,
+.dropdown {
   position: relative;
 }
 
-.bootstrapped .dropdown-toggle {
+.dropdown-toggle {
   *margin-bottom: -3px;
 }
 
-.bootstrapped .dropdown-toggle:active,
-.bootstrapped .open .dropdown-toggle {
+.dropdown-toggle:active,
+.open .dropdown-toggle {
   outline: 0;
 }
 
-.bootstrapped .caret {
+.caret {
   display: inline-block;
   width: 0;
   height: 0;
@@ -2380,18 +2380,18 @@
   filter: alpha(opacity=30);
 }
 
-.bootstrapped .dropdown .caret {
+.dropdown .caret {
   margin-top: 8px;
   margin-left: 2px;
 }
 
-.bootstrapped .dropdown:hover .caret,
-.bootstrapped .open .caret {
+.dropdown:hover .caret,
+.open .caret {
   opacity: 1;
   filter: alpha(opacity=100);
 }
 
-.bootstrapped .dropdown-menu {
+.dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -2418,12 +2418,12 @@
           background-clip: padding-box;
 }
 
-.bootstrapped .dropdown-menu.pull-right {
+.dropdown-menu.pull-right {
   right: 0;
   left: auto;
 }
 
-.bootstrapped .dropdown-menu .divider {
+.dropdown-menu .divider {
   *width: 100%;
   height: 1px;
   margin: 8px 1px;
@@ -2433,7 +2433,7 @@
   border-bottom: 1px solid #ffffff;
 }
 
-.bootstrapped .dropdown-menu a {
+.dropdown-menu a {
   display: block;
   padding: 3px 15px;
   clear: both;
@@ -2443,19 +2443,19 @@
   white-space: nowrap;
 }
 
-.bootstrapped .dropdown-menu li > a:hover,
-.bootstrapped .dropdown-menu .active > a,
-.bootstrapped .dropdown-menu .active > a:hover {
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
   background-color: #0088cc;
 }
 
-.bootstrapped .open {
+.open {
   *z-index: 1000;
 }
 
-.bootstrapped .open > .dropdown-menu {
+.open > .dropdown-menu {
   display: block;
 }
 
@@ -2464,14 +2464,14 @@
   left: auto;
 }
 
-.bootstrapped .dropup .caret,
+.dropup .caret,
 .bootstrapped .navbar-fixed-bottom .dropdown .caret {
   border-top: 0;
   border-bottom: 4px solid #000000;
   content: "\2191";
 }
 
-.bootstrapped .dropup .dropdown-menu,
+.dropup .dropdown-menu,
 .bootstrapped .navbar-fixed-bottom .dropdown .dropdown-menu {
   top: auto;
   bottom: 100%;
@@ -2519,7 +2519,7 @@
           border-radius: 3px;
 }
 
-.bootstrapped .fade {
+.fade {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
      -moz-transition: opacity 0.15s linear;
@@ -2528,7 +2528,7 @@
           transition: opacity 0.15s linear;
 }
 
-.bootstrapped .fade.in {
+.fade.in {
   opacity: 1;
 }
 
@@ -3108,7 +3108,7 @@
 }
 
 .bootstrapped .btn:hover .caret,
-.bootstrapped .open.btn-group .caret {
+.open.btn-group .caret {
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -3128,7 +3128,7 @@
   border-left-width: 5px;
 }
 
-.bootstrapped .dropup .btn-large .caret {
+.dropup .btn-large .caret {
   border-top: 0;
   border-bottom: 5px solid #000000;
 }
@@ -4131,23 +4131,23 @@
   background-color: #fff;
 }
 
-.bootstrapped .modal-open .dropdown-menu {
+.modal-open .dropdown-menu {
   z-index: 2050;
 }
 
-.bootstrapped .modal-open .dropdown.open {
+.modal-open .dropdown.open {
   *z-index: 2050;
 }
 
-.bootstrapped .modal-open .popover {
+.modal-open .popover {
   z-index: 2060;
 }
 
-.bootstrapped .modal-open .tooltip {
+.modal-open .tooltip {
   z-index: 2070;
 }
 
-.bootstrapped .modal-backdrop {
+.modal-backdrop {
   position: fixed;
   top: 0;
   right: 0;
@@ -4157,17 +4157,17 @@
   background-color: #000000;
 }
 
-.bootstrapped .modal-backdrop.fade {
+.modal-backdrop.fade {
   opacity: 0;
 }
 
-.bootstrapped .modal-backdrop,
-.bootstrapped .modal-backdrop.fade.in {
+.modal-backdrop,
+.modal-backdrop.fade.in {
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
 
-.bootstrapped .modal {
+.modal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -4190,7 +4190,7 @@
           background-clip: padding-box;
 }
 
-.bootstrapped .modal.fade {
+.modal.fade {
   top: -25%;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
      -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
@@ -4199,30 +4199,30 @@
           transition: opacity 0.3s linear, top 0.3s ease-out;
 }
 
-.bootstrapped .modal.fade.in {
+.modal.fade.in {
   top: 50%;
 }
 
-.bootstrapped .modal-header {
+.modal-header {
   padding: 9px 15px;
   border-bottom: 1px solid #eee;
 }
 
-.bootstrapped .modal-header .close {
+.modal-header .close {
   margin-top: 2px;
 }
 
-.bootstrapped .modal-body {
+.modal-body {
   max-height: 400px;
   padding: 15px;
   overflow-y: auto;
 }
 
-.bootstrapped .modal-form {
+.modal-form {
   margin-bottom: 0;
 }
 
-.bootstrapped .modal-footer {
+.modal-footer {
   padding: 14px 15px 15px;
   margin-bottom: 0;
   text-align: right;
@@ -4237,22 +4237,22 @@
           box-shadow: inset 0 1px 0 #ffffff;
 }
 
-.bootstrapped .modal-footer:before,
-.bootstrapped .modal-footer:after {
+.modal-footer:before,
+.modal-footer:after {
   display: table;
   content: "";
 }
 
-.bootstrapped .modal-footer:after {
+.modal-footer:after {
   clear: both;
 }
 
-.bootstrapped .modal-footer .btn + .btn {
+.modal-footer .btn + .btn {
   margin-bottom: 0;
   margin-left: 5px;
 }
 
-.bootstrapped .modal-footer .btn-group .btn + .btn {
+.modal-footer .btn-group .btn + .btn {
   margin-left: -1px;
 }
 
