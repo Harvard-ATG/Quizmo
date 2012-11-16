@@ -11,7 +11,8 @@
 	</div>
 	<label class="control-label" for="description">Description</label>
 	<div class="controls">
-		<textarea class="input-xlarge" id="description" name="description">{$description}</textarea>
+		<!-- <textarea class="input-xlarge" id="description" name="description">{$description}</textarea> -->
+		<textarea class="input-xlarge span10" id="description" name="description" style="height:200px">{$description}</textarea>
 	</div>
 </div>
 <div id="state-control-group" class="control-group">
