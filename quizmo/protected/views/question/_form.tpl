@@ -26,7 +26,7 @@
 <div id="body-control-group" class="control-group">
 	<label class="control-label" for="body">Question</label>
 	<div class="controls">
-		<textarea class="input-xlarge" id="body" name="body">{if $question}{$question.body}{/if}</textarea>
+		<textarea class="input-xlarge span10" id="question-body" name="body" rows="5">{if $question}{$question.body}{/if}</textarea>
 		<p class="help-inline"></p>
 	</div>
 </div>
