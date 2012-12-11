@@ -65,8 +65,9 @@ textarea { resize:both; }
 
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>
-		<?php echo $content; ?>
-
+			<div id='hashcontent'>
+				<?php echo $content; ?>
+			</div>
 		<script>
 		//<![CDATA[
 		<?php include("js/jquery.dataTables.js"); ?>
@@ -74,6 +75,78 @@ textarea { resize:both; }
 		<?php include("js/bootstrap-notify.js"); ?>
 		<?php include("js/wysihtml5-0.3.0.min.js"); ?>
 		<?php include("js/bootstrap-wysihtml5-0.0.2.js"); ?>
+		
+		dohash = function(hash){
+			if(document.location.hash != ''){
+				// get the ajax link for the hash url value
+				//console.log(document.location.hash);
+				//console.log(ajaxurl(document.location.hash));
+
+				locationhash = document.location.hash;
+				if(locationhash.match(/^#\//)){
+					//newlocation = locationhash.replace(/#(\/[^#]+)/, '$1');
+					newlocation = locationhash.replace(/^#([^#]*)#?([^#]*)?$/, "$1");
+					//console.log(newlocation);
+					//console.log(ajaxurl(newlocation));
+					$('#hashcontent').load(ajaxurl(newlocation));					
+				}
+				
+			}
+			
+		}
+		
+		window.onhashchange = function(hash){
+			//console.log('onhashchange');
+			dohash();
+		}
+		
+		$(document).ready(function(){
+			dohash();
+		});
+		
+		function ajaxurl(viewPath) {
+
+			host = "<?php echo $_REQUEST['urlRoot']; ?>";
+			keyword = "<?php echo $_REQUEST['keyword']; ?>";
+			page_id = "<?php echo $_REQUEST['pageid']; ?>";
+			page_content_id = "<?php echo $_REQUEST['pageContentId']; ?>";
+			topic_id = "<?php echo $_REQUEST['topicId']; ?>";
+			state = "<?php echo @$_REQUEST['state']; ?>";
+
+			parts = [];
+			parts['scheme'] = 'http';
+			parts['host'] = 'isites.harvard.edu';
+			parts['path'] = 'icb/ajax' + viewPath;
+			parts['query'] = '';
+	
+	
+			mergeQuery = {};
+			mergeQuery['state'] = state;
+			mergeQuery['keyword'] = keyword;
+
+			if(state === 'popup') {
+				//viewParams = $this->_queryAsViewParams($viewQuery);
+				//$mergeQuery = array_merge($mergeQuery, array(
+				//	'topicid' => $topic_id, // Note the spelling: topicid, NOT topicId
+				//	'view' => $viewPath)
+				//);
+				//$mergeQuery = array_merge($mergeQuery, $viewParams);
+			} else {
+				// pass view params back to our app via the "panel" query
+				panelView = viewPath;
+				panelParams = [];
+				
+				mergeQuery['topicId'] = topic_id;
+				mergeQuery['pageContentId'] = page_content_id;
+			}
+
+			parts['query'] = mergeQuery;
+			full_url = parts['scheme'] + '://' + parts['host'] + '/' + parts['path'] + '?' + $.param(mergeQuery);
+			
+			return $('<span>').text(full_url).html()
+
+		}
+		
 		//]]>
 		</script>
 
