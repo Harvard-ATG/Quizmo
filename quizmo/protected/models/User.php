@@ -131,6 +131,19 @@ class User extends QActiveRecord
 		return $user->EXTERNAL_ID;
 		
 	}
+	
+	/**
+	 * gets the group:
+	 * in isites this is enrollee/guest/other
+	 * this needs to be implemented elsewhere (isitestool)
+	 * @param number $id user_id
+	 * @param number $collection_id
+	 * @return
+	 */
+	public function getGroup($id, $collection_id){
+		$identity = IdentityFactory::getIdentity();
+		return $identity->getGroup($id, $collection_id);
+	}
 
 
 	
