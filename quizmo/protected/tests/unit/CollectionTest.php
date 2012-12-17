@@ -64,8 +64,16 @@ class CollectionTest extends CDbTestCase {
 			$this->assertEquals($collectionFixture['ID'], $collection->ID, "Failed asserting that getIdFromOtherId is getting the appropriate ID");
 			
 		}
-		
+	}
 	
+	public function testGetOtherId(){
+		$collection_id = 1;
+		$other_id = 'icb.topic1140341';
+		$this->assertEquals($other_id, Collection::getOtherId($collection_id));
+
+		$collection_id = 2;
+		$other_id = '1234';
+		$this->assertEquals($other_id, Collection::getOtherId($collection_id));
 	}
 	
 	

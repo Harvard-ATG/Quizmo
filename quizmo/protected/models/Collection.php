@@ -167,4 +167,14 @@ class Collection extends QActiveRecord
 
 	}
 	
+	/**
+	 * getOtherId
+	 * @param number $id collection_id
+	 * @return string $other_id
+	 */
+	public function getOtherId($id){
+		$collection = Collection::model()->findByPk($id);
+		return $collection->OTHER_ID;
+	}
+	
 }
