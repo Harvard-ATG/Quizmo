@@ -302,9 +302,11 @@ class QuizController extends Controller
 	 * and send along a list of questions for the view to grab via ajaxification
 	 * 
 	 * @param number $id quiz_id
+	 * @param number $id2 question_id (optional)
 	 */
-	public function actionTake($id=''){
+	public function actionTake($id='', $id2=''){
 		$quiz_id = $id;
+		$question_id = $id2;
 		$user_id = Yii::app()->user->id;
 		
 		// first we set the session quiz_id
@@ -324,7 +326,8 @@ class QuizController extends Controller
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'collection_id'=>$quiz->COLLECTION_ID,
-			'title'=>$quiz->TITLE
+			'title'=>$quiz->TITLE,
+			'first_question_id'=>$question_id
 		));
 		
 	}
