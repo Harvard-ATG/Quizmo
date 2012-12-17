@@ -170,7 +170,7 @@ class UserIdentity extends CUserIdentity
 	}
 	
 	/**
-	 * placeholder class -- this should be overridden by the XIdentity if it has a way
+	 * placeholder method -- this should be overridden by the XIdentity if it has a way
 	 * @return boolean always returns true
 	 */
 	public function getAllUsers(){
@@ -178,7 +178,15 @@ class UserIdentity extends CUserIdentity
 	}
 	
 	/**
-	 * placeholder class -- this should be overridden by the XIdentity if it has a way
+	 * placeholder method -- this should be overridden by the XIdentity if it has a way
+	 * @return string always returns ''
+	 */
+	public function getGroup(){
+		return '';
+	}
+	
+	/**
+	 * placeholder method -- this should be overridden by the XIdentity if it has a way
 	 * @return string if there is no
 	 */
 	public function getPhotoUrl($id=null, $size=128){
