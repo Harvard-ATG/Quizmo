@@ -97,11 +97,11 @@ textarea { resize:both; }
 		
 		window.onhashchange = function(hash){
 			//console.log('onhashchange');
-			dohash();
+			//dohash();
 		}
 		
 		$(document).ready(function(){
-			dohash();
+			//dohash();
 		});
 		
 		function ajaxurl(viewPath) {
