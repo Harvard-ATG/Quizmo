@@ -239,6 +239,16 @@ class IsitesIdentity extends UserIdentity {
 
 	}
 	
+	/**
+	 * gets the group from the isites web service
+	 * @return string group
+	 */
+	public function getGroup($user_id, $collection_id){
+		$huid = User::getExternalId($user_id);
+		
+		return Yii::app()->isitestool->getGroup($huid);
+	}
+	
 }
 
 
