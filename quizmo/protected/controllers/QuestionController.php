@@ -36,7 +36,7 @@ class QuestionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete','reorder'),
+				'actions'=>array('create','update','delete','reorder','admindex'),
 				'roles'=>array('admin','super'),
 			),
 			array('deny',  // deny all users
@@ -231,6 +231,28 @@ class QuestionController extends Controller
 
 	}
 
+	/**
+	 * Lists all models.
+	 */
+	public function actionAdmindex($id='')
+	{
+		$quiz_id = ($id=='') ? Yii::app()->session['quiz_id'] : $id;
+		//$collection_id = Yii::app()->session['collection_id'];
+		$collection_id = Quiz::getCollectionId($quiz_id);
+		Yii::app()->session['quiz_id'] = $quiz_id;
+		$user_id = Yii::app()->user->id;
+		$questions = Question::getQuestionArrayByQuizId($quiz_id);
+
+		$this->render('index',array(
+			'collection_id'=>$collection_id,
+			'questions'=>$questions,
+			'sizeofquestions'=>sizeof($questions),
+			'user_id'=>$user_id,
+			'quiz_id'=>$quiz_id,
+		));
+
+	}
+	
 	/**
 	 * Lists all models.
 	 */
