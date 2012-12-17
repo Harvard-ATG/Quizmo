@@ -24,7 +24,7 @@
 
 		<tr data-position="{$smarty.foreach.qounter.index + 1}" id="{$question['ID']}" class="question-row-{$question['ID']}">
 			<td>{$smarty.foreach.qounter.index + 1}</td>
-			<td><a href="{url url='/question/view/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
+			<td><a href="{url url='/quiz/take/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
 			<td>
 				<a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">Edit</a><br/>
 
