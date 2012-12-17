@@ -2,6 +2,9 @@
   <li>
     <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
+  <li>
+    <a href='{url url="/question/index/$quiz_id"}'>Questions</a> <span class="divider">/</span>
+  </li>
   <li class="active">{$title}</li>
 </ul>
 
@@ -43,6 +46,8 @@
 <input type="hidden" id="question_ids" value='{$question_ids_json}'/>
 
 <script>
+
+var first_question_id = '{$first_question_id}';
 
 submitQuestion = function(){
 	console.log("ERROR: submitting blank!");
@@ -106,6 +111,9 @@ $(document).ready(function(){
 	prev_button.addClass("disabled");
 	
 	current_item = $('#question_1');
+	if(first_question_id != ''){
+		current_item = $('button[name="' + first_question_id + '"]');
+	}
 	current_item.addClass("active");
 	
 	prevclickfun = function(e){
