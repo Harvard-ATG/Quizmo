@@ -172,7 +172,30 @@ class UsersCollection extends QActiveRecord
 		
 		$users = array();
 		foreach($userscollections as $userscollection){
-			array_push($users, $userscollection->ID);
+			array_push($users, $userscollection->USER_ID);
+		}
+		
+		return $users;
+		
+	}
+	
+	/**
+	 * gets all users associated with the collection and the associated permissions
+	 * @param number $collection_id
+	 * @return hash of user_ids as keys and permissions as values {1 => 'enrollee', 2 => 'admin'}
+	 */
+	public function getUsersAndPermissions($collection_id){
+		//error_log("getUsers");
+		
+		// setupUsersFromIdentity()
+		UsersCollection::setupUsersFromIdentity($collection_id);
+		
+		// get all users who have logged into this table
+		$userscollections = UsersCollection::model()->findAllByAttributes(array("COLLECTION_ID" => $collection_id));
+		
+		$users = array();
+		foreach($userscollections as $userscollection){
+			$users[$userscollection->USER_ID] = $userscollection->PERMISSION;
 		}
 		
 		return $users;
@@ -227,6 +250,17 @@ class UsersCollection extends QActiveRecord
 			
 		}
 		
+	}
+	
+	/**
+	 * gets the permission string for the user/collection pair
+	 * @param number $user_id
+	 * @param number $collection_id
+	 * @return string $permission
+	 */
+	public function getPermissionString($user_id, $collection_id){
+		$usersCollection = UsersCollection::model()->findByAttributes(array('USER_ID'=>$user_id, 'COLLECTION_ID'=>$collection_id));
+		return $usersCollecion->PERMISSION;
 	}
 
 }
