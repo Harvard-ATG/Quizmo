@@ -1,6 +1,7 @@
 <style>
 .enrollee {
-	background-color: #E6E6E6;
+	background-color: #E6E6E6 !important;
+	background-repeat: repeat-x;
 }
 .guest {
 	background-color: #E6E6D0;
@@ -27,9 +28,9 @@
 <div class="row-fluid">
 	<h6 class="span4"><a href='{url url="/quiz/export/$quiz_id"}'>Export</a></h6>
 	<div class="span8">
-		<span class='enrollee example'>Enrollee</span>
-		<span class='guest example'>Guest</span>
-		<span class='super example'>Other</span>
+		<span class='enrollee example'><input type="checkbox" id="enrollee_check" checked="checked"/>Enrollee</span>
+		<span class='guest example'><input type="checkbox" id="guest_check" checked="checked"/>Guest</span>
+		<span class='super example'><input type="checkbox" id="other_check" checked="checked"/>Other</span>
 	</div>
 </div>
 <table class="table table-bordered">
@@ -72,3 +73,30 @@
 		{/foreach}
 	</tbody>	
 </table>
+
+<script>
+// onchange
+$('#enrollee_check').change(function(){
+	if($('#enrollee_check').is(':checked')){
+		$('tr.enrollee').show();
+	} else {
+		$('tr.enrollee').hide();
+	}
+});
+$('#guest_check').change(function(){
+	if($('#guest_check').is(':checked')){
+		$('tr.guest').show();
+	} else {
+		$('tr.guest').hide();
+	}
+});
+$('#other_check').change(function(){
+	if($('#other_check').is(':checked')){
+		$('tr.super').show();
+		$('tr.admin').show();
+	} else {
+		$('tr.super').hide();
+		$('tr.admin').hide();
+	}
+});
+</script>
