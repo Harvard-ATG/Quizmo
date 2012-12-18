@@ -491,14 +491,16 @@ class Response extends QActiveRecord
 		//error_log(var_export($results, 1));
 
 		// get all users here
-		$users = UsersCollection::getUsers(Quiz::getCollectionId($quiz_id));
+		//$users = UsersCollection::getUsers(Quiz::getCollectionId($quiz_id));
+		$users = UsersCollection::getUsersAndPermissions(Quiz::getCollectionId($quiz_id));
 		//error_log(var_export($users, 1));
 		
 		// then add them to the results array
-		foreach($users as $user_id){
+		foreach($users as $user_id => $permission){
 			if(!isset($results[$user_id])){
-				$results[$user_id] = array('USER_ID'=>$user_id);
-				
+				$results[$user_id] = array('USER_ID'=>$user_id, 'permission'=>$permission);
+			} else {
+				$results[$user_id]['permission'] = $permission;
 			}
 		}
 		
@@ -541,8 +543,6 @@ class Response extends QActiveRecord
 			$results[$key]['photo_url'] = $photo_url;
 			
 		}
-
-
 
 		return $results;
 	}
