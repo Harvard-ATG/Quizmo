@@ -546,6 +546,106 @@ class Response extends QActiveRecord
 
 		return $results;
 	}
+
+	/**
+	 * gets an array of results for a quiz
+	 * @todo trim down, probably dont need to be fetching all responses for this...
+	 * @param integer $quiz_id
+	 * @return array
+	 */
+	public function getAllResults($quiz_id){
+		//error_log("getResults");
+
+		// get identity
+		$identity = IdentityFactory::getIdentity();
+
+		// first get all the questions for the quiz
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		
+		// turn the array into a string
+		$question_id_string = implode(", ", $question_ids);
+		
+		// then responses for all the questions
+		if($question_id_string == '')
+			return array();
+		$responses = Response::model()->findAll(
+			"question_id in ($question_id_string)"
+		);
+		
+		$results = array();
+		// run through them, add to the results array
+		// turn the response into an array so I can manipulate it
+		foreach($responses as $response){
+			$responseArr = array();
+			$results[$response->USER_ID] = array();
+			foreach($response as $key => $value){
+				$responseArr[$key] = $value;
+			}
+			
+			array_push($results[$response->USER_ID], $responseArr);
+
+		}
+		
+		//error_log(var_export($results, 1));
+
+		// get all users here
+		//$users = UsersCollection::getUsers(Quiz::getCollectionId($quiz_id));
+		$users = UsersCollection::getUsersAndPermissions(Quiz::getCollectionId($quiz_id));
+		//error_log(var_export($users, 1));
+		
+		// then add them to the results array
+		foreach($users as $user_id => $permission){
+			if(!isset($results[$user_id])){
+				$results[$user_id] = array('USER_ID'=>$user_id, 'permission'=>$permission);
+			} else {
+				$results[$user_id]['permission'] = $permission;
+			}
+		}
+		
+		// process results adding in people data
+		foreach($results as $key => $value){
+			$user_id = $key;
+			$name = User::getName($user_id);
+			$status = Submission::getStatusByUser($user_id, $quiz_id);
+			$score = Response::getTotalScoreByUser($user_id, $quiz_id);
+			$results[$key]['name'] = $name;
+			//$results[$key]['status'] = $status;
+			// submission
+			// const NOT_STARTED = 'N'; // this one may never be used
+			// const STARTED = 'U';
+			// const UNFINISHED = 'U';
+			// const SUBMITTED = 'S';
+			// const FINISHED = 'F';
+			// const GRADED = 'F';
+			switch($status){
+				case Submission::NOT_STARTED:
+					$results[$key]['status'] = "Not Started";
+					break;
+				case Submission::STARTED:
+					$results[$key]['status'] = "Started / Unfinished";
+					break;
+				case Submission::FINISHED:
+					$results[$key]['status'] = "Finished";
+					break;
+				case Submission::SUBMITTED:
+					$results[$key]['status'] = "Submitted";
+					break;
+				default:
+					$results[$key]['status'] = "Unknown";
+					break;
+				
+			}
+			$results[$key]['score'] = $score;
+			// call identity getAllUsers method
+			$photo_url = $identity->getPhotoUrl($user_id, 50);
+			$results[$key]['photo_url'] = $photo_url;
+			
+		}
+
+		return $results;
+	}
+
+
 	
 	/**
 	 * gets the total score by the user... 
