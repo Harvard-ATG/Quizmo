@@ -413,6 +413,22 @@ class QuizController extends Controller
 	}
 	
 	/**
+	 * gets all results for all people
+	 * @param number $id collection_id
+	 */
+	public function actionAllResults($id=''){
+		$quiz_id = $id;
+		//$results = Response::getAllResults($id);
+		
+		
+		$this->render('all_results', array(
+			'quiz_id'=>$id,
+			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID,
+		//	'results'=>$results
+		));
+	}
+	
+	/**
 	 * total results for an individual
 	 * only difference is feedback is always visible
 	 * @param number $id quiz_id
