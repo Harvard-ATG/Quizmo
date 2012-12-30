@@ -26,7 +26,7 @@
 	<h1 class="span12">Results</h1>
 </div>
 <div class="row-fluid">
-	<h5 class="span12"><a href='{url url="/quiz/all_results/$collection_id"}'>All Results</a></h5>
+	<h5 class="span12"><a href='{url url="/quiz/allResults/$collection_id"}'>All Results</a></h5>
 </div>
 <div class="row-fluid">
 	<h6 class="span4"><a href='{url url="/quiz/export/$quiz_id"}'>Export</a></h6>
