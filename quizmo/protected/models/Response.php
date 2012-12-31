@@ -462,21 +462,22 @@ class Response extends QActiveRecord
 		$identity = IdentityFactory::getIdentity();
 
 		// first get all the questions for the quiz
-		$question_ids = Quiz::getQuestionIds($quiz_id);
+		//$question_ids = Quiz::getQuestionIds($quiz_id);
 		
 		// turn the array into a string
-		$question_id_string = implode(", ", $question_ids);
+		//$question_id_string = implode(", ", $question_ids);
 		
 		// then responses for all the questions
-		if($question_id_string == '')
-			return array();
-		$responses = Response::model()->findAll(
-			"question_id in ($question_id_string)"
-		);
+		//if($question_id_string == '')
+		//	return array();
+		//$responses = Response::model()->findAll(
+		//	"question_id in ($question_id_string)"
+		//);
 		
 		$results = array();
 		// run through them, add to the results array
 		// turn the response into an array so I can manipulate it
+		/*
 		foreach($responses as $response){
 			$responseArr = array();
 			$results[$response->USER_ID] = array();
@@ -484,9 +485,10 @@ class Response extends QActiveRecord
 				$responseArr[$key] = $value;
 			}
 			
-			array_push($results[$response->USER_ID], $responseArr);
+			//array_push($results[$response->USER_ID], $responseArr);
 
 		}
+		*/
 		
 		//error_log(var_export($results, 1));
 
@@ -560,10 +562,9 @@ class Response extends QActiveRecord
 		$identity = IdentityFactory::getIdentity();
 
 		// first get all the questions for the quiz
+		// with all of the answers
 		$question_ids = Quiz::getQuestionIds($quiz_id);
 		
-		// turn the array into a string
-		$question_id_string = implode(", ", $question_ids);
 		
 		// then responses for all the questions
 		if($question_id_string == '')
@@ -575,6 +576,7 @@ class Response extends QActiveRecord
 		$results = array();
 		// run through them, add to the results array
 		// turn the response into an array so I can manipulate it
+		/*
 		foreach($responses as $response){
 			$responseArr = array();
 			$results[$response->USER_ID] = array();
@@ -582,9 +584,12 @@ class Response extends QActiveRecord
 				$responseArr[$key] = $value;
 			}
 			
+			//error_log(var_export($responseArr, 1));
+			
 			array_push($results[$response->USER_ID], $responseArr);
 
 		}
+		*/
 		
 		//error_log(var_export($results, 1));
 
