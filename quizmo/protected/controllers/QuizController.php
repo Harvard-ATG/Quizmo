@@ -418,13 +418,13 @@ class QuizController extends Controller
 	 */
 	public function actionAllResults($id=''){
 		$quiz_id = $id;
-		//$results = Response::getAllResults($id);
+		$results = Response::getAllResults($quiz_id);
 		
 		
 		$this->render('all_results', array(
 			'quiz_id'=>$id,
 			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID,
-		//	'results'=>$results
+			'results'=>$results
 		));
 	}
 	
@@ -472,7 +472,7 @@ class QuizController extends Controller
 			'total_score'=>Question::getTotalScore($quiz_id),
 			'collection_id'=>$quiz->COLLECTION_ID,
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
-			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
+			'questions'=>Question::getQuestionViewsByQuizIdUserId($quiz_id, $user_id),
 			'show_feedback'=>1,
 			'photo_url'=>$photo_url,
 		));

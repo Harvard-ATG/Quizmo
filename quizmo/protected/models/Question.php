@@ -483,14 +483,14 @@ class Question extends QActiveRecord
 	}
 	
 	/**
-	 * getQuestionViewById
+	 * getQuestionViewByQuizIdUserId
 	 *
 	 * this should return the question and answers in an array that will be easily interpretted by the template
 	 * @param integer $question_id
 	 *
 	 * @return array
 	 */
-	public function getQuestionViewsByQuizId($quiz_id, $user_id){
+	public function getQuestionViewsByQuizIdUserId($quiz_id, $user_id){
 		$questions = Question::model()->sort_order()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
 
 		$output = array();
@@ -522,6 +522,85 @@ class Question extends QActiveRecord
 				array_push($responseArr, $responseInnerArr);
 			}
 			$questionArr['responses'] = $responseArr;
+
+			if(sizeof($responseArr) == 0){
+				$questionArr['responses'][0]['id'] = '';
+				$questionArr['responses'][0]['response'] = '';
+			}
+			
+			// answers
+			$answerArr = array();
+			foreach($answers as $answer){
+				$answerInnerArr = array();
+				foreach($answer as $key => $value){
+					$answerInnerArr[strtolower($key)] = $value;		
+				}
+
+				// for mc ms and tf the answer arr needs to know if it's correctly answered
+				if(Response::isAnswerSelected($user_id, $answer->ID)){
+					$answerInnerArr['response'] = true;
+				} else {
+					$answerInnerArr['response'] = false;
+				}
+				
+				array_push($answerArr, $answerInnerArr);
+
+			}
+			$questionArr['answers'] = $answerArr;
+			
+			$questionArr['score'] = $score;
+		
+			array_push($output, $questionArr);
+		}
+		
+		return $output;
+	
+	}
+
+	/**
+	 * getQuestionViewById
+	 *
+	 * this should return the question and answers in an array that will be easily interpretted by the template
+	 * @param integer $question_id
+	 *
+	 * @return array
+	 */
+	public function getQuestionViewsByQuizId($quiz_id){
+		$questions = Question::model()->sort_order()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+
+		$output = array();
+		foreach($questions as $question){
+			$score = 0;
+			$answers = $question->answers;
+			$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question->ID));
+			
+			$userArr = array();
+
+			// responses
+			$responseArr = array();
+			foreach($responses as $response){
+				$responseInnerArr = array();
+				foreach($response as $key => $value){
+					if($key == 'SCORE'){
+						$score += $value;
+					}
+					$responseInnerArr[strtolower($key)] = $value;		
+				}
+				array_push($responseArr, $responseInnerArr);
+			}
+			$questionArr['responses'] = $responseArr;
+
+
+			// questions
+			$questionArr = array();
+			foreach($question as $key => $value){
+				if($key == 'POINTS' && $value == ''){
+					$value = 0;
+				}
+				$questionArr[strtolower($key)] = $value;
+			
+			}
+			
 
 			if(sizeof($responseArr) == 0){
 				$questionArr['responses'][0]['id'] = '';
