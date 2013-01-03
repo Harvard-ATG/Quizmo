@@ -243,7 +243,7 @@ class QuestionController extends Controller
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
 
-		$this->render('index',array(
+		$this->render('admindex',array(
 			'collection_id'=>$collection_id,
 			'questions'=>$questions,
 			'sizeofquestions'=>sizeof($questions),
