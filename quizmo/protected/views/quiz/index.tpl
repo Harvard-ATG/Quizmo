@@ -76,8 +76,10 @@
 		</tbody>
 	</table>
 {else}
-<div class="lead">
-	There are no quizzes available right now.
+<div class="span12">
+	<div class="lead">
+		There are no quizzes available right now.
+	</div>
 </div>
 {/if}
 

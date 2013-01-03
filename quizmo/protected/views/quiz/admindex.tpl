@@ -1,4 +1,4 @@
-	<h1>Quizzes</h1>
+	<h1>Manage Quizzes</h1>
 
 <div id="quizzes-container" class="row-fluid">
 	<div class="span8">
@@ -134,7 +134,11 @@
 		</tbody>
 	</table>
 {else}
-There are no quizzes right now. Click the button to create a quiz.
+<div class="span12">
+	<div class="lead">
+		There are no quizzes available right now. Click the button to create a quiz.
+	</div>
+</div>
 {/if}
 
 </div>
