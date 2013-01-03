@@ -105,6 +105,7 @@ $(document).ready(function(){
 	showMultipleChoice = function(){
 		$('#multiple-choice-control-group').removeClass('hidden');
 		$('#question-type-multiple').removeClass('disabled');
+		$('#question-type-checkall').removeClass('disabled');
 		$('#true-false-control-group').addClass('hidden');
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
@@ -114,12 +115,14 @@ $(document).ready(function(){
 		$('#question-type-multiple').addClass('active');
 
 		$('#question-type-truefalse').css('visibility', 'hidden');
-		$('#question-type-checkall').css('visibility', 'hidden');
+		//$('#question-type-checkall').css('visibility', 'hidden');
 		$('#question-type-essay').css('visibility', 'hidden');
 		$('#question-type-numerical').css('visibility', 'hidden');
 		$('#question-type-fillin').css('visibility', 'hidden');
 
-		unbindAllTypes();
+		$('#question-type-multiple').click(showMultipleChoice);
+		$('#question-type-checkall').click(showCheckAll);
+		//unbindAllTypes();
 	}
 	showTrueFalse = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
@@ -144,6 +147,7 @@ $(document).ready(function(){
 		$('#multiple-choice-control-group').addClass('hidden');
 		$('#true-false-control-group').addClass('hidden');
 		$('#check-all-control-group').removeClass('hidden');
+		$('#question-type-multiple').removeClass('disabled');
 		$('#question-type-checkall').removeClass('disabled');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
@@ -151,13 +155,15 @@ $(document).ready(function(){
 		$('#question_type').val("checkall");		
 		$('#question-type-checkall').addClass('active');	
 
-		$('#question-type-multiple').css('visibility', 'hidden');
+		//$('#question-type-multiple').css('visibility', 'hidden');
 		$('#question-type-truefalse').css('visibility', 'hidden');
 		$('#question-type-essay').css('visibility', 'hidden');
 		$('#question-type-numerical').css('visibility', 'hidden');
 		$('#question-type-fillin').css('visibility', 'hidden');
 
-		unbindAllTypes();
+		$('#question-type-multiple').click(showMultipleChoice);
+		$('#question-type-checkall').click(showCheckAll);
+		//unbindAllTypes();
 	}
 	showEssay = function(){
 		$('#multiple-choice-control-group').addClass('hidden');
