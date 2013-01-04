@@ -6,12 +6,17 @@
     <a href='{url url="/question/index/$quiz_id"}'>Questions</a> <span class="divider">/</span>
   </li>
   <li class="active">{$title}</li>
+  <li id="saved-div" style="position:fixed;"></li>
 </ul>
 
 <div class="well"  style="height: 250px">
 <div id="questions-container">
 
 </div>
+</div>
+
+<div id="saved-div2" class="notifications" style="width: 100px">
+	
 </div>
 
 <div id="quiz-controls" class="btn-toolbar">
@@ -140,7 +145,7 @@ $(document).ready(function(){
 	// add the click listener for the numbered buttons
 	$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
 		submitQuestion();
-		$('.bottom-right').notify({
+		$('#saved-div').notify({
 			message: { html: 'Saved' }
 		}).show();
 		
@@ -170,7 +175,10 @@ $(document).ready(function(){
 
 	next_button.click(function(e){
 		submitQuestion(continueNext);
-		$('.bottom-right').notify({
+		//$('.bottom-right').notify({
+		//	message: { html: 'Saved' }
+		//}).show();
+		$('#saved-div').notify({
 			message: { html: 'Saved' }
 		}).show();
 
