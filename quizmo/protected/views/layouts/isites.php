@@ -7,7 +7,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 <body>
 	<session>
 	  <attribute>
-	    <name>QUIZMO_SESSION</name>
+	    <name>QUIZMO_SESSION_<?php echo $_REQUEST['topicId']; ?></name>
 	    <value><?php echo session_id(); ?></value>
 	  </attribute>
 	</session>
