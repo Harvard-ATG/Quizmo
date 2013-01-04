@@ -34,6 +34,10 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<?php include("css/bootstrap-wysihtml5-0.0.2.css"); ?>
 	</style>
 	<style>
+	<?php //include("css/font-awesome.css"); ?>
+	</style>
+	<link href="http://fortawesome.github.com/Font-Awesome/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<style>
 #view-switch {
 	display: none;
 }
