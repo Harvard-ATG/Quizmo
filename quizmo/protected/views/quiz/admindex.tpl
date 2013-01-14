@@ -63,7 +63,7 @@
 				{if $quiz.status != 'S' && $quiz.question_count > 0}
 					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				{/if}
-				<a href="{url url='/question/index/'|cat:$quiz['ID']}">Edit Questions</a><br/>
+				<a href="{url url='/question/admindex/'|cat:$quiz['ID']}">Edit Questions</a><br/>
 				<a href="{url url='/quiz/create/'|cat:$collection_id|cat:'/'|cat:$quiz['ID']}">Edit Settings</a><br/>
 				{if $quiz.status == 'N'}
 					<!-- not started -->
