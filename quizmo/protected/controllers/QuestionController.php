@@ -193,7 +193,7 @@ class QuestionController extends Controller
 			if(@$question_id != ''){
 				// now go to list
 				//$this->forward('/question/index/'.$quiz_id);
-				$this->jsredirect($this->url('/question/index/'.$quiz_id));
+				$this->jsredirect($this->url('/question/admindex/'.$quiz_id));
 				return;
 			}
 		}
