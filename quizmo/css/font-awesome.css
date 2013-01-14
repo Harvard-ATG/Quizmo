@@ -32,8 +32,9 @@
 /*  Font Awesome styles
     ------------------------------------------------------- */
 /* includes sprites.less reset */
-[class^="icon-"],
-[class*=" icon-"] {
+
+.bootstrapped [class^="icon-"],
+.bootstrapped [class*=" icon-"] {
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
@@ -47,17 +48,19 @@
   background-position: 0% 0%;
   background-repeat: repeat;
 }
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
+.bootstrapped [class^="icon-"]:before,
+.bootstrapped [class*=" icon-"]:before {
   text-decoration: inherit;
   display: inline-block;
   speak: none;
 }
+
 /* makes sure icons active on rollover in links */
-a [class^="icon-"],
-a [class*=" icon-"] {
+.bootstrapped a [class^="icon-"],
+.bootstrapped a [class*=" icon-"] {
   display: inline-block;
 }
+
 /* makes the font 33% larger relative to the icon container */
 .icon-large:before {
   vertical-align: -10%;
@@ -78,26 +81,28 @@ a [class*=" icon-"] {
 .nav [class*=" icon-"].icon-spin {
   display: inline-block;
 }
-li [class^="icon-"],
-li [class*=" icon-"] {
+
+.bootstrapped li [class^="icon-"],
+.bootstrapped li [class*=" icon-"] {
   display: inline-block;
   width: 1.25em;
   text-align: center;
 }
-li [class^="icon-"].icon-large,
-li [class*=" icon-"].icon-large {
-  /* increased font size for icon-large */
-
+.bootstrapped li [class^="icon-"].icon-large,
+.bootstrapped li [class*=" icon-"].icon-large {
+ 
   width: 1.5625em;
 }
-ul.icons {
+
+.bootstrapped ul.icons {
   list-style-type: none;
   text-indent: -0.75em;
 }
-ul.icons li [class^="icon-"],
-ul.icons li [class*=" icon-"] {
+.bootstrapped ul.icons li [class^="icon-"],
+.bootstrapped ul.icons li [class*=" icon-"] {
   width: .75em;
 }
+
 .icon-muted {
   color: #eeeeee;
 }
