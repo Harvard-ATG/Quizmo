@@ -78,6 +78,7 @@ class QuizController extends Controller
 		
 		$title = Yii::app()->getRequest()->getParam('title');
 		$description = Yii::app()->getRequest()->getParam('description');
+		$description = preg_replace("/<br>/", "<br/>", $description);
 		$state = Yii::app()->getRequest()->getParam('quiz_state');
 		$start_date = Yii::app()->getRequest()->getParam('start_date');
 		$end_date = Yii::app()->getRequest()->getParam('end_date');
@@ -251,6 +252,7 @@ class QuizController extends Controller
 		$user_id = Yii::app()->user->id;
 		$quizzes = Quiz::getQuizArrayByCollectionId($collection_id, $user_id);
 		$perm_id = Yii::app()->user->perm_id;
+		$admin = false;
 		if($perm_id >= UserIdentity::ADMIN){
 			$admin = true;
 		}

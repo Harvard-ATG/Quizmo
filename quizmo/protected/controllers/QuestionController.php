@@ -93,6 +93,7 @@ class QuestionController extends Controller
 
 		$title = Yii::app()->getRequest()->getParam('title');
 		$body = Yii::app()->getRequest()->getParam('body');
+		$body = preg_replace("/<br>/", "<br/>", $body);
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
