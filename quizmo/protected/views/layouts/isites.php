@@ -70,14 +70,14 @@ textarea { resize:both; }
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>
 			<div id='hashcontent'>
-				<?php echo $content; ?>
+				<?php echo preg_replace("/<br>/", "<br/>", $content); ?>
 			</div>
 		<script>
 		//<![CDATA[
 		<?php include("js/jquery.dataTables.js"); ?>
 		<?php include("js/jquery.dataTables.rowReordering.js"); ?>
 		<?php include("js/bootstrap-notify.js"); ?>
-		<?php include("js/wysihtml5-0.3.0.min.js"); ?>
+		<?php include("js/wysihtml5-0.3.0.js"); ?>
 		<?php include("js/bootstrap-wysihtml5-0.0.2.js"); ?>
 		
 		dohash = function(hash){
