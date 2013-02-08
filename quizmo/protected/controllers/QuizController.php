@@ -408,7 +408,7 @@ class QuizController extends Controller
 			'total_score'=>Question::getTotalScore($quiz_id),
 			'collection_id'=>$quiz->COLLECTION_ID,
 			'question_ids'=>Quiz::getQuestionIds($quiz_id),
-			'questions'=>Question::getQuestionViewsByQuizId($quiz_id, $user_id),
+			'questions'=>Question::getQuestionViewsByQuizIdUserId($quiz_id, $user_id),
 			'show_feedback'=>$quiz->SHOW_FEEDBACK,
 			'photo_url'=>$photo_url,
 		));
