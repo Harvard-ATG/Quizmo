@@ -1,6 +1,6 @@
 RewriteEngine on
 
-
+RewriteRule server-health ${APACHE_DOCS}/server-health.php
 
 # if a directory or a file exists, use it directly
 
