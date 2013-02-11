@@ -6,10 +6,6 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return CMap::mergeArray(
-	require(dirname(__FILE__).'/database.php'),
-	//require(dirname(__FILE__).'/facebook.php'),
-	require(dirname(__FILE__).'/ldap.php'),
-	require(dirname(__FILE__).'/isites.php'),
 	array(
 		'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 		'name'=>'Quizmo',
@@ -80,11 +76,10 @@ return CMap::mergeArray(
 						'logFile'=>'sql.log',
 					),
 					// uncomment the following to show log messages on web pages
-					/*
-					array(
-						'class'=>'CWebLogRoute',
-					),
-					*/
+					//array(
+					//	'class'=>'CWebLogRoute',
+					//),
+					
 				),
 			),
 
@@ -140,6 +135,11 @@ return CMap::mergeArray(
 		),
 
 
-	)
+	),
+	require(dirname(__FILE__).'/database.php'),
+	//require(dirname(__FILE__).'/facebook.php'),
+	require(dirname(__FILE__).'/ldap.php'),
+	require(dirname(__FILE__).'/isites.php')
+	
 );
 ?>
