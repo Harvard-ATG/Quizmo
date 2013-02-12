@@ -3,7 +3,7 @@
     <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
   <li>
-    <a href='{url url="/question/index/$quiz_id"}'>Questions</a> <span class="divider">/</span>
+    <a href='{url url="/question/admindex/$quiz_id"}'>Questions</a> <span class="divider">/</span>
   </li>
   <li class="active">Edit Question</li>
 </ul>
@@ -25,7 +25,7 @@
 
 		<div class="form-actions">
 			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
-			<a class="btn" href='{url url="/question/index/$quiz_id"}'>Cancel</a>
+			<a class="btn" href='{url url="/question/admindex/$quiz_id"}'>Cancel</a>
 		</div>
 		
 	</fieldset>
@@ -36,9 +36,10 @@
 <script>
 $(document).ready(function(){
 		
-	question_type = '{if $question}{$question.question_type}{/if}';		
+	question_type = '{if isset($question.question_type)}{$question.question_type}{/if}';		
 	
 
+	// NOTE: this does not work in isites, linking to the isites form submit does not work
 	$('#question-form').submit(function() {
 		//alert("asdf");
 		returnval = true;
