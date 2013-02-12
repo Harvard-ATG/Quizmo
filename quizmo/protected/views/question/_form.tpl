@@ -10,7 +10,7 @@
 	<label class="control-label" for="numerical">Fill in the blank answer</label>
 	<div class="controls">
 		<label class="checkbox inline">
-			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if $question}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
+			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if isset($question.answers)}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
 		</label>
 		<p class="help-inline">
 			{literal}
@@ -51,7 +51,7 @@
 <div id="multiple-choice-control-group" class="control-group hidden">
 	<label class="control-label" for="state">Multiple Choice Answers</label>
 	<div id="multiple-choice-control-group-inner">
-	{if $question}
+	{if isset($question.answers)}
 		{foreach from=$question.answers item=answer name=answers}
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
@@ -134,7 +134,7 @@ $(document).ready(function(){
 
 <div id="true-false-control-group" class="control-group hidden">
 	<label class="control-label" for="state">True/False Answers</label>
-	{if $question}
+	{if isset($question.answers)}
 		{foreach from=$question.answers item=answer name=answers}
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
@@ -164,7 +164,7 @@ $(document).ready(function(){
 <div id="check-all-control-group" class="control-group hidden">
 	<label class="control-label" for="check-all">Check All Answers</label>
 	<div id="check-all-control-group-inner">
-	{if $question}
+	{if isset($question.answers)}
 		{foreach from=$question.answers item=answer name=answers}
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
@@ -249,7 +249,7 @@ $(document).ready(function(){
 <div id="essay-control-group" class="control-group hidden">
 	<label class="control-label" for="essay">Text Field Size For Essay (Area where student will enter their essay text)</label>
 	<div class="controls">
-		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{if $question}{$question.answers[0].textarea_rows}{/if}"/> rows in student response field.
+		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{if isset($question.answers)}{$question.answers[0].textarea_rows}{/if}"/> rows in student response field.
 		<p class="help-inline"></p>
 	</div>	
 </div>
@@ -258,11 +258,11 @@ $(document).ready(function(){
 	<p class="help-inline">Set the answer and the tolerance in the fields below. Tolerance is expressed as a number, not a percentage. For example, setting the answer to '50' and the tolerance to '5' indicates that any answer in the range 45-55 will be considered correct.</p>
 	<label class="control-label" for="numerical">Numerical Answer</label>
 	<div class="controls">
-		<input type="text" class="span1" id="numerical_answer" name="numerical_answer" value="{if $question}{$question.answers[0].answer}{/if}"/>
+		<input type="text" class="span1" id="numerical_answer" name="numerical_answer" value="{if isset($question.answers)}{$question.answers[0].answer}{/if}"/>
 	</div>
 	<label class="control-label" for="numerical">Tolerance</label>
 	<div class="controls">
-		<input type="text" class="span1" id="tolerance" name="tolerance" value="{if $question}{$question.answers[0].tolerance}{/if}"/>
+		<input type="text" class="span1" id="tolerance" name="tolerance" value="{if isset($question.answers)}{$question.answers[0].tolerance}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 
@@ -279,14 +279,14 @@ $(document).ready(function(){
 <div id="score-control-group" class="control-group">
 	<label class="control-label" for="score">Score</label>
 	<div class="controls">
-		<input type="text" class="span1 input-xlarge" id="score" name="score" value="{if $question}{$question.points}{/if}"/>
+		<input type="text" class="span1 input-xlarge" id="score" name="score" value="{if isset($question.points)}{$question.points}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 </div>
 <div id="feedback-control-group" class="control-group">
 	<label class="control-label" for="feedback">Feedback</label>
 	<div class="controls">
-		<textarea class="input-xlarge" id="feedback" name="feedback">{if $question}{$question.feedback}{/if}</textarea>
+		<textarea class="input-xlarge" id="feedback" name="feedback">{if isset($question.feedback)}{$question.feedback}{/if}</textarea>
 		<p class="help-inline"></p>
 	</div>
 </div>

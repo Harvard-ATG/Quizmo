@@ -82,7 +82,7 @@ class QuestionController extends Controller
 	{
 		$user_id = Yii::app()->user->getId();
 		$quiz = new Quiz;
-		//error_log("quiz/create");
+		error_log("quiz/create");
 		
 		//$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
 		//$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
@@ -98,6 +98,19 @@ class QuestionController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		
+		// lets put everything into question so it will show if the validation fails
+		if($question_id == ''){
+			$question = array();
+			$question['title'] = $title;
+			$question['body'] = $body;
+			//$question['question_type'] = $question_type;
+			$question['points'] = $score;
+			$question['feedback'] = $feedback;
+			
+		} else {
+			$question = Question::getQuestionViewById($question_id);
+		}
+
 
 		// else it's a create
 		if($title != '' && $body != '' && $question_type != ''){
@@ -199,8 +212,6 @@ class QuestionController extends Controller
 			}
 		}
 
-		
-
 		$this->render('create', array(
 			'collection_id'=>$collection_id,
 			'quiz_id'=>$quiz_id,
@@ -208,7 +219,7 @@ class QuestionController extends Controller
 			'body'=>$body,
 			'question_type'=>$question_type,
 			'question_id'=>$question_id,
-			'question'=>Question::getQuestionViewById($question_id)
+			'question'=>$question
 		));
 
 	}
