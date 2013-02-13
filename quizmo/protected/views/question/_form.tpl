@@ -10,7 +10,7 @@
 	<label class="control-label" for="numerical">Fill in the blank answer</label>
 	<div class="controls">
 		<label class="checkbox inline">
-			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if isset($question.answers)}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
+			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if isset($question.answers[0].is_case_sensitive)}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
 		</label>
 		<p class="help-inline">
 			{literal}
@@ -139,7 +139,7 @@ $(document).ready(function(){
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
 			<label class="radio inline">
-				<input type="radio" id="true_false_answer{$iteration}" name="truefalse" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>{$answer.answer}
+				<input type="radio" id="true_false_answer{$iteration}" name="truefalse" value="{if $answer.answer == 'True'}1{else}0{/if}" {if $answer.is_correct == 1}checked="checked"{/if}/>{$answer.answer}
 			</label>
 				<p class="help-inline"></p>
 		</div>			
@@ -249,7 +249,7 @@ $(document).ready(function(){
 <div id="essay-control-group" class="control-group hidden">
 	<label class="control-label" for="essay">Text Field Size For Essay (Area where student will enter their essay text)</label>
 	<div class="controls">
-		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{if isset($question.answers)}{$question.answers[0].textarea_rows}{/if}"/> rows in student response field.
+		Display <input type="text" class="span1" id="textarea_rows" name="textarea_rows" value="{if isset($question.answers[0].textarea_rows)}{$question.answers[0].textarea_rows}{/if}"/> rows in student response field.
 		<p class="help-inline"></p>
 	</div>	
 </div>
@@ -262,7 +262,7 @@ $(document).ready(function(){
 	</div>
 	<label class="control-label" for="numerical">Tolerance</label>
 	<div class="controls">
-		<input type="text" class="span1" id="tolerance" name="tolerance" value="{if isset($question.answers)}{$question.answers[0].tolerance}{/if}"/>
+		<input type="text" class="span1" id="tolerance" name="tolerance" value="{if isset($question.answers[0].tolerance)}{$question.answers[0].tolerance}{/if}"/>
 		<p class="help-inline"></p>
 	</div>
 

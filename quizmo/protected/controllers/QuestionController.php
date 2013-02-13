@@ -103,10 +103,69 @@ class QuestionController extends Controller
 			$question = array();
 			$question['title'] = $title;
 			$question['body'] = $body;
-			//$question['question_type'] = $question_type;
+			// TODO: implement this: Question::typeStringToCode($question_type);
+			//$question['question_type'] = Question::typeStringToCode($question_type);
+			switch($question_type){
+				case 'multiple':
+					$question['question_type'] = 'M';
+					$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
+					for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
+						($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
+						$question['answers'][$i]['is_correct'] = $correct;
+						$question['answers'][$i]['answer'] = $_REQUEST['multiple_answer'.$i];
+					}
+					break;
+				case 'truefalse':
+					$question['question_type'] = 'T';
+					$truefalse = Yii::app()->getRequest()->getParam('truefalse');
+					error_log("bam?");
+					error_log($truefalse);
+					
+					$question['answers'][0]['is_correct'] = $truefalse;
+					$question['answers'][1]['is_correct'] = !$truefalse;
+					$question['answers'][0]['answer'] = 'True';
+					$question['answers'][1]['answer'] = 'False';
+					break;
+				case 'checkall':
+					$question['question_type'] = 'S';
+					error_log(var_export($_REQUEST, 1));
+
+					$check_all_answers = array();
+					for($i = 0; $i < 30; $i++){
+						if(isset($_REQUEST['check_all_answer'.$i])){
+							(isset($_REQUEST['check_all_check_answer'.$i])) ? $correct = 1 : $correct = 0;
+							array_push($check_all_answers, array(
+								'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
+								'is_correct' => $correct
+							));
+						}
+					}
+
+					for($i = 0; $i < sizeof($check_all_answers); $i++){
+						if(isset($check_all_answers[$i]['answer'])){
+							$question['answers'][$i]['is_correct'] = $check_all_answers[$i]['is_correct'];
+							$question['answers'][$i]['answer'] = $check_all_answers[$i]['answer'];
+						}
+					}
+					break;
+				case 'essay':
+					$question['question_type'] = 'E';
+					break;
+				case 'numerical':
+					$question['question_type'] = 'N';
+					$question['answers'][0]['answer'] = Yii::app()->getRequest()->getParam('numerical_answer');
+					$question['answers'][0]['tolerance'] = Yii::app()->getRequest()->getParam('tolerance');				
+					break;
+				case 'fillin':
+					$question['question_type'] = 'F';
+					break;
+				default:
+					$question['question_type'] = '';
+					break;
+			}
 			$question['points'] = $score;
 			$question['feedback'] = $feedback;
-			
+			error_log(var_export($question, 1));
 		} else {
 			$question = Question::getQuestionViewById($question_id);
 		}
