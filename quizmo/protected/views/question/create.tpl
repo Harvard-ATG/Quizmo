@@ -73,6 +73,15 @@ $(document).ready(function(){
 		$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one correct answer").show();
 		$("#check-all-control-group").addClass("error");		
 	}
+	
+	if(errors['numerical_not_number']){
+		$("#numerical-control-group .controls p.help-inline").text("Error: numerical question answers need to be a number").show();
+		$("#numerical-control-group").addClass("error");				
+	}
+	if(errors['tolerance_not_number']){
+		$("#numerical-control-group .controls p.help-inline").text("Error: numerical tolerance needs to be a number").show();
+		$("#numerical-control-group").addClass("error");						
+	}
 
 	// NOTE: this does not work in isites, linking to the isites form submit does not work
 	$('#question-form').submit(function() {

@@ -180,6 +180,8 @@ class QuestionController extends Controller
 			$question = Question::getQuestionViewById($question_id);
 		}
 		
+		error_log(var_export($question, 1));
+		
 		// validation rules
 		$errors = array();
 		// if no title
@@ -209,7 +211,7 @@ class QuestionController extends Controller
 			} 
 		}
 		// if true false has no selected correct answer
-		// this shouldn't be possible
+			// this shouldn't be possible
 		// if multiple selection has 0 answers
 		if($question_type == 'checkall' && !isset($question['answers'])){
 			$errors['checkall_no_answer'] = 1;
@@ -220,7 +222,18 @@ class QuestionController extends Controller
 			} 			
 		}
 		// if numerical isn't a valid number
-		// if tolerence isn't a valid number
+		if($question_type == 'numerical'){
+			$tolerance = Yii::app()->getRequest()->getParam('tolerance');
+			$numerical_answer = Yii::app()->getRequest()->getParam('numerical_answer');
+			if(!is_numeric($numerical_answer)){
+				$errors['numerical_not_number'] = 1;
+			} else {
+				// if tolerence isn't a valid number
+				if(!is_numeric($tolerance)){
+					$errors['tolerance_not_number'] = 1;
+				}
+			}
+		}
 		// if fillin doesn't have a {fillin}
 
 

@@ -57,7 +57,7 @@
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
 			<label class="radio inline">
-				<input type="radio" id="multiple_radio_answer{$iteration}" name="multiple_radio_answer" value="{$iteration - 1}" {if $answer.is_correct == 1}checked="checked"{/if}/>
+				<input type="radio" id="multiple_radio_answer{$iteration}" name="multiple_radio_answer" value="{$iteration - 1}" {if isset($answer.is_correct)}{if $answer.is_correct == 1}checked="checked"{/if}{/if}/>
 			</label>
 				<input type="text" id="multiple_answer{$iteration - 1}" name="multiple_answer{$iteration - 1}" value="{$answer.answer}"/>
 		</div>		
@@ -136,7 +136,7 @@ $(document).ready(function(){
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
 			<label class="radio inline">
-				<input type="radio" id="true_false_answer{$iteration}" name="truefalse" value="{if $answer.answer == 'True'}1{else}0{/if}" {if $answer.is_correct == 1}checked="checked"{/if}/>{$answer.answer}
+				<input type="radio" id="true_false_answer{$iteration}" name="truefalse" value="{if $answer.answer == 'True'}1{else}0{/if}" {if isset($answer.is_correct)}{if $answer.is_correct == 1}checked="checked"{/if}{/if}/>{$answer.answer}
 			</label>
 				<p class="help-inline"></p>
 		</div>			
@@ -167,7 +167,7 @@ $(document).ready(function(){
 		{assign iteration $smarty.foreach.answers.iteration}
 		<div class="controls">
 			<label class="checkbox inline">
-				<input type="checkbox" id="check_all_check_answer{$iteration}" name="check_all_check_answer{$iteration}" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
+				<input type="checkbox" id="check_all_check_answer{$iteration}" name="check_all_check_answer{$iteration}" value="iteration" {if isset($answer.is_correct)}{if $answer.is_correct == 1}checked="checked"{/if}{/if}/>
 			</label>
 				<input type="text" id="check_all_answer{$iteration}" name="check_all_answer{$iteration}" value="{$answer.answer}"/>
 		</div>			
