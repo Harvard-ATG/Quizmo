@@ -179,9 +179,7 @@ class QuestionController extends Controller
 		} else {
 			$question = Question::getQuestionViewById($question_id);
 		}
-		
-		error_log(var_export($question, 1));
-		
+				
 		// validation rules
 		$errors = array();
 		// if no title
@@ -197,29 +195,33 @@ class QuestionController extends Controller
 			$errors['no_question_type'] = 1;
 		}
 		// if score isn't a number
-		if(!is_numeric($score)){
+		if(!is_numeric($score) && $score != ''){
 			$errors['score_not_number'] = 1;
 		}
 		// if multiple choice has 0 answers
-		if($question_type == 'multiple' && !isset($question['answers'])){
-			$errors['multiple_no_answer'] = 1;
-			// we don't need to report both of these errors at the same time
-		} else {
-			// if multiple choice has no selected correct answer
-			if(!$has_correct){
-				$errors['multiple_no_correct'] = 1;
-			} 
+		if($question_type == 'multiple'){
+			if(!isset($question['answers'])){
+				$errors['multiple_no_answer'] = 1;
+				// we don't need to report both of these errors at the same time
+			} else {
+				// if multiple choice has no selected correct answer
+				if(!$has_correct){
+					$errors['multiple_no_correct'] = 1;
+				} 
+			}
 		}
 		// if true false has no selected correct answer
 			// this shouldn't be possible
 		// if multiple selection has 0 answers
-		if($question_type == 'checkall' && !isset($question['answers'])){
-			$errors['checkall_no_answer'] = 1;
-		} else {
-			// if multiple selection has no selected correct answer
-			if(!$has_correct){
-				$errors['checkall_no_correct'] = 1;
-			} 			
+		if($question_type == 'checkall'){
+			if(!isset($question['answers'])){
+				$errors['checkall_no_answer'] = 1;
+			} else {
+				// if multiple selection has no selected correct answer
+				if(!$has_correct){
+					$errors['checkall_no_correct'] = 1;
+				} 			
+			}
 		}
 		// if numerical isn't a valid number
 		if($question_type == 'numerical'){
@@ -235,7 +237,11 @@ class QuestionController extends Controller
 			}
 		}
 		// if fillin doesn't have a {fillin}
-
+		if($question_type == 'fillin'){
+			if(!preg_match("/\{.+\}/", $body)){
+				$errors['fillin_no_answer'] = 1;
+			}
+		}		
 
 		// else it's a create
 		if($title != '' && $body != '' && $question_type != '' && sizeof($errors) == 0){

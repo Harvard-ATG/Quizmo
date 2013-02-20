@@ -22,7 +22,8 @@
 		}
 		
 		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
-
+		<input type="hidden" id="submit" name="submit" value="1"/>
+		
 		<div class="form-actions">
 			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
 			<a class="btn" href='{url url="/question/admindex/$quiz_id"}'>Cancel</a>
@@ -81,6 +82,10 @@ $(document).ready(function(){
 	if(errors['tolerance_not_number']){
 		$("#numerical-control-group .controls p.help-inline").text("Error: numerical tolerance needs to be a number").show();
 		$("#numerical-control-group").addClass("error");						
+	}
+	if(errors['fillin_no_answer']){
+		$("#body-control-group p.help-inline").text("Error: fill in questions require an answer").show();
+		$("#body-control-group").addClass("error");		
 	}
 
 	// NOTE: this does not work in isites, linking to the isites form submit does not work
