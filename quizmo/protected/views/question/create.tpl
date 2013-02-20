@@ -36,8 +36,26 @@
 <script>
 $(document).ready(function(){
 		
-	question_type = '{if isset($question.question_type)}{$question.question_type}{/if}';		
+	var question_type = '{if isset($question.question_type)}{$question.question_type}{/if}';		
+	var errors = {$error_json};
 	
+	// validation
+	if(errors['no_title']){
+		$("#title-control-group p.help-inline").text("Error: title required").show();
+		$("#title-control-group").addClass("error");
+	}
+	if(errors['no_body']){
+		$("#body-control-group p.help-inline").text("Error: question required").show();
+		$("#body-control-group").addClass("error");
+	}
+	if(errors['no_question_type']){
+		$("#question_type-control-group p.help-block").text("Error: question type required").show();
+		$("#question_type-control-group").addClass("error");
+	}
+	if(errors['score_not_number']){
+		$("#score-control-group p.help-inline").text("Error: score needs to be a number").show();
+		$("#score-control-group").addClass("error");
+	}
 
 	// NOTE: this does not work in isites, linking to the isites form submit does not work
 	$('#question-form').submit(function() {

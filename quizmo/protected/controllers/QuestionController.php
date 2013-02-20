@@ -128,7 +128,6 @@ class QuestionController extends Controller
 					break;
 				case 'checkall':
 					$question['question_type'] = 'S';
-					error_log(var_export($_REQUEST, 1));
 
 					$check_all_answers = array();
 					for($i = 0; $i < 30; $i++){
@@ -165,14 +164,40 @@ class QuestionController extends Controller
 			}
 			$question['points'] = $score;
 			$question['feedback'] = $feedback;
-			error_log(var_export($question, 1));
 		} else {
 			$question = Question::getQuestionViewById($question_id);
 		}
+		
+		// validation rules
+		$errors = array();
+		// if no title
+		if($title == ''){
+			$errors['no_title'] = 1;
+		}
+		// if no body
+		if($body == ''){
+			$errors['no_body'] = 1;
+		}
+		// if no question type
+		if($question_type == ''){
+			$errors['no_question_type'] = 1;
+		}
+		// if score isn't a number
+		if(!is_numeric($score)){
+			$errors['score_not_number'] = 1;
+		}
+		// if multiple choice has 0 answers
+		// if multiple choice has no selected correct answer
+		// if true false has no selected correct answer
+		// if multiple selection has 0 answers
+		// if multiple selection has no selected correct answer
+		// if numerical isn't a valid number
+		// if tolerence isn't a valid number
+		// if fillin doesn't have a {fillin}
 
 
 		// else it's a create
-		if($title != '' && $body != '' && $question_type != ''){
+		if($title != '' && $body != '' && $question_type != '' && sizeof($errors) == 0){
 			// this needs to be put into the question model or its own component so a unit test can be written on it
 			if($question_id != ''){
 				$question = Question::model()->findByPk($question_id);
@@ -278,7 +303,8 @@ class QuestionController extends Controller
 			'body'=>$body,
 			'question_type'=>$question_type,
 			'question_id'=>$question_id,
-			'question'=>$question
+			'question'=>$question,
+			'error_json'=>json_encode($errors)
 		));
 
 	}
