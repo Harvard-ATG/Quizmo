@@ -140,10 +140,15 @@ class QuestionController extends Controller
 					for($i = 0; $i < 30; $i++){
 						if(isset($_REQUEST['check_all_answer'.$i])){
 							(isset($_REQUEST['check_all_check_answer'.$i])) ? $correct = 1 : $correct = 0;
-							array_push($check_all_answers, array(
-								'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
-								'is_correct' => $correct
-							));
+							// for validation
+							if($correct == 1)
+								$has_correct = true;
+							if(Yii::app()->getRequest()->getParam('check_all_answer'.$i) != ''){
+								array_push($check_all_answers, array(
+									'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
+									'is_correct' => $correct
+								));								
+							}
 						}
 					}
 
@@ -204,8 +209,16 @@ class QuestionController extends Controller
 			} 
 		}
 		// if true false has no selected correct answer
+		// this shouldn't be possible
 		// if multiple selection has 0 answers
-		// if multiple selection has no selected correct answer
+		if($question_type == 'checkall' && !isset($question['answers'])){
+			$errors['checkall_no_answer'] = 1;
+		} else {
+			// if multiple selection has no selected correct answer
+			if(!$has_correct){
+				$errors['checkall_no_correct'] = 1;
+			} 			
+		}
 		// if numerical isn't a valid number
 		// if tolerence isn't a valid number
 		// if fillin doesn't have a {fillin}

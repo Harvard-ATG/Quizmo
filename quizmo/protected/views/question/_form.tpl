@@ -160,6 +160,7 @@ $(document).ready(function(){
 
 <div id="check-all-control-group" class="control-group hidden">
 	<label class="control-label" for="check-all">Check All Answers</label>
+	<p class="help-inline"></p>
 	<div id="check-all-control-group-inner">
 	{if isset($question.answers)}
 		{foreach from=$question.answers item=answer name=answers}
@@ -169,7 +170,6 @@ $(document).ready(function(){
 				<input type="checkbox" id="check_all_check_answer{$iteration}" name="check_all_check_answer{$iteration}" value="iteration" {if $answer.is_correct == 1}checked="checked"{/if}/>
 			</label>
 				<input type="text" id="check_all_answer{$iteration}" name="check_all_answer{$iteration}" value="{$answer.answer}"/>
-				<p class="help-inline"></p>
 		</div>			
 		{/foreach}
 	{else}
@@ -178,7 +178,6 @@ $(document).ready(function(){
 			<input type="checkbox" id="check_all_check_answer0" name="check_all_check_answer0" value="1"/>
 		</label>
 			<input type="text" id="check_all_answer0" name="check_all_answer0"/>
-			<p class="help-inline"></p>
 	</div>
 		
 	<div class="controls">
@@ -186,7 +185,6 @@ $(document).ready(function(){
 			<input type="checkbox" id="check_all_check_answer1" name="check_all_check_answer1" value="1"/>
 		</label>
 			<input type="text" id="check_all_answer1" name="check_all_answer1"/>
-			<p class="help-inline"></p>
 	</div>
 		
 	<div class="controls">
@@ -194,7 +192,6 @@ $(document).ready(function(){
 			<input type="checkbox" id="check_all_check_answer2" name="check_all_check_answer2" value="1"/>
 		</label>
 			<input type="text" id="check_all_answer2" name="check_all_answer2"/>
-			<p class="help-inline"></p>
 	</div>
 	{/if}
 	</div>

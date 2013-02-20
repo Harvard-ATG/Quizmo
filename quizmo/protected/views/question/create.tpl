@@ -58,17 +58,20 @@ $(document).ready(function(){
 	}
 	
 	if(errors['multiple_no_answer']){
-		console.log("nam");
 		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need at least one answer").show();
 		$("#multiple-choice-control-group").addClass("error");		
 	}
 	if(errors['multiple_no_correct']){
-		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need at least one correct answer").show();
+		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need a correct answer").show();
 		$("#multiple-choice-control-group").addClass("error");		
 	}
-	if(errors['multiple_has_blank']){
-		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need values for all answers").show();
-		$("#multiple-choice-control-group").addClass("error");		
+	if(errors['checkall_no_answer']){
+		$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one answer").show();
+		$("#check-all-control-group").addClass("error");		
+	}
+	if(errors['checkall_no_correct']){
+		$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one correct answer").show();
+		$("#check-all-control-group").addClass("error");		
 	}
 
 	// NOTE: this does not work in isites, linking to the isites form submit does not work
