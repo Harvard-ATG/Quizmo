@@ -97,7 +97,7 @@ class QuestionController extends Controller
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
-		$submit = Yii::app()->getRequest()->getParam('submit');
+		$submit = Yii::app()->getRequest()->getParam('submitted');
 		
 		$question = array();
 		$errors = array();
@@ -130,9 +130,16 @@ class QuestionController extends Controller
 					case 'truefalse':
 						$question['question_type'] = 'T';
 						$truefalse = Yii::app()->getRequest()->getParam('truefalse');
-					
-						$question['answers'][0]['is_correct'] = $truefalse;
-						$question['answers'][1]['is_correct'] = !$truefalse;
+						$has_correct = true;
+						if($truefalse == 1){
+							$question['answers'][0]['is_correct'] = 1;
+							$question['answers'][1]['is_correct'] = 0;
+						} elseif($truefalse == 0){
+							$question['answers'][0]['is_correct'] = 0;
+							$question['answers'][1]['is_correct'] = 1;
+						} else {
+							$has_correct = false;
+						}
 						$question['answers'][0]['answer'] = 'True';
 						$question['answers'][1]['answer'] = 'False';
 						break;
@@ -213,7 +220,11 @@ class QuestionController extends Controller
 				}
 			}
 			// if true false has no selected correct answer
-				// this shouldn't be possible
+			if($question_type == 'truefalse'){
+				if(!$has_correct){
+					$errors['truefalse_no_correct'] = 1;
+				}
+			}
 			// if multiple selection has 0 answers
 			if($question_type == 'checkall'){
 				if(!isset($question['answers'])){

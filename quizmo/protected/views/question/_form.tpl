@@ -144,7 +144,7 @@ $(document).ready(function(){
 	{else}
 	<div class="controls">
 		<label class="radio">
-			<input type="radio" id="true_answer" name="truefalse" value="true"/> True
+			<input type="radio" id="true_answer" name="truefalse" value="true" checked="checked"/> True
 			<p class="help-inline"></p>
 		</label>
 	</div>

@@ -22,7 +22,7 @@
 		}
 		
 		<input type="hidden" id="quiz_id" name="quiz_id" value="{$quiz_id}"/>
-		<input type="hidden" id="submit" name="submit" value="1"/>
+		<input type="hidden" id="submitted" name="submitted" value="1"/>
 		
 		<div class="form-actions">
 			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
