@@ -82,7 +82,7 @@ class QuestionController extends Controller
 	{
 		$user_id = Yii::app()->user->getId();
 		$quiz = new Quiz;
-		error_log("quiz/create");
+		//error_log("quiz/create");
 		
 		//$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
 		//$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
@@ -97,151 +97,154 @@ class QuestionController extends Controller
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
+		$submit = Yii::app()->getRequest()->getParam('submit');
 		
-		// for validation
-		$has_correct = false;
+		$question = array();
+		$errors = array();
+		if($submit){
+			// for validation
+			$has_correct = false;
 		
-		// lets put everything into question so it will show if the validation fails
-		if($question_id == ''){
-			$question = array();
-			$question['title'] = $title;
-			$question['body'] = $body;
-			// TODO: implement this: Question::typeStringToCode($question_type);
-			//$question['question_type'] = Question::typeStringToCode($question_type);
-			switch($question_type){
-				case 'multiple':
-					$question['question_type'] = 'M';
-					$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
-					for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
-						($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
-						// for validation
-						if($correct == 1)
-							$has_correct = true;
-						if($_REQUEST['multiple_answer'.$i] != ''){
-							$question['answers'][$i]['answer'] = $_REQUEST['multiple_answer'.$i];
-							$question['answers'][$i]['is_correct'] = $correct;
-						}
-						
-					}
-					break;
-				case 'truefalse':
-					$question['question_type'] = 'T';
-					$truefalse = Yii::app()->getRequest()->getParam('truefalse');
-					
-					$question['answers'][0]['is_correct'] = $truefalse;
-					$question['answers'][1]['is_correct'] = !$truefalse;
-					$question['answers'][0]['answer'] = 'True';
-					$question['answers'][1]['answer'] = 'False';
-					break;
-				case 'checkall':
-					$question['question_type'] = 'S';
-
-					$check_all_answers = array();
-					for($i = 0; $i < 30; $i++){
-						if(isset($_REQUEST['check_all_answer'.$i])){
-							(isset($_REQUEST['check_all_check_answer'.$i])) ? $correct = 1 : $correct = 0;
+			// lets put everything into question so it will show if the validation fails
+			if($question_id == ''){
+				$question['title'] = $title;
+				$question['body'] = $body;
+				// TODO: implement this: Question::typeStringToCode($question_type);
+				//$question['question_type'] = Question::typeStringToCode($question_type);
+				switch($question_type){
+					case 'multiple':
+						$question['question_type'] = 'M';
+						$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
+						for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
+							($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
 							// for validation
 							if($correct == 1)
 								$has_correct = true;
-							if(Yii::app()->getRequest()->getParam('check_all_answer'.$i) != ''){
-								array_push($check_all_answers, array(
-									'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
-									'is_correct' => $correct
-								));								
+							if($_REQUEST['multiple_answer'.$i] != ''){
+								$question['answers'][$i]['answer'] = $_REQUEST['multiple_answer'.$i];
+								$question['answers'][$i]['is_correct'] = $correct;
+							}
+						
+						}
+						break;
+					case 'truefalse':
+						$question['question_type'] = 'T';
+						$truefalse = Yii::app()->getRequest()->getParam('truefalse');
+					
+						$question['answers'][0]['is_correct'] = $truefalse;
+						$question['answers'][1]['is_correct'] = !$truefalse;
+						$question['answers'][0]['answer'] = 'True';
+						$question['answers'][1]['answer'] = 'False';
+						break;
+					case 'checkall':
+						$question['question_type'] = 'S';
+
+						$check_all_answers = array();
+						for($i = 0; $i < 30; $i++){
+							if(isset($_REQUEST['check_all_answer'.$i])){
+								(isset($_REQUEST['check_all_check_answer'.$i])) ? $correct = 1 : $correct = 0;
+								// for validation
+								if($correct == 1)
+									$has_correct = true;
+								if(Yii::app()->getRequest()->getParam('check_all_answer'.$i) != ''){
+									array_push($check_all_answers, array(
+										'answer' => Yii::app()->getRequest()->getParam('check_all_answer'.$i),
+										'is_correct' => $correct
+									));								
+								}
 							}
 						}
-					}
 
-					for($i = 0; $i < sizeof($check_all_answers); $i++){
-						if(isset($check_all_answers[$i]['answer'])){
-							$question['answers'][$i]['is_correct'] = $check_all_answers[$i]['is_correct'];
-							$question['answers'][$i]['answer'] = $check_all_answers[$i]['answer'];
+						for($i = 0; $i < sizeof($check_all_answers); $i++){
+							if(isset($check_all_answers[$i]['answer'])){
+								$question['answers'][$i]['is_correct'] = $check_all_answers[$i]['is_correct'];
+								$question['answers'][$i]['answer'] = $check_all_answers[$i]['answer'];
+							}
 						}
-					}
-					break;
-				case 'essay':
-					$question['question_type'] = 'E';
-					break;
-				case 'numerical':
-					$question['question_type'] = 'N';
-					$question['answers'][0]['answer'] = Yii::app()->getRequest()->getParam('numerical_answer');
-					$question['answers'][0]['tolerance'] = Yii::app()->getRequest()->getParam('tolerance');				
-					break;
-				case 'fillin':
-					$question['question_type'] = 'F';
-					break;
-				default:
-					$question['question_type'] = '';
-					break;
+						break;
+					case 'essay':
+						$question['question_type'] = 'E';
+						break;
+					case 'numerical':
+						$question['question_type'] = 'N';
+						$question['answers'][0]['answer'] = Yii::app()->getRequest()->getParam('numerical_answer');
+						$question['answers'][0]['tolerance'] = Yii::app()->getRequest()->getParam('tolerance');				
+						break;
+					case 'fillin':
+						$question['question_type'] = 'F';
+						break;
+					default:
+						$question['question_type'] = '';
+						break;
+				}
+				$question['points'] = $score;
+				$question['feedback'] = $feedback;
+			} else {
+				$question = Question::getQuestionViewById($question_id);
 			}
-			$question['points'] = $score;
-			$question['feedback'] = $feedback;
-		} else {
-			$question = Question::getQuestionViewById($question_id);
-		}
 				
-		// validation rules
-		$errors = array();
-		// if no title
-		if($title == ''){
-			$errors['no_title'] = 1;
-		}
-		// if no body
-		if($body == ''){
-			$errors['no_body'] = 1;
-		}
-		// if no question type
-		if($question_type == ''){
-			$errors['no_question_type'] = 1;
-		}
-		// if score isn't a number
-		if(!is_numeric($score) && $score != ''){
-			$errors['score_not_number'] = 1;
-		}
-		// if multiple choice has 0 answers
-		if($question_type == 'multiple'){
-			if(!isset($question['answers'])){
-				$errors['multiple_no_answer'] = 1;
-				// we don't need to report both of these errors at the same time
-			} else {
-				// if multiple choice has no selected correct answer
-				if(!$has_correct){
-					$errors['multiple_no_correct'] = 1;
-				} 
+			// validation rules
+			// if no title
+			if($title == ''){
+				$errors['no_title'] = 1;
 			}
-		}
-		// if true false has no selected correct answer
-			// this shouldn't be possible
-		// if multiple selection has 0 answers
-		if($question_type == 'checkall'){
-			if(!isset($question['answers'])){
-				$errors['checkall_no_answer'] = 1;
-			} else {
-				// if multiple selection has no selected correct answer
-				if(!$has_correct){
-					$errors['checkall_no_correct'] = 1;
-				} 			
+			// if no body
+			if($body == ''){
+				$errors['no_body'] = 1;
 			}
-		}
-		// if numerical isn't a valid number
-		if($question_type == 'numerical'){
-			$tolerance = Yii::app()->getRequest()->getParam('tolerance');
-			$numerical_answer = Yii::app()->getRequest()->getParam('numerical_answer');
-			if(!is_numeric($numerical_answer)){
-				$errors['numerical_not_number'] = 1;
-			} else {
-				// if tolerence isn't a valid number
-				if(!is_numeric($tolerance)){
-					$errors['tolerance_not_number'] = 1;
+			// if no question type
+			if($question_type == ''){
+				$errors['no_question_type'] = 1;
+			}
+			// if score isn't a number
+			if(!is_numeric($score) && $score != ''){
+				$errors['score_not_number'] = 1;
+			}
+			// if multiple choice has 0 answers
+			if($question_type == 'multiple'){
+				if(!isset($question['answers'])){
+					$errors['multiple_no_answer'] = 1;
+					// we don't need to report both of these errors at the same time
+				} else {
+					// if multiple choice has no selected correct answer
+					if(!$has_correct){
+						$errors['multiple_no_correct'] = 1;
+					} 
 				}
 			}
-		}
-		// if fillin doesn't have a {fillin}
-		if($question_type == 'fillin'){
-			if(!preg_match("/\{.+\}/", $body)){
-				$errors['fillin_no_answer'] = 1;
+			// if true false has no selected correct answer
+				// this shouldn't be possible
+			// if multiple selection has 0 answers
+			if($question_type == 'checkall'){
+				if(!isset($question['answers'])){
+					$errors['checkall_no_answer'] = 1;
+				} else {
+					// if multiple selection has no selected correct answer
+					if(!$has_correct){
+						$errors['checkall_no_correct'] = 1;
+					} 			
+				}
 			}
-		}		
+			// if numerical isn't a valid number
+			if($question_type == 'numerical'){
+				$tolerance = Yii::app()->getRequest()->getParam('tolerance');
+				$numerical_answer = Yii::app()->getRequest()->getParam('numerical_answer');
+				if(!is_numeric($numerical_answer)){
+					$errors['numerical_not_number'] = 1;
+				} else {
+					// if tolerence isn't a valid number
+					if(!is_numeric($tolerance)){
+						$errors['tolerance_not_number'] = 1;
+					}
+				}
+			}
+			// if fillin doesn't have a {fillin}
+			if($question_type == 'fillin'){
+				if(!preg_match("/\{.+\}/", $body)){
+					$errors['fillin_no_answer'] = 1;
+				}
+			}	
+		}	
 
 		// else it's a create
 		if($title != '' && $body != '' && $question_type != '' && sizeof($errors) == 0){
