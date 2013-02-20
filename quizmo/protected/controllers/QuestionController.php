@@ -98,6 +98,9 @@ class QuestionController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		
+		// for validation
+		$has_correct = false;
+		
 		// lets put everything into question so it will show if the validation fails
 		if($question_id == ''){
 			$question = array();
@@ -111,15 +114,19 @@ class QuestionController extends Controller
 					$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
 					for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
 						($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
-						$question['answers'][$i]['is_correct'] = $correct;
-						$question['answers'][$i]['answer'] = $_REQUEST['multiple_answer'.$i];
+						// for validation
+						if($correct == 1)
+							$has_correct = true;
+						if($_REQUEST['multiple_answer'.$i] != ''){
+							$question['answers'][$i]['answer'] = $_REQUEST['multiple_answer'.$i];
+							$question['answers'][$i]['is_correct'] = $correct;
+						}
+						
 					}
 					break;
 				case 'truefalse':
 					$question['question_type'] = 'T';
 					$truefalse = Yii::app()->getRequest()->getParam('truefalse');
-					error_log("bam?");
-					error_log($truefalse);
 					
 					$question['answers'][0]['is_correct'] = $truefalse;
 					$question['answers'][1]['is_correct'] = !$truefalse;
@@ -187,7 +194,15 @@ class QuestionController extends Controller
 			$errors['score_not_number'] = 1;
 		}
 		// if multiple choice has 0 answers
-		// if multiple choice has no selected correct answer
+		if($question_type == 'multiple' && !isset($question['answers'])){
+			$errors['multiple_no_answer'] = 1;
+			// we don't need to report both of these errors at the same time
+		} else {
+			// if multiple choice has no selected correct answer
+			if(!$has_correct){
+				$errors['multiple_no_correct'] = 1;
+			} 
+		}
 		// if true false has no selected correct answer
 		// if multiple selection has 0 answers
 		// if multiple selection has no selected correct answer

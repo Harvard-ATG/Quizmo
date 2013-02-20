@@ -56,6 +56,20 @@ $(document).ready(function(){
 		$("#score-control-group p.help-inline").text("Error: score needs to be a number").show();
 		$("#score-control-group").addClass("error");
 	}
+	
+	if(errors['multiple_no_answer']){
+		console.log("nam");
+		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need at least one answer").show();
+		$("#multiple-choice-control-group").addClass("error");		
+	}
+	if(errors['multiple_no_correct']){
+		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need at least one correct answer").show();
+		$("#multiple-choice-control-group").addClass("error");		
+	}
+	if(errors['multiple_has_blank']){
+		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need values for all answers").show();
+		$("#multiple-choice-control-group").addClass("error");		
+	}
 
 	// NOTE: this does not work in isites, linking to the isites form submit does not work
 	$('#question-form').submit(function() {

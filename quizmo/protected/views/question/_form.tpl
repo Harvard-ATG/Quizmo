@@ -50,6 +50,7 @@
 
 <div id="multiple-choice-control-group" class="control-group hidden">
 	<label class="control-label" for="state">Multiple Choice Answers</label>
+	<p class="help-inline"></p>
 	<div id="multiple-choice-control-group-inner">
 	{if isset($question.answers)}
 		{foreach from=$question.answers item=answer name=answers}
@@ -59,7 +60,6 @@
 				<input type="radio" id="multiple_radio_answer{$iteration}" name="multiple_radio_answer" value="{$iteration - 1}" {if $answer.is_correct == 1}checked="checked"{/if}/>
 			</label>
 				<input type="text" id="multiple_answer{$iteration - 1}" name="multiple_answer{$iteration - 1}" value="{$answer.answer}"/>
-				<p class="help-inline"></p>
 		</div>		
 		{/foreach}
 	{else}
@@ -68,21 +68,18 @@
 			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="0"/>
 		</label>
 			<input type="text" id="multiple_answer0" name="multiple_answer0"/>
-			<p class="help-inline"></p>
 	</div>
 	<div class="controls">
 		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="1"/>
 		</label>
 			<input type="text" id="multiple_answer1" name="multiple_answer1"/>
-			<p class="help-inline"></p>
 	</div>
 	<div class="controls">
 		<label class="radio inline">
 			<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answer" value="2"/>
 		</label>
 			<input type="text" id="multiple_answer2" name="multiple_answer2"/>
-			<p class="help-inline"></p>
 	</div>
 	{/if}
 	</div>
