@@ -37,7 +37,7 @@ class ResponseController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('grade'),
-				'roles'=>array('admin','super'),
+				'roles'=>array('admin','super','enrollee'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
