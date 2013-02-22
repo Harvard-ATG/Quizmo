@@ -356,6 +356,10 @@ class QuestionController extends Controller
 				return;
 			}
 		}
+		
+		if($question_id != ''){
+			$question = Question::getQuestionViewById($question_id);
+		}
 
 		$this->render('create', array(
 			'collection_id'=>$collection_id,
