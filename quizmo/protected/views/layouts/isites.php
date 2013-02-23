@@ -21,6 +21,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
     </titlebar>
     
 	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"> </a>
+	<!-- TODO: change all of these to actual paths - this no longer does anything as VPN is required at all times to do work so pfft -->
 	<style>
 	<?php include("css/bootstrap-isites.css"); ?>
 	</style>
