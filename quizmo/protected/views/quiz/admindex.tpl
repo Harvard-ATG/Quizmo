@@ -61,7 +61,10 @@
 			</td>
 			<td>
 				{if $quiz.status != 'S' && $quiz.question_count > 0}
-					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
+					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz {$quiz.question_count}</a><br/>
+				{/if}
+				{if $quiz.question_count == 0}
+					Quiz has no questions.<br/>
 				{/if}
 				<a href="{url url='/question/admindex/'|cat:$quiz['ID']}">Edit Questions</a><br/>
 				<a href="{url url='/quiz/create/'|cat:$collection_id|cat:'/'|cat:$quiz['ID']}">Edit Settings</a><br/>

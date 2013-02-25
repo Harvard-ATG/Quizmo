@@ -55,12 +55,16 @@
 				{/if}	
 			</td>
 			<td>
-				{if $quiz.status != 'S' && $quiz['STATE'] != 'C' && !$quiz['isClosed']}
+				{if $quiz.status != 'S' && $quiz.question_count > 0}
 					<a href="{url url='/quiz/take/'|cat:$quiz['ID']}">Take Quiz</a><br/>
 				{/if}
+				{if $quiz.question_count == 0}
+					Quiz has no questions.<br/>
+				{/if}
+				
 				{if $quiz.status == 'N' && $quiz['STATE'] != 'C' && $quiz['STATE'] != 'S'}
 					<!-- not started -->
-				{elseif $quiz.status != 'N' || $quiz['STATE'] == 'C' || $quiz['isClosed']}
+				{elseif ($quiz.status != 'N' && $quiz.status != 'U') || $quiz['STATE'] == 'C' || $quiz['isClosed']}
 					<!-- submitted -->
 					<a href='{url url="/quiz/individualResults/"|cat:$quiz['ID']|cat:"/"|cat:$user_id}'>My Results</a><br/>
 				{else}
