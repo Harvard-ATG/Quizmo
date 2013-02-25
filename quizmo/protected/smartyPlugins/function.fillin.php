@@ -22,13 +22,13 @@ function smarty_function_fillin($params, &$smarty){
 	$responses = null;
 	if(isset($params['responses']))
 		$responses = $params['responses'];
-	//$question = "you put the {lime} in the {coconut} and {drink} it all up";
-	//$responses = array(array(response=>lime), array(response=>coconut), array(response=>drink))
 	$disabled = '';
 	if(isset($params['disabled'])){
 		$disabled = ' disabled="disabled" ';
 	}
 	
+	// removing the pipes, they seem to have an odd effect on the inputs
+	$question = preg_replace("/\|/", "", $question);
 	preg_match_all("/\{[^}]*\}/", $question, $matches);
 	$responses_index = 0;
 	foreach($matches as $val){
@@ -43,11 +43,12 @@ function smarty_function_fillin($params, &$smarty){
 				$responses_index++;
 				$new_input = "<input class='input-small fillin-text' type='text' value='$response' $disabled/>";
 			}
-			$question = preg_replace("/".addslashes($match)."/", $new_input, $question);
+			// if the pipe is left in, this preg_replace matches more times than we want because of the OR in the match... 
+			$question = preg_replace("/".htmlspecialchars($match)."/", $new_input, $question);
 		}
 		//error_log(var_export($match, 1));
 	}
 	
-
+	error_log($question);
     return $question;
 }
