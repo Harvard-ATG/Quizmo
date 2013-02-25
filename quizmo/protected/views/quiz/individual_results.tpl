@@ -35,7 +35,7 @@
 			
 			</td>
 			<td nowrap="nowrap">
-			{if true}
+			{if $admin_view}
 				{include file = 'protected/views/response/_grade.tpl'
 					response_id = $question.responses[0].id
 					score = $question.score
