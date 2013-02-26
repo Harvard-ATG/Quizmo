@@ -40,7 +40,7 @@ function smarty_function_fillin($params, &$smarty){
 				$new_input = "<input class='input-small fillin-text' type='text' value='$response' $disabled/>";
 			}
 			// if the pipe is left in, this preg_replace matches more times than we want because of the OR in the match... 
-			$question = preg_replace("/".preg_quote($match)."/", $new_input, $question);
+			$question = preg_replace("/".preg_quote($match, '/')."/", $new_input, $question);
 		}
 	}
 	
