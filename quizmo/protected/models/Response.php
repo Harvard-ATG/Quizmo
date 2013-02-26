@@ -771,14 +771,22 @@ class Response extends QActiveRecord
 								$answer_string = strtolower($answer_string);
 							}
 							
-							if($response_string == $answer_string){								
-								if(!$correct)
-									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
-								$correct = true;
-							} else {								
-								Response::setScore($response->ID, 0);
+							// get all the answers seperated by |
+							$answerArr = explode("|", $answer_string);
+							
+							foreach($answerArr as $answer){
+								if($response_string == $answer){
+									$correct = true;
+									break;
+								} 
 								$correct = false;
 							}
+
+							if($correct)
+								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+							else
+								Response::setScore($response->ID, 0);
+								
 							
 						break;
 						
