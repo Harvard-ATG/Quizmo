@@ -103,10 +103,11 @@ class QuestionController extends Controller
 		$errors = array();
 		if($submit){
 			// for validation
-			$has_correct = false;
+			$has_correct = true;
 		
 			// lets put everything into question so it will show if the validation fails
 			if($question_id == ''){
+				$has_correct = false;
 				$question['title'] = $title;
 				$question['body'] = $body;
 				// TODO: implement this: Question::typeStringToCode($question_type);
@@ -116,6 +117,7 @@ class QuestionController extends Controller
 						$question['question_type'] = 'M';
 						$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
 						for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
+							error_log("$i:$multiple_radio_answer");
 							($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
 							// for validation
 							if($correct == 1)
