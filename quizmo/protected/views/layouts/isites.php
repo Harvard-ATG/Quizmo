@@ -22,22 +22,27 @@ $host = "http://".$_SERVER['HTTP_HOST'];
     
 	<a name="quizmo-<?php echo $_REQUEST['topicId']; ?>"> </a>
 	<!-- TODO: change all of these to actual paths - this no longer does anything as VPN is required at all times to do work so pfft -->
+	<link href="<?php echo $host; ?>/css/bootstrap-isites.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo $host; ?>/css/bootstrap-responsive-isites.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo $host; ?>/css/bootstrap-notify.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo $host; ?>/css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo $host; ?>/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+	
 	<style>
-	<?php include("css/bootstrap-isites.css"); ?>
+	<?php //include("css/bootstrap-isites.css"); ?>
 	</style>
 	<style>
-	<?php include("css/bootstrap-responsive-isites.css"); ?>
+	<?php //include("css/bootstrap-responsive-isites.css"); ?>
 	</style>
 	<style>
-	<?php include("css/bootstrap-notify.css"); ?>
+	<?php //include("css/bootstrap-notify.css"); ?>
 	</style>
 	<style>
-	<?php include("css/bootstrap-wysihtml5-0.0.2.css"); ?>
+	<?php //include("css/bootstrap-wysihtml5-0.0.2.css"); ?>
 	</style>
 	<style>
-	<?php include("css/font-awesome.css"); ?>
+	<?php //include("css/font-awesome.css"); ?>
 	</style>
-	<!-- link href="http://fortawesome.github.com/Font-Awesome/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/ -->
 	<style>
 #view-switch {
 	display: none;
@@ -45,12 +50,6 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 textarea { resize:both; }
 	</style>
 
-<!--
-	<link href="<?php echo $host; ?>/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo $host; ?>/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
--->
-
-	
 	<script>
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
@@ -60,7 +59,7 @@ textarea { resize:both; }
 	<!-- <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script> -->
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
     <!-- <script src="<?php echo $host; ?>/js/jquery-ui-datepicker.js"></script> -->
-    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
+    <!-- **** <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script> -->
     <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
 	<!-- <script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script> -->
 	<!-- <script src="http://nijikokun.github.com/bootstrap-notify/js/bootstrap-notify.js"></script> -->
@@ -73,13 +72,21 @@ textarea { resize:both; }
 			<div id='hashcontent'>
 				<?php echo preg_replace("/<br>/", "<br/>", $content); ?>
 			</div>
+		</div>
+		
+		<script src="<?php echo $host; ?>/js/bootstrap.js"></script>
+		<script src="<?php echo $host; ?>/js/jquery.dataTables.js"></script>
+		<script src="<?php echo $host; ?>/js/jquery.dataTables.rowReordering.js"></script>
+		<script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script>
+		<script src="<?php echo $host; ?>/js/wysihtml5-0.3.0.js"></script>
+		<script src="<?php echo $host; ?>/js/bootstrap-wysihtml5-0.0.2.js"></script>
 		<script>
 		//<![CDATA[
-		<?php include("js/jquery.dataTables.js"); ?>
-		<?php include("js/jquery.dataTables.rowReordering.js"); ?>
-		<?php include("js/bootstrap-notify.js"); ?>
-		<?php include("js/wysihtml5-0.3.0.js"); ?>
-		<?php include("js/bootstrap-wysihtml5-0.0.2.js"); ?>
+		<?php //include("js/jquery.dataTables.js"); ?>
+		<?php //include("js/jquery.dataTables.rowReordering.js"); ?>
+		<?php //include("js/bootstrap-notify.js"); ?>
+		<?php //include("js/wysihtml5-0.3.0.js"); ?>
+		<?php //include("js/bootstrap-wysihtml5-0.0.2.js"); ?>
 		
 		dohash = function(hash){
 			if(document.location.hash != ''){
@@ -154,8 +161,6 @@ textarea { resize:both; }
 		
 		//]]>
 		</script>
-
-		</div>
 
   </body>
 </html>
