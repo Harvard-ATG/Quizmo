@@ -24,8 +24,10 @@
 
 		<tr data-position="{$smarty.foreach.qounter.index + 1}" id="{$question['ID']}" class="question-row-{$question['ID']}">
 			<td>{$smarty.foreach.qounter.index + 1}</td>
-			<td><a href="{url url='/question/view/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
+			<!-- <td><a href="{url url='/question/view/'|cat:$question['ID']}">{$question['TITLE']}</a></td> -->
+			<td><a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
 			<td>
+				<a href="{url url='/question/view/'|cat:$question['ID']}">View</a><br/>
 				<a href="{url url='/question/create/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">Edit</a><br/>
 
 				<a class="question-delete-btn" name="#question-delete-modal-{$question['ID']}" >Delete</a>
