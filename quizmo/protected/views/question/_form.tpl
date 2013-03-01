@@ -6,12 +6,9 @@
 	</div>
 </div>
 
-<div id="fill-in-control-group" class="control-group hidden">
+<div id="fill-in-control-group" class="fill-in-control-group control-group hidden">
 	<label class="control-label" for="numerical">Fill in the blank answer</label>
 	<div class="controls">
-		<label class="checkbox inline">
-			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if isset($question.answers[0].is_case_sensitive)}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
-		</label>
 		<p class="help-inline">
 			{literal}
 			<p>To create blanks, place curly braces around words. For example:</p>
@@ -28,6 +25,14 @@
 	<div class="controls">
 		<textarea class="input-xlarge span10" id="question-body" name="body" rows="5">{if $question}{$question.body}{/if}</textarea>
 		<p class="help-inline"></p>
+	</div>
+</div>
+
+<div id="fill-in-control-group" class="fill-in-control-group control-group hidden">
+	<div class="controls">
+		<label class="checkbox inline" style="white-space:nowrap;">
+			<input type="checkbox" id="is_case_sensitive" name="is_case_sensitive" value="1" {if isset($question.answers[0].is_case_sensitive)}{if $question.answers[0].is_case_sensitive == 1}checked="checked"{/if}{/if}/> Case sensitive?
+		</label>
 	</div>
 </div>
 

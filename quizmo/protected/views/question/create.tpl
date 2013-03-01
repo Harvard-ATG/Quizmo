@@ -160,7 +160,7 @@ $(document).ready(function(){
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
-		$('#fill-in-control-group').addClass('hidden');
+		$('.fill-in-control-group').addClass('hidden');
 		$('#question_type').val("multiple");
 		$('#question-type-multiple').addClass('active');
 
@@ -181,7 +181,7 @@ $(document).ready(function(){
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
-		$('#fill-in-control-group').addClass('hidden');
+		$('.fill-in-control-group').addClass('hidden');
 		$('#question_type').val("truefalse");		
 		$('#question-type-truefalse').addClass('active');	
 
@@ -201,7 +201,7 @@ $(document).ready(function(){
 		$('#question-type-checkall').removeClass('disabled');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
-		$('#fill-in-control-group').addClass('hidden');
+		$('.fill-in-control-group').addClass('hidden');
 		$('#question_type').val("checkall");		
 		$('#question-type-checkall').addClass('active');	
 
@@ -222,7 +222,7 @@ $(document).ready(function(){
 		$('#essay-control-group').removeClass('hidden');
 		$('#question-type-essay').removeClass('disabled');
 		$('#numerical-control-group').addClass('hidden');
-		$('#fill-in-control-group').addClass('hidden');
+		$('.fill-in-control-group').addClass('hidden');
 		$('#question_type').val("essay");		
 		$('#question-type-essay').addClass('active');	
 
@@ -241,7 +241,7 @@ $(document).ready(function(){
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').removeClass('hidden');
 		$('#question-type-numerical').removeClass('disabled');
-		$('#fill-in-control-group').addClass('hidden');
+		$('.fill-in-control-group').addClass('hidden');
 		$('#question_type').val("numerical");		
 		$('#question-type-numerical').addClass('active');	
 
@@ -259,7 +259,7 @@ $(document).ready(function(){
 		$('#check-all-control-group').addClass('hidden');
 		$('#essay-control-group').addClass('hidden');
 		$('#numerical-control-group').addClass('hidden');
-		$('#fill-in-control-group').removeClass('hidden');
+		$('.fill-in-control-group').removeClass('hidden');
 		$('#question-type-fillin').removeClass('disabled');
 		$('#question_type').val("fillin");		
 		$('#question-type-fillin').addClass('active');	
