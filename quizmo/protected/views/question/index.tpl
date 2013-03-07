@@ -2,11 +2,14 @@
   <li>
     <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
+  <li>
+    {$title} <span class="divider">/</span>
+  </li>
   <li class="active">Questions</li>
 </ul>
 
 <div>
-	<h1>Questions</h1>
+	<h1>Questions for {$title}</h1>
 </div>
 
 <div id="questions-container">

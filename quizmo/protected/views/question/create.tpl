@@ -3,9 +3,12 @@
     <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
   <li>
+    {$quiz_title} <span class="divider">/</span>
+  </li>
+  <li>
     <a href='{url url="/question/admindex/$quiz_id"}'>Questions</a> <span class="divider">/</span>
   </li>
-  <li class="active">Edit Question</li>
+  <li class="active">Edit Question for {$quiz_title}</li>
 </ul>
 
 <form id="question-form" class="form-horizontal row-fluid isites-form" action="/question/create/{$quiz_id}/{$question_id}">

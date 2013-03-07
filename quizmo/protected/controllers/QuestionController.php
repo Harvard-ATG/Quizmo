@@ -371,7 +371,8 @@ class QuestionController extends Controller
 			'question_type'=>$question_type,
 			'question_id'=>$question_id,
 			'question'=>$question,
-			'error_json'=>json_encode($errors)
+			'error_json'=>json_encode($errors),
+			'quiz_title'=>Quiz::model()->findByPk($quiz_id)->TITLE,
 		));
 
 	}
@@ -413,6 +414,7 @@ class QuestionController extends Controller
 			'sizeofquestions'=>sizeof($questions),
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
+			'title'=>Quiz::model()->findByPk($quiz_id)->TITLE,
 		));
 
 	}
@@ -435,6 +437,7 @@ class QuestionController extends Controller
 			'sizeofquestions'=>sizeof($questions),
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
+			'title'=>Quiz::model()->findByPk($quiz_id)->TITLE,
 		));
 
 	}
