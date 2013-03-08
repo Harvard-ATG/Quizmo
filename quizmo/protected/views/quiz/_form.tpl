@@ -37,12 +37,14 @@
 	<div id="scheduling" class="hide">
 		<label class="control-label" for="start_date">Display start</label>
 		<div class="controls">
-			<input type="text" class="input-small" id="start_date" name="start_date" value="{$start_date}"/>
+			<input type="date" class="input-small" id="start_date" name="start_date" value="{$start_date}"/>
+			<input type="time" class="input-small" id="start_time" name="start_time" value="{*$start_time*}"/>
 			<p class="help-inline"></p>
 		</div>
 		<label class="control-label" for="end_date">Display end</label>
 		<div class="controls">
-			<input type="text" class="input-small" id="end_date" name="end_date" value="{$end_date}"/>
+			<input type="date" class="input-small" id="end_date" name="end_date" value="{$end_date}"/>
+			<input type="time" class="input-small" id="end_time" name="end_time" value="{*$end_time*}"/>
 			<p class="help-inline"></p>
 		</div>
 	</div>
