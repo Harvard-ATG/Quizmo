@@ -81,7 +81,12 @@ class QuizController extends Controller
 		$description = preg_replace("/<br>/", "<br/>", $description);
 		$state = Yii::app()->getRequest()->getParam('quiz_state');
 		$start_date = Yii::app()->getRequest()->getParam('start_date');
+		$start_time = Yii::app()->getRequest()->getParam('start_time');
 		$end_date = Yii::app()->getRequest()->getParam('end_date');
+		$end_time = Yii::app()->getRequest()->getParam('end_time');
+		$start_date = $start_date." ".$start_time.":00";
+		$end_date = $end_date." ".$end_time.":00";
+		
 		$visibility = Yii::app()->getRequest()->getParam('visibility');
 		if($visibility == '') $visibility = 0;
 		$show_feedback = Yii::app()->getRequest()->getParam('show_feedback');
@@ -104,8 +109,11 @@ class QuizController extends Controller
 				$title = $quiz->TITLE;
 				$description = $quiz->DESCRIPTION;
 				$state = $quiz->STATE;
-				$start_date = $quiz->START_DATE;
-				$end_date = $quiz->END_DATE;
+				//preg_match($quiz->START_DATE);
+				$start_date = preg_replace("/ \d\d:\d\d:\d\d/", "", $quiz->START_DATE);
+				$end_date = preg_replace("/ \d\d:\d\d:\d\d/", "", $quiz->END_DATE);
+				$start_time = preg_replace("/^\d\d\d\d-\d\d-\d\d /", "", $quiz->START_DATE);
+				$end_time = preg_replace("/^\d\d\d\d-\d\d-\d\d /", "", $quiz->END_DATE);
 				$visibility = $quiz->VISIBILITY;
 				$show_feedback = $quiz->SHOW_FEEDBACK;					
 			}
@@ -135,7 +143,9 @@ class QuizController extends Controller
 			'description'=>$description,
 			'state'=>$state,
 			'start_date'=>$start_date,
+			'start_time'=>$start_time,
 			'end_date'=>$end_date,
+			'end_time'=>$end_time,
 			'visibility'=>$visibility,
 			'show_feedback'=>$show_feedback,
 		));
