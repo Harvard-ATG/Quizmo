@@ -681,8 +681,7 @@ class Response extends QActiveRecord
 		//$questions = Question::model()->with('responses', 'answers')->findAllByAttributes(array('QUIZ_ID'=>$quiz_id);
 		// a huge query is very inefficient, and will not scale appropriately
 		
-		$question_ids = Quiz::getQuestionIds($quiz_id);
-		// this is a hash that has question_id as the key and question->points as the value
+		$question_ids = Quiz::getQuestionIds($quiz_id);		// this is a hash that has question_id as the key and question->points as the value
 		$question_points = Quiz::getQuestionPoints($quiz_id);
 		$question_ids_string = join(",", $question_ids);
 		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids, 'USER_ID'=>$user_id));
@@ -840,6 +839,29 @@ class Response extends QActiveRecord
 			return false;
 		else
 			return true;
+	}
+	
+	/**
+	 * gets a hash for question_ids and boolean answered/notanswered
+	 * @param number $quiz_id
+	 * @param number $user_id
+	 * @return boolean
+	 */
+	function getQuestionsAnsweredByQuizIdUserId($quiz_id, $user_id){
+		$question_ids = Quiz::getQuestionIds($quiz_id);		// this is a hash that has question_id as the key and question->points as the value
+		$question_ids_string = join(",", $question_ids);
+		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids, 'USER_ID'=>$user_id));
+		$answered_hash = array();
+		foreach($question_ids as $question_id){
+			$answered_hash[$question_id] = false;
+			foreach($responses as $response){
+				if($response->QUESTION_ID == $question_id){
+					$answered_hash[$question_id] = true;			
+				}
+			}
+		}
+		return $answered_hash;
+		
 	}
 	
 }
