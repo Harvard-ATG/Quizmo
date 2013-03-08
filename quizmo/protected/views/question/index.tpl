@@ -25,7 +25,16 @@
 {foreach from=$questions item=question name=qounter}
 
 		<tr data-position="{$smarty.foreach.qounter.index + 1}" id="{$question['ID']}" class="question-row-{$question['ID']}">
-			<td><a href="{url url='/quiz/take/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">{$question['TITLE']}</a></td>
+			<td>
+				<a href="{url url='/quiz/take/'|cat:$quiz_id|cat:'/'|cat:$question['ID']}">{$question['TITLE']}</a>
+			</td>
+			<td>
+				{if $questions_answered[$question['ID']]}
+				Answered
+				{else}
+				Unanswered
+				{/if}
+			</td>
 		</tr>
 
 

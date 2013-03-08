@@ -430,7 +430,8 @@ class QuestionController extends Controller
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
-
+		$questions_answered = Response::getQuestionsAnsweredByQuizIdUserId($quiz_id, $user_id);
+		
 		$this->render('index',array(
 			'collection_id'=>$collection_id,
 			'questions'=>$questions,
@@ -438,6 +439,7 @@ class QuestionController extends Controller
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'title'=>Quiz::model()->findByPk($quiz_id)->TITLE,
+			'questions_answered'=>$questions_answered,
 		));
 
 	}
