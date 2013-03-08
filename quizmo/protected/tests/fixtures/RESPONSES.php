@@ -135,7 +135,7 @@ return array(
 		'SCORE' => 0,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => '',
-		'RESPONSE' => 'eat',
+		'RESPONSE' => 'asdf',
 	),
 
 	// user_id 3
@@ -359,7 +359,7 @@ return array(
 		'SCORE' => 0,
 		'DATE_MODIFIED' => '',
 		'MODIFIED_BY' => '',
-		'RESPONSE' => 'drink',
+		'RESPONSE' => 'asdf',
 	),
 	
 	

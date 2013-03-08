@@ -93,7 +93,7 @@ return array(
 		'SORT_ORDER' => 8,
 		'POINTS' => '8',
 		'DELETED' => 0,
-		'BODY' => "You put the {lime} in the {Coconut} and {drink} it all up",
+		'BODY' => "You put the {lime} in the {Coconut} and {drink|eat} it all up",
 		'FEEDBACK' => 'question 8 feedback',
 	),
 	
