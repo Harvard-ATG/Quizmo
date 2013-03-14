@@ -25,7 +25,7 @@ before_script:
   - mysql -e "CREATE USER 'quizmo_dev'@'localhost' IDENTIFIED BY 'quizmo_dev';"
   #- mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'quizmo_dev'@'localhost' WITH GRANT OPTION;"
   - quizmo/protected/yiic migrate --interactive=0
-  - composer require --dev phpunit/php-invoker
+  - composer require --dev phpunit/php-invoker:\>=1.2.0
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
