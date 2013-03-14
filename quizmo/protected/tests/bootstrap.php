@@ -10,6 +10,6 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',1);
 
 require_once($yiit);
-require_once(dirname(__FILE__).'/WebTestCase.php');
+//require_once(dirname(__FILE__).'/WebTestCase.php');
 
 Yii::createWebApplication($config);

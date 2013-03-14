@@ -39,7 +39,6 @@
 		           port="4444"
 		           timeout="30000"/>
 	</selenium>
--->
 	<selenium>
 		<browser name="Firefox on MacOSX"
 		           browser="*firefox"
@@ -52,5 +51,6 @@
 		           port="4444"
 		           timeout="30000"/>
 	</selenium>
+-->
 
 </phpunit>
