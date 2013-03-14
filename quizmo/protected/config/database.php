@@ -18,8 +18,8 @@ return array(
 			'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=quizmo_dev',
 			'emulatePrepare' => true,
-			'username' => 'quizmo_dev',
-			'password' => 'quizmo_dev',
+			'username' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 				
