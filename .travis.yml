@@ -13,6 +13,8 @@ php:
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
+  - INSTALL_PHP_INVOKER=0
+  - INSTALL_PHP_INVOKER=1  
   - DB=mysql
   # - DB=pgsql
 
