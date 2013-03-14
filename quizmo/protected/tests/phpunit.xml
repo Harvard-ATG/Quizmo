@@ -1,9 +1,10 @@
 <phpunit bootstrap="bootstrap.php"
-		colors="false"
+		colors="true"
 		convertErrorsToExceptions="true"
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
-		stopOnFailure="false">
+		stopOnFailure="false"
+         strict="false">
 <!--
 		<testsuites>
 		  <testsuite name="unit">
