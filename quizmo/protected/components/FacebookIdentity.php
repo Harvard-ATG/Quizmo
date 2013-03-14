@@ -192,7 +192,7 @@ class FacebookIdentity extends UserIdentity {
 			//error_log(var_export($e->__toString(), 1));
 			//error_log(var_export($_SERVER, 1));
 			
-			$redirect_uri = (@$_SERVER['SCRIPT_URI']) ? $_SERVER['SCRIPT_URI'] : $_SERVER['HTTP_REFERER'];
+			$redirect_uri = (@$_SERVER['SCRIPT_URI']) ? $_SERVER['SCRIPT_URI'] : @$_SERVER['HTTP_REFERER'];
 			$redirect_uri = "http://quizmo.harvard.edu/site/login";
 			
 			// if redirect_uri is the logout url, we'll end up with an infinite loop...
