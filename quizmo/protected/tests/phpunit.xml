@@ -4,15 +4,13 @@
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
 		stopOnFailure="false">
-
+<!--
 		<testsuites>
-		  <testsuite name="All Unit Tests">
-		    <directory>quizmo/protected/test/unit</directory>
-		    <!-- <file>/path/to/MyTest.php</file> -->
-		    <!-- <exclude>/path/to/exclude</exclude> -->
+		  <testsuite name="unit">
+		    <directory>quizmo/protected/test/unit/*Test.php</directory>
 		  </testsuite>
 		</testsuites>
-
+-->
 <!-- ************************************************************* -->
 <!-- this would be nice, though it's not available until phpunit 3.6+ (using 3.4)
 	it would be nice to do this instead of altering the system php.ini

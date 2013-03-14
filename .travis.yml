@@ -28,7 +28,7 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: phpunit --configuration quizmo/protected/tests/phpunit.xml --coverage-text
+script: phpunit --configuration quizmo/protected/tests/phpunit.xml --coverage-text quizmo/protected/tests/unit
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
