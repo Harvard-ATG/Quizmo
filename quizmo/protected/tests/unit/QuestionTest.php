@@ -183,7 +183,7 @@ class QuestionTest extends CDbTestCase {
 		
 	}
 	
-	public function testGetQuestionViewsByQuizId(){
+	public function testGetQuestionViewsByQuizIdUserId(){
 		$user_id = 2;
 		$quiz_id = 1;
 		$question_count = 8;
@@ -192,7 +192,7 @@ class QuestionTest extends CDbTestCase {
 		$score = 1;
 		$points = 1;
 		
-		$questions = Question::getQuestionViewsByQuizId($quiz_id, $user_id);
+		$questions = Question::getQuestionViewsByQuizIdUserId($quiz_id, $user_id);
 		// check the number is right
 		$this->assertEquals($question_count, count($questions));
 		// check the second question id is right 
