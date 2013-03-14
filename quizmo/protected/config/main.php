@@ -22,7 +22,7 @@ return CMap::mergeArray(
 		),
 
 		// need to change this for isites
-		'layout'=>"isites",
+		'layout'=>"main",
 
 		'modules'=>array(
 			// uncomment the following to enable the Gii tool
@@ -121,8 +121,8 @@ return CMap::mergeArray(
 		'params'=>array(
 			// this is used in contact page
 			'adminEmail'=>'jcleveng@fas.harvard.edu',
-			//'authMethod'=>'facebook',
-			'authMethod'=>'isites',
+			'authMethod'=>'facebook',
+			//'authMethod'=>'isites',
 		),
 
 		// comment this if you don't want the login to be forced (if you want to allow viewer level guests)
@@ -137,9 +137,9 @@ return CMap::mergeArray(
 
 	),
 	require(dirname(__FILE__).'/database.php'),
-	//require(dirname(__FILE__).'/facebook.php'),
-	require(dirname(__FILE__).'/ldap.php'),
-	require(dirname(__FILE__).'/isites.php')
+	require(dirname(__FILE__).'/facebook.php')
+	//require(dirname(__FILE__).'/ldap.php'),
+	//require(dirname(__FILE__).'/isites.php')
 	
 );
 ?>
