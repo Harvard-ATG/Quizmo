@@ -121,10 +121,10 @@ class FacebookIdentity extends UserIdentity {
 		      $dialog_url= "https://www.facebook.com/dialog/oauth?"
 		        . "client_id=" . $app_id 
 		        . "&redirect_uri=" . urlencode($my_url);
-		      error_log("top.location.href='" . $dialog_url);
+		      //error_log("top.location.href='" . $dialog_url);
 		    }
 		    else {
-		      error_log("other error has happened");
+		      //error_log("other error has happened");
 		    }
 		  } 
 		  else {
