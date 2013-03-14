@@ -38,5 +38,5 @@ script: phpunit --configuration quizmo/protected/tests/phpunit.xml quizmo/protec
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
-  #irc: "irc.freenode.org#travis"
-  email: "jcleveng@fas.harvard.edu"
+  email: 
+    - jcleveng@fas.harvard.edu
