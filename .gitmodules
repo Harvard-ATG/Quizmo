@@ -1,15 +1,15 @@
 [submodule "yii"]
 	path = yii
-	url = git@github.com:jazahn/yii.git
+	url = git://github.com/jazahn/yii.git
 [submodule "quizmo/protected/extensions/yii-facebook-opengraph"]
 	path = quizmo/protected/extensions/yii-facebook-opengraph
-	url = git@github.com:jazahn/yii-facebook-opengraph.git
+	url = git://github.com/jazahn/yii-facebook-opengraph.git
 [submodule "quizmo/protected/extensions/smarty-renderer"]
 	path = quizmo/protected/extensions/smarty-renderer
-	url = git@github.com:jazahn/smarty-renderer.git
+	url = git://github.com/jazahn/smarty-renderer.git
 [submodule "quizmo/protected/extensions/isitestool"]
 	path = quizmo/protected/extensions/isitestool
-	url = git@github.com:jazahn/yii-isitestool
+	url = git://github.com/jazahn/yii-isitestool.git
 [submodule "quizmo/protected/extensions/harvard_person"]
 	path = quizmo/protected/extensions/harvard_person
-	url = git@github.com:jazahn/yii-HarvardPerson.git
+	url = git://github.com/jazahn/yii-HarvardPerson.git
