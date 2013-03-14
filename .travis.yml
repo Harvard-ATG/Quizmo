@@ -13,7 +13,7 @@ php:
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
-  - DB=mysql INSTALL_PHP_INVOKER=1
+  - DB=mysql
   # - DB=pgsql
 
 # execute any number of scripts before the test run, custom env's are available as variables
@@ -25,7 +25,8 @@ before_script:
   - mysql -e "CREATE USER 'quizmo_dev'@'localhost' IDENTIFIED BY 'quizmo_dev';"
   #- mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'quizmo_dev'@'localhost' WITH GRANT OPTION;"
   - quizmo/protected/yiic migrate --interactive=0
-  - sh -c "if [ '$INSTALL_PHP_INVOKER' = '1' ]; then composer require --dev --prefer-source phpunit/php-invoker:\>=1.2.0; else composer install --dev --prefer-source; fi"
+  - pear channel-discover pear.phpunit.de
+  - pear install phpunit/PHP_Invoker
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
