@@ -71,7 +71,20 @@
 				{$results[$user_id].score} 
 			</td>
 			<td>
-				Delete 
+				<a class="result-delete-btn" name="#result-delete-modal-{$user_id}" >Delete</a> 
+				<div class="modal hide" id="result-delete-modal-{$user_id}">
+				  <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal">×</button>
+				    <h3>Delete Result</h3>
+				  </div>
+				  <div class="modal-body">
+				    <p>Are you sure you want to delete this Result?</p>
+				  </div>
+				  <div class="modal-footer">
+				    <a href="#" class="btn btn-primary result-delete-action" name="{$user_id}" data-dismiss="modal">Delete</a>
+				    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+				  </div>
+				</div>
 			</td>
 		</tr>
 		{/foreach}
@@ -103,4 +116,44 @@ $('#other_check').change(function(){
 		$('tr.admin').hide();
 	}
 });
+
+openModal = function(e){
+	// get the id
+	$(e.currentTarget.name).modal();
+}
+
+resultDeleteAction = function(e){
+	result_delete_url = "{url url='/response/delete' ajax=1}";
+	// get the quiz_id from eventObject
+	quiz_id = '{$quiz_id}';
+	user_id = e.currentTarget.name;
+	// form data
+	data = {
+		quiz_id: quiz_id,
+		user_id: user_id
+	};
+	// now send the delete query
+	$.ajax({
+		type: 'POST',
+		url: result_delete_url,
+		data: data,
+		dataType: 'json',
+		error: failure,
+		success: removeDiv
+	});
+}
+
+removeDiv = function(data){
+	quiz_id = data.user_id;
+	$('tr.quiz-row-'+quiz_id).hide(400);
+		
+}
+
+$(document).ready(function(){
+		
+	$('.result-delete-btn').click(openModal);
+	$('.quiz-delete-action').click(resultDeleteAction);
+	
+});
+
 </script>
