@@ -19,11 +19,12 @@
   <li>
     <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
+  <li class="active">{$title} <span class="divider">/</span></li>
   <li class="active">Results</li>
 </ul>
 
 <div class="row-fluid">
-	<h1 class="span12">Results</h1>
+	<h1 class="span12">{$title} Results</h1>
 </div>
 <div class="row-fluid">
 	<h5 class="span12"><a href='{url url="/quiz/allResults/$collection_id"}'>All Results</a></h5>

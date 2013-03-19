@@ -2,6 +2,7 @@
   <li>
     <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
   </li>
+  <li class="active">{$title} <span class="divider">/</span></li>
 {if $admin_view}
   <li>
     <a href='{url url="/quiz/results/$quiz_id"}'>Results</a> <span class="divider">/</span>

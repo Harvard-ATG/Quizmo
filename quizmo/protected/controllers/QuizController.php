@@ -365,12 +365,14 @@ class QuizController extends Controller
 	 */
 	public function actionResults($id){	
 		
-		$results = Response::getResults($id);
+		$quiz_id = $id;
+		$results = Response::getResults($quiz_id);
 			
-		
+		$quiz = Quiz::model()->findByPk($quiz_id);
 		$this->render('results', array(
 			'quiz_id'=>$id,
-			'collection_id'=>Quiz::getQuiz($id)->COLLECTION_ID,
+			'title'=>$quiz->TITLE,
+			'collection_id'=>$quiz->COLLECTION_ID,
 			'results'=>$results
 		));
 	}
@@ -412,6 +414,7 @@ class QuizController extends Controller
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
+			'title'=>$quiz->TITLE,
 			'admin_view'=>0,
 			'name'=>User::getName($user_id),
 			'status'=>$status,
