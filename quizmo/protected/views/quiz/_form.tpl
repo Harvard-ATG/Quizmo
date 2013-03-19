@@ -6,13 +6,13 @@
 	</div>
 </div>
 <div id="description-control-group" class="control-group">
-	<div class="controls">
-		<p class="help-block">(Appears at the beginning of the quiz in student view)</p>
-	</div>
 	<label class="control-label" for="description">Description</label>
 	<div class="controls">
 		<!-- <textarea class="input-xlarge" id="description" name="description">{$description}</textarea> -->
 		<textarea class="input-xlarge span10" id="description" name="description" style="height:200px">{$description}</textarea>
+	</div>
+	<div class="controls">
+		<p class="help-block">(Appears at the beginning of the quiz in student view)</p>
 	</div>
 </div>
 <div id="state-control-group" class="control-group">
