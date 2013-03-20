@@ -36,6 +36,12 @@
 				show_feedback = $show_feedback
 			}
 			
+			{if $show_feedback && $question.feedback != ''}
+			<div class="well">
+				{$question.feedback}
+			</div>
+			{/if}
+			
 			</td>
 			<td nowrap="nowrap">
 			{if $admin_view}
