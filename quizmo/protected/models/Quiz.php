@@ -416,13 +416,13 @@ class Quiz extends QActiveRecord
 	 */
 	public function reset($quiz_id){
 		$question_ids = Quiz::getQuestionIds($quiz_id);
-		$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids));
+		// remove all responses
+		$responses = Response::model()->deleteAllByAttributes(array('QUESTION_ID'=>$question_ids));
+		// remove all submissions
+		$submissions = Submission::model()->deleteAllByAttributes(array('QUIZ_ID'=>$quiz_id));
+		
 		// reset settings
 		Quiz::resetSettings($quiz_id);
-		foreach($responses as $response){
-			if(!$response->delete())
-				return false;
-		}
 		return true;
 	}
 	
