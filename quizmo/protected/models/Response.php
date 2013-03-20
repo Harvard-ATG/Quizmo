@@ -845,7 +845,7 @@ class Response extends QActiveRecord
 	 * gets a hash for question_ids and boolean answered/notanswered
 	 * @param number $quiz_id
 	 * @param number $user_id
-	 * @return boolean
+	 * @return hash
 	 */
 	function getQuestionsAnsweredByQuizIdUserId($quiz_id, $user_id){
 		$question_ids = Quiz::getQuestionIds($quiz_id);		// this is a hash that has question_id as the key and question->points as the value
@@ -861,6 +861,16 @@ class Response extends QActiveRecord
 			}
 		}
 		return $answered_hash;
+		
+	}
+	
+	/**
+	 * deletes all responses for a user given a quiz_id
+	 * @param number $quiz_id
+	 * @param number $user_id
+	 * @return boolean
+	 */
+	static function deleteByQuizIdUserId($quiz_id, $user_id){
 		
 	}
 	
