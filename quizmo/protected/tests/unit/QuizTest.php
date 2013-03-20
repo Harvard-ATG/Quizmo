@@ -231,11 +231,19 @@ class QuizTest extends CDbTestCase {
 	public function testReset(){
 		$quiz_id = 1;
 		// check that it has responses
-		//$this->assertGreaterThan(0, sizeof(Response::getResults($quiz_id)));
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		$this->assertGreaterThan(0, sizeof(Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids))));
+		// check that it has submissions
+		$this->assertGreaterThan(0, sizeof(Submission::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id))));
+		
 		// reset
-		//$this->assertTrue(Quiz::reset($quiz_id));
+		$this->assertTrue(Quiz::reset($quiz_id));
+		
 		// check that it has no responses
-		//$this->assertEquals(6, sizeof(Response::getResults($quiz_id)), "note that 6 should be 0 if the Identity::getUsers is implemented");
+		$this->assertEquals(0, sizeof(Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_ids))));
+		// check that it has no submissions
+		$this->assertEquals(0, sizeof(Submission::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id))));
+		
 		
 	}
 	
