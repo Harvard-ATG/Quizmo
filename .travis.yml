@@ -15,8 +15,8 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
+  - mysql -e 'CREATE DATABASE `quizmo_dev`;'
   # The following is fine, but travis won't allow granting privilages
-  # - mysql -e 'CREATE DATABASE `quizmo_dev`;'
   # - mysql -e "CREATE USER 'quizmo_dev'@'localhost' IDENTIFIED BY 'quizmo_dev';"
   # - mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'quizmo_dev'@'localhost' WITH GRANT OPTION;"
   # migrating adds all tables
