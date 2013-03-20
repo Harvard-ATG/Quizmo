@@ -366,5 +366,26 @@ class ResponseTest extends CDbTestCase {
 		$this->assertNotNull($responses);
 		
 	}
+	
+	public function testDeleteByQuizIdUserId(){
+		$user_id = 3;
+		$quiz_id = 1;
+		
+		// get question_ids
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		// check that user has responses for given quiz
+		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_ids));
+		$this->assertEquals(sizeof($responses), 11, "Failed asserting initial responses equal 11");
+		// check the submission status
+		$this->assertEquals(Submission::getStatusByUser($user_id, $quiz_id), Submission::STARTED, "Failed asserting initial submission status is STARTED");
+		
+		$this->assertTrue(Response::deleteByQuizIdUserId($quiz_id, $user_id));
+		
+		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_ids));
+		$this->assertEquals(sizeof($responses), 0, "Failed asserting final responses equal 0");
+		// check the submission status
+		$this->assertEquals(Submission::getStatusByUser($user_id, $quiz_id), Submission::NOT_STARTED, "Failed asserting submission status after delete is NOT_STARTED");		
+		
+	}
 
 }

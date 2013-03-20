@@ -36,8 +36,8 @@ class ResponseController extends Controller
 				'roles'=>array('enrollee','admin','super'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('grade'),
-				'roles'=>array('admin','super','enrollee'),
+				'actions'=>array('grade','delete'),
+				'roles'=>array('admin','super'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -102,6 +102,26 @@ class ResponseController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		//error_log($score);
 		Response::setScore($response_id, $score);
+		
+	}
+
+	/**
+	 * Sets the flag as deleted
+	 */
+	public function actionDelete()
+	{
+		$this->layout = false;
+		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
+		$user_id = Yii::app()->getRequest()->getParam('user_id');
+		
+		if($quiz_id != '' && $user_id != ''){
+			Response::deleteByQuizIdUserId($quiz_id, $user_id);
+			echo json_encode(array('quiz_id'=>$quiz_id, 'user_id'=>$user_id));
+			Yii::app()->end();
+		} else {
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		}
+
 		
 	}
 
