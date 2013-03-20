@@ -57,7 +57,7 @@
 	</thead>
 	<tbody>
 		{foreach from=$results key=user_id item=value}
-		<tr class="{$results[$user_id].permission}">
+		<tr class="{$results[$user_id].permission}" id="result-row-{$user_id}">
 			<td>
 				<img height="50px" width="50px" src="{$results[$user_id].photo_url}"/>
 			</td>
@@ -138,21 +138,21 @@ resultDeleteAction = function(e){
 		url: result_delete_url,
 		data: data,
 		dataType: 'json',
-		error: failure,
+		//error: failure,
 		success: removeDiv
 	});
 }
 
 removeDiv = function(data){
-	quiz_id = data.user_id;
-	$('tr.quiz-row-'+quiz_id).hide(400);
+	user_id = data.user_id;
+	$('tr#result-row-'+user_id).hide(400);
 		
 }
 
 $(document).ready(function(){
 		
 	$('.result-delete-btn').click(openModal);
-	$('.quiz-delete-action').click(resultDeleteAction);
+	$('.result-delete-action').click(resultDeleteAction);
 	
 });
 
