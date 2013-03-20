@@ -871,7 +871,12 @@ class Response extends QActiveRecord
 	 * @return boolean
 	 */
 	static function deleteByQuizIdUserId($quiz_id, $user_id){
-		
+		if(Response::model()->deleteAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>Quiz::getQuestionIds($quiz_id)))){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 }
