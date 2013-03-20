@@ -482,6 +482,7 @@ class QuizController extends Controller
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
+			'title'=>$quiz->TITLE,
 			'admin_view'=>1,
 			'name'=>User::getName($user_id),
 			'status'=>$status,
