@@ -52,7 +52,8 @@
                     "</div>" +
                   "</div>" +
                   "<a class='btn' data-wysihtml5-command='createLink' title='" + locale.link.insert + "'>" +
-				  "<i class='icon-2x icon-link'></i>" +
+				  "<img src='/js/isites/resources/images/link.png'/>" +
+				  //"<i class='icon-2x icon-link'></i>" +
 				  "</a>" +
                 "</li>",
 
@@ -72,7 +73,8 @@
                     "</div>" +
                   "</div>" +
                   "<a class='btn' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "'>" +
-				  "<i class='icon-2x icon-picture'></i>" +
+				  "<img src='/js/isites/resources/images/photo.png'/>" +
+				  //"<i class='icon-2x icon-picture'></i>" +
 				  "</a>" +
                 "</li>",
 

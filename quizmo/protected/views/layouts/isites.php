@@ -26,23 +26,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<link href="<?php echo $host; ?>/css/bootstrap-responsive-isites.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo $host; ?>/css/bootstrap-notify.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo $host; ?>/css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet" type="text/css"/>
-	<link href="<?php echo $host; ?>/css/font-awesome.css" rel="stylesheet" type="text/css"/>
 	
-	<style>
-	<?php //include("css/bootstrap-isites.css"); ?>
-	</style>
-	<style>
-	<?php //include("css/bootstrap-responsive-isites.css"); ?>
-	</style>
-	<style>
-	<?php //include("css/bootstrap-notify.css"); ?>
-	</style>
-	<style>
-	<?php //include("css/bootstrap-wysihtml5-0.0.2.css"); ?>
-	</style>
-	<style>
-	<?php //include("css/font-awesome.css"); ?>
-	</style>
 	<style>
 #view-switch {
 	display: none;
