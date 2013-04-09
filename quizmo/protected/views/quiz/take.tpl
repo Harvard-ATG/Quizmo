@@ -187,5 +187,9 @@ $(document).ready(function(){
 	$("#quiz-submit-btn").click(openSubmitModal);
 	$("#quiz-submit-confirm-btn").click(submitQuiz);
 
+	$("a").click(function(){
+		submitQuestion();
+	});
+
 });
 </script>
