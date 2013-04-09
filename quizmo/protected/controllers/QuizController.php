@@ -355,7 +355,7 @@ class QuizController extends Controller
 		Submission::submitQuiz($user_id, $quiz_id);
 		Response::gradeQuiz($user_id, $quiz_id);
 		
-		$this->jsredirect($this->url('/quiz/individualResults/'.$quiz_id."/".$user_id));
+		$this->jsredirect($this->url('/quiz/individualResults/'.$quiz_id."/".$user_id."/1"));
 	
 	 }
 	
@@ -381,9 +381,10 @@ class QuizController extends Controller
 	 * total results for an individual
 	 * @param number $id quiz_id
 	 * @param number $id2 user_id
+	 * @param number $id3 just_submitted?
 	 */
-	public function actionIndividualResults($id, $id2){	
-		
+	public function actionIndividualResults($id, $id2, $id3=false){			
+		$just_submitted = $id3;	
 		$quiz_id = $id;
 		$user_id = $id2;
 		
@@ -425,6 +426,7 @@ class QuizController extends Controller
 			'questions'=>Question::getQuestionViewsByQuizIdUserId($quiz_id, $user_id),
 			'show_feedback'=>$quiz->SHOW_FEEDBACK,
 			'photo_url'=>$photo_url,
+			'just_submitted'=>$just_submitted,
 		));
 	}
 	
@@ -493,6 +495,7 @@ class QuizController extends Controller
 			'questions'=>Question::getQuestionViewsByQuizIdUserId($quiz_id, $user_id),
 			'show_feedback'=>1,
 			'photo_url'=>$photo_url,
+			'just_submitted'=>false,
 		));
 	}
 	
