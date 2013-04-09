@@ -64,10 +64,10 @@
 			<td>
 				<a href='{url url="/quiz/individualResultsAdmin/$quiz_id/$user_id"}'>{$results[$user_id].name}</a> 
 			</td>
-			<td>
+			<td class="result-status">
 				{$results[$user_id].status} 
 			</td>
-			<td>
+			<td class="result-score">
 				{$results[$user_id].score} 
 			</td>
 			<td>
@@ -139,7 +139,7 @@ resultDeleteAction = function(e){
 		data: data,
 		dataType: 'json',
 		//error: failure,
-		success: removeDiv
+		success: changeDiv
 	});
 }
 
@@ -147,6 +147,13 @@ removeDiv = function(data){
 	user_id = data.user_id;
 	$('tr#result-row-'+user_id).hide(400);
 		
+}
+
+changeDiv = function(data){
+	// change the status to "Not Started"
+	$('tr#result-row-'+user_id+' .result-status').text("Not Started");
+	// change the score to 0
+	$('tr#result-row-'+user_id+' .result-score').text("0");	
 }
 
 $(document).ready(function(){
