@@ -64,7 +64,21 @@
 </table>
 </div>
 
+<div id="submittedModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="submittedModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="submittedModalLabel">Submitted</h3>
+  </div>
+  <div class="modal-body">
+    <p>Quiz successfully submitted.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
 <script>
+
 
 	updateTotalScore = function(){
 		totalScoreUrl = "{url url='/quiz/totalScore' ajax=1}";
@@ -99,6 +113,10 @@
 	}
 	
 	$(document).ready(function(){
+		var just_submitted = '{$just_submitted}';
+		if(just_submitted){
+			$('#submittedModal').modal();
+		}
 		updateTotalScore();
 	});
 	
