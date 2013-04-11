@@ -38,18 +38,7 @@ textarea { resize:both; }
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
 	</script>
-	<!-- <script src="<?php echo $host; ?>/js/wysihtml5-0.3.0.min.js"></script> -->
-	<!-- <script src="http://jhollingworth.github.com/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script> -->
-	<!-- <script src="<?php echo $host; ?>/js/jquery-1.7.2.min.js"></script> -->
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
-    <!-- <script src="<?php echo $host; ?>/js/jquery-ui-datepicker.js"></script> -->
-    <!-- **** <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script> -->
-    <!-- <script src="<?php echo $host; ?>/js/bootstrap.js"></script> -->
-	<!-- <script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script> -->
-	<!-- <script src="http://nijikokun.github.com/bootstrap-notify/js/bootstrap-notify.js"></script> -->
-	<!-- <script src="<?php echo $host; ?>/js/bootstrap-wysihtml5-0.0.2.js"></script> -->
-	<!-- <script src="http://jhollingworth.github.com/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script> -->
-	<!-- <script src="<?php echo $host; ?>/js/prettify.js"></script> -->
 
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>
