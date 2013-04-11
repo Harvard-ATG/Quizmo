@@ -4131,15 +4131,15 @@
   background-color: #fff;
 }
 
-.modal-open .dropdown-menu {
+.bootstrapped .modal-open .dropdown-menu {
   z-index: 2050;
 }
 
-.modal-open .dropdown.open {
+.bootstrapped .modal-open .dropdown.open {
   *z-index: 2050;
 }
 
-.modal-open .popover {
+.bootstrapped .modal-open .popover {
   z-index: 2060;
 }
 
@@ -4147,7 +4147,7 @@
   z-index: 2070;
 }
 
-.modal-backdrop {
+.bootstrapped .modal-backdrop {
   position: fixed;
   top: 0;
   right: 0;
@@ -4157,17 +4157,17 @@
   background-color: #000000;
 }
 
-.modal-backdrop.fade {
+.bootstrapped .modal-backdrop.fade {
   opacity: 0;
 }
 
-.modal-backdrop,
-.modal-backdrop.fade.in {
+.bootstrapped .modal-backdrop,
+.bootstrapped .modal-backdrop.fade.in {
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
 
-.modal {
+.bootstrapped .modal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -4190,7 +4190,7 @@
           background-clip: padding-box;
 }
 
-.modal.fade {
+.bootstrapped .modal.fade {
   top: -25%;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
      -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
@@ -4199,30 +4199,30 @@
           transition: opacity 0.3s linear, top 0.3s ease-out;
 }
 
-.modal.fade.in {
+.bootstrapped .modal.fade.in {
   top: 50%;
 }
 
-.modal-header {
+.bootstrapped .modal-header {
   padding: 9px 15px;
   border-bottom: 1px solid #eee;
 }
 
-.modal-header .close {
+.bootstrapped .modal-header .close {
   margin-top: 2px;
 }
 
-.modal-body {
+.bootstrapped .modal-body {
   max-height: 400px;
   padding: 15px;
   overflow-y: auto;
 }
 
-.modal-form {
+.bootstrapped .modal-form {
   margin-bottom: 0;
 }
 
-.modal-footer {
+.bootstrapped .modal-footer {
   padding: 14px 15px 15px;
   margin-bottom: 0;
   text-align: right;
@@ -4237,26 +4237,26 @@
           box-shadow: inset 0 1px 0 #ffffff;
 }
 
-.modal-footer:before,
-.modal-footer:after {
+.bootstrapped .modal-footer:before,
+.bootstrapped .modal-footer:after {
   display: table;
   content: "";
 }
 
-.modal-footer:after {
+.bootstrapped .modal-footer:after {
   clear: both;
 }
 
-.modal-footer .btn + .btn {
+.bootstrapped .modal-footer .btn + .btn {
   margin-bottom: 0;
   margin-left: 5px;
 }
 
-.modal-footer .btn-group .btn + .btn {
+.bootstrapped .modal-footer .btn-group .btn + .btn {
   margin-left: -1px;
 }
 
-.bootstrapped .tooltip {
+.tooltip {
   position: absolute;
   z-index: 1020;
   display: block;
@@ -4267,28 +4267,28 @@
   visibility: visible;
 }
 
-.bootstrapped .tooltip.in {
+.tooltip.in {
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
 
-.bootstrapped .tooltip.top {
+.tooltip.top {
   margin-top: -2px;
 }
 
-.bootstrapped .tooltip.right {
+.tooltip.right {
   margin-left: 2px;
 }
 
-.bootstrapped .tooltip.bottom {
+.tooltip.bottom {
   margin-top: 2px;
 }
 
-.bootstrapped .tooltip.left {
+.tooltip.left {
   margin-left: -2px;
 }
 
-.bootstrapped .tooltip.top .tooltip-arrow {
+.tooltip.top .tooltip-arrow {
   bottom: 0;
   left: 50%;
   margin-left: -5px;
@@ -4297,7 +4297,7 @@
   border-left: 5px solid transparent;
 }
 
-.bootstrapped .tooltip.left .tooltip-arrow {
+.tooltip.left .tooltip-arrow {
   top: 50%;
   right: 0;
   margin-top: -5px;
@@ -4306,7 +4306,7 @@
   border-left: 5px solid #000000;
 }
 
-.bootstrapped .tooltip.bottom .tooltip-arrow {
+.tooltip.bottom .tooltip-arrow {
   top: 0;
   left: 50%;
   margin-left: -5px;
@@ -4315,7 +4315,7 @@
   border-left: 5px solid transparent;
 }
 
-.bootstrapped .tooltip.right .tooltip-arrow {
+.tooltip.right .tooltip-arrow {
   top: 50%;
   left: 0;
   margin-top: -5px;
@@ -4324,7 +4324,7 @@
   border-bottom: 5px solid transparent;
 }
 
-.bootstrapped .tooltip-inner {
+.tooltip-inner {
   max-width: 100px;
   padding: 3px 8px;
   color: #ffffff;
@@ -4336,7 +4336,7 @@
           border-radius: 4px;
 }
 
-.bootstrapped .tooltip-arrow {
+.tooltip-arrow {
   position: absolute;
   width: 0;
   height: 0;
