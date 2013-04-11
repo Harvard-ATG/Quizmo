@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li>
-    <a href='{url url="/quiz/index/$collection_id"}'>Quizzes</a> <span class="divider">/</span>
+    <a href='{url url="/quiz/index/$collection_id"}' id="thisone" title="something">Quizzes</a> <span class="divider">/</span>
   </li>
   <li>
     <a href='{url url="/question/index/$quiz_id"}'>Questions</a> <span class="divider">/</span>
@@ -21,20 +21,20 @@
 
 <div id="quiz-controls" class="btn-toolbar">
 	<div class="btn-group">
-		<button name="prev" type="button" class="btn">&lt;</button>	
+		<button name="prev" type="button" class="btn question-btn" title="Save and go to previous question">&lt;</button>	
 	</div>
 	<div name="question_numbers" class="btn-group">
 		{foreach from=$question_ids item=question_id name=questions}
-			<button id="question_{$smarty.foreach.questions.iteration}" name="{$question_id}" type="button" class="btn">{$smarty.foreach.questions.iteration}</button>
+			<button id="question_{$smarty.foreach.questions.iteration}" name="{$question_id}" type="button" class="btn question-btn" title="Save and go to question {$smarty.foreach.questions.iteration}">{$smarty.foreach.questions.iteration}</button>
 		{/foreach}
 	</div>
 	<div class="btn-group">
-		<button name="next" type="button" class="btn">&gt;</button>
+		<button name="next" type="button" class="btn question-btn" title="Save and go to next question">&gt;</button>
 	</div>
 </div>
 
 <div>
-	<button type="button" class="btn btn-danger" id="quiz-submit-btn">Submit</button>
+	<button type="button" class="btn btn-danger" id="quiz-submit-btn">Submit Quiz</button>
 </div>
 <div class="modal hide" id="quiz-submit" style="text-align: center">
 	<div class="modal-body">
@@ -108,7 +108,14 @@ submitQuiz = function(){
 	
 }
 
+$.widget.bridge('uibutton', $.ui.button);
+$.widget.bridge('uitooltip', $.ui.tooltip);
+
 $(document).ready(function(){
+	
+	// initialize tooltips
+	$('button.question-btn').tooltip();
+	
 	//var question_ids = {$question_ids_json};
 	//var question_ids = eval($('#question_ids').val());
 	prev_button = $('#quiz-controls .btn-group button[name=prev]');
