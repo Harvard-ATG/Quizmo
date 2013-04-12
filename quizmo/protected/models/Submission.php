@@ -77,7 +77,7 @@ class Submission extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'quizzes' => array(self::BELONGS_TO, 'Quiz', 'quiz_id'),
+			'quizzes' => array(self::BELONGS_TO, 'Quiz', 'QUIZ_ID'),
 		);
 	}
 
@@ -198,33 +198,32 @@ class Submission extends QActiveRecord
 	 * @return array of a hash array('submitted'=>\d, 'total_results'=>\d)
 	 */
 	public static function getResultTotalsArrayByCollectionId($collection_id){
-		$quizzes = Quiz::model()->findAllByAttributes(array('COLLECTION_ID'=>1));
-		$quiz_ids = array();
-		foreach($quizzes as $quiz){
-			array_push($quiz_ids, $quiz->ID);
-		}
+				
+		// just left joining the submissions on quizzes (so we get all quiz_ids and can set them to 0 in results)
+		// note: resetScope was needed because defaultScope puts an ambiguous orderby in there (ORDER BY ASC ID)
+		$quizzes = Quiz::model()->with(array(
+			'submissions'=>array(
+				'joinType'=>'LEFT JOIN'
+			)
+		))->resetScope()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
 		
-		$submissions = Submission::model()->findAllByAttributes(array('QUIZ_ID'=>$quiz_ids));
-		
-		// start out the results as being the quiz_ids array
 		$results = array();
-		foreach($quiz_ids as $quiz_id){
-			$results[$quiz_id]['submitted'] = 0;
-			$results[$quiz_id]['total'] = 0;
+		foreach($quizzes as $quiz){
+			if(!isset($results[$quiz->ID])){
+				$results[$quiz->ID]['submitted'] = 0;
+				$results[$quiz->ID]['total'] = 0;				
+			}
 			
+			foreach($quiz->submissions as $submission){
+				if($submission->STATUS == Submission::SUBMITTED)
+					$results[$quiz->ID]['submitted']++;
+
+				if($submission->STATUS != Submission::NOT_STARTED)
+					$results[$quiz->ID]['total']++;
+			}
 		}
-
-		foreach($submissions as $submission){
-			$quiz_id = $submission->QUIZ_ID;
-			if($submission->STATUS == Submission::SUBMITTED)
-				$results[$quiz_id]['submitted']++;
-			if($submission->STATUS != Submission::NOT_STARTED)
-				$results[$quiz_id]['total']++;
-
-		}
-
 		return $results;
-		
+
 	}
 	
 }
