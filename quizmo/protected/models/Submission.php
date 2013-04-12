@@ -197,7 +197,7 @@ class Submission extends QActiveRecord
 	 * @param number $collection_id
 	 * @return array of a hash array('submitted'=>\d, 'total_results'=>\d)
 	 */
-	public static function getResultTotalsArrayByCollectionId($collection_id){
+	public static function getResultTotals($collection_id){
 				
 		// just left joining the submissions on quizzes (so we get all quiz_ids and can set them to 0 in results)
 		// note: resetScope was needed because defaultScope puts an ambiguous orderby in there (ORDER BY ASC ID)

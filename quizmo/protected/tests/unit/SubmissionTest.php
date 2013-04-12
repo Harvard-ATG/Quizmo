@@ -107,13 +107,13 @@ class SubmissionTest extends CDbTestCase {
 		
 	}
 	
-	public function testGetResultTotalsArrayByCollectionId(){
+	public function testGetResultTotals(){
 		$collection_id = 1;
 		$total_number_of_quizzes = 4;
 		$submitted = 1;
 		$total = 2;
 		// get result
-		$result = Submission::getResultTotalsArrayByCollectionId($collection_id);
+		$result = Submission::getResultTotals($collection_id);
 		// make sure total number of quizzes is right
 		$this->assertEquals($total_number_of_quizzes, sizeof($result));
 		// make sure submitted is right
