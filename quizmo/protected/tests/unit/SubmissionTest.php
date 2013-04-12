@@ -106,6 +106,20 @@ class SubmissionTest extends CDbTestCase {
 		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id, $quiz_id));
 		
 	}
-
+	
+	public function testGetResultTotalsArrayByCollectionId(){
+		$collection_id = 1;
+		$total_number_of_quizzes = 4;
+		$submitted = 1;
+		$total = 2;
+		// get result
+		$result = Submission::getResultTotalsArrayByCollectionId($collection_id);
+		// make sure total number of quizzes is right
+		$this->assertEquals($total_number_of_quizzes, sizeof($result));
+		// make sure submitted is right
+		$this->assertEquals($submitted, $result[$collection_id]['submitted']);
+		// make sure total is right
+		$this->assertEquals($total, $result[$collection_id]['total']);
+	}
    
 }
