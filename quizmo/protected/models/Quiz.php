@@ -89,8 +89,10 @@ class Quiz extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'submissionCount' => array(self::STAT, 'Submission', 'quiz_id'),
 			'questions' => array(self::HAS_MANY, 'QUESTIONS', 'QUIZ_ID'),
-			'collection' => array(self::BELONGS_TO, 'Collection', 'COLLECTION_ID'),
+			'submissions' => array(self::HAS_MANY, 'Submission', 'QUIZ_ID'),
+			'collections' => array(self::BELONGS_TO, 'COLLECTIONS', 'COLLECTION_ID'),
 		);
 	}
 
