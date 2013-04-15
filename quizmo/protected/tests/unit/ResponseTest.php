@@ -226,11 +226,12 @@ class ResponseTest extends CDbTestCase {
 				':user_id' => $user_id,			
 				':question_id' => $question_id,			
 			)
-		);
+		);		
 		
-		
+		$index = 0;
 		foreach($responses as $response){
 			$this->assertEquals($response->QUESTION_TYPE, Question::FILLIN);			
+			$this->assertEquals($response->RESPONSE, $answers[$index++]);			
 		}
 		$this->assertEquals(count($responses), 3);
 		

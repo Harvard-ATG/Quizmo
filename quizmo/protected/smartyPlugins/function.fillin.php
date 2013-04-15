@@ -27,6 +27,8 @@ function smarty_function_fillin($params, &$smarty){
 		$disabled = ' disabled="disabled" ';
 	}
 	
+	$question = preg_replace("/\|/", "", $question);
+	
 	preg_match_all("/\{[^}]*\}/", $question, $matches);
 	$responses_index = 0;
 	foreach($matches as $val){
