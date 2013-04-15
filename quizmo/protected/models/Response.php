@@ -131,6 +131,16 @@ class Response extends QActiveRecord
 	}
 	
 	/**
+	 * defaultScope ensures that every find operation makes sure it's not deleted
+	 */
+	public function defaultScope()
+	{
+	    return array(
+	    	'order'=>'SORT_ORDER ASC, ID ASC'
+	    );
+	}
+	
+	/**
 	 * submits an essay question
 	 * @param number $user_id
 	 * @param number $question_id
@@ -415,6 +425,7 @@ class Response extends QActiveRecord
 			
 
 			// go through each $answers as $answer_id and add it
+			$sort_order = 0;
 			foreach($answers as $answer){
 				// this part isn't really necessary...
 				$response = Response::model()->find(
@@ -435,7 +446,9 @@ class Response extends QActiveRecord
 					$response->RESPONSE = $answer;
 					$response->SCORE_STATE = Response::NOT_SCORED;
 					$resposne->MODIFIED_BY = $modified_by;
-				
+					$response->SORT_ORDER = $sort_order;
+					$sort_order++;
+
 					$response->save();
 
 				} else {  
