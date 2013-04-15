@@ -23,6 +23,7 @@ class IncorrectQuestionTypeException extends Exception { }
  * @property integer $SCORE
  * @property string $DATE_MODIFIED
  * @property integer $MODIFIED_BY
+ * @property integer $SORT_ORDER
  */
 class Response extends QActiveRecord
 {
@@ -60,7 +61,7 @@ class Response extends QActiveRecord
 		// will receive user inputs.
 		return array(
 			array('QUESTION_ID, QUESTION_TYPE, USER_ID', 'required'),
-			array('QUESTION_ID, USER_ID, SCORE, MODIFIED_BY', 'numerical', 'integerOnly'=>true),
+			array('QUESTION_ID, USER_ID, SCORE, MODIFIED_BY, SORT_ORDER', 'numerical', 'integerOnly'=>true),
 			array('SCORE_STATE', 'length', 'max'=>255),
 			array('QUESTION_TYPE', 'length', 'max'=>1),
 			array('RESPONSE', 'length', 'max'=>3900),
@@ -98,6 +99,7 @@ class Response extends QActiveRecord
 			'SCORE' => 'Score',
 			'DATE_MODIFIED' => 'Date Modified',
 			'MODIFIED_BY' => 'Modified By',
+			'SORT_ORDER' => 'Sort Order'
 		);
 	}
 
@@ -121,10 +123,21 @@ class Response extends QActiveRecord
 		$criteria->compare('SCORE',$this->score);
 		$criteria->compare('DATE_MODIFIED',$this->date_modified,true);
 		$criteria->compare('MODIFIED_BY',$this->modified_by);
+		$criteria->compare('SORT_ORDER',$this->sort_order);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 * defaultScope ensures that every find operation makes sure it's not deleted
+	 */
+	public function defaultScope()
+	{
+	    return array(
+	    	'order'=>'SORT_ORDER ASC, ID ASC'
+	    );
 	}
 	
 	/**
@@ -412,6 +425,7 @@ class Response extends QActiveRecord
 			
 
 			// go through each $answers as $answer_id and add it
+			$sort_order = 0;
 			foreach($answers as $answer){
 				// this part isn't really necessary...
 				$response = Response::model()->find(
@@ -432,7 +446,9 @@ class Response extends QActiveRecord
 					$response->RESPONSE = $answer;
 					$response->SCORE_STATE = Response::NOT_SCORED;
 					$resposne->MODIFIED_BY = $modified_by;
-				
+					$response->SORT_ORDER = $sort_order;
+					$sort_order++;
+
 					$response->save();
 
 				} else {  
@@ -670,6 +686,7 @@ class Response extends QActiveRecord
 			// save
 			return $response->save(false);
 		}
+		return false;
 	}
 	
 	/**
