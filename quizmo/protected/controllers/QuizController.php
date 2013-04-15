@@ -292,6 +292,7 @@ class QuizController extends Controller
 				'sizeofquizzes'=>sizeof($quizzes),
 				'user_id'=>$user_id,
 				'collection_id'=>$collection_id,
+				'results'=>Submission::getResultTotals($collection_id),
 			));
 		} else {
 			$this->render('index',array(
