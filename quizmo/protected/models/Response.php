@@ -23,6 +23,7 @@ class IncorrectQuestionTypeException extends Exception { }
  * @property integer $SCORE
  * @property string $DATE_MODIFIED
  * @property integer $MODIFIED_BY
+ * @property integer $SORT_ORDER
  */
 class Response extends QActiveRecord
 {
@@ -60,7 +61,7 @@ class Response extends QActiveRecord
 		// will receive user inputs.
 		return array(
 			array('QUESTION_ID, QUESTION_TYPE, USER_ID', 'required'),
-			array('QUESTION_ID, USER_ID, SCORE, MODIFIED_BY', 'numerical', 'integerOnly'=>true),
+			array('QUESTION_ID, USER_ID, SCORE, MODIFIED_BY, SORT_ORDER', 'numerical', 'integerOnly'=>true),
 			array('SCORE_STATE', 'length', 'max'=>255),
 			array('QUESTION_TYPE', 'length', 'max'=>1),
 			array('RESPONSE', 'length', 'max'=>3900),
@@ -98,6 +99,7 @@ class Response extends QActiveRecord
 			'SCORE' => 'Score',
 			'DATE_MODIFIED' => 'Date Modified',
 			'MODIFIED_BY' => 'Modified By',
+			'SORT_ORDER' => 'Sort Order'
 		);
 	}
 
@@ -121,6 +123,7 @@ class Response extends QActiveRecord
 		$criteria->compare('SCORE',$this->score);
 		$criteria->compare('DATE_MODIFIED',$this->date_modified,true);
 		$criteria->compare('MODIFIED_BY',$this->modified_by);
+		$criteria->compare('SORT_ORDER',$this->sort_order);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -670,6 +673,7 @@ class Response extends QActiveRecord
 			// save
 			return $response->save(false);
 		}
+		return false;
 	}
 	
 	/**
