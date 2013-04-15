@@ -15,6 +15,7 @@
 			<th></th>
 			<th>Quiz</th>
 			<th>Status</th>
+			<th>Submitted <span class="muted">(Total Started)</span></th>
 			<th>Actions</th>
 		</tr>
 		</thead>
@@ -58,6 +59,9 @@
 					(hidden)
 				{/if}
 				</div>
+			</td>
+			<td>
+				{$results[$quiz['ID']]['submitted']} <span class="muted">({$results[$quiz['ID']]['total']})</span>
 			</td>
 			<td>
 				{if $quiz.status != 'S' && $quiz.question_count > 0}
