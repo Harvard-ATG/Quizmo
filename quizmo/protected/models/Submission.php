@@ -77,6 +77,7 @@ class Submission extends QActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'quizzes' => array(self::BELONGS_TO, 'Quiz', 'QUIZ_ID'),
 		);
 	}
 
@@ -190,4 +191,39 @@ class Submission extends QActiveRecord
 			return Submission::NOT_STARTED;
 		return $submission->STATUS;
 	}
+	
+	/**
+	 * gets the total results of people who are submitted and not for each quiz in a collection
+	 * @param number $collection_id
+	 * @return array of a hash array('submitted'=>\d, 'total_results'=>\d)
+	 */
+	public static function getResultTotals($collection_id){
+				
+		// just left joining the submissions on quizzes (so we get all quiz_ids and can set them to 0 in results)
+		// note: resetScope was needed because defaultScope puts an ambiguous orderby in there (ORDER BY ASC ID)
+		$quizzes = Quiz::model()->with(array(
+			'submissions'=>array(
+				'joinType'=>'LEFT JOIN'
+			)
+		))->resetScope()->findAllByAttributes(array('COLLECTION_ID'=>$collection_id));
+		
+		$results = array();
+		foreach($quizzes as $quiz){
+			if(!isset($results[$quiz->ID])){
+				$results[$quiz->ID]['submitted'] = 0;
+				$results[$quiz->ID]['total'] = 0;				
+			}
+			
+			foreach($quiz->submissions as $submission){
+				if($submission->STATUS == Submission::SUBMITTED)
+					$results[$quiz->ID]['submitted']++;
+
+				if($submission->STATUS != Submission::NOT_STARTED)
+					$results[$quiz->ID]['total']++;
+			}
+		}
+		return $results;
+
+	}
+	
 }
