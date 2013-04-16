@@ -773,27 +773,31 @@ class Response extends QActiveRecord
 							
 						break;	
 						case Question::FILLIN:
+						
+							//echo($answer->QUESTION_ID.": ");
+							//echo($answer->ID." -> ".$response->ID."\n");
+						
 							if($is_new_question){
 								array_push($answer_array, $answer->ANSWER);
 							}
 							if($is_new_response){
-								array_push($response_array, $response->RESPONSE);
-							}
-							
+								array_push($response_array, $response);
+							} 
+
 							// so we need to run through the responses and match them
 							// each individually with what should be the corresponding answer
 							$correct = false;
 							for($i = 0; $i < sizeof($response_array); $i++){
-								if(isset($response_array[$i]) && isset($answer_array[$i])){
+								if(isset($response_array[$i]->RESPONSE) && isset($answer_array[$i])){
 									if($answer->IS_CASE_SENSITIVE != 1){
-										$response_array[$i] = strtolower($response_array[$i]);
+										$response_array[$i]->RESPONSE = strtolower($response_array[$i]->RESPONSE);
 										$answer_array[$i] = strtolower($answer_array[$i]);
 									}
 										
 									$acceptable_answers = explode("|", $answer_array[$i]);
 									$correct = false;
 									foreach($acceptable_answers as $acceptable_answer){
-										if($response_array[$i] == $acceptable_answer){
+										if($response_array[$i]->RESPONSE == $acceptable_answer){
 											$correct = true;
 										} 										
 									}									
@@ -807,37 +811,15 @@ class Response extends QActiveRecord
 									break;
 								}
 							}
-							
-							/*							
-							// this creates a string consisting of all the responses put together
-							$response_string = implode("", $response_array);
-							// this creates a string consisting of all of the answers put together
-							// TODO: create multiple answer strings based on pipe answers...
-							// in case of a pipe answer, this is not checking it appropriately
-							$answer_string = implode("", $answer_array);
-							
-							if($answer->IS_CASE_SENSITIVE != 1){
-								$response_string = strtolower($response_string);
-								$answer_string = strtolower($answer_string);
-							}
-							
-							// get all the answers seperated by |
-							$answerArr = explode("|", $answer_string);
-							
-							foreach($answerArr as $answer){
-								if($response_string == $answer){
-									$correct = true;
-									break;
-								} 
-								$correct = false;
-							}
-							*/
-							
-							if($correct)
-								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
-							else
+
+							if($correct){
+								//echo($response_array[0]->ID." -- ".$question_points[$response->QUESTION_ID]."\n");
 								Response::setScore($response->ID, 0);
-								
+								Response::setScore($response_array[0]->ID, $question_points[$response->QUESTION_ID]);
+							
+							} else {
+								Response::setScore($response_array[0]->ID, 0);
+							}
 							
 						break;
 						
