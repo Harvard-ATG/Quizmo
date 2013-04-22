@@ -26,6 +26,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 	<link href="<?php echo $host; ?>/css/bootstrap-responsive-isites.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo $host; ?>/css/bootstrap-notify.css" rel="stylesheet" type="text/css"/>
 	<link href="<?php echo $host; ?>/css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo $host; ?>/css/main.css" rel="stylesheet" type="text/css"/>
 	
 	<style>
 #view-switch {

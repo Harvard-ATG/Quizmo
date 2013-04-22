@@ -37,7 +37,11 @@ function smarty_function_fillin($params, &$smarty){
 			if(!isset($responses[$responses_index])){
 				$new_input = "<input class='input-small fillin-text' type='text' $disabled/>";				
 			} else {
-				$response = $responses[$responses_index]['response'];
+				if(isset($responses[$responses_index]['answer'])){
+					$response = $responses[$responses_index]['answer'];
+				} else {
+					$response = $responses[$responses_index]['response'];
+				}
 				$responses_index++;
 				$new_input = "<input class='input-small fillin-text' type='text' value='$response' $disabled/>";
 			}

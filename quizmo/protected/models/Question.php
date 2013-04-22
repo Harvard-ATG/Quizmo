@@ -405,6 +405,10 @@ class Question extends QActiveRecord
 	public function createFillin($quiz_id, $title, $body, $score, $feedback, $is_case_sensitive){
 		
 		$question_id = $this->create($quiz_id, Question::FILLIN, $title, $body, $score, $feedback);
+		// we need to remove the old answers...
+		if($question_id){
+			Answer::model()->deleteAllByAttributes(array('QUESTION_ID'=>$question_id));
+		}
 		
 		// need to get the answers from the body:
 		preg_match_all("/\{[^}]*\}/", $body, $matches);
