@@ -1,7 +1,13 @@
 <div id="question-quiz-view" class="well" style="height: 200px">
 	<div class="lead">
 		{if $question.question_type == 'F'}
-			{fillin question=$question.body responses=$question.responses disabled=1}
+			{fillin question=$question.body responses=$question.responses disabled=1}<br/>
+			{if $show_feedback == 1}
+			<div style="font-size: 10px; border: black solid 1px; border-radius: 5px; padding: 2px;">
+				Correct answer:<br/>
+				{fillin question=$question.body responses=$question.answers disabled=1}
+			</div>
+			{/if}
 		{else}
 			{$question['body']}
 		{/if}
@@ -75,6 +81,11 @@
 		<label class="control-label"></label>
 		<div class="controls">
 			<input id="numerical-text" type="text" class="input-small disabled" value="{$question.responses[0].response}" disabled="disabled"/>
+			{if $show_feedback == 1}
+			<div style="font-size: 10px; border: black solid 1px; border-radius: 5px; padding: 2px;">
+				Correct answer: {$question.answers[0].answer}<br/>
+			</div>
+			{/if}
 		</div>
 	</div>
 
