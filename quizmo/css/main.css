@@ -1,0 +1,18 @@
+.bootstrapped .icon-tick {
+  background-image: url("../img/tick.png");
+  background-position: 0      0;
+  width: 16px;
+  height: 16px;
+}
+.bootstrapped .icon-cross {
+  background-image: url("../img/cross.png");
+  background-position: 0      0;
+  width: 16px;
+  height: 16px;
+}
+.bootstrapped .icon-tick-grey {
+  background-image: url("../img/tick-grey.png");
+  background-position: 0      0;
+  width: 16px;
+  height: 16px;
+}
