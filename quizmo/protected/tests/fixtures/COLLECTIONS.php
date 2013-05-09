@@ -3,8 +3,8 @@
 return array(
 	
 	'collection1' => array(
-		'OTHER_ID' => 'icb.topic1140341',
-		'TITLE' => 'icb.topic1140341',
+		'OTHER_ID' => 'icb.topic1245724',
+		'TITLE' => 'icb.topic1245724',
 		'DELETED' => 0,
 		'DESCRIPTION' => '',
 	),
