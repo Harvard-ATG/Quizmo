@@ -68,7 +68,7 @@ class CollectionTest extends CDbTestCase {
 	
 	public function testGetOtherId(){
 		$collection_id = 1;
-		$other_id = 'icb.topic1140341';
+		$other_id = 'icb.topic1245724';
 		$this->assertEquals($other_id, Collection::getOtherId($collection_id));
 
 		$collection_id = 2;
