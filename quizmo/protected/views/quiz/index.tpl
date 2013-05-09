@@ -67,7 +67,7 @@
 				{elseif ($quiz.status != 'N' && $quiz.status != 'U')}
 					<!-- submitted -->
 					<a href='{url url="/quiz/individualResults/"|cat:$quiz['ID']|cat:"/"|cat:$user_id}'>My Results</a><br/>
-				{else}
+				{elseif $quiz.status == 'U'}
 					<!-- started -->
 					<a href='{url url="/quiz/submit/"|cat:$quiz['ID']}'>Submit</a><br/>
 				{/if}
