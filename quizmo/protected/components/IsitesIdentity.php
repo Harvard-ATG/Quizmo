@@ -138,14 +138,14 @@ class IsitesIdentity extends UserIdentity {
 							$this_user['group_string'] = UserIdentity::GUEST_STRING;
 						break;
 					}
+					array_push($users, $this_user);
 				
 				}
-				array_push($users, $this_user);
 				//$users = array_merge($users, $these_users->members);
 			}
 		}
 		
-		//error_log(var_export($users, 1));
+		error_log(var_export($users, 1));
 		
 		return $users;
 		
