@@ -12,5 +12,3 @@ README-webrootsInstall.php
 /quizmo/protected/config/coursemanager.php
 /quizmo/protected/config/main.php
 /quizmo/assets/*
-/quizmo/protected/runtime/*
-/quizmo/protected/runtime/application.log
