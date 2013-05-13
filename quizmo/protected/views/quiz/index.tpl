@@ -1,9 +1,7 @@
 <h1>Quizzes</h1>
 
 <div id="quizzes-container" class="row-fluid">
-	<div class="span8">
 
-	</div>
 	{if $admin}
 	<div id="view-switch" class="span4">
 		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/1"}'>Manage</a>
