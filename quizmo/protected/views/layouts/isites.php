@@ -44,7 +44,28 @@ textarea { resize:both; }
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>
 			<div id='hashcontent'>
-				<?php echo preg_replace("/<br>/", "<br/>", $content); ?>
+				<?php //echo preg_replace("/<br>/", "<br/>", $content); ?>
+				<?php 
+				/* doing this ensures that all content given to isites is xhtml */
+				echo tidy_repair_string($content, 
+					array(
+						'output-xhtml'=>true,
+						'doctype'=>'omit', 
+						//'quote-ampersand'=>false, 
+						//'join-styles'=>false,
+						//'fix-uri'=>false,
+						//'drop-empty-paras'=>false,
+						//'anchor-as-name'=>false,
+						//'fix-backslash'=>false,
+						//'fix-bad-comments'=>false,
+						//'lower-literals'=>false,
+						//'merge-divs'=>false,
+						//'merge-spans'=>false,
+						//'ncr'=>false,
+						//'quote-nbsp'=>false,
+						'show-body-only'=>true					
+					)); 
+				?>
 			</div>
 		</div>
 		
@@ -52,6 +73,7 @@ textarea { resize:both; }
 		<script src="<?php echo $host; ?>/js/jquery.dataTables.js"></script>
 		<script src="<?php echo $host; ?>/js/jquery.dataTables.rowReordering.js"></script>
 		<script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script>
+		<script src="<?php echo $host; ?>/js/wysihtml5-parser.js"></script>
 		<script src="<?php echo $host; ?>/js/wysihtml5-0.3.0.js"></script>
 		<script src="<?php echo $host; ?>/js/bootstrap-wysihtml5-0.0.2.js"></script>
 		<script>
