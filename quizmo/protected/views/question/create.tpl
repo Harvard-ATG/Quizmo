@@ -372,7 +372,6 @@ $(document).ready(function(){
 	}
 	
 	var inner = $('#question-body-div').html();
-	console.log(inner);
 	$('<textarea id="question-body" name="body" rows="5" style="height:300px; width: 500px">' + inner + '</textarea>').insertAfter('#question-body-div');
 	$('#question-body-div').remove();
 	$('#question-body').wysihtml5({
