@@ -73,7 +73,6 @@ textarea { resize:both; }
 		<script src="<?php echo $host; ?>/js/jquery.dataTables.js"></script>
 		<script src="<?php echo $host; ?>/js/jquery.dataTables.rowReordering.js"></script>
 		<script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script>
-		<script src="<?php echo $host; ?>/js/wysihtml5-parser.js"></script>
 		<script src="<?php echo $host; ?>/js/wysihtml5-0.3.0.js"></script>
 		<script src="<?php echo $host; ?>/js/bootstrap-wysihtml5-0.0.2.js"></script>
 		<script>
