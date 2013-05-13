@@ -9,15 +9,9 @@
   <li id="saved-div" style="position:fixed;"></li>
 </ul>
 
-<div class="well"  style="height: 250px">
-<div id="questions-container">
+<div class="well"  style="height: 100%" id="questions-container"></div>
 
-</div>
-</div>
-
-<div id="saved-div2" class="notifications" style="width: 100px">
-	
-</div>
+<div id="saved-div2" class="notifications" style="width: 100px"></div>
 
 <div id="quiz-controls" class="btn-toolbar">
 	<div class="btn-group">
