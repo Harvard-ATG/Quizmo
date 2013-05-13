@@ -23,7 +23,10 @@
 <div id="body-control-group" class="control-group">
 	<label class="control-label" for="body">Question</label>
 	<div class="controls">
-		<textarea class="input-xlarge span10" id="question-body" name="body" rows="5">{if $question}{$question.body}{/if}</textarea>
+		<!--
+		<div id="question-body-div" name="body" rows="5" class="hide"><img src="http://blog.wsd.net/teschriver/files/2012/09/test1.jpg"></div>
+		-->
+		<div id="question-body-div" name="body" rows="5" class="hide">{if $question}{$question.body}{/if}</div>
 		<p class="help-inline"></p>
 	</div>
 </div>
@@ -289,19 +292,3 @@ $(document).ready(function(){
 		<p class="help-inline"></p>
 	</div>
 </div>
-
-
-
-
-<script>
-
-
-
-$(document).ready(function(){
-	
-
-
-
-});
-
-</script>
