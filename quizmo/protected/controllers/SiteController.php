@@ -101,6 +101,7 @@ class SiteController extends Controller
 	}
 	
 	public function actionJsredirect(){
+		$this->layout = false;
 		
 		if(isset(Yii::app()->session['jsredirect'])){
 			$this->render('jsredirect',array(
