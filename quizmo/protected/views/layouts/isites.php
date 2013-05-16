@@ -51,6 +51,9 @@ textarea { resize:both; }
 					array(
 						'output-xhtml'=>true,
 						'doctype'=>'omit', 
+						'preserve-entities'=>true,
+						//'input-encoding' => 'utf8',
+						//'output-encoding' => 'utf8',
 						//'quote-ampersand'=>false, 
 						//'join-styles'=>false,
 						//'fix-uri'=>false,
