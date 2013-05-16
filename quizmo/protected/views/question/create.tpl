@@ -372,7 +372,8 @@ $(document).ready(function(){
 	}
 	
 	var inner = $('#question-body-div').html();
-	$('<textarea id="question-body" name="body" rows="5" style="height:300px; width: 500px">' + inner + '</textarea>').insertAfter('#question-body-div');
+	$('<textarea id="question-body" name="bodyValue" rows="5" style="height:300px; width: 500px">' + inner + '</textarea><input value="body" name="inputField" type="hidden"/>').insertAfter('#question-body-div');
+	
 	$('#question-body-div').remove();
 	$('#question-body').wysihtml5({
 		"font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
