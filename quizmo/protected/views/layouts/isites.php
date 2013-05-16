@@ -34,6 +34,25 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 }
 textarea { resize:both; }
 	</style>
+	
+	<!-- for results -->
+	<style>
+	.enrollee {
+		background-color: #E6E6E6 !important;
+		background-repeat: repeat-x;
+	}
+	.guest {
+		background-color: #E6E6D0;
+	}
+	.admin, super {
+		background-color: #ffffff;
+	}
+	.example {
+		border: 1px solid;
+		border-radius: 5px;
+		padding: 3px;
+	}
+	</style>
 
 	<script>
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
