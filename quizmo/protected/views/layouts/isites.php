@@ -63,9 +63,16 @@ textarea { resize:both; }
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>
 			<div id='hashcontent'>
-				<?php //echo preg_replace("/<br>/", "<br/>", $content); ?>
+				<?php 
+					//$content = addslashes($content);
+					//$content = "<img src='http://static.php.net/www.php.net/images/php.gif'/>";
+					$content = preg_replace("{<img(.*?)[\/]?>}", "<img $1 />", $content);
+					echo preg_replace("/<br>/", "<br/>", $content); 
+					
+				?>
 				<?php 
 				/* doing this ensures that all content given to isites is xhtml */
+				/*
 				echo tidy_repair_string($content, 
 					array(
 						'output-xhtml'=>true,
@@ -73,7 +80,7 @@ textarea { resize:both; }
 						'preserve-entities'=>true,
 						//'input-encoding' => 'utf8',
 						//'output-encoding' => 'utf8',
-						//'quote-ampersand'=>false, 
+						'quote-ampersand'=>false, 
 						//'join-styles'=>false,
 						//'fix-uri'=>false,
 						//'drop-empty-paras'=>false,
@@ -87,6 +94,7 @@ textarea { resize:both; }
 						//'quote-nbsp'=>false,
 						'show-body-only'=>true					
 					)); 
+				*/
 				?>
 			</div>
 		</div>

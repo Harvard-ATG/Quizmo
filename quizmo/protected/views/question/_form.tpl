@@ -26,7 +26,7 @@
 		<!--
 		<div id="question-body-div" name="body" rows="5" class="hide"><img src="http://blog.wsd.net/teschriver/files/2012/09/test1.jpg"></div>
 		-->
-		<div id="question-body-div" name="body" rows="5" class="hide">{if $question}{$question.body}{/if}</div>
+		<textarea id="question-body" name="body" rows="5" style="height:300px; width: 500px">{if $question}{$question.body}{/if}</textarea>
 		<p class="help-inline"></p>
 	</div>
 </div>
