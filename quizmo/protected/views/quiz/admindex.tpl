@@ -1,9 +1,11 @@
 	<h1>Manage Quizzes</h1>
+	<div class="update">Welcome to the new Course iSites Quiz Tool, which we are piloting during Fall semester, 2013. We appreciate any suggestions that you have about how we may improve this tool. Please contact <a href="mailto:atg@fas.harvard.edu">atg@fas.harvard.edu</a> with your feedback.</div>
 
 <div id="quizzes-container" class="row-fluid">
 	<div class="span8">
 		<a class="btn" href='{url url="/quiz/create/$collection_id"}'>Create Quiz</a>
 	</div>
+
 	<div id="view-switch" class="span4">
 		<a class="btn" href='{url url="/quiz/index/"|cat:$collection_id|cat:"/0"}'>Student View</a>
 	</div>
