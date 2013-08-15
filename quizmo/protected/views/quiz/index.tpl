@@ -1,4 +1,4 @@
-<h1>Quizzes!</h1>
+<h1>Quizzes</h1>
 
 <div id="quizzes-container" class="row-fluid">
 
