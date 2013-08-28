@@ -3,10 +3,7 @@
 README-technotes.php
 README-webrootsInstall.php
 /quizmo/protected/config/database.php
-/quizmo/protected/config/database-dev.php
-/quizmo/protected/config/database-stage.php
-/quizmo/protected/config/database-test.php
-/quizmo/protected/config/database-prod.php
+/quizmo/protected/config/database-*.php
 /quizmo/protected/config/ldap.php
 /quizmo/protected/config/isites.php
 /quizmo/protected/config/coursemanager.php
