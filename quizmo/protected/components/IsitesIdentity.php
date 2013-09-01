@@ -145,7 +145,7 @@ class IsitesIdentity extends UserIdentity {
 			}
 		}
 		
-		error_log(var_export($users, 1));
+		//error_log(var_export($users, 1));
 		
 		return $users;
 		
