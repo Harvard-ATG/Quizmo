@@ -5,6 +5,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 <head>    
 </head>
 <body>
+	<a href="#asdf">asdf</a>
 	<session>
 	  <attribute>
 	    <name>QUIZMO_SESSION_<?php echo $_REQUEST['topicId']; ?></name>
@@ -65,36 +66,9 @@ textarea { resize:both; }
 			<div id='hashcontent'>
 				<?php 
 					//$content = addslashes($content);
-					//$content = "<img src='http://static.php.net/www.php.net/images/php.gif'/>";
 					$content = preg_replace("{<img(.*?)[\/]?>}", "<img $1 />", $content);
 					echo preg_replace("/<br>/", "<br/>", $content); 
 					
-				?>
-				<?php 
-				/* doing this ensures that all content given to isites is xhtml */
-				/*
-				echo tidy_repair_string($content, 
-					array(
-						'output-xhtml'=>true,
-						'doctype'=>'omit', 
-						'preserve-entities'=>true,
-						//'input-encoding' => 'utf8',
-						//'output-encoding' => 'utf8',
-						'quote-ampersand'=>false, 
-						//'join-styles'=>false,
-						//'fix-uri'=>false,
-						//'drop-empty-paras'=>false,
-						//'anchor-as-name'=>false,
-						//'fix-backslash'=>false,
-						//'fix-bad-comments'=>false,
-						//'lower-literals'=>false,
-						//'merge-divs'=>false,
-						//'merge-spans'=>false,
-						//'ncr'=>false,
-						//'quote-nbsp'=>false,
-						'show-body-only'=>true					
-					)); 
-				*/
 				?>
 			</div>
 		</div>
@@ -105,86 +79,103 @@ textarea { resize:both; }
 		<script src="<?php echo $host; ?>/js/bootstrap-notify.js"></script>
 		<script src="<?php echo $host; ?>/js/wysihtml5-0.3.0.js"></script>
 		<script src="<?php echo $host; ?>/js/bootstrap-wysihtml5-0.0.2.js"></script>
+		<script data-main="<?php echo $host; ?>/js/main.js" src="<?php echo $host; ?>/js/require.js"></script>
+		
 		<script>
 		//<![CDATA[
-		<?php //include("js/jquery.dataTables.js"); ?>
-		<?php //include("js/jquery.dataTables.rowReordering.js"); ?>
-		<?php //include("js/bootstrap-notify.js"); ?>
-		<?php //include("js/wysihtml5-0.3.0.js"); ?>
-		<?php //include("js/bootstrap-wysihtml5-0.0.2.js"); ?>
 		
 		dohash = function(hash){
 			if(document.location.hash != ''){
 				// get the ajax link for the hash url value
-				//console.log(document.location.hash);
-				//console.log(ajaxurl(document.location.hash));
-
+				console.log(document.location.hash);
+				console.log(ajaxurl(document.location.hash));
+		
 				locationhash = document.location.hash;
 				if(locationhash.match(/^#\//)){
 					//newlocation = locationhash.replace(/#(\/[^#]+)/, '$1');
 					newlocation = locationhash.replace(/^#([^#]*)#?([^#]*)?$/, "$1");
-					//console.log(newlocation);
-					//console.log(ajaxurl(newlocation));
-					$('#hashcontent').load(ajaxurl(newlocation));					
+					console.log(newlocation);
+					console.log(ajaxurl(newlocation));
+					$('#hashcontent').load(ajaxurl(newlocation) + ' #hashcontent');          
 				}
-				
+		        
 			}
-			
+		      
 		}
-		
+		    
 		window.onhashchange = function(hash){
 			//console.log('onhashchange');
-			//dohash();
+			dohash();
 		}
-		
+		    
 		$(document).ready(function(){
 			//dohash();
 		});
-		
+		    
 		function ajaxurl(viewPath) {
-
+		
 			host = "<?php echo $_REQUEST['urlRoot']; ?>";
 			keyword = "<?php echo $_REQUEST['keyword']; ?>";
 			page_id = "<?php echo $_REQUEST['pageid']; ?>";
 			page_content_id = "<?php echo $_REQUEST['pageContentId']; ?>";
 			topic_id = "<?php echo $_REQUEST['topicId']; ?>";
 			state = "<?php echo @$_REQUEST['state']; ?>";
-
+		
 			parts = [];
 			parts['scheme'] = 'http';
 			parts['host'] = 'isites.harvard.edu';
 			parts['path'] = 'icb/ajax' + viewPath;
 			parts['query'] = '';
-	
-	
+		  
+		  
 			mergeQuery = {};
 			mergeQuery['state'] = state;
 			mergeQuery['keyword'] = keyword;
-
+		
 			if(state === 'popup') {
 				//viewParams = $this->_queryAsViewParams($viewQuery);
 				//$mergeQuery = array_merge($mergeQuery, array(
-				//	'topicid' => $topic_id, // Note the spelling: topicid, NOT topicId
-				//	'view' => $viewPath)
+				//  'topicid' => $topic_id, // Note the spelling: topicid, NOT topicId
+				//  'view' => $viewPath)
 				//);
 				//$mergeQuery = array_merge($mergeQuery, $viewParams);
 			} else {
 				// pass view params back to our app via the "panel" query
 				panelView = viewPath;
 				panelParams = [];
-				
+		        
 				mergeQuery['topicId'] = topic_id;
 				mergeQuery['pageContentId'] = page_content_id;
 			}
-
+		
 			parts['query'] = mergeQuery;
 			full_url = parts['scheme'] + '://' + parts['host'] + '/' + parts['path'] + '?' + $.param(mergeQuery);
-			
+		      
 			return $('<span>').text(full_url).html()
-
+		
 		}
 		
+		
 		//]]>
+		</script>
+		
+		<script>
+		require(['iSitesAjax'], function(iSitesAjax){
+			
+			var host = "<?php echo $_REQUEST['urlRoot']; ?>";
+			var keyword = "<?php echo $_REQUEST['keyword']; ?>";
+			var page_id = "<?php echo $_REQUEST['pageid']; ?>";
+			var page_content_id = "<?php echo $_REQUEST['pageContentId']; ?>";
+			var topic_id = "<?php echo $_REQUEST['topicId']; ?>";
+			var state = "<?php echo @$_REQUEST['state']; ?>";
+			
+			
+				
+			//isites_ajax = new iSitesAjax(host, keyword, page_id, page_content_id, topic_id, state);
+			isites_ajax = new iSitesAjax();
+			isites_ajax.init();
+		
+		});
 		</script>
 
   </body>

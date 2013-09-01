@@ -29,8 +29,8 @@ function smarty_function_url($params, &$smarty){
 		if($ajax == 1){
 			$url = Yii::app()->isitestool->ajaxurl($url);
 		} else {
-			$url = Yii::app()->isitestool->url($url);
-			//$url = "#$url";
+			//$url = Yii::app()->isitestool->url($url);
+			$url = "#$url";
 		}
 
 		
