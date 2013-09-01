@@ -531,6 +531,10 @@ class Response extends QActiveRecord
 			$photo_url = $identity->getPhotoUrl($user_id, 50);
 			$results[$key]['photo_url'] = $photo_url;
 			
+			// only enrollees should be displayed if it hasn't been started
+			if($status == Submission::NOT_STARTED && $results[$key]['permission'] != 'enrollee')
+				unset($results[$key]);
+			
 		}
 
 		return $results;
