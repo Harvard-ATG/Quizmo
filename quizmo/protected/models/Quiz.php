@@ -592,11 +592,13 @@ class Quiz extends QActiveRecord
 		
 		
 		// get all users
-		$usersO = User::model()->findAll('ID IN ('.join(",", $user_ids).')');
-		foreach($usersO as $user){
-			$users[$user->ID]['lname'] = $user->LNAME;
-			$users[$user->ID]['fname'] = $user->FNAME;
-			$users[$user->ID]['email'] = $user->EMAIL;
+		if(!empty($user_ids)){
+			$usersO = User::model()->findAll('ID IN ('.join(",", $user_ids).')');
+			foreach($usersO as $user){
+				$users[$user->ID]['lname'] = $user->LNAME;
+				$users[$user->ID]['fname'] = $user->FNAME;
+				$users[$user->ID]['email'] = $user->EMAIL;
+			}
 		}
 		
 		//echo(var_export($users, 1));

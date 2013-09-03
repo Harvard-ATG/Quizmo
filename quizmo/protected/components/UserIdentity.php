@@ -106,6 +106,10 @@ class UserIdentity extends CUserIdentity
 				// set it in the database
 				$user->LNAME = $this->lname;
 			}
+			if($this->email){
+				// set it in the database
+				$user->EMAIL = $this->email;
+			}
 			
 			
 			$transaction = $user->dbConnection->beginTransaction();

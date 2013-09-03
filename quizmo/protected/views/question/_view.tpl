@@ -1,4 +1,4 @@
-<div id="question-quiz-view" class="well" style="height: 200px">
+<div id="question-quiz-view" class="well">
 	<div class="lead">
 		{if $question.question_type == 'F'}
 			{fillin question=$question.body responses=$question.responses disabled=1}<br/>
