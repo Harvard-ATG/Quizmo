@@ -84,9 +84,6 @@ class QuestionController extends Controller
 		$quiz = new Quiz;
 		//error_log("quiz/create");
 		
-		//$quiz_id = ($id == '') ? Yii::app()->session['quiz_id'] : $id;
-		//$quiz_id = ($quiz_id == '') ? Yii::app()->getRequest()->getParam('quiz_id') : $quiz_id;
-		//if($quiz_id != '') Yii::app()->session['quiz_id'] = $quiz_id;
 		$quiz_id = $id;
 		$question_id = $id2;
 		$collection_id = Quiz::getCollectionId($quiz_id);
@@ -98,7 +95,7 @@ class QuestionController extends Controller
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
 		$submit = Yii::app()->getRequest()->getParam('submitted');
-		
+				
 		$question = array();
 		$errors = array();
 		if($submit){
@@ -117,7 +114,7 @@ class QuestionController extends Controller
 						$question['question_type'] = 'M';
 						$multiple_radio_answer = Yii::app()->getRequest()->getParam('multiple_radio_answer');
 						for($i = 0; isset($_REQUEST['multiple_answer'.$i]); $i++){
-							error_log("$i:$multiple_radio_answer");
+							//error_log("$i:$multiple_radio_answer");
 							($i == $multiple_radio_answer) ? $correct = 1 : $correct = 0;
 							// for validation
 							if($correct == 1)
@@ -354,7 +351,10 @@ class QuestionController extends Controller
 			if(@$question_id != ''){
 				// now go to list
 				//$this->forward('/question/index/'.$quiz_id);
-				$this->jsredirect($this->url('/question/admindex/'.$quiz_id));
+				//$this->jsredirect($this->url('/question/admindex/'.$quiz_id));
+				$this->layout = false;
+				echo json_encode(array('success'=>true, 'question_id'=>$question_id, 'errors'=>$errors));
+				Yii::app()->end();			
 				return;
 			}
 		}
@@ -363,6 +363,12 @@ class QuestionController extends Controller
 			$question = Question::getQuestionViewById($question_id);
 		}
 
+		if($submit){
+			$this->layout = false;
+			echo json_encode(array('success'=>true, 'question_id'=>$question_id, 'errors'=>$errors));
+			Yii::app()->end();			
+		}
+		
 		$this->render('create', array(
 			'collection_id'=>$collection_id,
 			'quiz_id'=>$quiz_id,
@@ -374,7 +380,7 @@ class QuestionController extends Controller
 			'error_json'=>json_encode($errors),
 			'quiz_title'=>Quiz::model()->findByPk($quiz_id)->TITLE,
 		));
-
+		
 	}
 
 
