@@ -15,7 +15,7 @@
 <div id="questions-container">
 	<a class="btn" href='{url url="/question/create/$quiz_id"}'>New Question</a>
 {if $sizeofquestions > 0}
-	<table id="questions-table" class="table table-condensed">
+	<table id="questions-table_{$topic_id}" class="table table-condensed">
 		<thead>
 			<tr>
 				<th></th>
@@ -99,10 +99,11 @@
 		alert("failure saving");
 	}
 	$(document).ready(function(){
+		var topic_id = '{$topic_id}';
 		$('.question-delete-btn').click(openQuestionDeleteModal);
 		$('.question-delete-action').click(questionDeleteAction);
 		
-		$('#questions-table').dataTable({
+		$('#questions-table_'+topic_id).dataTable({
 			 "bPaginate": false,
 			 "bFilter": false,
 			 "bInfo": false,

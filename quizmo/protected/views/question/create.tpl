@@ -28,7 +28,8 @@
 		<input type="hidden" id="submitted" name="submitted" value="1"/>
 		
 		<div class="form-actions">
-			<input id="question-submit" type="submit" class="btn btn-primary" value="Submit" />
+			<!-- <input id="question-submit" type="submit" class="btn btn-primary" value="Submit" /> -->
+			<button type="button" id="question-submit" class="btn btn-primary">Submit</button>
 			<a class="btn" href='{url url="/question/admindex/$quiz_id"}'>Cancel</a>
 		</div>
 		
@@ -44,52 +45,56 @@ $(document).ready(function(){
 	var errors = {$error_json};
 	
 	// validation
-	if(errors['no_title']){
-		$("#title-control-group p.help-inline").text("Error: title required").show();
-		$("#title-control-group").addClass("error");
-	}
-	if(errors['no_body']){
-		$("#body-control-group p.help-inline").text("Error: question required").show();
-		$("#body-control-group").addClass("error");
-	}
-	if(errors['no_question_type']){
-		$("#question_type-control-group p.help-block").text("Error: question type required").show();
-		$("#question_type-control-group").addClass("error");
-	}
-	if(errors['score_not_number']){
-		$("#score-control-group p.help-inline").text("Error: score needs to be a number").show();
-		$("#score-control-group").addClass("error");
-	}
+	var validate = function(errors){
+		if(errors['no_title']){
+			$("#title-control-group p.help-inline").text("Error: title required").show();
+			$("#title-control-group").addClass("error");
+		}
+		if(errors['no_body']){
+			$("#body-control-group p.help-inline").text("Error: question required").show();
+			$("#body-control-group").addClass("error");
+		}
+		if(errors['no_question_type']){
+			$("#question_type-control-group p.help-block").text("Error: question type required").show();
+			$("#question_type-control-group").addClass("error");
+		}
+		if(errors['score_not_number']){
+			$("#score-control-group p.help-inline").text("Error: score needs to be a number").show();
+			$("#score-control-group").addClass("error");
+		}
 	
-	if(errors['multiple_no_answer']){
-		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need at least one answer").show();
-		$("#multiple-choice-control-group").addClass("error");		
-	}
-	if(errors['multiple_no_correct']){
-		$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need a correct answer").show();
-		$("#multiple-choice-control-group").addClass("error");		
-	}
-	if(errors['checkall_no_answer']){
-		$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one answer").show();
-		$("#check-all-control-group").addClass("error");		
-	}
-	if(errors['checkall_no_correct']){
-		$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one correct answer").show();
-		$("#check-all-control-group").addClass("error");		
-	}
+		if(errors['multiple_no_answer']){
+			$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need at least one answer").show();
+			$("#multiple-choice-control-group").addClass("error");		
+		}
+		if(errors['multiple_no_correct']){
+			$("#multiple-choice-control-group p.help-inline").text("Error: multiple choice questions need a correct answer").show();
+			$("#multiple-choice-control-group").addClass("error");		
+		}
+		if(errors['checkall_no_answer']){
+			$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one answer").show();
+			$("#check-all-control-group").addClass("error");		
+		}
+		if(errors['checkall_no_correct']){
+			$("#check-all-control-group p.help-inline").text("Error: multiple selection questions need at least one correct answer").show();
+			$("#check-all-control-group").addClass("error");		
+		}
 	
-	if(errors['numerical_not_number']){
-		$("#numerical-control-group .controls p.help-inline").text("Error: numerical question answers need to be a number").show();
-		$("#numerical-control-group").addClass("error");				
+		if(errors['numerical_not_number']){
+			$("#numerical-control-group .controls p.help-inline").text("Error: numerical question answers need to be a number").show();
+			$("#numerical-control-group").addClass("error");				
+		}
+		if(errors['tolerance_not_number']){
+			$("#numerical-control-group .controls p.help-inline").text("Error: numerical tolerance needs to be a number").show();
+			$("#numerical-control-group").addClass("error");						
+		}
+		if(errors['fillin_no_answer']){
+			$("#body-control-group p.help-inline").text("Error: fill in questions require an answer").show();
+			$("#body-control-group").addClass("error");		
+		}
+		
 	}
-	if(errors['tolerance_not_number']){
-		$("#numerical-control-group .controls p.help-inline").text("Error: numerical tolerance needs to be a number").show();
-		$("#numerical-control-group").addClass("error");						
-	}
-	if(errors['fillin_no_answer']){
-		$("#body-control-group p.help-inline").text("Error: fill in questions require an answer").show();
-		$("#body-control-group").addClass("error");		
-	}
+
 
 	// NOTE: this does not work in isites, linking to the isites form submit does not work
 	$('#question-form').submit(function() {
@@ -370,6 +375,66 @@ $(document).ready(function(){
 			showFillin();
 		}
 	}
+	
+	$('#question-submit').click(function(){
+		// get all of the form data
+		var data = {};
+		data['quiz_id'] = $('#quiz_id').val();
+		data['submitted'] = $('#submitted').val();
+		
+		data['title'] = $('#title').val();
+		data['body'] = $('#question-body').val();
+		data['is_case_sensitive'] = $('#is_case_sensitive').val();
+		data['question_type'] = $('#question_type').val();
+		var count = 0;
+		while($('#multiple_answer' + count).length != 0){
+			data['multiple_answer' + count] = $('#multiple_answer' + count).val();
+			if($('#multiple_radio_answer'+count+':checked').val() !== undefined){
+				data['multiple_radio_answer'] = count;
+			}
+			count++;
+		}
+		
+		//data['true_false_answer'] = $('#true_false_answer').val();			
+		//true_answer = $('#true_answer').val();			
+		//false_answer = $('#false_answer').val();
+		data['truefalse'] = $('#true_false_answer0:checked').val() ? 1 : 0;
+				
+		// reset count to use with check_all
+		count = 0;
+		while($('#check_all_answer' + count).length != 0){
+			data['check_all_answer' + count] = $('#check_all_answer' + count).val();		
+			if($('#check_all_check_answer' + count + ':checked').val() !== undefined)
+				data['check_all_check_answer' + count] = 1;
+			count++;
+		}
+		data['textarea_rows'] = $('#textarea_rows').val();			
+		data['numerical_answer'] = $('#numerical_answer').val();			
+		data['tolerance'] = $('#tolerance').val();			
+		data['score'] = $('#score').val();			
+		data['feedback'] = $('#feedback').val();			
+		
+		// send it
+		var submit_url = '{url url="/question/create/$quiz_id/$question_id" ajax=1}';
+		var return_url = '{url url="/question/admindex/$quiz_id"}';
+		$.ajax({
+			type: "POST",
+			url: submit_url,
+			data: data,
+			dataType: 'json',
+			success: function(data){
+				if(data.errors.length == 0){
+					window.location = return_url;				
+				} else {
+					validate(data.errors)
+				}
+			},
+			error: function(){
+				alert("Error submitting form.");
+			}
+		});
+		
+	});
 	
 	$('#question-body').wysihtml5({
 		"font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
