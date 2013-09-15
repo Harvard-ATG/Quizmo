@@ -92,7 +92,6 @@
 $(document).ready(function () {
 
 	topic_id = '{$topic_id}'.replace(".", "\\.");
-	alert(topic_id);
 
 	$('#quizzes-table_'+topic_id).dataTable({
 		"bPaginate": false,
