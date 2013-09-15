@@ -413,6 +413,7 @@ class QuestionController extends Controller
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
+		$topic_id = Yii::app()->getRequest()->getParam('topic_id');
 
 		$this->render('admindex',array(
 			'collection_id'=>$collection_id,
@@ -421,6 +422,7 @@ class QuestionController extends Controller
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'title'=>Quiz::model()->findByPk($quiz_id)->TITLE,
+			'topic_id'=>$topic_id,
 		));
 
 	}
