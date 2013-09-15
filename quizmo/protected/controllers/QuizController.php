@@ -252,6 +252,7 @@ class QuizController extends Controller
 	{
 		//error_log("quiz/index/".$id);
 		$state = Yii::app()->getRequest()->getParam('state');
+		$topic_id = Yii::app()->getRequest()->getParam('topic_id');
 		$collection_id = $id;
 		$admin_view = $id2;
 		if($state == 'edit'){
@@ -293,6 +294,7 @@ class QuizController extends Controller
 				'user_id'=>$user_id,
 				'collection_id'=>$collection_id,
 				'results'=>Submission::getResultTotals($collection_id),
+				'topic_id'=>$topic_id,
 			));
 		} else {
 			$this->render('index',array(
@@ -302,6 +304,7 @@ class QuizController extends Controller
 				'sizeofquizzes'=>sizeof($quizzes),
 				'user_id'=>$user_id,
 				'collection_id'=>$collection_id,
+				'topic_id'=>$topic_id,
 			));
 
 		}			

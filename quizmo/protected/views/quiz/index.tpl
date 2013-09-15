@@ -9,7 +9,7 @@
 	{/if}
 
 {if $sizeofquizzes > 0}
-	<table id="quizzes-table" class="table table-condensed">
+	<table id="quizzes-table_{$topic_id}" class="table table-condensed">
 		<thead>
 			<tr>
 				<th>Quiz</th>
@@ -91,7 +91,9 @@
 <script>
 $(document).ready(function () {
 
-	$('#quizzes-table').dataTable({
+	topic_id = '{$topic_id}';
+
+	$('#quizzes-table_'+topic_id).dataTable({
 		"bPaginate": false,
 		"bFilter": false,
 		"bInfo": false,
