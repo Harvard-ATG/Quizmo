@@ -1,3 +1,7 @@
+{if $guest}
+You need to be signed into Course iSites in order to use this tool.
+{else}
+
 <div id="quizzes-container" class="row-fluid">
 
 	{if $admin}
@@ -102,3 +106,5 @@ $(document).ready(function () {
 });
 
 </script>
+
+{/if}
