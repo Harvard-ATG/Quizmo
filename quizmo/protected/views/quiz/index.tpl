@@ -1,4 +1,6 @@
-<h1>Quizzes</h1>
+{if $guest}
+You need to be signed into Course iSites in order to use this tool.
+{else}
 
 <div id="quizzes-container" class="row-fluid">
 
@@ -92,7 +94,6 @@
 $(document).ready(function () {
 
 	topic_id = '{$topic_id}'.replace(".", "\\.");
-	alert(topic_id);
 
 	$('#quizzes-table_'+topic_id).dataTable({
 		"bPaginate": false,
@@ -105,3 +106,5 @@ $(document).ready(function () {
 });
 
 </script>
+
+{/if}
