@@ -99,7 +99,7 @@
 		alert("failure saving");
 	}
 	$(document).ready(function(){
-		var topic_id = '{$topic_id}';
+		var topic_id = '{$topic_id}'.replace(".", "\\.");
 		$('.question-delete-btn').click(openQuestionDeleteModal);
 		$('.question-delete-action').click(questionDeleteAction);
 		

@@ -252,7 +252,7 @@ class QuizController extends Controller
 	{
 		//error_log("quiz/index/".$id);
 		$state = Yii::app()->getRequest()->getParam('state');
-		$topic_id = Yii::app()->getRequest()->getParam('topic_id');
+		$topic_id = Yii::app()->getRequest()->getParam('topicId');
 		$collection_id = $id;
 		$admin_view = $id2;
 		if($state == 'edit'){
