@@ -297,9 +297,13 @@ class QuizController extends Controller
 				'topic_id'=>$topic_id,
 			));
 		} else {
+			$guest = false;
+			if($perm_id == 1)
+				$guest = true;
 			$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
 				'admin'=>$admin,
+				'guest'=>$guest,
 				'quizzes'=>$quizzes,
 				'sizeofquizzes'=>sizeof($quizzes),
 				'user_id'=>$user_id,
