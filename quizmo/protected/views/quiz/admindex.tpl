@@ -11,7 +11,7 @@
 	</div>
 
 {if $sizeofquizzes > 0}
-	<table id="quizzes-table" class="table table-condensed">
+	<table id="quizzes-table_{$topic_id}" class="table table-condensed">
 		<thead>
 		<tr>
 			<th></th>
@@ -153,6 +153,7 @@
 </div>
 
 <script>
+
 	openModal = function(e){
 		// get the id
 		$(e.currentTarget.name).modal();
@@ -200,7 +201,7 @@
 	
 
 	quizCopyAction = function(e){
-		console.log("quizCopyAction");
+		//console.log("quizCopyAction");
 		quiz_copy_url = "{url url='/quiz/copy' ajax=1}";
 		// get the quiz_id from eventObject
 		quiz_id = e.currentTarget.name;
@@ -227,7 +228,7 @@
 	}
 	addDiv = function(data){
 		quiz_id = data.quiz_id;
-		$('#quizzes-table').dataTable().fnAddData([
+		$('#quizzes-table_'+topic_id).dataTable().fnAddData([
 			1,
 			'asdf',
 			3,
@@ -248,7 +249,7 @@
 		$('.quiz-copy-btn').click(openModal);
 		$('.quiz-copy-action').click(quizCopyAction);
 
-		$('#quizzes-table').dataTable({
+		$('#quizzes-table_' + topic_id).dataTable({
 			 "bPaginate": false,
 			 "bFilter": false,
 			 "bInfo": false,
