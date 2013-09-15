@@ -861,7 +861,8 @@ class Response extends QActiveRecord
 			$answered_hash[$question_id] = false;
 			foreach($responses as $response){
 				if($response->QUESTION_ID == $question_id){
-					$answered_hash[$question_id] = true;			
+					if($response->RESPONSE != null)
+						$answered_hash[$question_id] = true;			
 				}
 			}
 		}
