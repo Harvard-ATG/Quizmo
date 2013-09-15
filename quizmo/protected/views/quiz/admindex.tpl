@@ -153,6 +153,7 @@
 </div>
 
 <script>
+	topic_id = '{$topic_id}'.replace(".", "\\.");
 
 	openModal = function(e){
 		// get the id

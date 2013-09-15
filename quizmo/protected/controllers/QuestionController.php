@@ -418,7 +418,7 @@ class QuestionController extends Controller
 		Yii::app()->session['quiz_id'] = $quiz_id;
 		$user_id = Yii::app()->user->id;
 		$questions = Question::getQuestionArrayByQuizId($quiz_id);
-		$topic_id = Yii::app()->getRequest()->getParam('topic_id');
+		$topic_id = Yii::app()->getRequest()->getParam('topicId');
 
 		$this->render('admindex',array(
 			'collection_id'=>$collection_id,
