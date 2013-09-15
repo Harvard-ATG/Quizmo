@@ -94,6 +94,11 @@ class QuestionController extends Controller
 		$question_type = Yii::app()->getRequest()->getParam('question_type');
 		$score = Yii::app()->getRequest()->getParam('score');
 		$feedback = Yii::app()->getRequest()->getParam('feedback');
+		// necessary for isites inserting spaces into empty input fields. right?
+		// even though it appears to just be a space, the preg_match was required over a simple == ' '
+		if(preg_match("/\s*/", $feedback)){
+			$feedback = '';
+		}
 		$submit = Yii::app()->getRequest()->getParam('submitted');
 				
 		$question = array();
