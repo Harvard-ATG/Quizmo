@@ -97,12 +97,14 @@ class ResponseController extends Controller
 	public function actionGrade(){
 		//error_log("actionGrade");
 		$this->layout = false;
+		$modified_by = Yii::app()->user->getId();
+		$question_id = Yii::app()->getRequest()->getParam('question_id');
 		$response_id = Yii::app()->getRequest()->getParam('response_id');
 		$user_id = Yii::app()->getRequest()->getParam('user_id');
 		$score = Yii::app()->getRequest()->getParam('score');
-		//error_log($score);
-		Response::setScore($response_id, $score);
 		
+		Response::setScore($response_id, $score, $question_id, $user_id, $modified_by);		
+
 	}
 
 	/**
