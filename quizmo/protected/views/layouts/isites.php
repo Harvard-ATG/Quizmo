@@ -67,6 +67,9 @@ textarea { resize:both; }
 					//$content = addslashes($content);
 					//$content = "<img src='http://static.php.net/www.php.net/images/php.gif'/>";
 					$content = preg_replace("{<img(.*?)[\/]?>}", "<img $1 />", $content);
+					// isites can't handle a "dash dash" being anywhere that isn't in an html comment
+					// seriously
+					$content = preg_replace("/(?<!\<!)\-\-(?!\>)/", "&ndash;&ndash;", $content);
 					echo preg_replace("/<br>/", "<br/>", $content); 
 					
 				?>
