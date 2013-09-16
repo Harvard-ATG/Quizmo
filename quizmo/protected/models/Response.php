@@ -679,7 +679,7 @@ class Response extends QActiveRecord
 	 * @param number $score
 	 * @return boolean
 	 */
-	public function setScore($response_id, $score){
+	public function setScore($response_id, $score, $question_id='', $user_id='', $modified_by=''){
 		// get response
 		$response = Response::model()->findByPk($response_id);
 		if($response instanceof Response){
@@ -689,6 +689,25 @@ class Response extends QActiveRecord
 			$response->SCORE_STATE = Response::MANUAL_SCORED;
 			// save
 			return $response->save(false);
+		} else {
+			$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id, 'USER_ID'=>$user_id));
+			
+			if(sizeof($responses) == 0){
+				$response = new Response;
+				// NOTE: if you are doing auto-increment, this->ID will be overwritten with whatever
+				//    the sequence is at at the save()
+				$question = Question::model()->findByPk($question_id);
+				$response->USER_ID = $user_id;
+				$response->QUESTION_ID = $question_id;
+				$response->QUESTION_TYPE = $question->QUESTION_TYPE;
+				$response->RESPONSE = '';
+				$response->SCORE_STATE = Response::MANUAL_SCORED;
+				$resposne->MODIFIED_BY = $modified_by;
+				$response->SCORE = $score;
+
+				return $response->save();
+			}
+			
 		}
 		return false;
 	}

@@ -46,6 +46,7 @@
 			<td nowrap="nowrap">
 			{if $admin_view}
 				{include file = 'protected/views/response/_grade.tpl'
+					question_id = $question.id
 					response_id = $question.responses[0].id
 					score = $question.score
 					points = $question.points
@@ -94,10 +95,11 @@
 		);
 	}
 
-	updateScore = function(response_id, user_id, score){
+	updateScore = function(question_id, response_id, user_id, score){
 		scoreUrl = "{url url='/response/grade' ajax=1}";
 		// compose data
 		data = {
+			question_id: question_id,
 			response_id: response_id,
 			user_id: user_id,
 			score: score
