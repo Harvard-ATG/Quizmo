@@ -578,10 +578,24 @@ class Quiz extends QActiveRecord
 			$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
 			// put them into an array based on user_ids
 			foreach($responses as $response){
-				if(!isset($users[$response->USER_ID]['responses'][$count]['response']))
-					$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
-				else
+				if(!isset($users[$response->USER_ID]['responses'][$count]['response'])){
+					if(in_array($response->QUESTION_TYPE, array(Question::MULTIPLE_CHOICE, Question::MULTIPLE_SELECTION, Question::TRUE_FALSE))){
+						// in this case, the answer comes from answer, not response
+						// get the question associated with this answer_id stored in the response
+						$answer = Answer::model()->findByPk($response->RESPONSE);
+
+						// it's possible to have an empty response for these if they visited the question, but didn't actually answer it
+						if($answer != null)
+							$users[$response->USER_ID]['responses'][$count]['response'] = $answer->ANSWER;
+						else
+							$users[$response->USER_ID]['responses'][$count]['response'] = "";
+
+					} else {
+						$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
+					}
+				} else {
 					$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$response->RESPONSE;
+				}
 				@$users[$response->USER_ID]['responses'][$count]['score'] += $response->SCORE;
 				array_push($user_ids, $response->USER_ID);
 			}
@@ -650,7 +664,7 @@ class Quiz extends QActiveRecord
 		Yii::import('application.extensions.phpexcel.JPhpExcel');
 		$xls = new JPhpExcel('UTF-8', false, 'My Test Sheet');
 		$xls->addArray($data);
-		$xls->generateXML('my-test');
+		$xls->generateXML('results');
 	}
 	
 }
