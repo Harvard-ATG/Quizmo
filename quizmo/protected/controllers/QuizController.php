@@ -298,7 +298,7 @@ class QuizController extends Controller
 			));
 		} else {
 			$guest = false;
-			if($perm_id == 1)
+			if($perm_id <= 1)
 				$guest = true;
 			$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
