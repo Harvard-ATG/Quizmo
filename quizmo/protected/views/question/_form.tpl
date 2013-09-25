@@ -213,26 +213,26 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('#add-check-all-answer').click(function(){
 		// get the number of radios in there...
-		current_index = $('#check-all-control-group input[type=checkbox]').length + 1;
+		current_index = $('#check-all-control-group input[type=checkbox]').length;
 		// add a new item
 		// this needs to be conditional based on if it's isites
 		{if true}
-		$('#check-all-control-group-inner').append('<div class="controls">'+
-		'<label class="checkbox inline">'+
-		'<input type="checkbox" id="check_all_check_answer'+current_index+'" name="check_all_check_answer'+current_index+'Value" value="'+current_index+'" />'+
-		'<input value="check_all_check_answer'+current_index+'" name="inputField" type="hidden">'+
-		'</label>'+
-		'<input type="text" id="check_all_answer'+current_index+'" name="check_all_answer'+current_index+'Value"/>'+
-		'<input value="check_all_answer'+current_index+'" name="inputField" type="hidden">'+
-		'<p class="help-inline"></p>'+
+		$('#check-all-control-group-inner').append('<div class="controls"> '+
+		'<label class="checkbox inline"> '+
+		'<input type="checkbox" id="check_all_check_answer'+current_index+'" name="check_all_check_answer'+current_index+'Value" value="'+current_index+'" /> '+
+		'<input value="check_all_check_answer'+current_index+'" name="inputField" type="hidden"> '+
+		'</label> '+
+		'<input type="text" id="check_all_answer'+current_index+'" name="check_all_answer'+current_index+'Value"/> '+
+		'<input value="check_all_answer'+current_index+'" name="inputField" type="hidden"> '+
+		'<p class="help-inline"></p> '+
 		'</div>');
 		{else}
-		$('#check-all-control-group-inner').append('<div class="controls">'+
-		'<label class="checkbox inline">'+
-		'<input type="checkbox" id="check_all_check_answer'+current_index+'" name="check_all_check_answer'+current_index+'" value="'+current_index+'" />'+
-		'</label>'+
-		'<input type="text" id="check_all_answer'+current_index+'" name="check_all_answer'+current_index+'"/>'+
-		'</div>');		
+		$('#check-all-control-group-inner').append('<div class="controls"> '+
+		'<label class="checkbox inline"> '+
+		'<input type="checkbox" id="check_all_check_answer'+current_index+ '" name="check_all_check_answer'+current_index+'" value="'+current_index+'" /> '+
+		'</label> '+
+		'<input type="text" id="check_all_answer'+current_index+'" name="check_all_answer'+current_index+'"/> '+
+		'</div> ');		
 		{/if}
 	});
 	
