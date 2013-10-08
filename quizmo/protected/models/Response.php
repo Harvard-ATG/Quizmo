@@ -901,6 +901,7 @@ class Response extends QActiveRecord
 			return true;
 		}
 		else {
+			Submission::model()->deleteAllByAttributes(array('USER_ID'=>$user_id, 'QUIZ_ID'=>$quiz_id));
 			return false;
 		}
 	}
