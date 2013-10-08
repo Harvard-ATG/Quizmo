@@ -108,7 +108,7 @@ $(document).ready(function(){
 		{if true}
 		$('#multiple-choice-control-group-inner').append('<div class="controls"> '+
 		'<label class="radio inline"> '+
-		'<input type="radio" id="multiple_radio_answer1" name="multiple_radio_answerValue" value="'+current_index+'" /> '+
+		'<input type="radio" id="multiple_radio_answer'+current_index+'" name="multiple_radio_answerValue" value="'+current_index+'" /> '+
 		'<input value="multiple_radio_answer" name="inputField" type="hidden"> '+
 		'</label> '+
 		'<input type="text" id="multiple_answer'+current_index+'" name="multiple_answer'+current_index+'Value"/> '+
