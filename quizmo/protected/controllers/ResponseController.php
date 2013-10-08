@@ -66,7 +66,7 @@ class ResponseController extends Controller
 				$response = Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id);
 			break;
 			case Question::TRUE_FALSE:
-				$response = Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id);
+				$response = Response::submitTrueFalseQuestion($user_id, $question_type, $question_id, $answer_id);
 			break;
 			case Question::ESSAY:
 				$response = Response::submitEssayQuestion($user_id, $question_id, $answer);
