@@ -386,6 +386,20 @@ class Response extends QActiveRecord
 		return true;
 		
 	}
+	
+	/**
+	 * submits a true false question
+	 * NOTE: this is just an implementation of submitMultipleChoiceQuestion()
+	 * @param number $user_id
+	 * @param string $question_type
+	 * @param number $question_id
+	 * @param array $answers an array of answer_ids
+	 * @param number $modified_by should be user_id if not specified
+	 * @return boolean
+	 */
+	public function submitTrueFalseQuestion($user_id, $question_type, $question_id, $answer_id, $modified_by=''){
+		submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id, $modified_by);
+	}
 
 	/**
 	 * submits a multiple choice question
