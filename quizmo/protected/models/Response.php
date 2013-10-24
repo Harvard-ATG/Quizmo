@@ -398,7 +398,7 @@ class Response extends QActiveRecord
 	 * @return boolean
 	 */
 	public function submitTrueFalseQuestion($user_id, $question_type, $question_id, $answer_id, $modified_by=''){
-		submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id, $modified_by);
+		return Response::submitMultipleChoiceQuestion($user_id, $question_type, $question_id, $answer_id, $modified_by);
 	}
 
 	/**
