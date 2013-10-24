@@ -457,7 +457,7 @@ class Question extends QActiveRecord
 			foreach($responses as $response){
 				$responseInnerArr = array();
 				foreach($response as $key => $value){
-					$responseInnerArr[strtolower($key)] = $value;		
+					$responseInnerArr[strtolower($key)] = htmlentities($value);		
 				}
 				array_push($responseArr, $responseInnerArr);
 			}
@@ -469,7 +469,7 @@ class Question extends QActiveRecord
 		foreach($answers as $answer){
 			$answerInnerArr = array();
 			foreach($answer as $key => $value){
-				$answerInnerArr[strtolower($key)] = $value;		
+				$answerInnerArr[strtolower($key)] = htmlentities($value);		
 			}
 
 			// for mc ms and tf the answer arr needs to know if it's answered
@@ -521,7 +521,7 @@ class Question extends QActiveRecord
 					if($key == 'SCORE'){
 						$score += $value;
 					}
-					$responseInnerArr[strtolower($key)] = $value;		
+					$responseInnerArr[strtolower($key)] = htmlentities($value);		
 				}
 				array_push($responseArr, $responseInnerArr);
 			}
@@ -537,7 +537,7 @@ class Question extends QActiveRecord
 			foreach($answers as $answer){
 				$answerInnerArr = array();
 				foreach($answer as $key => $value){
-					$answerInnerArr[strtolower($key)] = $value;		
+					$answerInnerArr[strtolower($key)] = htmlentities($value);		
 				}
 
 				// for mc ms and tf the answer arr needs to know if it's correctly answered
