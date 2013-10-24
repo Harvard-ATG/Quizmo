@@ -207,7 +207,7 @@ class Quiz extends QActiveRecord
 			
 			
 			foreach($quiz as $key=>$value){
-				$qa[$key] = $value;
+				$qa[$key] = htmlentities($value);
 			}				
 			array_push($quizArray, $qa);
 		}
@@ -655,7 +655,7 @@ class Quiz extends QActiveRecord
 				$output .= $lineArr."\n";
 			}
 		}
-		return $output;
+		return htmlentities($output);
 	
 	}
 	
