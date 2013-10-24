@@ -95,6 +95,7 @@ loadQuestion = function(question_id){
 }
 
 openSubmitModal = function(){
+	submitQuestion();
 	$("#quiz-submit").modal();
 }
 
