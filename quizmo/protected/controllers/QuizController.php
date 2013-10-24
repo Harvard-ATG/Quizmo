@@ -106,8 +106,8 @@ class QuizController extends Controller
 				
 			} else {
 				// get all elements to send back
-				$title = $quiz->TITLE;
-				$description = $quiz->DESCRIPTION;
+				$title = htmlentities($quiz->TITLE);
+				$description = htmlentities($quiz->DESCRIPTION);
 				$state = $quiz->STATE;
 				//preg_match($quiz->START_DATE);
 				$start_date = preg_replace("/ \d\d:\d\d:\d\d/", "", $quiz->START_DATE);
@@ -346,7 +346,7 @@ class QuizController extends Controller
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
 			'collection_id'=>$quiz->COLLECTION_ID,
-			'title'=>$quiz->TITLE,
+			'title'=>htmlentities($quiz->TITLE),
 			'first_question_id'=>$question_id
 		));
 		
@@ -379,7 +379,7 @@ class QuizController extends Controller
 		$quiz = Quiz::model()->findByPk($quiz_id);
 		$this->render('results', array(
 			'quiz_id'=>$id,
-			'title'=>$quiz->TITLE,
+			'title'=>htmlentities($quiz->TITLE),
 			'collection_id'=>$quiz->COLLECTION_ID,
 			'results'=>$results
 		));
@@ -423,7 +423,7 @@ class QuizController extends Controller
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
-			'title'=>$quiz->TITLE,
+			'title'=>htmlentities($quiz->TITLE),
 			'admin_view'=>0,
 			'name'=>User::getName($user_id),
 			'status'=>$status,
@@ -492,7 +492,7 @@ class QuizController extends Controller
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
 			'quiz_id'=>$quiz_id,
-			'title'=>$quiz->TITLE,
+			'title'=>htmlentities($quiz->TITLE),
 			'admin_view'=>1,
 			'name'=>User::getName($user_id),
 			'status'=>$status,
