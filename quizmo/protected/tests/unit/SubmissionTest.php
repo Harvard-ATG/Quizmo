@@ -98,6 +98,15 @@ class SubmissionTest extends CDbTestCase {
 		$this->assertEquals($submission_status, Submission::getStatusByUser($user_id, $quiz_id));
 		
 	}
+	
+	public function testIsSubmitted(){
+		$user_id_true = 2;
+		$user_id_false = 1;
+		$quiz_id = 1;
+		$this->assertTrue(Submission::isSubmitted($user_id_true, $quiz_id));
+		$this->assertFalse(Submission::isSubmitted($user_id_false, $quiz_id));
+		
+	}
 
 	public function shouldReturnNotStarted(){
 		$user_id = 1;
