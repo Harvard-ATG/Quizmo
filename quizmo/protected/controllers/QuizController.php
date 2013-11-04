@@ -329,6 +329,11 @@ class QuizController extends Controller
 		$question_id = $id2;
 		$user_id = Yii::app()->user->id;
 		
+		// check that the quiz is not submitted yet
+		if(Submission::isSubmitted($user_id, $quiz_id)){
+			throw new CHttpException(500,'Quiz already submitted!');
+		}
+		
 		// first we set the session quiz_id
 		// then we forward along to the question Take view
 		// OR we just go into this and flip through it via ajax
