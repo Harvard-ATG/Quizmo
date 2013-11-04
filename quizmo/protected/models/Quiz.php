@@ -292,7 +292,11 @@ class Quiz extends QActiveRecord
 	 */
 	public function getCollectionId($quiz_id){
 		$quiz = Quiz::model()->findByPk($quiz_id);
-		return $quiz->COLLECTION_ID;
+		if($quiz){
+			return $quiz->COLLECTION_ID;
+		} else {
+			return false;
+		}
 	}
 	
 	/**

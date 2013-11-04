@@ -661,8 +661,11 @@ class Question extends QActiveRecord
 	 */
 	public function getQuizId($question_id){
 		$question = Question::model()->findByPk($question_id);
-		return $question->QUIZ_ID;
-		
+		if($question){
+			return $question->QUIZ_ID;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
