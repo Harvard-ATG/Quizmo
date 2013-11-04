@@ -193,6 +193,24 @@ class Submission extends QActiveRecord
 	}
 	
 	/**
+	 * implementation of getStatusByUser
+	 * @param number $user_id
+	 * @param number $quiz_id
+	 * @return boolean, is it submitted
+	 */
+	public function isSubmitted($user_id, $quiz_id){
+		$status = Submission::getStatusByUser($user_id, $quiz_id);
+		switch($status){
+			case Submission::SUBMITTED:
+			case Submission::FINISHED:
+			case Submission::GRADED:
+				return true;
+		}
+		return false;
+		
+	}
+	
+	/**
 	 * gets the total results of people who are submitted and not for each quiz in a collection
 	 * @param number $collection_id
 	 * @return array of a hash array('submitted'=>\d, 'total_results'=>\d)
