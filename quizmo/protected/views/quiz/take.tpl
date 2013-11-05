@@ -107,10 +107,10 @@ submitQuiz = function(){
 	
 }
 
-$.widget.bridge('uibutton', $.ui.button);
-$.widget.bridge('uitooltip', $.ui.tooltip);
-
 $(document).ready(function(){
+	
+	$.widget.bridge('uibutton', $.ui.button);
+	$.widget.bridge('uitooltip', $.ui.tooltip);
 	
 	// initialize tooltips
 	$('button.question-btn').tooltip();
