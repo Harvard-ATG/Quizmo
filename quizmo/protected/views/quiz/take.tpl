@@ -198,4 +198,17 @@ $(document).ready(function(){
 	});
 
 });
+
+require(['views/quiz/take'], function(Take){	
+	$(document).ready(function(){
+		var take = new Take({
+			is_submitted_url: "{url url='/submission/issubmitted' ajax=1}",
+			quiz_id: '{$quiz_id}',
+			redirect_url: "{url url='/quiz/index'}"
+		});
+	});
+});
+
+
+
 </script>
