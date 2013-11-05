@@ -58,6 +58,7 @@ textarea { resize:both; }
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
 	</script>
+	<script data-main="<?php echo $host; ?>/js/main" src="<?php echo $host; ?>/js/libs/require.min.js"></script>
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
 
 		<div class="bootstrapped">
