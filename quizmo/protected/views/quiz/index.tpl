@@ -2,6 +2,10 @@
 You need to be signed into Course iSites in order to use this tool.
 {else}
 
+{if $banner_message}
+	<div class="update">{$banner_message}</div>	
+{/if}
+
 <div id="quizzes-container" class="row-fluid">
 
 	{if $admin}
