@@ -254,6 +254,10 @@ class QuizController extends Controller
 		$state = Yii::app()->getRequest()->getParam('state');
 		$topic_id = Yii::app()->getRequest()->getParam('topicId');
 		$collection_id = $id;
+		if($collection_id == ''){
+			$collection_id = Collection::getByOtherId(Yii::app()->getRequest()->getParam('topicId'))->ID;
+		}
+		
 		$admin_view = $id2;
 		if($state == 'edit'){
 			$admin_view = 1;
@@ -285,6 +289,12 @@ class QuizController extends Controller
 		} else {
 			$admin_view = false;
 		}
+		
+		$banner_message = '';
+		if(isset(Yii::app()->session['banner_message'])){
+			$banner_message = Yii::app()->session['banner_message'];
+			unset(Yii::app()->session['banner_message']);
+		}
 					
 		if($admin && $admin_view){
 			$this->render('admindex',array(
@@ -295,6 +305,7 @@ class QuizController extends Controller
 				'collection_id'=>$collection_id,
 				'results'=>Submission::getResultTotals($collection_id),
 				'topic_id'=>$topic_id,
+				'banner_message'=>$banner_message,
 			));
 		} else {
 			$guest = false;
@@ -309,6 +320,7 @@ class QuizController extends Controller
 				'user_id'=>$user_id,
 				'collection_id'=>$collection_id,
 				'topic_id'=>$topic_id,
+				'banner_message'=>$banner_message,
 			));
 
 		}			
