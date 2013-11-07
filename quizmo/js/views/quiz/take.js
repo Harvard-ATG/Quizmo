@@ -1,10 +1,10 @@
 define(['jquery', 'lodash', 'bootstrap'], function($, _, bootstrap){
 	
 	var Take = function(config){
-		// is_submitted_url
-		// quiz_id
-		// redirect_url
 		this.config = config;
+		this.is_submitted_url = config.is_submitted_url;
+		this.quiz_id = config.quiz_id;
+		this.redirect_url = config.redirect_url;
 		this.init();
 	};
 	
@@ -14,7 +14,7 @@ define(['jquery', 'lodash', 'bootstrap'], function($, _, bootstrap){
 		},
 		checkSubmitted: function(){
 			var that = this;
-			quiz_id = that.config.quiz_id;
+			var quiz_id = that.config.quiz_id;
 			$.ajax({
 				type: 'POST',
 				url: that.config.is_submitted_url,
