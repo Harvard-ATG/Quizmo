@@ -19,15 +19,13 @@ define(['jquery', 'lodash', 'bootstrap'], function($, _, bootstrap){
 				type: 'POST',
 				url: that.config.is_submitted_url,
 				data: {'quiz_id': quiz_id},
-				success: function(data, statusText){
-					if(statusText){
-						//alert("Success");
-						//console.log(data);
+				dataType: 'json',
+				success: function(data, statusText){		
+					if(data.success){
 						// redirect
 						window.location.href = that.config.redirect_url;
 					} else {
 						// do nothing
-						//console.log(data);
 					}
 				},
 				error: function(request, statusText){
