@@ -37,10 +37,12 @@ class SubmissionController extends Controller
 	}
 	
 	public function actionIsSubmitted(){
+		$this->layout = false;
 		$user_id = Yii::app()->user->id;
 		$quiz_id = Yii::app()->getRequest()->getParam('quiz_id');
 		
 		if(Submission::isSubmitted($user_id, $quiz_id)){
+			Yii::app()->session['banner_message'] = "Quiz already submitted.";
 			$success = true;
 		} else {
 			$success = false;
