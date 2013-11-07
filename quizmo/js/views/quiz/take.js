@@ -1,5 +1,8 @@
 define(['jquery', 'lodash', 'bootstrap'], function($, _, bootstrap){
 	
+	/**
+	 * This class takes care of all of the view-related methods of taking a quiz
+	 */
 	var Take = function(config){
 		this.config = config;
 		this.is_submitted_url = config.is_submitted_url;
