@@ -49,6 +49,8 @@ tolerance=>
 
 <h3>
 	{$question['title']}
+	<input type="hidden" id="question-id" value="{$question.id}"/>
+	<input type="hidden" id="question-type" value="{$question.question_type}"/>
 </h3>
 
 <div id="question-quiz-view">
@@ -93,6 +95,7 @@ tolerance=>
 				//success: success,
 				//dataType: dataType
 			});
+			return true;
 		}
 	</script>
 
@@ -133,6 +136,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
@@ -161,6 +165,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
@@ -189,6 +194,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
@@ -214,6 +220,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
