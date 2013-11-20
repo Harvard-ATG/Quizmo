@@ -94,7 +94,11 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 			};
 			url = "{url url='/question/view' ajax=1}";
 			{literal}
-			$('#questions-container').load(url, data, function(){$(this).fadeIn('slow')}).hide();
+			$('#questions-container').load(url, data, function(){
+				$(this).fadeIn('slow')
+				$('input, textarea').change(submitQuestionContainer);
+				$('input, textarea').keyup(submitQuestionContainer);
+			}).hide();
 			{/literal}	
 		}
 
@@ -191,7 +195,6 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 		}
 		$('a, button, .btn').on('mousedown', submitQuestionContainer);
 		
-
 		var take = new Take({
 			is_submitted_url: "{url url='/submission/issubmitted' ajax=1}",
 			quiz_id: '{$quiz_id}',
