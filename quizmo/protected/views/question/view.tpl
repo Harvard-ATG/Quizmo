@@ -112,27 +112,28 @@ tolerance=>
 	<script>
 		submitQuestion = function(callback){
 			// get the answers
-			answers = [];
-			$('input[type=checkbox]').each(function () {
+			var answers = [];
+			$('input[type=checkbox]').each(function (key, item) {
 				//if (this.checked) {
-				if ($(this).attr('checked')) {
-					answers.push($(this).val());
+				if ($(item).is(':checked')) {
+					answers.push($(item).val());
 				}
 			});
 			// set the data
-			data = {
+			var data = {
 				question_id: '{$question.id}',
 				question_type: '{$question.question_type}',
 				answers: answers
 			}
 			// send the ajax
-			submit_url = "{url url='/response/submitQuestion' ajax=1}";
+			var submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
