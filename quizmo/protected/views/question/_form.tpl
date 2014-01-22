@@ -282,7 +282,7 @@ $(document).ready(function(){
 	<label class="control-label" for="score">Score</label>
 	<div class="controls">
 		<input type="text" class="span1 input-xlarge" id="score" name="score" value="{if isset($question.points)}{$question.points}{/if}"/>
-		<p class="help-inline"></p>
+		<p class="help-inline">Points for essay questions must be manually assigned by the quiz administrator when they review results.</p>
 	</div>
 </div>
 <div id="feedback-control-group" class="control-group">
