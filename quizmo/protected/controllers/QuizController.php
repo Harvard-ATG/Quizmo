@@ -506,6 +506,10 @@ class QuizController extends Controller
 		// call identity getAllUsers method
 		$photo_url = $identity->getPhotoUrl($user_id);
 		
+		$answered_anything = true;
+		if(Submission::getStatusByUser($user_id, $quiz_id) == Submission::NOT_STARTED)
+			$answered_anything = false;
+		
 		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
@@ -522,6 +526,7 @@ class QuizController extends Controller
 			'show_feedback'=>1,
 			'photo_url'=>$photo_url,
 			'just_submitted'=>false,
+			'answered_anything'=>$answered_anything,
 		));
 	}
 	

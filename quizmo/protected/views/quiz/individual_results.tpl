@@ -15,6 +15,10 @@
 	<h1>Question Results for {$name}</h1>
 </div>
 
+{if !$answered_anything}
+	<h2>User has not started the quiz yet.</h2>
+{else}
+
 <div class="row-fluid">
 	<div class="span2">
 		<img src="{$photo_url}"/>
@@ -64,6 +68,7 @@
 	</tbody>
 </table>
 </div>
+{/if}
 
 <div id="submittedModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="submittedModalLabel" aria-hidden="true">
   <div class="modal-header">
