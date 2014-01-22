@@ -50,11 +50,6 @@
 
 <script>
 
-$(document).ready(function(){
-	
-	
-
-});
 
 require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){	
 	$(document).ready(function(){
@@ -99,18 +94,19 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 			};
 			url = "{url url='/question/view' ajax=1}";
 			{literal}
-			$('#questions-container').load(url, data, function(){$(this).fadeIn('slow')}).hide();
+			$('#questions-container').load(url, data, function(){
+				$(this).fadeIn('slow')
+				$('input, textarea').change(submitQuestionContainer);
+				$('input, textarea').keyup(submitQuestionContainer);
+			}).hide();
 			{/literal}	
 		}
 
 		openSubmitModal = function(){
-			submitQuestion();
 			$("#quiz-submit").modal();
 		}
 
 		submitQuiz = function(){
-			submitQuestion();
-	
 			index_url = '{url url="/quiz/submit/$quiz_id"}';
 			window.location.href = index_url;
 	
@@ -135,7 +131,6 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 		current_item.addClass("active");
 	
 		prevclickfun = function(e){
-			submitQuestion();
 		
 			prev_item = current_item.prev("button");
 			prev_item_question_id = prev_item.attr("name");
@@ -157,7 +152,6 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 		loadQuestion(current_question_id);
 		// add the click listener for the numbered buttons
 		$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
-			submitQuestion();
 			$('#saved-div').notify({
 				message: { html: 'Saved' }
 			}).show();
@@ -182,14 +176,10 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 			}
 		
 		});
-		
-		//prev_button.click(prevclickfun);
 
 		next_button.click(function(e){
-			submitQuestion(continueNext);
-			//$('.bottom-right').notify({
-			//	message: { html: 'Saved' }
-			//}).show();
+			continueNext();
+			
 			$('#saved-div').notify({
 				message: { html: 'Saved' }
 			}).show();
@@ -199,12 +189,12 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 		$("#quiz-submit-btn").click(openSubmitModal);
 		$("#quiz-submit-confirm-btn").click(submitQuiz);
 
-		$("a").click(function(){
+		// need to wrap this, because submitQuestion isn't defined until after view.tpl for the question is loaded..
+		submitQuestionContainer = function(){
 			submitQuestion();
-		});
+		}
+		$('a, button, .btn').on('mousedown', submitQuestionContainer);
 		
-
-
 		var take = new Take({
 			is_submitted_url: "{url url='/submission/issubmitted' ajax=1}",
 			quiz_id: '{$quiz_id}',
