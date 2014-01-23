@@ -31,6 +31,10 @@
 	</div>
 </div>
 
+<div class="notify-container">
+	<div class="notify">saved</div>
+</div>
+
 <div>
 	<button type="button" class="btn btn-danger" id="quiz-submit-btn">Submit Quiz</button>
 </div>
@@ -51,7 +55,7 @@
 <script>
 
 
-require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){	
+require(['views/quiz/take', 'jquery', 'jquery-ui', 'bootstrap', 'bootstrap-notify'], function(Take, $){	
 	$(document).ready(function(){
 
 		var first_question_id = '{$first_question_id}';
@@ -116,7 +120,9 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 		$.widget.bridge('uitooltip', $.ui.tooltip);
 	
 		// initialize tooltips
-		$('button.question-btn').tooltip();
+		$('button.question-btn').tooltip({
+			track: true
+		});
 	
 		//var question_ids = {$question_ids_json};
 		//var question_ids = eval($('#question_ids').val());
@@ -152,9 +158,11 @@ require(['views/quiz/take', 'jquery', 'jqueryui'], function(Take){
 		loadQuestion(current_question_id);
 		// add the click listener for the numbered buttons
 		$('#quiz-controls .btn-group[name=question_numbers] button').click(function(e){
-			$('#saved-div').notify({
-				message: { html: 'Saved' }
-			}).show();
+			//$('#saved-div').notify({
+			//	message: { html: 'Saved' }
+			//}).show();
+			$('.notify').fadeIn();
+			$('.notify').fadeOut().delay(3000);
 		
 			this_question_button = $(e.currentTarget);
 			this_question_id = this_question_button.attr("name");
