@@ -55,7 +55,7 @@
 <script>
 
 
-require(['views/quiz/take', 'jquery', 'jquery-ui', 'bootstrap', 'bootstrap-notify'], function(Take, $){	
+require(['views/quiz/take', 'jquery', 'bootstrap', 'bootstrap-notify'], function(Take, $){	
 	$(document).ready(function(){
 
 		var first_question_id = '{$first_question_id}';
@@ -116,8 +116,8 @@ require(['views/quiz/take', 'jquery', 'jquery-ui', 'bootstrap', 'bootstrap-notif
 	
 		}
 	
-		$.widget.bridge('uibutton', $.ui.button);
-		$.widget.bridge('uitooltip', $.ui.tooltip);
+		//$.widget.bridge('uibutton', $.ui.button);
+		//$.widget.bridge('uitooltip', $.ui.tooltip);
 	
 		// initialize tooltips
 		$('button.question-btn').tooltip({
@@ -188,10 +188,12 @@ require(['views/quiz/take', 'jquery', 'jquery-ui', 'bootstrap', 'bootstrap-notif
 		next_button.click(function(e){
 			continueNext();
 			
-			$('#saved-div').notify({
-				message: { html: 'Saved' }
-			}).show();
-
+			//$('#saved-div').notify({
+			//	message: { html: 'Saved' }
+			//}).show();
+			$('.notify').fadeIn();
+			$('.notify').fadeOut().delay(3000);
+		
 		});
 	
 		$("#quiz-submit-btn").click(openSubmitModal);
