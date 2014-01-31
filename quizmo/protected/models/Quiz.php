@@ -592,10 +592,10 @@ class Quiz extends QActiveRecord
 					if($answer != null){
 						if(!isset($users[$response->USER_ID]['responses'][$count]['response'])){
 							$users[$response->USER_ID]['responses'][$count]['response'] = $answer->ANSWER;
-							error_log("response: ".$users[$response->USER_ID]['responses'][$count]['response']);
+							//error_log("response: ".$users[$response->USER_ID]['responses'][$count]['response']);
 						} else {
 							$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$answer->ANSWER;
-							error_log("response: ".$users[$response->USER_ID]['responses'][$count]['response']);
+							//error_log("response: ".$users[$response->USER_ID]['responses'][$count]['response']);
 						}
 					} else {
 						$users[$response->USER_ID]['responses'][$count]['response'] = "";
