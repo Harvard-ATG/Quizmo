@@ -453,6 +453,7 @@ class QuizController extends Controller
 			'show_feedback'=>$quiz->SHOW_FEEDBACK,
 			'photo_url'=>$photo_url,
 			'just_submitted'=>$just_submitted,
+			'answered_anything'=>true,
 		));
 	}
 	
