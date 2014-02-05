@@ -504,11 +504,10 @@ class Question extends QActiveRecord
 			$responses = array();
 			foreach($responses_to_questions as $resp){
 				if($resp->QUESTION_ID == $question->ID)
-					array_push($responses, $resp);
+					$responses[] = $resp;
 			}
 			$score = 0;
 			$answers = $question->answers;
-			//$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question->ID));
 
 			// questions
 			$questionArr = array();
