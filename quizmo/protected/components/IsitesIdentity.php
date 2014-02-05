@@ -102,7 +102,7 @@ class IsitesIdentity extends UserIdentity {
 	 * gets all users for a given class
 	 */
 	public function getAllUsers(){
- 		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
+		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
 	 	
 		// let's try to use the group service
 		$course_groups = $this->courseGroups();
@@ -166,8 +166,9 @@ class IsitesIdentity extends UserIdentity {
 		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
 		
 		$url = "https://isites.harvard.edu/services/groups/course_groups/".$this->keyword."/".$this->external_id.".json";
+		//$url = "https://isites.harvard.edu/services/groups/course_groups/k100309/30847024.json";
 		//$url = "https://isites.harvard.edu/services/groups/course_groups/k98807/30847024.json";
-		
+		//https://C4172DCA-FDD7-11E1-B791-B3A6EB067CE9:oe5FVZdonYlCWr8Gk82P@isites.harvard.edu/services/groups/course_groups/k100309/30847024.json
 
 		return IsitesIdentity::curl($userpwd, $url);
 		
@@ -194,7 +195,7 @@ class IsitesIdentity extends UserIdentity {
 		
 		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
 
-		//$url = "https://isites.harvard.edu/services/groups/course_group_members/k28781/$idType:k28781/80719647.json";
+		//$url = "https://isites.harvard.edu/services/groups/course_group_members/k100309/$idType:k100309/30847024.json";
 		//k98807/30847024
 		$url = "https://isites.harvard.edu/services/groups/course_group_members/".$this->keyword."/$idType:".$this->keyword."/".$this->external_id.".json";
 		
