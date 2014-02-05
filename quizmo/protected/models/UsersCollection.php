@@ -209,6 +209,29 @@ class UsersCollection extends QActiveRecord
 		$identity = IdentityFactory::getIdentity();
 		// call identity getAllUsers method
 		$users = $identity->getAllUsers();
+		
+		// cleanup enrollees
+		$criteria = new CDbCriteria;
+		$criteria->addCondition("COLLECTION_ID=:collection_id");
+		$criteria->addCondition("PERMISSION=:perm_id");
+		$criteria->params = array(':collection_id'=>$collection_id, ':perm_id'=>'enrollee');
+		$current_enrollees = UsersCollection::model()->with('user')->resetScope()->findAll($criteria);
+		
+		foreach($current_enrollees as $current_enrollee){
+			// make sure the current enrollee is in the current class list
+			$found = false;
+			foreach($users as $user){
+				if($user['id'] == $current_enrollee->user->EXTERNAL_ID){
+					$found = true;
+				}
+			}
+			if(!$found){
+				// if it's not found, delete this enrollee from the UsersCollection 
+				// so they're no longer associated with the course
+				UsersCollection::model()->deleteAllByAttributes(array('ID'=>$current_enrollee->ID));
+			}
+		}
+		
 		// run through them and add them to the db if they don't already exist, update permission level if they do
 		foreach($users as $user){
 			// get user with external_id
@@ -246,32 +269,8 @@ class UsersCollection extends QActiveRecord
 					$usersCollection->PERMISSION = $user['group_string'];
 					$usersCollection->save();
 				}
-			}
-			
-		}
-		
-		// cleanup enrollees
-		$criteria = new CDbCriteria;
-		$criteria->addCondition("COLLECTION_ID=:collection_id");
-		$criteria->addCondition("PERMISSION=:perm_id");
-		$criteria->params = array(':collection_id'=>$collection_id, ':perm_id'=>'enrollee');
-		$current_enrollees = UsersCollection::model()->with('user')->resetScope()->findAll($criteria);
-		
-		foreach($current_enrollees as $current_enrollee){
-			// make sure the current enrollee is in the current class list
-			$found = false;
-			foreach($users as $user){
-				if($user['id'] == $current_enrollee->user->EXTERNAL_ID){
-					$found = true;
-				}
-			}
-			if(!$found){
-				// if it's not found, delete this enrollee from the UsersCollection 
-				// so they're no longer associated with the course
-				UsersCollection::model()->deleteAllByAttributes(array('ID'=>$current_enrollee->ID));
-			}
-		}
-		
+			}	
+		}		
 	}
 	
 	/**
