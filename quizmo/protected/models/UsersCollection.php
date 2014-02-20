@@ -202,16 +202,14 @@ class UsersCollection extends QActiveRecord
 		
 	}
 	
-	public function setupUsersFromIdentity($collection_id){
-		//error_log("setupUsersFromIdentity");
-		
-		// get identity
-		$identity = IdentityFactory::getIdentity();
-		// call identity getAllUsers method
-		$users = $identity->getAllUsers();
-		
-		
-		// cleanup enrollees
+	/**
+	 * removes people who are no longer enrollees
+	 * actually deletes the people from the userscollection mtm table
+	 * @param array $users 
+	 * @param int $collection_id
+	 * @return none
+	 */
+	public function cleanupEnrollees($users, $collection_id){
 		// only do this if getAllUsers actually got something -- only staff should be able to get a class list
 		if(sizeof($users) > 0){
 			$criteria = new CDbCriteria;
@@ -235,6 +233,24 @@ class UsersCollection extends QActiveRecord
 				}
 			}
 		}
+	}
+	
+	/**
+	 * uses the identity of the person accessing the page to determine if they are an instructor,
+	 * if they have permissions, they get the course list, and add that course list to the 
+	 * users db
+	 * @param int $collection_id
+	 * @return none
+	 */
+	public function setupUsersFromIdentity($collection_id){
+		//error_log("setupUsersFromIdentity");
+		
+		// get identity
+		$identity = IdentityFactory::getIdentity();
+		// call identity getAllUsers method
+		$users = $identity->getAllUsers();
+		
+		UsersCollection::cleanupEnrollees($users, $collection_id);
 		
 		// run through them and add them to the db if they don't already exist, update permission level if they do
 		foreach($users as $user){
