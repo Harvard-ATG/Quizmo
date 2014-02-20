@@ -224,12 +224,13 @@ class UsersCollection extends QActiveRecord
 				foreach($users as $user){
 					if($user['id'] == $current_enrollee->user->EXTERNAL_ID){
 						$found = true;
+						break;
 					}
 				}
 				if(!$found){
 					// if it's not found, delete this enrollee from the UsersCollection 
 					// so they're no longer associated with the course
-					UsersCollection::model()->deleteAllByAttributes(array('ID'=>$current_enrollee->ID));
+					UsersCollection::model()->deleteByPk($current_enrollee->ID);
 				}
 			}
 		}
