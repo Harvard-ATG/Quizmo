@@ -36,9 +36,11 @@ class IsitesIdentity extends UserIdentity {
 		
 	}
 	
+	/**
+	 * sets permission levels for user
+	 * retrieves all params from POST
+	 */
 	public function authenticate(){
-
-		//error_log(var_export($_REQUEST, 1));
 
 		$this->userid = Yii::app()->getRequest()->getParam('userid');
 		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
@@ -47,9 +49,7 @@ class IsitesIdentity extends UserIdentity {
 				
 		$decrypted_userid = Yii::app()->isitestool->getDecryptedUserId($this->userid);
 
-		//$this->username = "$decrypted_userid";
 		Yii::app()->HarvardPerson->setup($decrypted_userid);
-		//$this->id = Yii::app()->HarvardPerson->huid;
 		$this->external_id = Yii::app()->HarvardPerson->huid;
 		$this->username = Yii::app()->HarvardPerson->huid;
 		$this->name = Yii::app()->HarvardPerson->full_name;
@@ -102,7 +102,7 @@ class IsitesIdentity extends UserIdentity {
 	 * gets all users for a given class
 	 */
 	public function getAllUsers(){
-		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
+ 		$this->keyword = Yii::app()->getRequest()->getParam('keyword');
 	 	
 		// let's try to use the group service
 		$course_groups = $this->courseGroups();
@@ -164,14 +164,10 @@ class IsitesIdentity extends UserIdentity {
 	 */
 	public function courseGroups(){
 		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
-		
+
 		$url = "https://isites.harvard.edu/services/groups/course_groups/".$this->keyword."/".$this->external_id.".json";
-		//$url = "https://isites.harvard.edu/services/groups/course_groups/k100309/30847024.json";
-		//$url = "https://isites.harvard.edu/services/groups/course_groups/k98807/30847024.json";
-		//https://C4172DCA-FDD7-11E1-B791-B3A6EB067CE9:oe5FVZdonYlCWr8Gk82P@isites.harvard.edu/services/groups/course_groups/k100309/30847024.json
 
 		return IsitesIdentity::curl($userpwd, $url);
-		
 	}
 	 
 	/**
@@ -195,15 +191,18 @@ class IsitesIdentity extends UserIdentity {
 		
 		$userpwd = Yii::app()->params->groupserviceKey.":".Yii::app()->params->groupservicePass;
 
-		//$url = "https://isites.harvard.edu/services/groups/course_group_members/k100309/$idType:k100309/30847024.json";
-		//k98807/30847024
 		$url = "https://isites.harvard.edu/services/groups/course_group_members/".$this->keyword."/$idType:".$this->keyword."/".$this->external_id.".json";
-		
 
 		return IsitesIdentity::curl($userpwd, $url);
-		
 	}
 	
+	/**
+	 * Implementation of curl
+	 * Expects json from the call
+	 * @param string $userpwd user-password combo
+	 * @param string $url url to hit with curl
+	 * @return returns the json decoded data
+	 */
 	public function curl($userpwd, $url){
 		$proxy = Yii::app()->params->proxy;
 
@@ -236,6 +235,8 @@ class IsitesIdentity extends UserIdentity {
 	/**
 	 * gets the photourl from the isites photo service
 	 * 	
+	 * @param string $user_id
+	 * @param int $size default of 128(x128)
 	 * @return string url
 	 */
 	public function getPhotoUrl($user_id, $size=128){
