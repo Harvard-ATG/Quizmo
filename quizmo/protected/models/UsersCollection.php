@@ -202,6 +202,47 @@ class UsersCollection extends QActiveRecord
 		
 	}
 	
+	/**
+	 * removes people who are no longer enrollees
+	 * actually deletes the people from the userscollection mtm table
+	 * @param array $users 
+	 * @param int $collection_id
+	 * @return none
+	 */
+	public function cleanupEnrollees($users, $collection_id){
+		// only do this if getAllUsers actually got something -- only staff should be able to get a class list
+		if(sizeof($users) > 0){
+			$criteria = new CDbCriteria;
+			$criteria->addCondition("COLLECTION_ID=:collection_id");
+			$criteria->addCondition("PERMISSION=:perm_id");
+			$criteria->params = array(':collection_id'=>$collection_id, ':perm_id'=>'enrollee');
+			$current_enrollees = UsersCollection::model()->with('user')->resetScope()->findAll($criteria);
+		
+			foreach($current_enrollees as $current_enrollee){
+				// make sure the current enrollee is in the current class list
+				$found = false;
+				foreach($users as $user){
+					if($user['id'] == $current_enrollee->user->EXTERNAL_ID){
+						$found = true;
+						break;
+					}
+				}
+				if(!$found){
+					// if it's not found, delete this enrollee from the UsersCollection 
+					// so they're no longer associated with the course
+					UsersCollection::model()->deleteByPk($current_enrollee->ID);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * uses the identity of the person accessing the page to determine if they are an instructor,
+	 * if they have permissions, they get the course list, and add that course list to the 
+	 * users db
+	 * @param int $collection_id
+	 * @return none
+	 */
 	public function setupUsersFromIdentity($collection_id){
 		//error_log("setupUsersFromIdentity");
 		
@@ -209,6 +250,9 @@ class UsersCollection extends QActiveRecord
 		$identity = IdentityFactory::getIdentity();
 		// call identity getAllUsers method
 		$users = $identity->getAllUsers();
+		
+		UsersCollection::cleanupEnrollees($users, $collection_id);
+		
 		// run through them and add them to the db if they don't already exist, update permission level if they do
 		foreach($users as $user){
 			// get user with external_id
@@ -246,10 +290,8 @@ class UsersCollection extends QActiveRecord
 					$usersCollection->PERMISSION = $user['group_string'];
 					$usersCollection->save();
 				}
-			}
-			
-		}
-		
+			}	
+		}		
 	}
 	
 	/**
