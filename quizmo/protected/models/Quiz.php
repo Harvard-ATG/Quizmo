@@ -657,8 +657,7 @@ class Quiz extends QActiveRecord
 		foreach($exportArr as $lineArr){
 			if(is_array($lineArr)){
 				foreach($lineArr as $item){
-					//$item = preg_replace('/\n/', "<br/>", $item);
-					//$item = preg_replace('/\t/', "    ", $item);
+					$item = preg_replace('/"/', '\"', $item);
 					$output .= "\"".$item."\"\t";
 				}
 				$output = preg_replace('/\t$/', "\n", $output);			
