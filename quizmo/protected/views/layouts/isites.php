@@ -58,7 +58,8 @@ textarea { resize:both; }
 	topicId = "<?php echo $_REQUEST['topicId']; ?>";
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
 	</script>
-    <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
+	<!-- TODO: entirely remove this, though I'm not sure what's using it. the one in the requirejs.config main, is much better -->
+	
 	<script data-main="<?php echo $host; ?>/js/main" src="<?php echo $host; ?>/js/libs/require.min.js"></script>
 	<script src="<?php echo $host; ?>/js/main.js"></script>
 
