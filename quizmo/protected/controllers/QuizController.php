@@ -309,7 +309,7 @@ class QuizController extends Controller
 			));
 		} else {
 			$guest = false;
-			if($perm_id <= 1)
+			if(Yii::app()->user->lname == '')
 				$guest = true;
 			$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
