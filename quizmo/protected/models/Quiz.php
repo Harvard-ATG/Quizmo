@@ -292,7 +292,11 @@ class Quiz extends QActiveRecord
 	 */
 	public function getCollectionId($quiz_id){
 		$quiz = Quiz::model()->findByPk($quiz_id);
-		return $quiz->COLLECTION_ID;
+		if($quiz){
+			return $quiz->COLLECTION_ID;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
@@ -578,24 +582,31 @@ class Quiz extends QActiveRecord
 			$responses = Response::model()->findAllByAttributes(array('QUESTION_ID'=>$question_id));
 			// put them into an array based on user_ids
 			foreach($responses as $response){
-				if(!isset($users[$response->USER_ID]['responses'][$count]['response'])){
-					if(in_array($response->QUESTION_TYPE, array(Question::MULTIPLE_CHOICE, Question::MULTIPLE_SELECTION, Question::TRUE_FALSE))){
-						// in this case, the answer comes from answer, not response
-						// get the question associated with this answer_id stored in the response
-						$answer = Answer::model()->findByPk($response->RESPONSE);
+				//if(!isset($users[$response->USER_ID]['responses'][$count]['response'])){
+				if(in_array($response->QUESTION_TYPE, array(Question::MULTIPLE_CHOICE, Question::MULTIPLE_SELECTION, Question::TRUE_FALSE))){
+					// in this case, the answer comes from answer, not response
+					// get the question associated with this answer_id stored in the response
+					$answer = Answer::model()->findByPk($response->RESPONSE);
 
-						// it's possible to have an empty response for these if they visited the question, but didn't actually answer it
-						if($answer != null)
+					// it's possible to have an empty response for these if they visited the question, but didn't actually answer it
+					if($answer != null){
+						if(!isset($users[$response->USER_ID]['responses'][$count]['response'])){
 							$users[$response->USER_ID]['responses'][$count]['response'] = $answer->ANSWER;
-						else
-							$users[$response->USER_ID]['responses'][$count]['response'] = "";
-
+							//error_log("response: ".$users[$response->USER_ID]['responses'][$count]['response']);
+						} else {
+							$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$answer->ANSWER;
+							//error_log("response: ".$users[$response->USER_ID]['responses'][$count]['response']);
+						}
 					} else {
-						$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
+						$users[$response->USER_ID]['responses'][$count]['response'] = "";
 					}
+						
 				} else {
-					$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$response->RESPONSE;
+						$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
 				}
+				//} else {
+					//$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$response->RESPONSE;
+				//}
 				@$users[$response->USER_ID]['responses'][$count]['score'] += $response->SCORE;
 				array_push($user_ids, $response->USER_ID);
 			}
@@ -646,8 +657,7 @@ class Quiz extends QActiveRecord
 		foreach($exportArr as $lineArr){
 			if(is_array($lineArr)){
 				foreach($lineArr as $item){
-					//$item = preg_replace('/\n/', "<br/>", $item);
-					//$item = preg_replace('/\t/', "    ", $item);
+					$item = preg_replace('/"/', '\"', $item);
 					$output .= "\"".$item."\"\t";
 				}
 				$output = preg_replace('/\t$/', "\n", $output);			

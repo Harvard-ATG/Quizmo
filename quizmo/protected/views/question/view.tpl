@@ -1,40 +1,3 @@
-<!--
-id=>1
-quiz_id=>1
-question_type=>M
-title=>Multiple Choice Question 1
-body=>Pick a number, any number
-question_order=>1
-points=>
-feedback=>
-deleted=>0
-answers=>Array
-
-answer[0]
-id=>1
-question_id=>1
-question_type=>M
-textarea_rows=>
-answer=>A
-is_case_sensitive=>
-answer_order=>1
-is_correct=>1
-tolerance=>
--->
-
-<!--
-{foreach from=$question key=key item=value}
-{$key}=>{$question.$key}<br/>
-{/foreach}
-
-{foreach from=$question.answers key=key item=value}
-{$key}=>{$question.answers.$key}<br/>
-{/foreach}
-
-{foreach from=$question.answers[0] key=key item=value}
-{$key}=>{$question.answers[0].$key}<br/>
-{/foreach}
--->
 {if !$isajax}
 <ul class="breadcrumb">
   <li>
@@ -49,6 +12,8 @@ tolerance=>
 
 <h3>
 	{$question['title']}
+	<input type="hidden" id="question-id" value="{$question.id}"/>
+	<input type="hidden" id="question-type" value="{$question.question_type}"/>
 </h3>
 
 <div id="question-quiz-view">
@@ -93,6 +58,7 @@ tolerance=>
 				//success: success,
 				//dataType: dataType
 			});
+			return true;
 		}
 	</script>
 
@@ -112,27 +78,28 @@ tolerance=>
 	<script>
 		submitQuestion = function(callback){
 			// get the answers
-			answers = [];
-			$('input[type=checkbox]').each(function () {
+			var answers = [];
+			$('input[type=checkbox]').each(function (key, item) {
 				//if (this.checked) {
-				if ($(this).attr('checked')) {
-					answers.push($(this).val());
+				if ($(item).is(':checked')) {
+					answers.push($(item).val());
 				}
 			});
 			// set the data
-			data = {
+			var data = {
 				question_id: '{$question.id}',
 				question_type: '{$question.question_type}',
 				answers: answers
 			}
 			// send the ajax
-			submit_url = "{url url='/response/submitQuestion' ajax=1}";
+			var submit_url = "{url url='/response/submitQuestion' ajax=1}";
 			$.ajax({
 				type: 'POST',
 				url: submit_url,
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
@@ -161,6 +128,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
@@ -189,6 +157,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 
@@ -214,6 +183,7 @@ tolerance=>
 				data: data,
 				complete: callback
 			});
+			return true;
 		}
 	</script>
 

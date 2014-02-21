@@ -7,7 +7,7 @@ $host = "http://".$_SERVER['HTTP_HOST'];
 <body>
 	<session>
 	  <attribute>
-	    <name>QUIZMO_SESSION_<?php echo $_REQUEST['topicId']; ?></name>
+	    <name>QUIZMO_SESSION</name>
 	    <value><?php echo session_id(); ?></value>
 	  </attribute>
 	</session>
@@ -59,6 +59,8 @@ textarea { resize:both; }
 	pageContentId = "<?php echo $_REQUEST['pageContentId']; ?>";
 	</script>
     <script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
+	<script data-main="<?php echo $host; ?>/js/main" src="<?php echo $host; ?>/js/libs/require.min.js"></script>
+	<script src="<?php echo $host; ?>/js/main.js"></script>
 
 		<div class="bootstrapped">
 			<div class='notifications bottom-right'> </div>

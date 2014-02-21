@@ -224,8 +224,12 @@ class QuestionTest extends CDbTestCase {
 	
 	public function testGetQuizId(){
 		$question_id = 1;
+		$question_id_nonexistant = null;
+		$question_id_nonexistant2 = 100000;
 		$quiz_id = 1;
 		$this->assertEquals($quiz_id, Question::getQuizId($question_id));
+		$this->assertFalse(Question::getQuizId($question_id_nonexistant));
+		$this->assertFalse(Question::getQuizId($question_id_nonexistant2));
 	}
 	
 	public function testSetDeleted(){

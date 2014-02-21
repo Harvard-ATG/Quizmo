@@ -110,9 +110,13 @@ class QuizTest extends CDbTestCase {
 	
 	public function testGetCollectionId(){
 		$quiz_id = 1;
+		$quiz_id_nonexistant = '';
+		$quiz_id_nonexistant2 = 1000;
 		$collection_id = 1;
 		
 		$this->assertEquals($collection_id, Quiz::getCollectionId($quiz_id));
+		$this->assertFalse(Quiz::getCollectionId($quiz_id_nonexistant));
+		$this->assertFalse(Quiz::getCollectionId($quiz_id_nonexistant2));
 	}
 	
 	public function testSetDeleted(){

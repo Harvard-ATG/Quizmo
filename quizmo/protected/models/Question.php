@@ -496,12 +496,18 @@ class Question extends QActiveRecord
 	 */
 	public function getQuestionViewsByQuizIdUserId($quiz_id, $user_id){
 		$questions = Question::model()->sort_order()->findAllByAttributes(array('QUIZ_ID'=>$quiz_id));
-
+		$question_ids = Quiz::getQuestionIds($quiz_id);
+		$responses_to_questions = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question_ids));
+		
 		$output = array();
 		foreach($questions as $question){
+			$responses = array();
+			foreach($responses_to_questions as $resp){
+				if($resp->QUESTION_ID == $question->ID)
+					$responses[] = $resp;
+			}
 			$score = 0;
 			$answers = $question->answers;
-			$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id, 'QUESTION_ID'=>$question->ID));
 
 			// questions
 			$questionArr = array();
@@ -661,8 +667,11 @@ class Question extends QActiveRecord
 	 */
 	public function getQuizId($question_id){
 		$question = Question::model()->findByPk($question_id);
-		return $question->QUIZ_ID;
-		
+		if($question){
+			return $question->QUIZ_ID;
+		} else {
+			return false;
+		}
 	}
 	
 	/**

@@ -560,41 +560,7 @@ class Response extends QActiveRecord
 		foreach($results as $user_id => $result){
 			$results[$user_id]['questions'] = Question::getQuestionViewsByQuizIdUserId($quiz_id, $user_id);
 		}
-		//error_log(var_export($results, 1));
-
-		// first get all the questions for the quiz
-		// with all of the answers
-		//$question_ids = Quiz::getQuestionIds($quiz_id);
 		
-		
-		// then responses for all the questions
-		//if($question_id_string == '')
-		//	return array();
-		//$responses = Response::model()->findAll(
-		//	"question_id in ($question_id_string)"
-		//);
-		
-		//$results = array();
-		// run through them, add to the results array
-		// turn the response into an array so I can manipulate it
-		/*
-		foreach($responses as $response){
-			$responseArr = array();
-			$results[$response->USER_ID] = array();
-			foreach($response as $key => $value){
-				$responseArr[$key] = $value;
-			}
-			
-			//error_log(var_export($responseArr, 1));
-			
-			array_push($results[$response->USER_ID], $responseArr);
-
-		}
-		*/
-		
-		//error_log(var_export($results, 1));
-
-
 		return $results;
 	}
 

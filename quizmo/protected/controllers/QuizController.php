@@ -254,6 +254,10 @@ class QuizController extends Controller
 		$state = Yii::app()->getRequest()->getParam('state');
 		$topic_id = Yii::app()->getRequest()->getParam('topicId');
 		$collection_id = $id;
+		if($collection_id == ''){
+			$collection_id = Collection::getByOtherId(Yii::app()->getRequest()->getParam('topicId'))->ID;
+		}
+		
 		$admin_view = $id2;
 		if($state == 'edit'){
 			$admin_view = 1;
@@ -285,6 +289,12 @@ class QuizController extends Controller
 		} else {
 			$admin_view = false;
 		}
+		
+		$banner_message = '';
+		if(isset(Yii::app()->session['banner_message'])){
+			$banner_message = Yii::app()->session['banner_message'];
+			unset(Yii::app()->session['banner_message']);
+		}
 					
 		if($admin && $admin_view){
 			$this->render('admindex',array(
@@ -295,10 +305,11 @@ class QuizController extends Controller
 				'collection_id'=>$collection_id,
 				'results'=>Submission::getResultTotals($collection_id),
 				'topic_id'=>$topic_id,
+				'banner_message'=>$banner_message,
 			));
 		} else {
 			$guest = false;
-			if($perm_id <= 1)
+			if(Yii::app()->user->lname == '')
 				$guest = true;
 			$this->render('index',array(
 				//'dataProvider'=>$dataProvider,
@@ -309,6 +320,7 @@ class QuizController extends Controller
 				'user_id'=>$user_id,
 				'collection_id'=>$collection_id,
 				'topic_id'=>$topic_id,
+				'banner_message'=>$banner_message,
 			));
 
 		}			
@@ -328,6 +340,12 @@ class QuizController extends Controller
 		$quiz_id = $id;
 		$question_id = $id2;
 		$user_id = Yii::app()->user->id;
+		
+		// check that the quiz is not submitted yet
+		// checking here doesn't work on fixing the back button
+		//if(Submission::isSubmitted($user_id, $quiz_id)){
+		//	throw new CHttpException(500,'Quiz already submitted!');
+		//}
 		
 		// first we set the session quiz_id
 		// then we forward along to the question Take view
@@ -435,6 +453,7 @@ class QuizController extends Controller
 			'show_feedback'=>$quiz->SHOW_FEEDBACK,
 			'photo_url'=>$photo_url,
 			'just_submitted'=>$just_submitted,
+			'answered_anything'=>true,
 		));
 	}
 	
@@ -488,6 +507,10 @@ class QuizController extends Controller
 		// call identity getAllUsers method
 		$photo_url = $identity->getPhotoUrl($user_id);
 		
+		$answered_anything = true;
+		if(Submission::getStatusByUser($user_id, $quiz_id) == Submission::NOT_STARTED)
+			$answered_anything = false;
+		
 		$quiz = Quiz::getQuiz($quiz_id);
 		$this->render('individual_results', array(
 			'user_id'=>$user_id,
@@ -504,6 +527,7 @@ class QuizController extends Controller
 			'show_feedback'=>1,
 			'photo_url'=>$photo_url,
 			'just_submitted'=>false,
+			'answered_anything'=>$answered_anything,
 		));
 	}
 	
