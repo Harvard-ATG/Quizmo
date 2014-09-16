@@ -209,6 +209,7 @@ class QuizTest extends CDbTestCase {
 		$state = Quiz::SCHEDULED;
 		$nextWeek = date("Y-m-d", time() + (7 * 24 * 60 * 60));
 		$nextWeek2 = date("Y-m-d", time() + 2 * (7 * 24 * 60 * 60));
+		$nextWeek10 = date("Y-m-d", time() + 10 * (7 * 24 * 60 * 60));
 		
 		$lastWeek = date("Y-m-d", time() - (7 * 24 * 60 * 60));
 		$lastWeek2 = date("Y-m-d", time() - 2 * (7 * 24 * 60 * 60));
@@ -230,6 +231,11 @@ class QuizTest extends CDbTestCase {
 		$this->assertGreaterThan(0, $quizFuture->create($collection_id, $title, '', $state, $nextWeek, $nextWeek2));
 		$this->assertEquals(6, Quiz::scheduleTimeTill($quizFuture->START_DATE, $quizFuture->END_DATE));
 		
+		// regression test - days need to be able to exceed 30
+		$quizFarFuture = new Quiz;
+		$this->assertGreaterThan(0, $quizFarFuture->create($collection_id, $title, '', $state, $now, $nextWeek10));
+		$this->assertGreaterThan(30, Quiz::scheduleTimeTill($quizFarFuture->START_DATE, $quizFarFuture->END_DATE));
+
 	}
 	
 	public function testReset(){
