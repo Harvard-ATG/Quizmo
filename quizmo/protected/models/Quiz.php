@@ -602,7 +602,15 @@ class Quiz extends QActiveRecord
 					}
 						
 				} else {
+					if($response->QUESTION_TYPE == Question::FILLIN){
+						if(isset($users[$response->USER_ID]['responses'][$count]['response'])){
+							$users[$response->USER_ID]['responses'][$count]['response'] .= ", ".$response->RESPONSE;
+						} else {
+							$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
+						}
+					} else {
 						$users[$response->USER_ID]['responses'][$count]['response'] = $response->RESPONSE;
+					}
 				}
 				//} else {
 					//$users[$response->USER_ID]['responses'][$count]['response'] .= ",".$response->RESPONSE;
