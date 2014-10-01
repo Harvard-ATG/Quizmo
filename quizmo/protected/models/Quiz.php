@@ -404,13 +404,13 @@ class Quiz extends QActiveRecord
 		
 		if($start_datetime < $now_datetime && $now_datetime < $end_datetime){
 			// we have started so we need the time to end
-			return $timeToEnd->d;
+			return $timeToEnd->format('%a');
 		} elseif($now_datetime < $start_datetime){
 			// we haven't started so we need the time till start
-			return $timeToStart->d;
+			return $timeToStart->format('%a');
 		} elseif($now_datetime > $end_datetime){
 			// we have ended so we need the time from end
-			return $timeToEnd->d;
+			return $timeToEnd->format('%a');
 		}
 				
 	}
