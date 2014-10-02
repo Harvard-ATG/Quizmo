@@ -345,6 +345,8 @@ class Response extends QActiveRecord
 		if($modified_by == '')
 			$modified_by = $user_id;
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 
 			$response = Response::model()->find(
@@ -377,9 +379,11 @@ class Response extends QActiveRecord
 				// else the response is the same, so leave it alone
 
 			}
+			$transaction->commit();
 
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
