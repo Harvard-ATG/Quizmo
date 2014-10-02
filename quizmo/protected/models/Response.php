@@ -161,6 +161,8 @@ class Response extends QActiveRecord
 			)
 		);
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			if($response == null){
 				// create new
@@ -187,8 +189,10 @@ class Response extends QActiveRecord
 				$response->save(false);
 
 			}
-		} catch (Exception $e){
+			$transaction->commit();
+		} catch (Exception $e){	
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -215,6 +219,8 @@ class Response extends QActiveRecord
 			)
 		);
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			if($response == null){
 				// create new
@@ -243,8 +249,10 @@ class Response extends QActiveRecord
 				$response->save();
 
 			}
+			$transaction->commit();
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -265,6 +273,8 @@ class Response extends QActiveRecord
 		if($modified_by == '')
 			$modified_by = $user_id;
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			
 			// remove all previous answers for this question
@@ -323,8 +333,10 @@ class Response extends QActiveRecord
 			
 
 			}
+			$transaction->commit();
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -417,6 +429,8 @@ class Response extends QActiveRecord
 		if($modified_by == '')
 			$modified_by = $user_id;
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			
 			// remove all previous answers for this question
@@ -464,8 +478,11 @@ class Response extends QActiveRecord
 					// not needed
 				}
 			}
+			$transaction->commit();
+
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
