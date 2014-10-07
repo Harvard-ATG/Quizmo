@@ -909,6 +909,17 @@ class Response extends QActiveRecord
 	/**
 	 * checks to see if the 2 responses are duplicates
 	 * if all data matches except ID, they are dupes
+	 *
+	 * Dear Future Self, this is a query to find existing duplicates
+	 * I pray you'll never need it
+	 * select r.id, r.user_id, r.question_id, r.question_type
+     * from RESPONSES r
+     * inner join (select user_id, question_id, response, sort_order from RESPONSES
+     * GROUP BY user_id, question_id, response HAVING count(id) > 1) dup 
+     * ON r.user_id = dup.user_id
+     * AND r.question_id = dup.question_id
+	 * AND r.response = dup.response
+	 *
 	 * @param number $response_id
 	 * @param number $response_id
 	 * @return boolean
