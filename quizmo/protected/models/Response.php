@@ -757,10 +757,7 @@ class Response extends QActiveRecord
 						case Question::TRUE_FALSE:
 							// we have to check if the response->RESPONSE matches the answer->ID
 							if($response->RESPONSE == $answer->ID && $answer->IS_CORRECT == 1){
-								// we don't want to score duplicates
-								if($last_question_id != $response->QUESTION_ID){
-									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
-								}
+								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
 							}
 						break;
 						case Question::NUMERICAL:
@@ -768,10 +765,7 @@ class Response extends QActiveRecord
 							$upper = $answer->ANSWER + $answer->TOLERANCE;
 							$lower = $answer->ANSWER - $answer->TOLERANCE;
 							if($response->RESPONSE <= $upper && $response->RESPONSE >= $lower){
-								// we don't want to score duplicates
-								if($last_question_id != $response->QUESTION_ID){
-									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
-								}
+								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
 							}
 						break;
 						case Question::MULTIPLE_SELECTION:
@@ -913,11 +907,11 @@ class Response extends QActiveRecord
 	 * Dear Future Self, this is a query to find existing duplicates
 	 * I pray you'll never need it
 	 * select r.id, r.user_id, r.question_id, r.question_type
-     * from RESPONSES r
-     * inner join (select user_id, question_id, response, sort_order from RESPONSES
-     * GROUP BY user_id, question_id, response HAVING count(id) > 1) dup 
-     * ON r.user_id = dup.user_id
-     * AND r.question_id = dup.question_id
+	 * from RESPONSES r
+	 * inner join (select user_id, question_id, response, sort_order from RESPONSES
+	 * GROUP BY user_id, question_id, response HAVING count(id) > 1) dup 
+	 * ON r.user_id = dup.user_id
+	 * AND r.question_id = dup.question_id
 	 * AND r.response = dup.response
 	 *
 	 * @param number $response_id
