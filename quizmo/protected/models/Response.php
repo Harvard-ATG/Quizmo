@@ -175,7 +175,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::ESSAY;
 				$response->RESPONSE = $essay;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 				
@@ -184,7 +184,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::ESSAY;
 				$response->RESPONSE = $essay;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save(false);
 
@@ -234,7 +234,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::NUMERICAL;
 				$response->RESPONSE = $number;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 				
@@ -244,7 +244,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::NUMERICAL;
 				$response->RESPONSE = $number;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 
@@ -321,7 +321,7 @@ class Response extends QActiveRecord
 					$response->QUESTION_TYPE = Question::MULTIPLE_SELECTION;
 					$response->RESPONSE = $answer_id;
 					$response->SCORE_STATE = Response::NOT_SCORED;
-					$resposne->MODIFIED_BY = $modified_by;
+					$response->MODIFIED_BY = $modified_by;
 				
 					$response->save();
 				
@@ -378,7 +378,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = $question_type;
 				$response->RESPONSE = $answer_id;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 				
@@ -467,7 +467,7 @@ class Response extends QActiveRecord
 					$response->QUESTION_TYPE = Question::FILLIN;
 					$response->RESPONSE = $answer;
 					$response->SCORE_STATE = Response::NOT_SCORED;
-					$resposne->MODIFIED_BY = $modified_by;
+					$response->MODIFIED_BY = $modified_by;
 					$response->SORT_ORDER = $sort_order;
 					$sort_order++;
 
@@ -693,7 +693,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = $question->QUESTION_TYPE;
 				$response->RESPONSE = '';
 				$response->SCORE_STATE = Response::MANUAL_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				$response->SCORE = $score;
 
 				return $response->save();
@@ -753,8 +753,10 @@ class Response extends QActiveRecord
 						case Question::TRUE_FALSE:
 							// we have to check if the response->RESPONSE matches the answer->ID
 							if($response->RESPONSE == $answer->ID && $answer->IS_CORRECT == 1){
-								// then we have a correct response
-								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+								// we don't want to score duplicates
+								if($last_question_id != $response->QUESTION_ID){
+									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+								}
 							}
 						break;
 						case Question::NUMERICAL:
@@ -762,7 +764,10 @@ class Response extends QActiveRecord
 							$upper = $answer->ANSWER + $answer->TOLERANCE;
 							$lower = $answer->ANSWER - $answer->TOLERANCE;
 							if($response->RESPONSE <= $upper && $response->RESPONSE >= $lower){
-								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+								// we don't want to score duplicates
+								if($last_question_id != $response->QUESTION_ID){
+									Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
+								}
 							}
 						break;
 						case Question::MULTIPLE_SELECTION:
