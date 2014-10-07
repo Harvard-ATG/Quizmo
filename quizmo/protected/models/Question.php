@@ -521,15 +521,19 @@ class Question extends QActiveRecord
 			
 			// responses
 			$responseArr = array();
+			$last_resp = null;
 			foreach($responses as $response){
 				$responseInnerArr = array();
 				foreach($response as $key => $value){
 					if($key == 'SCORE'){
-						$score += $value;
+						if(!Response::checkDuplicate($response, $last_resp)){
+							$score += $value;
+						}
 					}
 					$responseInnerArr[strtolower($key)] = htmlentities($value);		
 				}
 				array_push($responseArr, $responseInnerArr);
+				$last_resp = $response;
 			}
 			$questionArr['responses'] = $responseArr;
 

@@ -35,6 +35,16 @@ return array(
 		'MODIFIED_BY' => '',
 		'RESPONSE' => 4,
 	),
+	'responses2duplicate' => array(
+		'QUESTION_ID' => '2',
+		'QUESTION_TYPE' => 'T',
+		'USER_ID' => 2,
+		'SCORE_STATE' => 'U',
+		'SCORE' => 1,
+		'DATE_MODIFIED' => '',
+		'MODIFIED_BY' => '',
+		'RESPONSE' => 4,
+	),
 	'responses3' => array(
 		'QUESTION_ID' => '3',
 		'QUESTION_TYPE' => 'N',

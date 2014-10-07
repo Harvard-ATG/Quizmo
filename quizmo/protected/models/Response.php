@@ -161,6 +161,8 @@ class Response extends QActiveRecord
 			)
 		);
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			if($response == null){
 				// create new
@@ -173,7 +175,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::ESSAY;
 				$response->RESPONSE = $essay;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 				
@@ -182,13 +184,15 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::ESSAY;
 				$response->RESPONSE = $essay;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save(false);
 
 			}
-		} catch (Exception $e){
+			$transaction->commit();
+		} catch (Exception $e){	
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -215,6 +219,8 @@ class Response extends QActiveRecord
 			)
 		);
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			if($response == null){
 				// create new
@@ -228,7 +234,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::NUMERICAL;
 				$response->RESPONSE = $number;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 				
@@ -238,13 +244,15 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = Question::NUMERICAL;
 				$response->RESPONSE = $number;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 
 			}
+			$transaction->commit();
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -265,6 +273,8 @@ class Response extends QActiveRecord
 		if($modified_by == '')
 			$modified_by = $user_id;
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			
 			// remove all previous answers for this question
@@ -311,7 +321,7 @@ class Response extends QActiveRecord
 					$response->QUESTION_TYPE = Question::MULTIPLE_SELECTION;
 					$response->RESPONSE = $answer_id;
 					$response->SCORE_STATE = Response::NOT_SCORED;
-					$resposne->MODIFIED_BY = $modified_by;
+					$response->MODIFIED_BY = $modified_by;
 				
 					$response->save();
 				
@@ -323,8 +333,10 @@ class Response extends QActiveRecord
 			
 
 			}
+			$transaction->commit();
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -345,6 +357,8 @@ class Response extends QActiveRecord
 		if($modified_by == '')
 			$modified_by = $user_id;
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 
 			$response = Response::model()->find(
@@ -364,7 +378,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = $question_type;
 				$response->RESPONSE = $answer_id;
 				$response->SCORE_STATE = Response::NOT_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				
 				$response->save();
 				
@@ -377,9 +391,11 @@ class Response extends QActiveRecord
 				// else the response is the same, so leave it alone
 
 			}
+			$transaction->commit();
 
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -413,6 +429,8 @@ class Response extends QActiveRecord
 		if($modified_by == '')
 			$modified_by = $user_id;
 
+		$connection = Yii::app()->db;
+		$transaction = $connection->beginTransaction();
 		try {
 			
 			// remove all previous answers for this question
@@ -449,7 +467,7 @@ class Response extends QActiveRecord
 					$response->QUESTION_TYPE = Question::FILLIN;
 					$response->RESPONSE = $answer;
 					$response->SCORE_STATE = Response::NOT_SCORED;
-					$resposne->MODIFIED_BY = $modified_by;
+					$response->MODIFIED_BY = $modified_by;
 					$response->SORT_ORDER = $sort_order;
 					$sort_order++;
 
@@ -460,8 +478,11 @@ class Response extends QActiveRecord
 					// not needed
 				}
 			}
+			$transaction->commit();
+
 		} catch (Exception $e){
 			error_log($e->getTraceAsString());
+			$transaction->rollback();
 			return false;
 		}
 		
@@ -576,10 +597,14 @@ class Response extends QActiveRecord
 		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id));
 		$question_ids = Quiz::getQuestionIds($quiz_id);
 		$score = 0;
+		$last_resp = '';
 		foreach($responses as $response){
-			if(in_array($response->QUESTION_ID, $question_ids)){
-				$score += $response->SCORE;				
+			if(!Response::checkDuplicate($response, $last_resp)){
+				if(in_array($response->QUESTION_ID, $question_ids)){
+					$score += $response->SCORE;				
+				}
 			}
+			$last_resp = $response;
 		}
 		return $score;
 
@@ -672,7 +697,7 @@ class Response extends QActiveRecord
 				$response->QUESTION_TYPE = $question->QUESTION_TYPE;
 				$response->RESPONSE = '';
 				$response->SCORE_STATE = Response::MANUAL_SCORED;
-				$resposne->MODIFIED_BY = $modified_by;
+				$response->MODIFIED_BY = $modified_by;
 				$response->SCORE = $score;
 
 				return $response->save();
@@ -732,7 +757,6 @@ class Response extends QActiveRecord
 						case Question::TRUE_FALSE:
 							// we have to check if the response->RESPONSE matches the answer->ID
 							if($response->RESPONSE == $answer->ID && $answer->IS_CORRECT == 1){
-								// then we have a correct response
 								Response::setScore($response->ID, $question_points[$response->QUESTION_ID]);
 							}
 						break;
@@ -874,6 +898,38 @@ class Response extends QActiveRecord
 			Submission::model()->deleteAllByAttributes(array('USER_ID'=>$user_id, 'QUIZ_ID'=>$quiz_id));
 			return false;
 		}
+	}
+
+	/**
+	 * checks to see if the 2 responses are duplicates
+	 * if all data matches except ID, they are dupes
+	 *
+	 * Dear Future Self, this is a query to find existing duplicates
+	 * I pray you'll never need it
+	 * select r.id, r.user_id, r.question_id, r.question_type
+	 * from RESPONSES r
+	 * inner join (select user_id, question_id, response, sort_order from RESPONSES
+	 * GROUP BY user_id, question_id, response HAVING count(id) > 1) dup 
+	 * ON r.user_id = dup.user_id
+	 * AND r.question_id = dup.question_id
+	 * AND r.response = dup.response
+	 *
+	 * @param number $response_id
+	 * @param number $response_id
+	 * @return boolean
+	 */
+	static function checkDuplicate($response1, $response2){
+		if($response2 == ''){
+			return false;
+		}
+		foreach($response1 as $key => $value){
+			if($key != 'ID'){
+				if($response2->{$key} != $value){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
