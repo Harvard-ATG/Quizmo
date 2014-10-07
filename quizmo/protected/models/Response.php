@@ -597,10 +597,14 @@ class Response extends QActiveRecord
 		$responses = Response::model()->findAllByAttributes(array('USER_ID'=>$user_id));
 		$question_ids = Quiz::getQuestionIds($quiz_id);
 		$score = 0;
+		$last_resp = '';
 		foreach($responses as $response){
-			if(in_array($response->QUESTION_ID, $question_ids)){
-				$score += $response->SCORE;				
+			if(!Response::checkDuplicate($response, $last_resp)){
+				if(in_array($response->QUESTION_ID, $question_ids)){
+					$score += $response->SCORE;				
+				}
 			}
+			$last_resp = $response;
 		}
 		return $score;
 
@@ -900,6 +904,27 @@ class Response extends QActiveRecord
 			Submission::model()->deleteAllByAttributes(array('USER_ID'=>$user_id, 'QUIZ_ID'=>$quiz_id));
 			return false;
 		}
+	}
+
+	/**
+	 * checks to see if the 2 responses are duplicates
+	 * if all data matches except ID, they are dupes
+	 * @param number $response_id
+	 * @param number $response_id
+	 * @return boolean
+	 */
+	static function checkDuplicate($response1, $response2){
+		if($response2 == ''){
+			return false;
+		}
+		foreach($response1 as $key => $value){
+			if($key != 'ID'){
+				if($response2->{$key} != $value){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
